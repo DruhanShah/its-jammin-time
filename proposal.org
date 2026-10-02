@@ -7,24 +7,36 @@
 
 This will be a simple interactive fiction game, strongly inspired by the Stanley Parable.
 You control a regular white-collar worker at a generic sterile inhospitable office, working overtime (unpaid of course). 
-The main gameplay will be provided by minigames that occur across a strongly linear story, with each one designed to throw off the player's expectations.
-The story will be driven by an omniscient disembodied narrator who will be providing scathing commentary over each beat. Fourth wall breaks will be quite frequent, and meta humour will be a staple.
+The main gameplay will be provided by minigames that occur across a mostly linear story, with each one designed to throw off the player's expectations.
+The story will be driven by an omniscient disembodied narrator who will be providing scathing commentary over each beat. Fourth wall breaks will be quite frequent, and meta humour will be a staple. Along with the provided themes, the game would also like to explore the absurdities of seemingly mundane life (at a somewhat shallow level, this is a short game jam after all).
+
+We imagine the graphics to be mostly 3d, there may be some 2d assets to further add to the absurdity of the game.
+
+The audio narration/voice acting will be done in house by the team members.
+
+** Some mechanics we will include
+- there is a button pressing which does nothing at all except just dialogues
+- lights are the main antagonist/hurdle towards the player completing their task of writing on the document. the gameplay loop is the light keeps going out and the player must fix it to continue working on their comic sans project. each instance of fixing it has its own 
+    - initial path is simple and you turn a switch
+    - second path you go the same way there's no switch, narrator will make fun of you
+    - there's a bunch of extra doors
+    - you need to light a candle instead
+    - etc.
+- in the end, the final mechanic/interaction will be looking for your glasses. inspired by everything everywhere all at once: you try on different glasses and see the world in different ways. after the correct pair of glasses you see the read world.
 
 * Themes
 
-\paragraph{Comic} The entire game is expected to be comical, bordering on bizarre. The main task will be writing scripts for comics. The Comic family of fonts (including the classic Comic Sans) will be used almost everywhere. Frequent puns about comics will be dropped in narration (this will be true for all three themes, hopefully).
+\paragraph{Comic} The entire game is expected to be comical, bordering on bizarre. The main task will be writing scripts for comics. The Comic family of fonts (including the classic Comic Sans) will be used almost everywhere. The initial task of the protagonist is to write a document and they discover that they can only use Comic Sans fonts on their computer. Frequent puns about comics will be dropped in narration (this will be true for all three themes, hopefully).
 
 \paragraph{Light} Light will be the primary antagonist of the game. A lot of the actions of the protagonist will be in response to losing out on some light that is essential to your work. The humour would make the game light-hearted, despite not being for the light-hearted.
 
-\paragraph{Twist} The plot will twist, the world will twist, minigames might involve twisting threads together as a wick for lighting. Puns of course will be aplenty.
+\paragraph{Twist} The plot will twist, and minigames through the game will involve things twisting: the world will twist through kaleidoscope, letters twist on the screen, your paths twist as you walk on them. Puns (twisting the meaning of words) of course will be aplenty.
 
 
-* Appendix: Team details
+*  Appendix: Team details
 
-\begin{enumerate}
-\item\label{item:1} Vishesh Saraswat (=visheshs2910@gmail.com=, @justvishesh)
-\item\label{item:2} Druhan Shah (=druhanrshah@gmail.com=, @druhanrshah)
-\item\label{item:3} Nandini Chakaravarthy (=nandini.c@research.iiit.ac.in=, @chakaravarthy51234)
-\item\label{item:4} Kimaya Arora (=kimaya.arora.10@gmail.com=, @kimaya.arora)
-\item\label{item:5} Arnav Gupta (=arnavg@duck.com=, @wintersolstice)
-\end{enumerate}
+- Vishesh Saraswat (\url{visheshs2910@gmail.com}, @vishesh)
+- Druhan Shah (\url{druhanrshah@gmail.com}, @druhanrshah)
+- Nandini Chakaravarthy (\url{nandini.c@research.iiit.ac.in}, @chakaravarthy51234)
+- Kimaya Arora (\url{kimaya.arora.10@gmail.com}, @kimaya.arora)
+- Arnav Gupta (\url{arnavg@duck.com}, @wintersolstice)
