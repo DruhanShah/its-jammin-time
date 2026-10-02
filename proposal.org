@@ -1,9 +1,7 @@
-#+title: Placeholder title: a game
+#+title: Placeholder title: a game (yes this is our title)
 #+author: I Think Therefore I Jam
 
 #+options: toc:nil num:nil
-
-#+latex_header: \usepackage[margin=2cm]{geometry}
 
 * General description
 
