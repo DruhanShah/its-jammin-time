@@ -14,9 +14,19 @@ The story will be driven by an omniscient disembodied narrator who will be provi
 
 * Themes
 
+\paragraph{Comic} The entire game is expected to be comical, bordering on bizarre. The main task will be writing scripts for comics. The Comic family of fonts (including the classic Comic Sans) will be used almost everywhere. Frequent puns about comics will be dropped in narration (this will be true for all three themes, hopefully).
+
+\paragraph{Light} Light will be the primary antagonist of the game. A lot of the actions of the protagonist will be in response to losing out on some light that is essential to your work. The humour would make the game light-hearted, despite not being for the light-hearted.
+
+\paragraph{Twist} The plot will twist, the world will twist, minigames might involve twisting threads together as a wick for lighting. Puns of course will be aplenty.
+
 
 * Appendix: Team details
 
 \begin{enumerate}
-\item\label{item:1} Vishesh Saraswat (=vishesh.saraswat@research.iiit.ac.in=, )
+\item\label{item:1} Vishesh Saraswat (=visheshs2910@gmail.com=, @justvishesh)
+\item\label{item:2} Druhan Shah (=druhanrshah@gmail.com=, @druhanrshah)
+\item\label{item:3} Nandini Chakaravarthy (=nandini.c@research.iiit.ac.in=, @chakaravarthy51234)
+\item\label{item:4} Kimaya Arora (=kimaya.arora.10@gmail.com=, @kimaya.arora)
+\item\label{item:5} Arnav Gupta (=arnavg@duck.com=, @wintersolstice)
 \end{enumerate}
