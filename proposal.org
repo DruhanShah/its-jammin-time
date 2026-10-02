@@ -1,0 +1,22 @@
+#+title: Placeholder title: a game
+#+author: I Think Therefore I Jam
+
+#+options: toc:nil num:nil
+
+#+latex_header: \usepackage[margin=2cm]{geometry}
+
+* General description
+
+This will be a simple interactive fiction game, strongly inspired by the Stanley Parable.
+You control a regular white-collar worker at a generic sterile inhospitable office, working overtime (unpaid of course). 
+The main gameplay will be provided by minigames that occur across a strongly linear story, with each one designed to throw off the player's expectations.
+The story will be driven by an omniscient disembodied narrator who will be providing scathing commentary over each beat. Fourth wall breaks will be quite frequent, and meta humour will be a staple.
+
+* Themes
+
+
+* Appendix: Team details
+
+\begin{enumerate}
+\item\label{item:1} Vishesh Saraswat (=vishesh.saraswat@research.iiit.ac.in=, )
+\end{enumerate}
