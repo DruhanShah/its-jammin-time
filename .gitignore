@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Export builds (Godot-specific ignores live in game/.gitignore)
+game/export/
+builds/
+
+# Org-mode / LaTeX export intermediates
+docs/*.tex
+docs/*.aux
+docs/*.log
+docs/*.out
+docs/_minted*/
