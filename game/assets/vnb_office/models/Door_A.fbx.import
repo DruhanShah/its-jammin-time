@@ -63,6 +63,17 @@ _subresources={
 "use_external/path": "res://assets/vnb_office/materials/screen.tres"
 }
 },
+"meshes": {
+"Cube_202": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/vnb_office/meshes/Door_A.res",
+"save_to_file/path": "uid://dyaw1pob1eol1"
+}
+},
 "nodes": {
 "PATH:Door_A": {
 "generate/physics": true

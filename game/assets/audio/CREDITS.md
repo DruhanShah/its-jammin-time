@@ -10,6 +10,7 @@
   - `foley_footstep_carpet_1.wav` … `foley_footstep_carpet_4.wav` (pack folder `Footsteps/`): player footsteps, via `core/audio/footsteps.tres`.
   - `click_double_on.wav` (pack folder `UI/`): default `Interactable` sound.
   - `wood_small_hollow.wav` (pack folder `Materials/`): player hand touching something.
+  - `door_open.wav`, `door_close.wav` (pack folder `Environment/`): the openable door prop (`world/office/props/door.tscn`). Imported as mono (import option only; the files are unaltered).
 
 Credit line for the game's credits screen (optional per the license):
 

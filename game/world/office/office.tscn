@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://core/narrator/narrator_trigger.tscn" id="7_7e6co"]
 [ext_resource type="PackedScene" path="res://world/office/props/computer.tscn" id="8_comp"]
 [ext_resource type="MeshLibrary" uid="uid://u3ior7jn1wjd" path="res://world/office/gridmap/structure_library.tres" id="9_slib"]
+[ext_resource type="PackedScene" path="res://world/office/props/door.tscn" id="75_puljc"]
 [ext_resource type="PackedScene" path="res://world/office/props/sets/bookshelf_stocked.tscn" id="g_bookshelf_stocked"]
 [ext_resource type="PackedScene" uid="uid://c3wxol22g7n07" path="res://assets/vnb_office/models/Box_Base.fbx" id="g_Box_Base"]
 [ext_resource type="PackedScene" uid="uid://jtkt7v8d0lp7" path="res://assets/vnb_office/models/Chair_A.fbx" id="g_Chair_A"]
@@ -19,10 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://ckvb3i7d4gefh" path="res://assets/vnb_office/models/Computer_Keyboard.fbx" id="g_Computer_Keyboard"]
 [ext_resource type="PackedScene" uid="uid://de85c1qxh76jf" path="res://assets/vnb_office/models/Computer_Mouse.fbx" id="g_Computer_Mouse"]
 [ext_resource type="PackedScene" path="res://world/office/props/sets/desk_pair.tscn" id="g_desk_pair"]
-[ext_resource type="PackedScene" uid="uid://bj2hbtqkquaf" path="res://assets/vnb_office/models/Door_A.fbx" id="g_Door_A"]
-[ext_resource type="PackedScene" uid="uid://bmc3edoe8ucyb" path="res://assets/vnb_office/models/Door_B.fbx" id="g_Door_B"]
-[ext_resource type="PackedScene" uid="uid://bvssrln1amt47" path="res://assets/vnb_office/models/Door_C.fbx" id="g_Door_C"]
-[ext_resource type="PackedScene" uid="uid://c08gqtmet4ilt" path="res://assets/vnb_office/models/Door_Frame.fbx" id="g_Door_Frame"]
 [ext_resource type="PackedScene" uid="uid://dm1f5vosm3fc7" path="res://assets/vnb_office/models/FileCabinet_Standard.fbx" id="g_FileCabinet_Standard"]
 [ext_resource type="PackedScene" uid="uid://d3gyuh2qr4fh8" path="res://assets/vnb_office/models/FileCabinet_Standard_Drawer.fbx" id="g_FileCabinet_Standard_Drawer"]
 [ext_resource type="PackedScene" path="res://world/office/props/sets/file_cabinet.tscn" id="g_file_cabinet"]
@@ -436,30 +433,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, 5.2)
 [node name="PairSE" parent="Rooms/B1/Furniture" unique_id=975261843 instance=ExtResource("g_desk_pair")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0, 5.2)
 
-[node name="DoorFrame1" parent="Rooms/B1/Furniture" unique_id=85018069 instance=ExtResource("g_Door_Frame")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43, 0, -2.6)
-
-[node name="Door1" parent="Rooms/B1/Furniture" unique_id=893891732 instance=ExtResource("g_Door_B")]
-transform = Transform3D(0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 0.515, 0, -2.6)
-
-[node name="DoorFrame2" parent="Rooms/B1/Furniture" unique_id=594388451 instance=ExtResource("g_Door_Frame")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43, 0, -4.4)
-
-[node name="Door2" parent="Rooms/B1/Furniture" unique_id=1422463867 instance=ExtResource("g_Door_C")]
-transform = Transform3D(0.139173, 0, 0.990268, 0, 1, 0, -0.990268, 0, 0.139173, 0.515, 0, -4.4)
-
-[node name="DoorFrame3" parent="Rooms/B1/Furniture" unique_id=1731972426 instance=ExtResource("g_Door_Frame")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43, 0, -6.2)
-
-[node name="Door3" parent="Rooms/B1/Furniture" unique_id=86338977 instance=ExtResource("g_Door_A")]
-transform = Transform3D(-0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, -0.173648, 0.515, 0, -6.2)
-
-[node name="LastDoorFrame" parent="Rooms/B1/Furniture" unique_id=380841278 instance=ExtResource("g_Door_Frame")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43, 0, -7.775)
-
-[node name="LastDoor" parent="Rooms/B1/Furniture" unique_id=583409262 instance=ExtResource("g_Door_A")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.515, 0, -7.855)
-
 [node name="Lamborghini" parent="Rooms/B1/Furniture" unique_id=331937661 instance=ExtResource("g_Painting")]
 transform = Transform3D(0, 0, 1, 1, 0, 0, 0, 1, 0, -5.885, 1.8, -4)
 
@@ -495,6 +468,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, -7.3)
 
 [node name="Shelf" parent="Rooms/B1/Furniture" unique_id=2025082672 instance=ExtResource("g_shelf_stocked")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0, 5.5)
+
+[node name="Door1" parent="Rooms/B1/Furniture" unique_id=1822691239 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.75)
+leaf = 1
+transom = false
+
+[node name="Door2" parent="Rooms/B1/Furniture" unique_id=735034272 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3.75)
+leaf = 2
+transom = false
+
+[node name="Door3" parent="Rooms/B1/Furniture" unique_id=1986309761 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5.75)
+transom = false
+
+[node name="LastDoor" parent="Rooms/B1/Furniture" unique_id=1597498103 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7.775)
+transom = false
+one_way = true
 
 [node name="C1" type="Node3D" parent="Rooms" unique_id=62804894]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)
@@ -952,12 +944,6 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.885, 1.7, 5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -7.875)
 minute = 58
 
-[node name="FakeDoorFrame" parent="Rooms/A2/Furniture" unique_id=1693876517 instance=ExtResource("g_Door_Frame")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.85, 0.1, 6)
-
-[node name="FakeDoor" parent="Rooms/A2/Furniture" unique_id=34017049 instance=ExtResource("g_Door_A")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.85, 0.1, 5.915)
-
 [node name="Bookshelf2" parent="Rooms/A2/Furniture" unique_id=634965634 instance=ExtResource("g_bookshelf_stocked")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.72, 0, 7.56)
 
@@ -978,6 +964,11 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.62, 0, -6.15)
 
 [node name="PlantW" parent="Rooms/A2/Furniture" unique_id=936431268 instance=ExtResource("g_Nature_Deco_3")]
 transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, -5.35, 0, -4.2)
+
+[node name="FakeDoor" parent="Rooms/A2/Furniture" unique_id=1809550265 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.775, 0.1, 5.5)
+transom = false
+one_way = true
 
 [node name="B2" type="Node3D" parent="Rooms" unique_id=2012938201]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
@@ -1763,6 +1754,47 @@ transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 5.3, 0, 
 
 [node name="Bin" parent="Rooms/C3/Furniture" unique_id=1040575705 instance=ExtResource("g_TrashBin_Small")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -5.6)
+
+[node name="Doors" type="Node3D" parent="." unique_id=1293733539]
+
+[node name="StartA2" parent="Doors" unique_id=2071082252 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 1)
+
+[node name="A1B1" parent="Doors" unique_id=453261327 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, -15)
+
+[node name="B1C1" parent="Doors" unique_id=863673089 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24, 0, -15)
+
+[node name="A2B2" parent="Doors" unique_id=877956501 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, 1)
+
+[node name="B2C2" parent="Doors" unique_id=149864138 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24, 0, 1)
+
+[node name="A3B3" parent="Doors" unique_id=495673131 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, 17)
+
+[node name="B3C3" parent="Doors" unique_id=1316412072 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24, 0, 17)
+
+[node name="A1A2" parent="Doors" unique_id=539553098 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -8)
+
+[node name="B1B2" parent="Doors" unique_id=1463478724 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, -8)
+
+[node name="C1C2" parent="Doors" unique_id=553062749 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -8)
+
+[node name="A2A3" parent="Doors" unique_id=765178557 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
+
+[node name="B2B3" parent="Doors" unique_id=721892000 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 8)
+
+[node name="C2C3" parent="Doors" unique_id=786234506 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 8)
 
 [editable path="Rooms/A1/Furniture/Pinwheel/Desk3"]
 [editable path="Rooms/B1/Lights/CeilingLight1"]

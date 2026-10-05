@@ -52,7 +52,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Arms polish: left hand stays still during a grab, push animation on chairs, arm sway, left-hand grab for targets on the left [review: `core/player/hands.tscn` AnimationTree, `hands.gd`; click at things, X at something left of the crosshair, walk into a chair, turn quickly]
 ## Up next (in this order)
 - [x] Interaction batch: locked objects show a prompt and the narrator mocks you; subtle highlight on the targeted object; unlock ids as constants in one place (internal only) [review: `core/interaction/interactable.gd`, `highlight.gdshader`, `core/unlocks.gd`, `narration/locked_*.tres`; set the computer's `unlock_id` to `genie_lamp`, aim at it and press X]
-- [ ] Doors: frame + openable door in every doorway (X to open/close, door sound)
+- [x] Doors: frame + openable door in every doorway (X to open/close, door sound); A2's door to nowhere and B1's corridor doors use it too [review: `world/office/props/door.tscn`/`door.gd`, `docs/map/screenshots/door_*.png`; open the Start door from both sides, walk B1's corridor, open A2's fake door, stand in a doorway and close the door on yourself]
 - [x] Furnishing 1/2: prefab sets + Start, A1–A3, B1–B3; B1 lights moved onto the walls [review: `docs/map/screenshots/` (`<room>.png` from a doorway, `<room>_top.png` top-down with north on the left), deviations at the end of `docs/map/furnishing_plan.md`; walk A2 → B1, push a chair]
 - [x] Furnishing 2/2: C1 server room (amber lights, flicker), C2 upside-down, C3 [review: `docs/map/screenshots/c1*.png`, `c2*.png`, `c3*.png`; deviations in "As built (part 2)" at the end of `docs/map/furnishing_plan.md`; walk B1 → C1 aisle → switchboard spot, look up in C2, push C2's floor chair]
 - [ ] Chairs: bump/squeak sound on hitting walls; narrator jab after pushing chairs for a while (lines needed in script)
@@ -64,6 +64,10 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
+- Soft "denied" thunk sound when pressing X on a locked object
+- Locked lines don't repeat back-to-back; get sharper after several tries
+- Prompt verb changes while locked ("try to use the computer")
+- Stronger highlight option for small/dark props
 - Panelled walls in some rooms
 - Set unlocks from the Inspector: `unlock_id` on NarratorTrigger, `unlocks_on_interact` on Interactable
 - Save unlocks to disk once there's a save system

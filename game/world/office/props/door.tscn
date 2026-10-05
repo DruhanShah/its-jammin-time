@@ -1,0 +1,75 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/office/props/door.gd" id="1_door"]
+[ext_resource type="ArrayMesh" path="res://assets/vnb_office/meshes/Door_Frame.res" id="2_frame"]
+[ext_resource type="ArrayMesh" path="res://assets/vnb_office/meshes/Door_A.res" id="3_leaf"]
+[ext_resource type="Material" path="res://world/office/materials/wall_white.tres" id="4_wall"]
+[ext_resource type="Script" path="res://core/interaction/interactable.gd" id="5_int"]
+[ext_resource type="ArrayMesh" path="res://assets/vnb_office/meshes/Door_Handle1.res" id="6_handle"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jamb"]
+size = Vector3(0.085, 2.1, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_transom"]
+material = ExtResource("4_wall")
+size = Vector3(1.08, 0.58, 0.198)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_leaf"]
+size = Vector3(0.966, 2.02, 0.087)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_area"]
+size = Vector3(0.966, 2.02, 0.16)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_door")
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.483, 0, 0)
+mesh = ExtResource("2_frame")
+
+[node name="FrameBody" type="StaticBody3D" parent="."]
+
+[node name="LeftJamb" type="CollisionShape3D" parent="FrameBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5255, 1.05, 0)
+shape = SubResource("BoxShape3D_jamb")
+
+[node name="RightJamb" type="CollisionShape3D" parent="FrameBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5255, 1.05, 0)
+shape = SubResource("BoxShape3D_jamb")
+
+[node name="Transom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39, 0)
+mesh = SubResource("BoxMesh_transom")
+
+[node name="Hinge" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439, 0, 0)
+
+[node name="Leaf" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044, 0, 0)
+mesh = ExtResource("3_leaf")
+
+[node name="HandleFront" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.0, 0.0955)
+mesh = ExtResource("6_handle")
+
+[node name="HandleBack" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0.8, 1.0, -0.0955)
+mesh = ExtResource("6_handle")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439, 1.01, 0)
+shape = SubResource("BoxShape3D_leaf")
+
+[node name="Interactable" type="Area3D" parent="Hinge"]
+script = ExtResource("5_int")
+verb = "open the door"
+sound = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439, 1.01, 0)
+shape = SubResource("BoxShape3D_area")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+volume_db = -4.0
+bus = &"SFX"

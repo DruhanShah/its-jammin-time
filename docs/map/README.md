@@ -55,7 +55,7 @@ Start room contents (room-local): `PlayerDesk` at (−4.5, 0, −1), 1.5 m from 
 
 ## Doors
 
-13 open doorways (`WallDoorway` piece, about 1 m wide, no door leaf). Every pair of rooms that share a wall has one; Start only connects to A2. "Centre" is the world position of the middle of the opening.
+13 doorways (`WallDoorway` piece: opening 1.06 m wide, 2.67 m tall), each with an openable door (`world/office/props/door.tscn`, under `Doors`, named by the two rooms, e.g. `Doors/StartA2`; leaf swings 90° away from the player, hinge 0.44 m off the centre). Every pair of rooms that share a wall has one; Start only connects to A2. "Centre" is the world position of the middle of the opening.
 
 | Between | Wall | Centre (x, z) |
 |---|---|---|
@@ -77,6 +77,7 @@ Doors sit 1 m off the wall's middle (walls are an even number of 2 m pieces). Ke
 
 ## Structure
 
+- Doors: `Doors/<RoomRoom>` at the centres below, rot Y 90 on x-walls, 0 on z-walls.
 - Three GridMaps share `world/office/gridmap/structure_library.tres`, all at the origin with cell size (2, 3.875, 2): `Floor` (item `Floor`), `Walls` (`Wall`, `WallDoorway`) and `Ceiling` (`Ceiling`, no collision). Cell (i, k) covers world x 2i…2i+2, z 2k…2k+2.
 - Walls between rooms are single shared 0.2 m pieces centred on the room boundary. A cell holds one piece, so some walls are painted in the neighbouring cell (sometimes outside the building) and rotated to face back.
 - `Floor` and `Walls` use octant size 2 (4 × 4 m chunks) so each chunk is lit by about 9 ceiling lights, under the Compatibility renderer's limit of 16 per object (see the "Too many lights" pitfall in [`../tutorials/placing-assets.md`](../tutorials/placing-assets.md)).
