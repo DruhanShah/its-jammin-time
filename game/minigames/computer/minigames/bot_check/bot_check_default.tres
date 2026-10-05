@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BotCheckConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/bot_check/bot_check_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/click_double_on.wav" id="2_click"]
+
+[resource]
+script = ExtResource("1_cfg")
+click_sfx = ExtResource("2_click")

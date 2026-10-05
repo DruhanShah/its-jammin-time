@@ -7,7 +7,7 @@ extends Node
 
 ## Minigame ids (see minigame_registry.tres) started as soon as the computer opens, in order.
 #@export var start_on_open: Array[StringName] = [&"corporate_speak", &"ad_popup"]
-@export var start_on_open: Array[StringName] = [&"corporate_speak"]
+@export var start_on_open: Array[StringName] = [&"bot_check"]
 @onready var computer := get_parent() as Computer
 
 
