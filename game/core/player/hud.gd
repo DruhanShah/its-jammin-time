@@ -6,8 +6,20 @@ extends CanvasLayer
 @onready var prompt_label: Label = $Prompt
 
 
-func show_prompt(text: String) -> void:
-	prompt_label.text = text
-	prompt_label.visible = text != ""
+## Shows "Press <interact key> to <verb>", or hides the prompt if verb is empty.
+func show_prompt(verb: String) -> void:
+	prompt_label.text = "Press %s to %s" % [key_name(&"interact"), verb]
+	prompt_label.visible = verb != ""
 	# Crosshair grows a little while aiming at something interactable.
-	crosshair.scale = Vector2.ONE * (1.6 if text else 1.0)
+	crosshair.scale = Vector2.ONE * (1.6 if verb else 1.0)
+
+
+## Name of the first key bound to an input action (e.g. "X"), so prompts follow remapping.
+static func key_name(action: StringName) -> String:
+	for event in InputMap.action_get_events(action):
+		if event is InputEventKey:
+			var key: Key = event.keycode
+			if key == KEY_NONE:
+				key = DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
+			return OS.get_keycode_string(key)
+	return String(action)

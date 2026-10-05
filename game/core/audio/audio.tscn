@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" path="res://assets/audio/music/placeholder_loop.wav" id="2_music"]
 
 [node name="Audio" type="Node"]
+process_mode = 3
 script = ExtResource("1_audio")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

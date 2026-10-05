@@ -65,7 +65,8 @@ _subresources={
 },
 "nodes": {
 "PATH:Table_Circular": {
-"generate/physics": true
+"generate/physics": true,
+"physics/shape_type": 2
 }
 }
 }

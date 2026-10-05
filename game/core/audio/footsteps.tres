@@ -1,13 +1,15 @@
 [gd_resource type="AudioStreamRandomizer" format=3]
 
-[ext_resource type="AudioStream" path="res://assets/audio/sfx/footstep_1.wav" id="1_fs1"]
-[ext_resource type="AudioStream" path="res://assets/audio/sfx/footstep_2.wav" id="2_fs2"]
-[ext_resource type="AudioStream" path="res://assets/audio/sfx/footstep_3.wav" id="3_fs3"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/foley_footstep_carpet_1.wav" id="1_fs1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/foley_footstep_carpet_2.wav" id="2_fs2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/foley_footstep_carpet_3.wav" id="3_fs3"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/foley_footstep_carpet_4.wav" id="4_fs4"]
 
 [resource]
-random_pitch = 1.1
-random_volume_offset_db = 2.0
-streams_count = 3
+random_pitch = 1.08
+random_volume_offset_db = 1.5
+streams_count = 4
 stream_0/stream = ExtResource("1_fs1")
 stream_1/stream = ExtResource("2_fs2")
 stream_2/stream = ExtResource("3_fs3")
+stream_3/stream = ExtResource("4_fs4")

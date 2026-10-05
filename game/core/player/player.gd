@@ -5,7 +5,10 @@ extends CharacterBody3D
 @export var bob_frequency := 3.0
 @export var bob_amplitude := 0.05
 @export var footstep_sound: AudioStream = preload("res://core/audio/footsteps.tres")
-@export var touch_sound: AudioStream = preload("res://assets/audio/sfx/touch.wav")
+## Footsteps stay subtle under music and narration.
+@export var footstep_volume_db := -10.0
+@export var touch_sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/wood_small_hollow.wav")
+@export var touch_volume_db := -6.0
 
 var _bob_time := 0.0
 var _step := 0
@@ -20,11 +23,20 @@ var _step := 0
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ray.add_exception(self)
+	var pose: Array = GameState.player_poses.get(owner.scene_file_path, [])
+	if pose:
+		global_transform = pose[0]
+		head.rotation.x = pose[1]
+
+
+func _exit_tree() -> void:
+	# Remember where we were, e.g. when leaving the office for a minigame.
+	GameState.player_poses[owner.scene_file_path] = [global_transform, head.rotation.x]
 
 
 func _process(_delta: float) -> void:
 	var target := _interactable()
-	hud.show_prompt(target.prompt if target else "")
+	hud.show_prompt(target.verb if target else "")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -73,7 +85,7 @@ func _update_head_bob(delta: float) -> void:
 		var step := floori(_bob_time * bob_frequency / TAU + 0.25)
 		if step != _step:
 			_step = step
-			Audio.play_sfx(footstep_sound)
+			Audio.play_sfx(footstep_sound, footstep_volume_db)
 	else:
 		camera.position = camera.position.lerp(Vector3.ZERO, delta * 10.0)
 
@@ -86,6 +98,6 @@ func _interactable() -> Interactable:
 func _touch() -> void:
 	if ray.is_colliding():
 		hands.touch(ray.get_collision_point())
-		Audio.play_sfx(touch_sound)
+		Audio.play_sfx(touch_sound, touch_volume_db)
 	else:
 		hands.touch(ray.to_global(ray.target_position))

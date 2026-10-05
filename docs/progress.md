@@ -20,25 +20,40 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] (c) Crosshair at screen centre [review: `core/player/hud.tscn`]
 - [x] (d) Placeholder cuboid hands; left click tries to touch objects [review: `core/player/hands.gd`]
 
+## Current: approved polish
+- [x] Remember player position/rotation when returning from a minigame [review: `core/game_state.gd`, `player.gd` `_ready`/`_exit_tree`]
+- [x] Hide subtitles on scene change (the line stops too) [review: `narrator.gd` `stop()`/`_on_scene_changed()`]
+- [x] Lower the music while the narrator speaks [review: `audio.gd` `_duck_music()`]
+- [x] Build the interact prompt from the current key binding [review: `hud.gd` `key_name()`, `interactable.gd` `verb`]
+
+## Current: editor tooling
+- [x] `Furniture` group in `office.tscn` (desk + computer moved into it)
+- [x] Plugins: Godot Asset Placer 1.6.0, godot-snappy (usage in `docs/tutorials/placing-assets.md`)
+- [x] Audio keeps playing while the game is paused
+- [x] GridMap MeshLibrary for wall/floor/door pieces; floor + walls are now GridMaps [review: `world/office/gridmap/`, tutorial section]
+- [x] Trimesh (exact) collision for floor, wall and static furniture imports (was already the default; now pinned)
+- [x] Exclude editor-only addons from exported builds (macOS export preset, verified with a test pack)
+- [x] Shared Asset Placer library committed in the repo (`assets/asset_placer_library.json`)
+- [x] Sound effects from "400 Sounds Pack" (ci.itch.io) replacing placeholders [review: listen to volumes]
+- [x] Central credits file listing every external resource (`game/CREDITS.md`)
+- [ ] Subtitle-only narrator cues
+- [ ] Interactable `enabled` flag
+- [ ] Scene transition into/out of minigames (style to be decided)
+
+## Conventions
+- Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
+
 ## Suggestions awaiting approval
-- Add a `Furniture` group node in `office.tscn` and move `Office_Desk_1` into it
-- Plugin: Godot Asset Placer (free, open source): a dock to browse and place assets with snapping
-- Plugin: godot-snappy (MIT): hold V to snap to another object's vertices
-- GridMap MeshLibrary for wall, floor and door pieces (paint the 2 m grid)
-- Pre-made wrapper scenes for future interactable props in `world/office/props/`
-- Trimesh collision for floor and wall imports
-- Lower the music while the narrator speaks
-- Keep audio playing while the game is paused (for the pause menu)
+- Paint the ceiling with a third GridMap
+- Chained cues (one line starts the next) — only needed for waits/conditions between lines
 - Positional 3D sound effects (`play_sfx_3d`)
 - Different footstep sounds per floor surface
-- Subtitle-only narrator cues (no audio yet)
 - Subtitles on/off setting
 - A size property on narrator triggers that can be edited in the editor
-- Chained cues (one line starts the next)
-- Remember player position/rotation when returning from a minigame (currently respawns at start)
-- Hide subtitles on scene change
-- Build the interact prompt from the current key binding (for the WASD→ESDF remap gag)
 - Outline/highlight on the targeted object
 - Alternate hands per click
-- Interactable enabled / one-shot flag
-- Fade transition between scenes
+- Placeholder minigame text uses the current interact key instead of "Esc or X"
+- `GameState.reset()` for new game / restart
+- Per-cue music ducking amount
+- Narrator cues that keep playing across scene changes (`persist` flag)
+- Fade subtitles out instead of hiding instantly

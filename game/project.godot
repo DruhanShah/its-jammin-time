@@ -15,11 +15,16 @@ run/main_scene="res://world/office/office.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[asset_placer]
+
+general/asset_library_path="res://assets/asset_placer_library.json"
+
 [autoload]
 
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 Audio="*res://core/audio/audio.tscn"
 Narrator="*res://core/narrator/narrator.tscn"
+GameState="*res://core/game_state.gd"
 
 [display]
 
@@ -28,7 +33,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
+enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/godot_ai/plugin.cfg", "res://addons/snappy/plugin.cfg")
 
 [input]
 

@@ -65,7 +65,8 @@ _subresources={
 },
 "nodes": {
 "PATH:Office_Desk_4_Rounded_Alt": {
-"generate/physics": true
+"generate/physics": true,
+"physics/shape_type": 2
 }
 }
 }
