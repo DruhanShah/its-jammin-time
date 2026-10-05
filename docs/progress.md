@@ -40,26 +40,40 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Interactable `enabled` flag [review: `player.gd` `_interactable()`]
 - [x] Fade transition into/out of minigames (`Transition.change_scene`) [review: `core/transition/transition.gd`]
 - [x] Global unlocks in `GameState` (interactables available at different times, not tied to a scene) [review: `interactable.gd` `is_usable()`, `game_state.gd`]
+## Current: office map (from `docs/map/layout_sketch.jpeg`)
+- [x] Phase 1: room shells: 10 rooms ~2× bigger and rectangular, doors between adjacent rooms, ceilings, lights [review: confirm layout from `docs/map/layout_topdown.png`; `docs/map/README.md`]
+- [x] Furnishing research: `docs/map/furnishing_guide.md` (inventory, workstation recipes, weirdness ladder)
+- [~] Phase 2: furnishing (desk counts per room, server room with giant/stacked PCs as fake mainframes, weird paintings, C2 fully upside down (all furniture on the ceiling), odd placements further from start)
+
+- [x] Pushable chairs (walk into them to push them around) — a chair prop scene used when furnishing [review: `world/office/props/office_chair.tscn`/`.gd`, `player.gd` `_push_bodies()`; walk into the chair at your desk]
+- [x] Chair wheels rolling sound found: "rolling_office_chair.WAV" by alpanaytekin (Freesound 213086, CC0), cut into a 3.0 s loop (user's pick); added with the pushable chairs
+- [x] First-person arms from "PSX First Person Arms" (drillimpact.itch.io, CC0) replacing cuboid hands, with a grab animation on touch and interact [review: `core/player/hands.tscn`/`.gd`; left click the desk, press X at the computer, stand against a wall]
+
+- [x] Arms polish: left hand stays still during a grab, push animation on chairs, arm sway, left-hand grab for targets on the left [review: `core/player/hands.tscn` AnimationTree, `hands.gd`; click at things, X at something left of the crosshair, walk into a chair, turn quickly]
+## Up next (in this order)
+- [ ] Interaction batch: locked objects show a prompt and the narrator mocks you; subtle highlight on the targeted object; unlock ids as constants in one place (internal only)
+- [ ] Doors: frame + openable door in every doorway (X to open/close, door sound)
+- [~] Furnishing 1/2: prefab sets + Start, A1–A3, B1–B3
+- [ ] Furnishing 2/2: C1 server room (amber lights, flicker), C2 upside-down, C3
+- [ ] Chairs: bump/squeak sound on hitting walls; narrator jab after pushing chairs for a while (lines needed in script)
+- [ ] "Lights went out" phase: dimmer emergency lighting; try neon-ish vs red, pick what still reads as an office and shows off the map (comparison screenshots for the user)
+
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
 ## Conventions
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
+- Panelled walls in some rooms
 - Set unlocks from the Inspector: `unlock_id` on NarratorTrigger, `unlocks_on_interact` on Interactable
-- Locked objects show a prompt + narrator jab instead of being hidden
-- Unlock ids as constants in one place (avoid typos)
 - Save unlocks to disk once there's a save system
 - `Transition.fade_out()`/`fade_in()` for cutscenes without a scene change
 - Instant cut (skip the fade) as a narrator gag
-- Paint the ceiling with a third GridMap
 - Chained cues (one line starts the next) — only needed for waits/conditions between lines
 - Positional 3D sound effects (`play_sfx_3d`)
 - Different footstep sounds per floor surface
 - Subtitles on/off setting
 - A size property on narrator triggers that can be edited in the editor
-- Outline/highlight on the targeted object
-- Alternate hands per click
 - Placeholder minigame text uses the current interact key instead of "Esc or X"
 - `GameState.reset()` for new game / restart
 - Per-cue music ducking amount

@@ -15,6 +15,18 @@ Credit line for the game's credits screen (optional per the license):
 
 > Sound effects from 400 Sounds Pack by Chequered Ink, https://ci.itch.io/
 
+## Rolling office chair (sound effect)
+
+- **Title:** "rolling_office_chair.WAV"
+- **Author:** alpanaytekin, https://freesound.org/people/alpanaytekin/
+- **Source:** https://freesound.org/people/alpanaytekin/sounds/213086/ (uploaded 2014-01-05; description: "rolling office chair. suitable for looping.")
+- **License:** Creative Commons 0 (CC0 1.0, public domain dedication), https://creativecommons.org/publicdomain/zero/1.0/
+- **File:** `sfx/chair_roll_loop.wav`, **modified**: cut from the Freesound HQ preview (source 9.20–12.20 s, 3.0 s) with a 0.25 s crossfade so it loops seamlessly. Imported as mono with forward looping. Used by `world/office/props/office_chair.tscn` while a chair rolls.
+
+Credit line (optional under CC0):
+
+> Rolling chair sound: "rolling_office_chair.WAV" by alpanaytekin (Freesound), CC0
+
 ## Placeholders (ours)
 
 Generated procedurally by a small Python script (sine tones and filtered noise), made for this project. No third-party or AI-generated audio. Replace them with real recordings when ready.

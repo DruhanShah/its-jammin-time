@@ -5,6 +5,7 @@
 - **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Attribution is required. The models may not be resold on their own or as part of an asset pack.
 - **AI disclosure:** The itch.io page states "No generative AI was used".
 - **Files used:** `models/` = `FBX/Separated/*.fbx`, `textures/` = `Textures/*.png`, plus the original `ReadMe.txt`.
+- **Derived files:** `meshes/` = the office-chair meshes (Chair_Office_Base_A/B/C, Bottom, Wheel) saved by Godot's importer from those FBX files (import option *Save to File*), unchanged geometry.
 
 Credit line for the game's credits screen:
 

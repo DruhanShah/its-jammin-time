@@ -1,24 +1,79 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://core/player/hands.gd" id="1_hands"]
+[ext_resource type="PackedScene" uid="uid://0fh6dqev1ewo" path="res://assets/models/arms/arms_rig.glb" id="2_arms"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
-albedo_color = Color(0.72, 0.5, 0.38, 1)
-roughness = 1.0
+[sub_resource type="AnimationNodeAnimation" id="anim_relax"]
+animation = &"relax"
 
-[sub_resource type="BoxMesh" id="BoxMesh_hand"]
-material = SubResource("StandardMaterial3D_skin")
-size = Vector3(0.035, 0.022, 0.09)
+[sub_resource type="AnimationNodeAnimation" id="anim_push_R"]
+animation = &"push_R"
+use_custom_timeline = true
+timeline_length = 0.35
+stretch_time_scale = false
+start_offset = 0.15
+loop_mode = 2
+
+[sub_resource type="AnimationNodeAnimation" id="anim_grab_R"]
+animation = &"grab_R"
+use_custom_timeline = true
+timeline_length = 0.35
+stretch_time_scale = false
+start_offset = 0.15
+
+[sub_resource type="AnimationNodeAnimation" id="anim_grab_L"]
+animation = &"grab_L"
+use_custom_timeline = true
+timeline_length = 0.35
+stretch_time_scale = false
+start_offset = 0.15
+
+[sub_resource type="AnimationNodeBlend2" id="push"]
+filter_enabled = true
+filters = ["ArmsRig/Skeleton3D:shoulder.R", "ArmsRig/Skeleton3D:upper_arm.R", "ArmsRig/Skeleton3D:forearm.R", "ArmsRig/Skeleton3D:hand.R", "ArmsRig/Skeleton3D:palm.01.R", "ArmsRig/Skeleton3D:f_index.01.R", "ArmsRig/Skeleton3D:f_index.02.R", "ArmsRig/Skeleton3D:f_index.03.R", "ArmsRig/Skeleton3D:thumb.01.R", "ArmsRig/Skeleton3D:thumb.02.R", "ArmsRig/Skeleton3D:thumb.03.R", "ArmsRig/Skeleton3D:palm.02.R", "ArmsRig/Skeleton3D:f_middle.01.R", "ArmsRig/Skeleton3D:f_middle.02.R", "ArmsRig/Skeleton3D:f_middle.03.R", "ArmsRig/Skeleton3D:palm.03.R", "ArmsRig/Skeleton3D:f_ring.01.R", "ArmsRig/Skeleton3D:f_ring.02.R", "ArmsRig/Skeleton3D:f_ring.03.R", "ArmsRig/Skeleton3D:palm.04.R", "ArmsRig/Skeleton3D:f_pinky.01.R", "ArmsRig/Skeleton3D:f_pinky.02.R", "ArmsRig/Skeleton3D:f_pinky.03.R"]
+
+[sub_resource type="AnimationNodeOneShot" id="grab_R"]
+filter_enabled = true
+filters = ["ArmsRig/Skeleton3D:shoulder.R", "ArmsRig/Skeleton3D:upper_arm.R", "ArmsRig/Skeleton3D:forearm.R", "ArmsRig/Skeleton3D:hand.R", "ArmsRig/Skeleton3D:palm.01.R", "ArmsRig/Skeleton3D:f_index.01.R", "ArmsRig/Skeleton3D:f_index.02.R", "ArmsRig/Skeleton3D:f_index.03.R", "ArmsRig/Skeleton3D:thumb.01.R", "ArmsRig/Skeleton3D:thumb.02.R", "ArmsRig/Skeleton3D:thumb.03.R", "ArmsRig/Skeleton3D:palm.02.R", "ArmsRig/Skeleton3D:f_middle.01.R", "ArmsRig/Skeleton3D:f_middle.02.R", "ArmsRig/Skeleton3D:f_middle.03.R", "ArmsRig/Skeleton3D:palm.03.R", "ArmsRig/Skeleton3D:f_ring.01.R", "ArmsRig/Skeleton3D:f_ring.02.R", "ArmsRig/Skeleton3D:f_ring.03.R", "ArmsRig/Skeleton3D:palm.04.R", "ArmsRig/Skeleton3D:f_pinky.01.R", "ArmsRig/Skeleton3D:f_pinky.02.R", "ArmsRig/Skeleton3D:f_pinky.03.R"]
+fadein_time = 0.12
+fadeout_time = 0.12
+
+[sub_resource type="AnimationNodeOneShot" id="grab_L"]
+filter_enabled = true
+filters = ["ArmsRig/Skeleton3D:shoulder.L", "ArmsRig/Skeleton3D:upper_arm.L", "ArmsRig/Skeleton3D:forearm.L", "ArmsRig/Skeleton3D:hand.L", "ArmsRig/Skeleton3D:palm.01.L", "ArmsRig/Skeleton3D:f_index.01.L", "ArmsRig/Skeleton3D:f_index.02.L", "ArmsRig/Skeleton3D:f_index.03.L", "ArmsRig/Skeleton3D:thumb.01.L", "ArmsRig/Skeleton3D:thumb.02.L", "ArmsRig/Skeleton3D:thumb.03.L", "ArmsRig/Skeleton3D:palm.02.L", "ArmsRig/Skeleton3D:f_middle.01.L", "ArmsRig/Skeleton3D:f_middle.02.L", "ArmsRig/Skeleton3D:f_middle.03.L", "ArmsRig/Skeleton3D:palm.03.L", "ArmsRig/Skeleton3D:f_ring.01.L", "ArmsRig/Skeleton3D:f_ring.02.L", "ArmsRig/Skeleton3D:f_ring.03.L", "ArmsRig/Skeleton3D:palm.04.L", "ArmsRig/Skeleton3D:f_pinky.01.L", "ArmsRig/Skeleton3D:f_pinky.02.L", "ArmsRig/Skeleton3D:f_pinky.03.L"]
+fadein_time = 0.12
+fadeout_time = 0.12
+
+[sub_resource type="AnimationNodeBlendTree" id="tree"]
+nodes/relax/node = SubResource("anim_relax")
+nodes/relax/position = Vector2(-400, 0)
+nodes/push_R/node = SubResource("anim_push_R")
+nodes/push_R/position = Vector2(-400, 200)
+nodes/push/node = SubResource("push")
+nodes/push/position = Vector2(-200, 60)
+nodes/grab_R_clip/node = SubResource("anim_grab_R")
+nodes/grab_R_clip/position = Vector2(-200, 260)
+nodes/grab_R/node = SubResource("grab_R")
+nodes/grab_R/position = Vector2(0, 60)
+nodes/grab_L_clip/node = SubResource("anim_grab_L")
+nodes/grab_L_clip/position = Vector2(0, 260)
+nodes/grab_L/node = SubResource("grab_L")
+nodes/grab_L/position = Vector2(200, 60)
+nodes/output/position = Vector2(400, 60)
+node_connections = [&"push", 0, &"relax", &"push", 1, &"push_R", &"grab_R", 0, &"push", &"grab_R", 1, &"grab_R_clip", &"grab_L", 0, &"grab_R", &"grab_L", 1, &"grab_L_clip", &"output", 0, &"grab_L"]
 
 [node name="Hands" type="Node3D"]
 script = ExtResource("1_hands")
 
-[node name="LeftHand" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.978, 0, -0.208, 0, 1, 0, 0.208, 0, 0.978, -0.115, -0.11, -0.17)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_hand")
+[node name="Arms" parent="." instance=ExtResource("2_arms")]
+transform = Transform3D(-0.6, 0, 0, 0, 0.6, 0, 0, 0, -0.6, 0, -1.04589, 0)
 
-[node name="RightHand" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.978, 0, 0.208, 0, 1, 0, -0.208, 0, 0.978, 0.115, -0.11, -0.17)
+[node name="ArmsMesh" parent="Arms/ArmsRig/Skeleton3D" index="0"]
 cast_shadow = 0
-mesh = SubResource("BoxMesh_hand")
+
+[node name="AnimationTree" type="AnimationTree" parent="Arms"]
+tree_root = SubResource("tree")
+anim_player = NodePath("../AnimationPlayer")
+parameters/push/blend_amount = 0.0
+
+[editable path="Arms"]

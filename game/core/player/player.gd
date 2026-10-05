@@ -9,6 +9,8 @@ extends CharacterBody3D
 @export var footstep_volume_db := -10.0
 @export var touch_sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/wood_small_hollow.wav")
 @export var touch_volume_db := -6.0
+## Force (N) on rigid bodies we walk into, e.g. office chairs. Only while they're slower than us.
+@export var push_force := 300.0
 
 var _bob_time := 0.0
 var _step := 0
@@ -53,6 +55,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("interact"):
 		var target := _interactable()
 		if target:
+			# Reach toward the object's centre, so things off to the left get the left hand.
+			hands.touch(target.global_position)
 			target.interact()
 	elif event.is_action_pressed("touch"):
 		_touch()
@@ -68,7 +72,23 @@ func _physics_process(delta: float) -> void:
 	velocity.z = direction.z * speed
 
 	move_and_slide()
+	_push_bodies(delta)
 	_update_head_bob(delta)
+
+
+## CharacterBody3D doesn't move rigid bodies by itself, so nudge what we bumped into.
+func _push_bodies(delta: float) -> void:
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var body := collision.get_collider() as RigidBody3D
+		if not body:
+			continue
+		hands.push()
+		var push := -collision.get_normal()
+		push.y = 0.0  # Only sideways, so standing on or brushing past it doesn't press it into the floor.
+		push = push.normalized()
+		if body.linear_velocity.dot(push) < speed:
+			body.apply_central_impulse(push * push_force * delta)
 
 
 func _update_head_bob(delta: float) -> void:
