@@ -14,6 +14,7 @@ extends CharacterBody3D
 
 var _bob_time := 0.0
 var _step := 0
+var _target: Interactable ## What we're aiming at (highlighted), or null.
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -38,6 +39,12 @@ func _exit_tree() -> void:
 
 func _process(_delta: float) -> void:
 	var target := _interactable()
+	if target != _target:
+		if is_instance_valid(_target):
+			_target.set_highlighted(false)
+		if target:
+			target.set_highlighted(true)
+		_target = target
 	hud.show_prompt(target.verb if target else "")
 
 
@@ -110,10 +117,10 @@ func _update_head_bob(delta: float) -> void:
 		camera.position = camera.position.lerp(Vector3.ZERO, delta * 10.0)
 
 
-## The usable Interactable the player is looking at (within the ray's reach), or null.
+## The enabled Interactable the player is looking at (within the ray's reach), or null. May be locked.
 func _interactable() -> Interactable:
 	var target := ray.get_collider() as Interactable
-	return target if target and target.is_usable() else null
+	return target if target and target.enabled else null
 
 
 func _touch() -> void:
