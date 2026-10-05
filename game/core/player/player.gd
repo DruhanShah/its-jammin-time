@@ -4,15 +4,27 @@ extends CharacterBody3D
 @export var mouse_sensitivity := 0.002
 @export var bob_frequency := 3.0
 @export var bob_amplitude := 0.05
+@export var footstep_sound: AudioStream = preload("res://core/audio/footsteps.tres")
+@export var touch_sound: AudioStream = preload("res://assets/audio/sfx/touch.wav")
 
 var _bob_time := 0.0
+var _step := 0
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
+@onready var ray: RayCast3D = $Head/Camera3D/InteractRay
+@onready var hands: PlayerHands = $Head/Camera3D/Hands
+@onready var hud: PlayerHud = $HUD
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	ray.add_exception(self)
+
+
+func _process(_delta: float) -> void:
+	var target := _interactable()
+	hud.show_prompt(target.prompt if target else "")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -23,8 +35,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotation.x = clampf(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 	elif event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif event is InputEventMouseButton and event.pressed:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseButton and event.pressed:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	elif event.is_action_pressed("interact"):
+		var target := _interactable()
+		if target:
+			target.interact()
+	elif event.is_action_pressed("touch"):
+		_touch()
 
 
 func _physics_process(delta: float) -> void:
@@ -50,5 +69,23 @@ func _update_head_bob(delta: float) -> void:
 			sin(_bob_time * bob_frequency) * bob_amplitude,
 			0.0
 		)
+		# A step lands at the bottom of each bob.
+		var step := floori(_bob_time * bob_frequency / TAU + 0.25)
+		if step != _step:
+			_step = step
+			Audio.play_sfx(footstep_sound)
 	else:
 		camera.position = camera.position.lerp(Vector3.ZERO, delta * 10.0)
+
+
+## The Interactable the player is looking at (within the ray's reach), or null.
+func _interactable() -> Interactable:
+	return ray.get_collider() as Interactable
+
+
+func _touch() -> void:
+	if ray.is_colliding():
+		hands.touch(ray.get_collision_point())
+		Audio.play_sfx(touch_sound)
+	else:
+		hands.touch(ray.to_global(ray.target_position))

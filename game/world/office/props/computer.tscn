@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://bm0uornoexodw" path="res://assets/vnb_office/models/Computer_Monitor.fbx" id="1_mon"]
+[ext_resource type="Script" path="res://core/interaction/interactable.gd" id="2_int"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mon"]
+size = Vector3(0.44, 0.58, 0.22)
+
+[node name="Computer" type="Node3D"]
+
+[node name="Computer_Monitor" parent="." instance=ExtResource("1_mon")]
+
+[node name="Interactable" type="Area3D" parent="."]
+script = ExtResource("2_int")
+prompt = "Press X to use the computer"
+target_scene = "res://minigames/placeholder/placeholder_minigame.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, -0.045)
+shape = SubResource("BoxShape3D_mon")

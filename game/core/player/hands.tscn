@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://core/player/hands.gd" id="1_hands"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
+albedo_color = Color(0.72, 0.5, 0.38, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hand"]
+material = SubResource("StandardMaterial3D_skin")
+size = Vector3(0.035, 0.022, 0.09)
+
+[node name="Hands" type="Node3D"]
+script = ExtResource("1_hands")
+
+[node name="LeftHand" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.978, 0, -0.208, 0, 1, 0, 0.208, 0, 0.978, -0.115, -0.11, -0.17)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_hand")
+
+[node name="RightHand" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.978, 0, 0.208, 0, 1, 0, -0.208, 0, 0.978, 0.115, -0.11, -0.17)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_hand")
