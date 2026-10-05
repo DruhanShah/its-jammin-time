@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AdPopupConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/ad_popup/ad_popup_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/wood_small_hollow.wav" id="2_spawn"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/click_double_on.wav" id="3_close"]
+
+[resource]
+script = ExtResource("1_cfg")
+max_concurrent = 4
+spawn_sfx = ExtResource("2_spawn")
+close_sfx = ExtResource("3_close")

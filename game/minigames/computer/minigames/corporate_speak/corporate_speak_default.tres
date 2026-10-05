@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CorporateSpeakConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/corporate_speak/corporate_speak_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/click_double_on.wav" id="2_choose"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/wood_small_hollow.wav" id="3_submit"]
+
+[resource]
+script = ExtResource("1_cfg")
+sentences = Array[String](["Let's {circle back:10|talk again:3|never speak of this:-5} on this {offline:10|later:3|never:-5}.", "We need to {leverage:10|use:3|abuse:-5} our {core competencies:10|skills:3|stuff:0} to {move the needle:10|do better:3|survive:0}.", "Per my {last email:10|memory:3|vibes:-5}, the {deliverables:10|work:3|chores:0} are {mission-critical:10|important:3|whatever:-5}.", "This {paradigm shift:10|change:3|mess:-5} will {unlock synergies:10|help:3|confuse everyone:-5} across {all verticals:10|teams:3|the building:0}.", "I'll {take this offline:10|handle it:3|ignore it:-5} and {loop in:10|tell:3|blame:-5} the {key stakeholders:10|bosses:3|interns:0}.", "Going forward, let's {align:10|agree:3|argue:-5} on {actionable insights:10|ideas:3|guesses:-3} to {drive value:10|make money:3|look busy:0}.", "We're {pivoting:10|changing:3|panicking:-5} to a {customer-centric:10|nicer:3|cheaper:0} {ecosystem:10|setup:3|vibe:-3}.", "Can we {double-click:10|look more:3|stare:-3} on that {low-hanging fruit:10|easy task:3|snack:-5}?"])
+choose_sfx = ExtResource("2_choose")
+submit_sfx = ExtResource("3_submit")
