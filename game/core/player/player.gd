@@ -90,9 +90,10 @@ func _update_head_bob(delta: float) -> void:
 		camera.position = camera.position.lerp(Vector3.ZERO, delta * 10.0)
 
 
-## The Interactable the player is looking at (within the ray's reach), or null.
+## The usable Interactable the player is looking at (within the ray's reach), or null.
 func _interactable() -> Interactable:
-	return ray.get_collider() as Interactable
+	var target := ray.get_collider() as Interactable
+	return target if target and target.is_usable() else null
 
 
 func _touch() -> void:

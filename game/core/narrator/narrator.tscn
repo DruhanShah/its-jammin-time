@@ -10,7 +10,11 @@ script = ExtResource("1_narr")
 [node name="Voice" type="AudioStreamPlayer" parent="."]
 bus = &"Voice"
 
+[node name="ReadTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Subtitles" type="CanvasLayer" parent="."]
+layer = 101
 
 [node name="Label" type="Label" parent="Subtitles"]
 anchors_preset = 12

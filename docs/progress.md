@@ -36,14 +36,22 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Shared Asset Placer library committed in the repo (`assets/asset_placer_library.json`)
 - [x] Sound effects from "400 Sounds Pack" (ci.itch.io) replacing placeholders [review: listen to volumes]
 - [x] Central credits file listing every external resource (`game/CREDITS.md`)
-- [ ] Subtitle-only narrator cues
-- [ ] Interactable `enabled` flag
-- [ ] Scene transition into/out of minigames (style to be decided)
+- [x] Subtitle-only narrator cues (shown for max(2 s, chars/15)) [review: `narrator.gd` play()]
+- [x] Interactable `enabled` flag [review: `player.gd` `_interactable()`]
+- [x] Fade transition into/out of minigames (`Transition.change_scene`) [review: `core/transition/transition.gd`]
+- [x] Global unlocks in `GameState` (interactables available at different times, not tied to a scene) [review: `interactable.gd` `is_usable()`, `game_state.gd`]
+- [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
 ## Conventions
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
+- Set unlocks from the Inspector: `unlock_id` on NarratorTrigger, `unlocks_on_interact` on Interactable
+- Locked objects show a prompt + narrator jab instead of being hidden
+- Unlock ids as constants in one place (avoid typos)
+- Save unlocks to disk once there's a save system
+- `Transition.fade_out()`/`fade_in()` for cutscenes without a scene change
+- Instant cut (skip the fade) as a narrator gag
 - Paint the ceiling with a third GridMap
 - Chained cues (one line starts the next) — only needed for waits/conditions between lines
 - Positional 3D sound effects (`play_sfx_3d`)

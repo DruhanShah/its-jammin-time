@@ -7,6 +7,11 @@ signal interacted
 
 const LAYER := 2 ## Physics layer "interactable"; the player's ray looks for it.
 
+## Local on/off switch: when false the player ignores it (no prompt, no crosshair change).
+## Resets when the scene reloads; for story progress use `unlock_id` instead.
+@export var enabled := true
+## Usable only once `GameState.unlock(unlock_id)` was called (from any scene). Empty = always usable.
+@export var unlock_id: StringName
 ## Prompt reads "Press <interact key> to <verb>".
 @export var verb := "interact"
 ## Scene to switch to on interact (e.g. a minigame). Leave empty to only emit `interacted`.
@@ -21,9 +26,13 @@ func _ready() -> void:
 	monitoring = false
 
 
+func is_usable() -> bool:
+	return enabled and (unlock_id.is_empty() or GameState.is_unlocked(unlock_id))
+
+
 func interact() -> void:
 	if sound:
 		Audio.play_sfx(sound, sound_volume_db)
 	interacted.emit()
 	if target_scene:
-		get_tree().change_scene_to_file(target_scene)
+		Transition.change_scene(target_scene)
