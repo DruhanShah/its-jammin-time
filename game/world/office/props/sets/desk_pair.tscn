@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://world/office/props/sets/ws_modern.tscn" id="g_ws_modern"]
+[ext_resource type="PackedScene" path="res://world/office/props/office_chair.tscn" id="g_office_chair"]
+
+[node name="DeskPair" type="Node3D" unique_id=37426450]
+
+[node name="DeskN" parent="." unique_id=211359735 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, -0.375)
+
+[node name="DeskS" parent="." unique_id=1646005276 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.375)
+
+[node name="ChairN" parent="." unique_id=761574165 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.125)
+
+[node name="ChairS" parent="." unique_id=508545125 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 1.125)

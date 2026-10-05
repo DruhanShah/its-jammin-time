@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://xgkle45a0pln" path="res://assets/vnb_office/models/Office_Desk_2.fbx" id="g_Office_Desk_2"]
+[ext_resource type="PackedScene" uid="uid://b2faw0doffdcl" path="res://assets/vnb_office/models/Computer_Old.fbx" id="g_Computer_Old"]
+[ext_resource type="PackedScene" uid="uid://boinr4abxn5m3" path="res://assets/vnb_office/models/Computer_Old_Keyboard.fbx" id="g_Computer_Old_Keyboard"]
+[ext_resource type="PackedScene" uid="uid://umud3ee7d3cu" path="res://assets/vnb_office/models/Computer_old_mouse.fbx" id="g_Computer_old_mouse"]
+[ext_resource type="PackedScene" uid="uid://d348kwd73ai4v" path="res://assets/vnb_office/models/CoffeeCup_Filled.fbx" id="g_CoffeeCup_Filled"]
+[ext_resource type="PackedScene" uid="uid://uq8wjokeuuyf" path="res://assets/vnb_office/models/Computer_Case_Old.fbx" id="g_Computer_Case_Old"]
+[ext_resource type="PackedScene" uid="uid://dj57ol4krid86" path="res://assets/vnb_office/models/Phone_A_Base.fbx" id="g_Phone_A_Base"]
+
+[node name="WsRetro" type="Node3D" unique_id=180255972]
+
+[node name="Office_Desk_2" parent="." unique_id=2024077986 instance=ExtResource("g_Office_Desk_2")]
+
+[node name="Computer_Old" parent="." unique_id=2017064809 instance=ExtResource("g_Computer_Old")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.949, -0.12)
+
+[node name="Computer_Old_Keyboard" parent="." unique_id=1733024479 instance=ExtResource("g_Computer_Old_Keyboard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.949, 0.22)
+
+[node name="Computer_old_mouse" parent="." unique_id=1250324205 instance=ExtResource("g_Computer_old_mouse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.949, 0.22)
+
+[node name="Mug" parent="." unique_id=75003371 instance=ExtResource("g_CoffeeCup_Filled")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.949, 0.05)
+
+[node name="Computer_Case_Old" parent="." unique_id=1442171594 instance=ExtResource("g_Computer_Case_Old")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.1)
+
+[node name="Phone_A_Base" parent="." unique_id=1488393903 instance=ExtResource("g_Phone_A_Base")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.949, -0.1)

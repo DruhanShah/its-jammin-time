@@ -1,6 +1,6 @@
 # Furnishing plan (phase 2a)
 
-What goes in each room of `game/world/office/office.tscn`, with positions you can type in. Read [`README.md`](README.md) for the room grid and doors and [`furnishing_guide.md`](furnishing_guide.md) for model sizes and facing. Nothing in this plan has been built yet.
+What goes in each room of `game/world/office/office.tscn`, with positions you can type in. Read [`README.md`](README.md) for the room grid and doors and [`furnishing_guide.md`](furnishing_guide.md) for model sizes and facing. Part 1 (prefabs + Start, A2, A1, A3, B2, B1, B3) is built; see [As built (part 1)](#as-built-part-1) at the end for what changed. C1, C2, C3 are still to do.
 
 ## Conventions
 
@@ -729,3 +729,28 @@ No new lights are added (C1 only recolours its existing 12 and flickers 2), so t
 10. **C1 light colour:** amber proposed (see C1). Switch to blue? Should the flicker run all the time, or only after a story beat (e.g. the first blackout)?
 11. Should A2's fake door and B1's free-standing doors use the new **openable door prop** (open onto a wall), or stay as static models?
 12. Node budget (~2,300) acceptable, or trim the desk recipe now (option 2 above)?
+
+## As built (part 1)
+
+Prefabs, materials and the first seven rooms are in. Screenshots: `screenshots/<room>.png` (from a doorway) and `screenshots/<room>_top.png` (top-down, ceiling hidden, **north is on the left, east at the top**). Deviations from the tables above:
+
+**Prefabs**
+- Extra prefabs: `file_cabinet.tscn` (FileCabinet_Standard + 3 closed drawers at y 0.035 / 0.36 / 0.685; the bare body is a hollow frame), `bookshelf_stocked.tscn` (Bookshelf, shelf tops at y 0.115 / 0.558 / 1.046 / 1.533, with books, binders and paper stacks) and `shelf_stocked.tscn` (Shelf_Base, shelves at 1.09 / 1.521, lower cubbies 0.209 left / 0.115 right). Every `FileCabinet_Standard`, `Bookshelf` and `Shelf_Base` in the tables uses them.
+- `wall_clock.tscn`: the hour hand is scaled uniformly 0.65 (a non-uniform scale would warn on the hand's collision body) and the hands sit at z 0.03 (hour) / 0.038 (minute) so they don't z-fight.
+- Rack box shapes: (0.58, 1.9, 0.96) at y 0.95 and (0.58, 1.84, 0.96) at y 0.92 (the scaled mesh is 0.57 × 1.90 × 0.96, centred in x and z). The racks and `pc_shelf_stack` are built but not yet looked at in-game (C1 is part 2).
+
+**Rooms**
+- Start: as planned (test chairs removed, clock 6:59).
+- A2: `Divider` is a `file_cabinet`. Added (the room read as empty): a second stocked bookshelf (−4.72, 0, 7.56), a row of three `Chair_A` "waiting" in front of the door to nowhere (x −3.7, z 4.6 / 5.4 / 6.2, rot 270; 1.8 m from the fake door, outside its swing), a whiteboard on the east wall (5.865, 1.5, −4.5), a stocked shelf (5.62, 0, −6.15) and a plant (−5.35, 0, −4.2). The fake door is still the static `Door_Frame` + `Door_A` (frame at (−5.85, 0.1, 6), leaf at z 5.915); **swap it for the openable door prop when that exists.**
+- A1: whiteboard x −5.865 (flush). Added: a meeting corner facing the whiteboard (`Table_Circular` (−3.6, 0, 4.5) + 3 `Chair_A`), a coffee corner by the kitchenette (`Table_Circular` (4.3, 0, −5) + 2 `Stool_A`), a stocked shelf (5.62, 0, 5), a plant (−5.3, 0, −7.3) and a stocked bookshelf on the north wall (0.6, 0, −7.56; A1 has no north door).
+- A3: the clock labels run NEW YORK → DEADLINE left to right **as seen from inside** (x 3.5 → −4.5; the plan's order read backwards on the south wall). Clocks scaled 1.4 at y 2.35, labels at y 1.9, font size 64. Added: a stocked shelf (−5.62, 0, −1.8), a plant (−5.3, 0, 7.2), a small bin by the pinwheel, a floor lamp in the lounge (5.5, 0, 7.4).
+- B2: giant photo at y 0.99 (its bottom on the floor). Label y 2.7, font size 96 (48 was unreadable from the door). Added: a stocked bookshelf (−5.56, 0, −4.4), a printer table + printer (−5.5, 0, 4), three plants. The 5-chair stack's top back touches the ceiling ("stacked to the ceiling").
+- B1: `Door2` opens 82° instead of 35° (at 35° the leaf blocked the corridor; the player now walks through all three frames to the last door). Backwards whiteboard at z −7.77 (flush when rotated 180°). Added: two `Chair_B` and a coffee table watching the side TV (x 4.0 / 4.95, z −4), a plant (5.3, 0, −7.3), a stocked shelf (−5.62, 0, 5.5).
+  - **Wall lights (user request):** the 12 ceiling lights became 9 `CeilingLight`s on the walls (`CeilingLight10–12` deleted): north wall x −3.5 / 3.5, south x −3.5 / 4.5, west z −2.2 / 5, east z −6.2 / −2.2 / 5, all at y 2.6 with rot (−90, facing, 0) (facing = wall item facing: north 0, south 180, west 90, east 270), so the panel sits flush and the spot shines horizontally into the room. SpotLight overrides (editable children): range 7.5, angle 75°, energy 3. They stay ≥ 1.2 m from doorway edges and above the whiteboard, TV and painting. No light-limit patches seen on the walls or floor.
+- B3: file-tower drawers pulled out 0.25 / 0.35 / 0.45 m (x −5.42 + 0.1 i; at 0.45–0.85 the top ones floated clear of their cabinets) and each cabinet also gets its two other drawers closed. Added: a stocked bookshelf (3.4, 0, −7.56), a stocked shelf (−5.62, 0, −6.4), a plant SW and a floor lamp NE, and **four plants growing along the east wall** (scale 0.6 / 0.9 / 1.2 / 1.5 at z 3.4 → 7.2), the opposite of the shrinking desks.
+
+**Checks done:** walked all 11 doorway crossings that touch part-1 rooms plus the B1 door corridor (scripted walk, nothing snags); pushed the A2 timeout chair (rolls to the wall) and a B2 desk chair sideways (a tucked-in chair can't be pushed into its desk, as expected); no errors in the game or editor logs. Filler footprints were checked against the walkways, the 1.5 m doorway radius and the walls with a script.
+
+**Performance:** uncapped FPS at 1152×648 (separate game process, editor open, vsync off), before → after: B2 west doorway looking east ~480 → ~430, B2 centre ~465 → ~400, Start door looking into A2 ~425 → ~355. Draw calls: 153 → 292, 145 → 454, 274 → 664. Not trimmed yet; if part 2 makes it worse, step 1 of the performance list (visibility ranges on desk clutter) is the next lever.
+
+**For part 2:** `office.tscn` was edited as text and reloaded (the generator script lived in the agent's scratchpad, not the repo). The C rooms' `Furniture` nodes are untouched. Clocks continue the countdown: C2 6:55 (runs backwards, `minutes_per_second = -1`), C1 6:54 (C3 has no clock in the plan).

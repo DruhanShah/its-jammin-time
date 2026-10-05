@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cskdpba2q450m" path="res://assets/vnb_office/models/Office_Desk_1.fbx" id="g_Office_Desk_1"]
+[ext_resource type="PackedScene" uid="uid://bm0uornoexodw" path="res://assets/vnb_office/models/Computer_Monitor.fbx" id="g_Computer_Monitor"]
+[ext_resource type="PackedScene" uid="uid://ckvb3i7d4gefh" path="res://assets/vnb_office/models/Computer_Keyboard.fbx" id="g_Computer_Keyboard"]
+[ext_resource type="PackedScene" uid="uid://de85c1qxh76jf" path="res://assets/vnb_office/models/Computer_Mouse.fbx" id="g_Computer_Mouse"]
+[ext_resource type="PackedScene" uid="uid://d348kwd73ai4v" path="res://assets/vnb_office/models/CoffeeCup_Filled.fbx" id="g_CoffeeCup_Filled"]
+[ext_resource type="PackedScene" uid="uid://c386atnoywmlm" path="res://assets/vnb_office/models/Computer_Case.fbx" id="g_Computer_Case"]
+
+[node name="WsModern" type="Node3D" unique_id=1956305977]
+
+[node name="Office_Desk_1" parent="." unique_id=2075443165 instance=ExtResource("g_Office_Desk_1")]
+
+[node name="Computer_Monitor" parent="." unique_id=1671098288 instance=ExtResource("g_Computer_Monitor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.949, -0.2)
+
+[node name="Computer_Keyboard" parent="." unique_id=946466064 instance=ExtResource("g_Computer_Keyboard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.949, 0.12)
+
+[node name="Computer_Mouse" parent="." unique_id=250934580 instance=ExtResource("g_Computer_Mouse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.949, 0.12)
+
+[node name="Mug" parent="." unique_id=16087819 instance=ExtResource("g_CoffeeCup_Filled")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.949, 0.05)
+
+[node name="Computer_Case" parent="." unique_id=194655651 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.1)

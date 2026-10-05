@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cs7xn1aubqhok" path="res://assets/vnb_office/models/WallShelf_Box.fbx" id="g_WallShelf_Box"]
+[ext_resource type="PackedScene" uid="uid://c386atnoywmlm" path="res://assets/vnb_office/models/Computer_Case.fbx" id="g_Computer_Case"]
+
+[node name="PCShelfStack" type="Node3D" unique_id=393184162]
+
+[node name="Shelf1" parent="." unique_id=1338486782 instance=ExtResource("g_WallShelf_Box")]
+
+[node name="Case1" parent="." unique_id=1039910183 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+
+[node name="Shelf2" parent="." unique_id=1322454143 instance=ExtResource("g_WallShelf_Box")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="Case2" parent="." unique_id=995461691 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+
+[node name="Shelf3" parent="." unique_id=319018672 instance=ExtResource("g_WallShelf_Box")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Case3" parent="." unique_id=196037793 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53, 0)

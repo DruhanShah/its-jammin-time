@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://dm1f5vosm3fc7" path="res://assets/vnb_office/models/FileCabinet_Standard.fbx" id="g_FileCabinet_Standard"]
+[ext_resource type="PackedScene" uid="uid://d3gyuh2qr4fh8" path="res://assets/vnb_office/models/FileCabinet_Standard_Drawer.fbx" id="g_FileCabinet_Standard_Drawer"]
+
+[node name="FileCabinet" type="Node3D" unique_id=516455895]
+
+[node name="Cabinet" parent="." unique_id=1716087199 instance=ExtResource("g_FileCabinet_Standard")]
+
+[node name="Drawer1" parent="." unique_id=542730242 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+
+[node name="Drawer2" parent="." unique_id=699878128 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0)
+
+[node name="Drawer3" parent="." unique_id=423729284 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.685, 0)

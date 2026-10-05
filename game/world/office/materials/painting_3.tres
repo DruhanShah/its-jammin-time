@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" uid="uid://cj81hin7e1vy4" path="res://assets/vnb_office/textures/Paintings3.png" id="1"]
+
+[resource]
+resource_name = "Painting"
+albedo_texture = ExtResource("1")
+texture_filter = 3
