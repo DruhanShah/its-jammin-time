@@ -1,6 +1,6 @@
 # Furnishing plan (phase 2a)
 
-What goes in each room of `game/world/office/office.tscn`, with positions you can type in. Read [`README.md`](README.md) for the room grid and doors and [`furnishing_guide.md`](furnishing_guide.md) for model sizes and facing. Part 1 (prefabs + Start, A2, A1, A3, B2, B1, B3) is built; see [As built (part 1)](#as-built-part-1) at the end for what changed. C1, C2, C3 are still to do.
+What goes in each room of `game/world/office/office.tscn`, with positions you can type in. Read [`README.md`](README.md) for the room grid and doors and [`furnishing_guide.md`](furnishing_guide.md) for model sizes and facing. Part 1 (prefabs + Start, A2, A1, A3, B2, B1, B3) and part 2 (C1, C2, C3) are built; see [As built (part 1)](#as-built-part-1) and [As built (part 2)](#as-built-part-2) at the end for what changed.
 
 ## Conventions
 
@@ -754,3 +754,29 @@ Prefabs, materials and the first seven rooms are in. Screenshots: `screenshots/<
 **Performance:** uncapped FPS at 1152×648 (separate game process, editor open, vsync off), before → after: B2 west doorway looking east ~480 → ~430, B2 centre ~465 → ~400, Start door looking into A2 ~425 → ~355. Draw calls: 153 → 292, 145 → 454, 274 → 664. Not trimmed yet; if part 2 makes it worse, step 1 of the performance list (visibility ranges on desk clutter) is the next lever.
 
 **For part 2:** `office.tscn` was edited as text and reloaded (the generator script lived in the agent's scratchpad, not the repo). The C rooms' `Furniture` nodes are untouched. Clocks continue the countdown: C2 6:55 (runs backwards, `minutes_per_second = -1`), C1 6:54 (C3 has no clock in the plan).
+
+## As built (part 2)
+
+C1, C2 and C3 are in, mostly as in the tables above. Screenshots: `screenshots/c1.png` / `c3.png` (from the west doorway), `c2.png` (from the north doorway), `c*_top.png` (top-down, ceiling hidden, north on the left, east at the top). `office.tscn` was again generated as text (scratchpad script, appended to the part-1 file) and then reloaded and saved in the editor. Deviations and additions:
+
+**C1 (server room)**
+- Lights: all 12 `Rooms/C1/Lights/CeilingLight*` have editable-children overrides: SpotLight3D `light_color` (1.0, 0.70, 0.32), `light_energy` 3.0; Panel `material_override` = new `world/office/materials/ceiling_light_panel_amber.tres` (albedo (1, 0.8, 0.5), emission (1, 0.6, 0.22) × 2.2; more saturated than a straight copy, because at × 3 the panels clipped to white).
+- Flicker: `CeilingLight6` and `CeilingLight9` carry `world/office/parts/light_flicker.gd` on the instance root. Steady, then every 2–6 s a burst of 2–5 dips to 25–60 % (light energy and the panel's emission, on its own duplicated material), 0.05–0.15 s each with 0.15–0.3 s back at full in between (about 3 dips per second at most; no full-strength strobing). Story switches: `enabled = false` = steady light, `powered = false` = light off. It pauses with the game (default process mode). No buzz sound yet.
+- Racks, legacy mainframe, PC stacks, PC wall, fans, AC, control desk + CRT wall, Executive chair, clock (6:54, stopped), `SwitchboardSpot` Marker3D at (5.85, 0, 1) rot 270: as planned. The sticky note is at z −0.80. The sign is font size 80 at (−3.4, 2.75, −7.86) (48 was too small, and it sits above the PC stacks).
+- Added: a `LEGACY / DO NOT TOUCH` Label3D on the legacy rack's front (font 30); a whiteboard on the west wall (−5.865, 1.5, −2.4) with "DAYS SINCE / LAST BLACKOUT: / 0" (Label3D, font 64); a stocked bookshelf of "manuals" (−5.56, 0, −5) rot 90; three cardboard boxes in the NE corner (5.3, 0, −7.3 / −6.6, one stacked); two file cabinets (5.6, 0, 5.6 / 6.2) rot 270; a bin (−1.7, 0, 7.5).
+- The switchboard zone (x 3.4…5.9, z −0.6…2.6) is empty; the aisle from the west door to it is ~3.6 m wide (walked, see below).
+
+**C2 (upside-down room)**
+- As planned: the ceiling pinwheel (4 `ws_modern` + 4 frozen chairs + vase + desk photo; the group's rot Z 180 mirrors the pinwheel, which doesn't matter), 4 hanging Lamp_1, the counter with coffee machine and mug, 2 plants, bin, upside-down painting (Paintings2), whiteboard and clock (6:55, `minutes_per_second = -1`). Cabinets use the `file_cabinet` prefab. The mug is at z 3.6 (3.4 was off the counter's edge).
+- Added on the ceiling: a lounge corner (CoffeeTable (3.8, 3.875, 4.2) rot (0, 90, 180) and two Chair_B at x 2.9 / 4.75 facing it); an upside-down `Wall_TV` on the east wall (5.875, 2.1, −5.5) rot (0, 270, 180). Nothing new is single-sided, nothing covers a light panel, nothing hangs below ~2.3 m.
+- Floor gags: the upright pushable Task chair at (−3, 0, 4.5) (pushed: rolls ~5 m, stays upright), and **`CeilingLight7` moved to the floor**: (−4, 0, 2) rot (180, 0, 0), panel up, spot shining at the ceiling (still 12 lights). It has no collision; you walk over it.
+
+**C3 (the meeting)**
+- As planned: 4 `desk_pair`s at 0 / 15 / 30 / 45°, the meeting (table, plant, projector, 5 chairs) at the end of the west walkway, four twisting paintings (Paintings2), the sandwich on PairNW's south keyboard.
+- Briefcase wall is 3 / 2 / 3 (8 briefcases, middle row offset half a case like bricks) instead of 2 × 2.
+- Added: a plant (5.3, 0, 7.3) and a small bin (−0.9, 0, −5.6). No clock (as planned).
+
+**Checks done:** footprints of every C-room floor item checked by script against the walls, the 1.5 m doorway radius (both sides), the walkways and the switchboard zone (the only hit is the meeting circle on the west walkway's dead end, as planned). Scripted walks (separate game process, steering to waypoints): B1 → C1 west door → switchboard spot, C2 → C1 south door → aisle → switchboard, switchboard → B1, B2 → C2 → C1, C2 → C3 (north door), B3 → C3 → meeting, C3 → C2 → B2: no snags. C2's floor chair pushed 5.2 m, upright; ceiling chairs stay frozen at y 3.875. Flicker sampled for 12 s (bursts of 4 partial dips ~5 s apart; the other panels' shared material untouched). No errors in the game log.
+
+**Performance:** uncapped FPS at 1152×648 (separate process, vsync off, editor open): C1 west door ~655, C1 aisle → switchboard ~700, C1 south door ~595, C2 west door ~635, C3 west door ~635, C3 north door ~590, B2 east door → C2 ~590. Part-1 reference spots in the same run: B2 west door ~435, B2 centre ~435, Start → A2 ~350 (unchanged from part 1). Not trimmed.
+

@@ -54,7 +54,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [ ] Interaction batch: locked objects show a prompt and the narrator mocks you; subtle highlight on the targeted object; unlock ids as constants in one place (internal only)
 - [ ] Doors: frame + openable door in every doorway (X to open/close, door sound)
 - [x] Furnishing 1/2: prefab sets + Start, A1–A3, B1–B3; B1 lights moved onto the walls [review: `docs/map/screenshots/` (`<room>.png` from a doorway, `<room>_top.png` top-down with north on the left), deviations at the end of `docs/map/furnishing_plan.md`; walk A2 → B1, push a chair]
-- [ ] Furnishing 2/2: C1 server room (amber lights, flicker), C2 upside-down, C3
+- [x] Furnishing 2/2: C1 server room (amber lights, flicker), C2 upside-down, C3 [review: `docs/map/screenshots/c1*.png`, `c2*.png`, `c3*.png`; deviations in "As built (part 2)" at the end of `docs/map/furnishing_plan.md`; walk B1 → C1 aisle → switchboard spot, look up in C2, push C2's floor chair]
 - [ ] Chairs: bump/squeak sound on hitting walls; narrator jab after pushing chairs for a while (lines needed in script)
 - [ ] "Lights went out" phase: dimmer emergency lighting; try neon-ish vs red, pick what still reads as an office and shows off the map (comparison screenshots for the user)
 
