@@ -42,7 +42,20 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Global unlocks in `GameState` (interactables available at different times, not tied to a scene) [review: `interactable.gd` `is_usable()`, `game_state.gd`]
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
+## Current: computer screen
+- [x] Computer scene (`minigames/computer/computer.tscn`): vim-ish editor (insert mode only), Power button exits back to the office [review: `computer.gd` `start_minigame()`/`exit()`]
+- [x] Modular minigame framework: `Minigame` base, `MinigameConfig` tunables, `minigame_registry.tres` [review: `minigame.gd`]
+- [x] Event manager stub: starts the ad straight away; to be replaced by the real event system [review: `event_manager.gd`]
+- [x] Minigame: pop-up ad with a tiny X (decoy spawns more ads, X dodges after 3 closes) [review: tune in `ad_popup_default.tres`]
+- [x] Minigame: corporate-speak memo, fill each blank with the most corporate word; per-word points go to a shared score in the status bar [review: sentences in `corporate_speak_default.tres`, syntax `{word:points|word:points}`]
+- [x] Minigame: bot check, a "click me if you are a bot" trap button (fail, score penalty), an "I'm not a robot" captcha that passes after a random number of tries (5% first try), and a close X that appears after 3s [review: tune in `bot_check_default.tres`]
+- [x] Shared score: `Computer.add_score()` → `GameState.score`, shown in the status bar
+- [ ] Real event manager (timings for every minigame)
+- [ ] Vim modes (normal/insert, Esc)
+- [ ] Minigames: floating letters, password scream
+
 ## Conventions
+- Computer minigames live in `minigames/computer/minigames/<name>/`: a scene whose root extends `Minigame`, a `MinigameConfig` subclass + default `.tres`, and one line in `minigame_registry.tres`. Minigames never decide when they start; the event manager calls `Computer.start_minigame(id, overrides)`
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
