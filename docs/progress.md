@@ -102,7 +102,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [ ] Visit 1 (approved design): password via fake mic (live waveform, fails 2×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
 
 - [ ] Visit 2 (SWAPPED, user-specified): antivirus pop-up with no X → crank the download with the twist ring → lights out, narrator blames the antivirus (plan: `docs/plans/visit3.md`, editor visible in the background)
-- [ ] Visit 3 (SWAPPED): filling the document with corporate speak (memo_mail plan in `docs/plans/visit2.md`); then lights out + ESDF
+- [ ] Visit 3 (SWAPPED): corporate speak only (memo_mail section of `docs/plans/visit2.md`; software_update and Inky cut); then lights out + ESDF
 
 ## Switchboard gauntlet (twist minigames)
 - [x] Asset search: 3D models — picks in scratchpad `assets3d/` (Poly Pizza CC0/CC-BY; no free non-AI gargoyle → recoloured Quaternius demons on pedestals)
