@@ -47,7 +47,8 @@ const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"sw
 const OFF_PATH_CUES: Array[StringName] = [&"off_path_1", &"off_path_2", &"off_path_3", &"off_path_4"]
 ## From this step on the controls are shifted one key to the right (WASD → ESDF, X → C; see `Controls`).
 const CONTROLS_SHIFT_STEP := Step.SWITCH_3
-## Played once the shift's blackout line (`BLACKOUT_CUES[CONTROLS_SHIFT_STEP]`) has finished.
+## Played when the lights go out in the shift's step, *before* its blackout line
+## (`BLACKOUT_CUES[CONTROLS_SHIFT_STEP]`), which follows as soon as this one has finished.
 const CONTROLS_SHIFT_CUE := &"controls_shift"
 ## Played when the player presses W or A (by position) after the shift was explained.
 const CONTROLS_SHIFT_W_CUE := &"controls_shift_w"
@@ -67,6 +68,8 @@ var _fresh_start := true
 var _intro_pending := false
 ## The controls just shifted and `CONTROLS_SHIFT_CUE` hasn't been played yet.
 var _controls_cue_pending := false
+## Blackout line waiting for `CONTROLS_SHIFT_CUE` to finish (empty when none).
+var _blackout_cue_after_controls := &""
 
 
 func _ready() -> void:
@@ -140,6 +143,7 @@ func _go_to(new_step: Step) -> void:
 	GameState.has_scope = false
 	GameState.scope_solved = false
 	_off_path_count = 0
+	_blackout_cue_after_controls = &""
 	_arrival_cue = ARRIVAL_CUES.get(new_step, &"")
 	if new_step in MINIGAMES:
 		Computer.queue(MINIGAMES[new_step], false) # The visit ends with Computer.blackout(), not an exit.
@@ -168,15 +172,15 @@ func _sync_controls() -> void:
 	_controls_cue_pending = Controls.shifted and not was
 
 
-func _on_line_finished(cue_id: StringName) -> void:
-	if _controls_cue_pending and cue_id == BLACKOUT_CUES.get(CONTROLS_SHIFT_STEP):
-		_play_controls_cue.call_deferred() # Not from inside Narrator.play() (an interrupt emits this too).
-
-
-func _play_controls_cue() -> void:
-	if _controls_cue_pending and not Narrator.is_speaking():
-		_controls_cue_pending = false
-		Narrator.play(CONTROLS_SHIFT_CUE)
+## Chains the blackout line straight onto the keyboard line. A natural finish clears
+## `Narrator.current_cue` before emitting, so playing here leaves no gap for room/idle/off-path lines
+## to slip in; if the keyboard line was cut by another line instead, the blackout line waits for that
+## one to finish.
+func _on_line_finished(_cue_id: StringName) -> void:
+	if _blackout_cue_after_controls and Narrator.current_cue.is_empty() and not Narrator.is_speaking():
+		var cue := _blackout_cue_after_controls
+		_blackout_cue_after_controls = &""
+		Narrator.play(cue)
 
 
 ## A beaten visit ends with the computer itself cutting the power (the office loads already dark).
@@ -194,6 +198,11 @@ func _on_power_changed(on: bool) -> void:
 		return
 	if not on and is_switch_step():
 		_arrival_cue = BLACKOUT_CUES[step] # The office plays it (now, or on its next load).
+		if step == CONTROLS_SHIFT_STEP and _controls_cue_pending:
+			# The keyboard line first; the blackout line follows it (see _on_line_finished).
+			_controls_cue_pending = false
+			_blackout_cue_after_controls = _arrival_cue
+			_arrival_cue = CONTROLS_SHIFT_CUE
 	_sync_unlocks()
 
 

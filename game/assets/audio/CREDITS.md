@@ -84,7 +84,7 @@ Freesound, all CC0 1.0 (public domain), https://creativecommons.org/publicdomain
 | `stone_grind_step_aside_postproddog.wav` | "Heavy stone door opens 2", https://freesound.org/people/PostProdDog/sounds/578491/ | PostProdDog | 1.0–4.2 s, 0.7 s fade-out | the gargoyles sliding aside |
 | `rumble_step_aside_unfa.wav` | "Rumble · fade in 10s", https://freesound.org/people/unfa/sounds/258341/ | unfa | 7.0–9.5 s, 1.5 s fade-out | rumble under the slide |
 
-400 Sounds Pack (Chequered Ink, licence above), unaltered, in `sfx/400_sounds_pack/`: `clock_ticking.wav` (pack folder `Environment/`, imported with Loop Mode = Forward): ticking under a question; `clock_tick_only.wav` (`Environment/`): each time the "timer" jumps to a new nonsense value; `stone_push_short.wav` (`Materials/`): the gargoyles' per-word "voice" blips (random pitch); `pop_2.wav` (already listed): a lifeline used.
+400 Sounds Pack (Chequered Ink, licence above), unaltered, in `sfx/400_sounds_pack/`: `clock_ticking.wav` (pack folder `Environment/`, imported with Loop Mode = Forward): ticking under a question; `clock_tick_only.wav` (`Environment/`): each time the "timer" jumps to a new nonsense value; `stone_push_short.wav` (`Materials/`): no longer used (was the gargoyles' per-word blips); the gargoyles' babble (`speech_bubble.gd`) reuses `pop_1.wav`, `pop_3.wav`, `pop_4.wav` (already listed) plus `gravel_tick.wav`, the first 70 ms (mono, faded out) of `digital_footstep_gravel_2.wav` (pack folder `Footsteps/digital/`), cut for this game; `pop_2.wav` (already listed): a lifeline used.
 
 Credit line (optional under CC0):
 

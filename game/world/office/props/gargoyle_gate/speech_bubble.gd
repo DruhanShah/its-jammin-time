@@ -4,6 +4,9 @@ extends Control
 ## outline, solid offset shadow, the speaker's name tag in Comic Relief Bold and a tail pointing at
 ## the point. Follows it every frame (`Camera3D.unproject_position`), hides while it's behind the camera.
 ## Lives on a CanvasLayer; fill the screen with it (it ignores the mouse).
+## The text types itself out (`CHARS_PER_SECOND`) with an Animal-Crossing-style babble: a pitched pop
+## every `LETTERS_PER_BLIP` letters with a gravel tick under it for stone grit, around `voice_pitch`
+## (each speaker its own) with a little random wobble. SFX bus.
 
 const NAME_FONT := preload("res://assets/fonts/ComicRelief-Bold.ttf")
 const PAPER := Color("#fff8e7")
@@ -13,10 +16,26 @@ const LIFT := 46.0
 const MARGIN := 12.0
 const SHADOW := Vector2(7, 7)
 const TAIL_HALF_WIDTH := 16.0
+const CHARS_PER_SECOND := 42.0
+const LETTERS_PER_BLIP := 2
+const POPS: Array[AudioStream] = [
+	preload("res://assets/audio/sfx/400_sounds_pack/pop_1.wav"),
+	preload("res://assets/audio/sfx/400_sounds_pack/pop_3.wav"),
+	preload("res://assets/audio/sfx/400_sounds_pack/pop_4.wav"),
+]
+const GRAVEL := preload("res://assets/audio/sfx/400_sounds_pack/gravel_tick.wav")
+const POP_DB := -15.0
+const GRAVEL_DB := -17.0
 
 var anchor: Node3D
 ## Shifts the balloon sideways from the point (-1 left ... 1 right), so two speakers' balloons don't overlap.
 var lean := 0.0
+## Babble pitch of this balloon's speaker (1 = the pops' own pitch).
+var voice_pitch := 1.0
+var _shown := 0.0 ## Characters revealed so far (fractional).
+var _letters := 0 ## Letters revealed since the last blip.
+var _pop_player := AudioStreamPlayer.new()
+var _gravel_player := AudioStreamPlayer.new()
 var _panel := PanelContainer.new()
 var _name_label := Label.new()
 var _text_label := Label.new()
@@ -50,6 +69,7 @@ func _init() -> void:
 	_text_label.add_theme_font_size_override(&"font_size", 23)
 	_text_label.add_theme_color_override(&"font_color", Color("#1a1a1a"))
 	_text_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_text_label.visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING # Balloon keeps its size while typing.
 	_text_label.custom_minimum_size.x = TEXT_WIDTH
 	box.add_child(_name_label)
 	box.add_child(_text_label)
@@ -58,7 +78,23 @@ func _init() -> void:
 	_tail_cover.mouse_filter = MOUSE_FILTER_IGNORE
 	_tail_cover.draw.connect(_draw_tail_fill)
 	add_child(_tail_cover)
+	for player: AudioStreamPlayer in [_pop_player, _gravel_player]:
+		player.bus = &"SFX"
+		player.max_polyphony = 3
+		add_child(player)
+	_pop_player.volume_db = POP_DB
+	_gravel_player.stream = GRAVEL
+	_gravel_player.volume_db = GRAVEL_DB
 	hide()
+
+
+## Seconds `text` takes to type out.
+func reveal_time(text: String) -> float:
+	return text.length() / CHARS_PER_SECOND
+
+
+func is_typing() -> bool:
+	return visible and _text_label.visible_characters >= 0
 
 
 ## Shows `text` from `speaker` (name tag) pointing at `point`, with a little pop.
@@ -66,6 +102,9 @@ func say(speaker: String, text: String, point: Node3D) -> void:
 	anchor = point
 	_name_label.text = speaker
 	_text_label.text = text
+	_text_label.visible_characters = 0
+	_shown = 0.0
+	_letters = LETTERS_PER_BLIP - 1 # The first letter blips straight away.
 	_panel.reset_size()
 	show()
 	_follow()
@@ -77,9 +116,35 @@ func say(speaker: String, text: String, point: Node3D) -> void:
 	_pop.tween_property(_panel, "scale", Vector2.ONE, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
-func _process(_delta: float) -> void:
-	if visible:
-		_follow()
+func _process(delta: float) -> void:
+	if not visible:
+		return
+	_follow()
+	if _text_label.visible_characters >= 0:
+		_type(delta)
+
+
+func _type(delta: float) -> void:
+	var text := _text_label.text
+	var before := _text_label.visible_characters
+	_shown += delta * CHARS_PER_SECOND
+	var now := mini(int(_shown), text.length())
+	for i in range(before, now):
+		var c := text.unicode_at(i)
+		if char(c).to_lower() != char(c).to_upper() or (c >= 48 and c <= 57): # A letter or digit.
+			_letters += 1
+			if _letters >= LETTERS_PER_BLIP:
+				_letters = 0
+				_blip()
+	_text_label.visible_characters = -1 if now >= text.length() else now
+
+
+func _blip() -> void:
+	_pop_player.stream = POPS[randi() % POPS.size()]
+	_pop_player.pitch_scale = voice_pitch * randf_range(0.9, 1.12)
+	_pop_player.play()
+	_gravel_player.pitch_scale = voice_pitch * randf_range(0.85, 1.15)
+	_gravel_player.play()
 
 
 func _follow() -> void:
