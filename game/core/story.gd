@@ -17,10 +17,12 @@ enum Step {
 	SWITCH_2, ## Lights out, and the server room has swapped places with A3.
 	COMPUTER_3, ## Back to the desk: minigame 3.
 	SWITCH_3, ## Lights out again; the server room stays in A3.
-	FREE_ROAM, ## End of the current content.
+	ENDING, ## Power's back for good: blurry vision, glasses on the desk, the real-life video, credits (see story_stage.gd).
 }
 
 const OFFICE := "res://world/office/office.tscn"
+## Where putting on the glasses leads: the real-life video, then the credits (game/ending/).
+const REAL_LIFE := "res://ending/real_life.tscn"
 ## Computer minigames each computer visit plays, in order (registry ids, see
 ## minigames/computer/minigame_registry.tres). Edit these lists to change a visit; the step ends
 ## once the whole list is beaten.
@@ -39,7 +41,7 @@ const SWITCH_GAMES := {
 	Step.SWITCH_3: [&"kaleidoscope", &"candle"],
 }
 ## Narrator line for the next office load after entering a step.
-const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2", Step.FREE_ROAM: &"to_be_continued"}
+const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2", Step.ENDING: &"ending_lights_back"}
 ## Escalating lines when the player wanders off the objective (see story_stage.gd), in order.
 const OFF_PATH_CUES: Array[StringName] = [&"off_path_1", &"off_path_2", &"off_path_3", &"off_path_4"]
 
@@ -175,9 +177,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Finishes the current step as if the player did it, then (re)loads the office.
 func _debug_skip() -> void:
-	if step == Step.FREE_ROAM:
-		return
 	print("Story: skipping ", Step.keys()[step])
+	if step == Step.ENDING:
+		Transition.change_scene(REAL_LIFE) # As if the glasses went on.
+		return
 	if step in MINIGAMES:
 		GameState.computer_queue.clear()
 		_go_to(step + 1 as Step)
