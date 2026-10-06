@@ -29,14 +29,13 @@ extends Node
 @export var off_path_time := 25.0
 ## Minimum seconds between two off-path lines.
 @export var off_path_cooldown := 30.0
-## Seconds without any input before the first idle line, then between the next ones.
-@export var idle_first := 7.0
-@export var idle_next := 7.0
+## Seconds of narrator silence before the next idle fun fact plays.
+@export var idle_silence := 7.0
 
 const CHECK_INTERVAL := 0.5
 ## First-entry lines by room *content* (the room node, wherever it stands: C1 moves to A3's spot).
 const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &"C2": &"room_upside_down", &"B2": &"room_employee_month", &"B3": &"room_family_chairs"}
-## Played in order while the player stands idle (they don't restart after input); `idle_out` ends the facts.
+## Played in order when the narrator has been silent for a while; `idle_out` ends the facts.
 const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6", &"idle_out"]
 ## Most idle lines played per story step (i.e. per lights-out).
 const IDLE_PER_STEP := 2
@@ -81,8 +80,7 @@ var _hinted := false ## The "try them on" line played (this load).
 var _in_room_time := 0.0 ## Seconds in Start since the hint or the last nudge.
 var _nudges := 0
 var _putting_on := false
-var _idle_due := 0.0 ## Player.idle_time at which the next idle line plays.
-var _last_idle := 0.0
+var _silence := 0.0 ## Seconds since the narrator last spoke.
 
 @onready var _rooms: Node3D = $"../Rooms"
 @onready var _player: Node3D = $"../Player"
@@ -221,27 +219,25 @@ func _check_room_lines() -> bool:
 	return false
 
 
-## Idle facts: the first after `idle_first` s without input, then every `idle_next` s while still idle.
-## Any input resets the clock, not the order. The clock pauses while the narrator talks.
+## Idle facts: after `idle_silence` s with no narration, play the next fun fact (in order, at most
+## IDLE_PER_STEP per story step, i.e. per lights-out; `idle_out` closes the list).
 func _check_idle(delta: float) -> void:
-	var idle: float = _player.get(&"idle_time")
-	if idle < _last_idle or _idle_due <= 0.0:
-		_idle_due = idle_first # Input since the last check: a new idle spell.
-	_last_idle = idle
 	if GameState.idle_step != Story.step:
 		GameState.idle_step = Story.step
 		GameState.idle_lines_this_step = 0
-	if GameState.idle_lines_played >= IDLE_CUES.size() or GameState.idle_lines_this_step >= IDLE_PER_STEP or _player.get(&"movement_locked") \
-			or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED or get_tree().get_first_node_in_group(&"scope_view"):
-		return
 	if Narrator.is_speaking():
-		_idle_due += delta
+		_silence = 0.0
 		return
-	if idle >= _idle_due:
+	_silence += delta
+	if GameState.idle_lines_played >= IDLE_CUES.size() or GameState.idle_lines_this_step >= IDLE_PER_STEP \
+			or _player.get(&"movement_locked") or _player.get(&"frozen") \
+			or get_tree().get_first_node_in_group(&"scope_view"):
+		return
+	if _silence >= idle_silence:
 		Narrator.play(IDLE_CUES[GameState.idle_lines_played])
 		GameState.idle_lines_played += 1
 		GameState.idle_lines_this_step += 1
-		_idle_due = idle + idle_next
+		_silence = 0.0
 
 
 func _check_off_path(here: StringName, delta: float) -> void:
