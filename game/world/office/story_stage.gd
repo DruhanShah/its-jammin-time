@@ -58,12 +58,9 @@ const A3_CLEAR_X := 5.5
 const OWN_ROOM := &"Start"
 const SPECTACLES_SCENE := preload("res://world/office/props/spectacles.tscn")
 const SPECTACLES_SPOT := Transform3D(Basis(Vector3.UP, deg_to_rad(75.0)), Vector3(-4.22, 0.949, -0.5))
-## Ending lines: walking into Start, nudges while there (in order, then they stop), putting them on.
+## Ending lines: walking into Start, then nudges while there (in order, then they stop).
 const GLASSES_HINT := &"ending_glasses_hint"
 const GLASSES_NUDGES: Array[StringName] = [&"ending_glasses_nudge_1", &"ending_glasses_nudge_2"]
-const GLASSES_ON := &"ending_glasses_on"
-## Longest wait for the putting-on line before the video starts anyway.
-const GLASSES_ON_MAX_WAIT := 6.0
 
 ## Room centres as built (before any swap), by room name: these are fixed locations.
 var _cells: Dictionary[StringName, Vector3] = {}
@@ -315,8 +312,7 @@ func _check_ending(here: StringName, delta: float) -> void:
 		_in_room_time = 0.0
 
 
-## The spectacles go on: the player stops, the glasses slide down over the eyes (sharp through the
-## lenses), the narrator has a word, then the real-life video.
+## The spectacles go on: the player stops and the screen fades straight into the real-life video.
 func _put_on_glasses() -> void:
 	if _putting_on:
 		return
@@ -328,11 +324,5 @@ func _put_on_glasses() -> void:
 	var hud := _player.get_node_or_null(^"HUD") as CanvasLayer
 	if hud:
 		hud.visible = false
-	Narrator.play(GLASSES_ON)
-	await _vision.put_on()
-	var waited := 0.0
-	while Narrator.is_speaking() and waited < GLASSES_ON_MAX_WAIT:
-		await get_tree().create_timer(0.1).timeout
-		waited += 0.1
-	await get_tree().create_timer(0.4).timeout
+	Narrator.stop()
 	Transition.change_scene(Story.REAL_LIFE)

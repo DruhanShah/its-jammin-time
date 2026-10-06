@@ -39,7 +39,6 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `credits_end` | And that's the end. You can go home now. Unpaid, of course. |
 | `ending_glasses_nudge_1` | The glasses. On the desk. They go on your face. That's the whole puzzle. |
 | `ending_glasses_nudge_2` | I can wait. I'm a narrator; waiting is most of the job. But the glasses won't put themselves on. |
-| `ending_glasses_on` | There. Now you can finally see things as they really are. |
 | `ending_lights_back` | The lights are back. For good this time, I promise. Now go back to your desk and finish that comic. ...Is it me, or has everything gone a bit soft around the edges? |
 | `keypad_no_password` | You don't know the password. The painting does. Paintings know things. |
 | `keypad_old_password` | That's your computer password. You reuse passwords? In this economy? |
