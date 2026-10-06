@@ -13,7 +13,7 @@ size = Vector3(0.44, 0.58, 0.22)
 [node name="Interactable" type="Area3D" parent="."]
 script = ExtResource("2_int")
 verb = "use the computer"
-target_scene = "res://minigames/placeholder/placeholder_minigame.tscn"
+target_scene = "res://minigames/computer/computer.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, -0.045)
