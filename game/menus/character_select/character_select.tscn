@@ -22,6 +22,14 @@ shadow_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 shadow_size = 1
 shadow_offset = Vector2(9, 9)
 
+[sub_resource type="StyleBoxFlat" id="StyleBox_preview"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBox_caption"]
 content_margin_left = 24.0
 content_margin_top = 18.0
@@ -136,7 +144,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBox_frame")
+theme_override_styles/panel = SubResource("StyleBox_preview")
 
 [node name="Picker" type="HBoxContainer" parent="Screen/Chooser" unique_id=1859987855]
 layout_mode = 1
