@@ -1,0 +1,120 @@
+[gd_resource type="Resource" script_class="CharacterCategory" format=3 uid="uid://djku1hvxukcve"]
+
+[ext_resource type="Script" uid="uid://byxxh2cv63ctc" path="res://character-select/character_category.gd" id="1_cat"]
+[ext_resource type="Script" uid="uid://c7wybox28xv48" path="res://character-select/character_option.gd" id="2_opt"]
+[ext_resource type="Texture2D" uid="uid://kl5xvbem58f" path="res://character-select/categories/hair/black-flat.PNG" id="tex_black_flat"]
+[ext_resource type="Texture2D" uid="uid://di7ytgxs3ry46" path="res://character-select/categories/hair/brown.PNG" id="tex_brown"]
+[ext_resource type="Texture2D" uid="uid://b4maacniw0pb7" path="res://character-select/categories/hair/green.PNG" id="tex_green"]
+[ext_resource type="Texture2D" uid="uid://co2401nv7rorw" path="res://character-select/categories/hair/green2.PNG" id="tex_green2"]
+[ext_resource type="Texture2D" uid="uid://cr2ffs2antsut" path="res://character-select/categories/hair/pink.PNG" id="tex_pink"]
+[ext_resource type="Texture2D" uid="uid://cknbfss8e1owg" path="res://character-select/categories/hair/platinum.PNG" id="tex_platinum"]
+[ext_resource type="Texture2D" uid="uid://ggdgk8mleelp" path="res://character-select/categories/hair/purple.PNG" id="tex_purple"]
+[ext_resource type="Texture2D" uid="uid://dic6o7prpu3rk" path="res://character-select/categories/hair/purple-flat.PNG" id="tex_purple_flat"]
+[ext_resource type="Texture2D" uid="uid://cu58qlpryrlh0" path="res://character-select/categories/hair/purple-ish.PNG" id="tex_purple_ish"]
+[ext_resource type="Texture2D" uid="uid://da87aghnu3h63" path="res://character-select/categories/hair/red.PNG" id="tex_red"]
+[ext_resource type="Texture2D" uid="uid://dgi7cc7tmio7w" path="res://character-select/categories/hair/salmon.PNG" id="tex_salmon"]
+[ext_resource type="Texture2D" uid="uid://dam3d76ke8rx7" path="res://character-select/categories/hair/yellow.PNG" id="tex_yellow"]
+
+[sub_resource type="Resource" id="opt_black_flat"]
+script = ExtResource("2_opt")
+id = &"black_flat_hair"
+display_name = "Black Flat"
+texture = ExtResource("tex_black_flat")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_brown"]
+script = ExtResource("2_opt")
+id = &"brown_hair"
+display_name = "Brown"
+texture = ExtResource("tex_brown")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_green"]
+script = ExtResource("2_opt")
+id = &"green_hair"
+display_name = "Green"
+texture = ExtResource("tex_green")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_green2"]
+script = ExtResource("2_opt")
+id = &"green2_hair"
+display_name = "Green 2"
+texture = ExtResource("tex_green2")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_pink"]
+script = ExtResource("2_opt")
+id = &"pink_hair"
+display_name = "Pink"
+texture = ExtResource("tex_pink")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_platinum"]
+script = ExtResource("2_opt")
+id = &"platinum_hair"
+display_name = "Platinum"
+texture = ExtResource("tex_platinum")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_purple_flat"]
+script = ExtResource("2_opt")
+id = &"purple_flat_hair"
+display_name = "Purple Flat"
+texture = ExtResource("tex_purple_flat")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_purple_ish"]
+script = ExtResource("2_opt")
+id = &"purple_ish_hair"
+display_name = "Purple Ish"
+texture = ExtResource("tex_purple_ish")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_purple"]
+script = ExtResource("2_opt")
+id = &"purple_hair"
+display_name = "Purple"
+texture = ExtResource("tex_purple")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_red"]
+script = ExtResource("2_opt")
+id = &"red_hair"
+display_name = "Red"
+texture = ExtResource("tex_red")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_salmon"]
+script = ExtResource("2_opt")
+id = &"salmon_hair"
+display_name = "Salmon"
+texture = ExtResource("tex_salmon")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_yellow"]
+script = ExtResource("2_opt")
+id = &"yellow_hair"
+display_name = "Yellow"
+texture = ExtResource("tex_yellow")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[resource]
+script = ExtResource("1_cat")
+id = &"hairstyle"
+title = "SELECT HAIRSTYLE"
+layer = 2
+options = Array[ExtResource("2_opt")]([SubResource("opt_black_flat"), SubResource("opt_brown"), SubResource("opt_green"), SubResource("opt_green2"), SubResource("opt_pink"), SubResource("opt_platinum"), SubResource("opt_purple_flat"), SubResource("opt_purple_ish"), SubResource("opt_purple"), SubResource("opt_red"), SubResource("opt_salmon"), SubResource("opt_yellow")])
+placeholder_region = Rect2(0.32, 0.04, 0.36, 0.14)

@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="CharacterCategory" format=3 uid="uid://c8yxb9dnu3r7"]
+
+[ext_resource type="Script" uid="uid://byxxh2cv63ctc" path="res://character-select/character_category.gd" id="1_cat"]
+[ext_resource type="Script" uid="uid://c7wybox28xv48" path="res://character-select/character_option.gd" id="2_opt"]
+[ext_resource type="Texture2D" path="res://character-select/categories/eyes/black.PNG" id="tex_black"]
+[ext_resource type="Texture2D" path="res://character-select/categories/eyes/blue.PNG" id="tex_blue"]
+[ext_resource type="Texture2D" path="res://character-select/categories/eyes/green.PNG" id="tex_green"]
+[ext_resource type="Texture2D" path="res://character-select/categories/eyes/pink.PNG" id="tex_pink"]
+[ext_resource type="Texture2D" path="res://character-select/categories/eyes/white.PNG" id="tex_white"]
+
+[sub_resource type="Resource" id="opt_black"]
+script = ExtResource("2_opt")
+id = &"black_eyes"
+display_name = "Black"
+texture = ExtResource("tex_black")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_blue"]
+script = ExtResource("2_opt")
+id = &"blue_eyes"
+display_name = "Blue"
+texture = ExtResource("tex_blue")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_green"]
+script = ExtResource("2_opt")
+id = &"green_eyes"
+display_name = "Green"
+texture = ExtResource("tex_green")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_pink"]
+script = ExtResource("2_opt")
+id = &"pink_eyes"
+display_name = "Pink"
+texture = ExtResource("tex_pink")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[sub_resource type="Resource" id="opt_white"]
+script = ExtResource("2_opt")
+id = &"white_eyes"
+display_name = "White"
+texture = ExtResource("tex_white")
+placeholder_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://c7wybox28xv48"
+
+[resource]
+script = ExtResource("1_cat")
+id = &"eyes"
+title = "SELECT EYES"
+layer = 3
+options = Array[ExtResource("2_opt")]([SubResource("opt_black"), SubResource("opt_blue"), SubResource("opt_green"), SubResource("opt_pink"), SubResource("opt_white")])
+placeholder_region = Rect2(0.40, 0.22, 0.20, 0.05)
