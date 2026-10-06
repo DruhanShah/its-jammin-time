@@ -123,6 +123,31 @@ func take_fresh_start() -> bool:
 	return fresh
 
 
+## SaveGame.new_game(): GameState was just reset; start over at the intro (the office opens the
+## computer on its first load again).
+func restart() -> void:
+	_fresh_start = true
+	_intro_pending = false
+	_computer_cue_msec = -1
+	_go_to(Step.INTRO)
+
+
+## SaveGame.continue_game(): GameState was just loaded mid-step. Re-derives what the step implies
+## (unlocks, ESDF shift) without resetting the step's progress; a dark switch step repeats its
+## blackout directions when the office loads (unless that line is `once` and already played).
+func restore() -> void:
+	_fresh_start = false
+	_intro_pending = false
+	_computer_cue_msec = -1
+	_blackout_cue_after_controls = &""
+	_arrival_cue = BLACKOUT_CUES[step] if is_switch_step() and not GameState.power_on else &""
+	_sync_unlocks()
+	Controls.set_shifted(step >= CONTROLS_SHIFT_STEP)
+	_controls_cue_pending = Controls.shifted and CONTROLS_SHIFT_CUE not in Narrator.played_cues()
+	step_changed.emit(step)
+	switch_game_changed.emit(switch_game())
+
+
 func take_arrival_cue() -> StringName:
 	var cue := _arrival_cue
 	_arrival_cue = &""

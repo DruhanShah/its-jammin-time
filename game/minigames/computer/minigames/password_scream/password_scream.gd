@@ -6,7 +6,7 @@ extends Minigame
 ##
 ## An attempt ends once the input stayed above `threshold_db` for `scream_time` (a scream) and then
 ## went quiet for `quiet_time`, or after `listen_timeout` with no scream at all (so silent players, no mic or a denied permission still get
-## through). If the input is dead silent for `fake_after` s the waveform is faked (noise that reacts to
+## through). If the input is dead silent for `fake_after` s the waveform is faked (plausible random speech that also reacts to
 ## keys and the mouse) and says so.
 ##
 ## Mic capture: an AudioStreamMicrophone plays into a muted "MicTap" bus (created at runtime if
@@ -34,6 +34,8 @@ var _dead_time := 0.0 ## Seconds the input has been exactly silent.
 var _fake := false
 var _fake_level := 0.0
 var _fake_kick := 0.0
+var _syllable_target := 0.0 ## Fake waveform: level of the current syllable or pause.
+var _syllable_left := 0.0
 var _bar_time := 0.0
 var _player: AudioStreamPlayer
 var _capture: AudioEffectCapture
@@ -294,15 +296,20 @@ func _read_input(delta: float) -> void:
 	var cfg := config as PasswordScreamConfig
 	if not _fake and _dead_time >= cfg.fake_after and _phase <= Phase.WAIT_NO:
 		_fake = true
-		wave_note.text = "Simulated waveform (actual waveform unavailable)"
+		wave_note.text = "Live waveform. We are listening. Probably."
 	elif _fake and peak >= 0.001:
 		_fake = false
 		wave_note.text = "Live waveform. We are listening. Probably."
 	_fake_kick = maxf(0.0, _fake_kick - delta * 2.5)
-	# Speech-ish: two slow sines make syllables, a little noise, kicks from keys and the mouse.
-	var t := Time.get_ticks_msec() / 1000.0
-	var target := 0.08 + 0.4 * absf(sin(t * 5.3) * sin(t * 1.7)) + randf() * 0.06 + _fake_kick * 0.6
-	_fake_level = lerpf(_fake_level, target, minf(1.0, delta * 12.0))
+	# Plausible speech: random syllables (loud bursts) and short pauses, a little jitter, kicks from
+	# keys and the mouse. No mic access shouldn't look any different from a mic that hears you.
+	_syllable_left -= delta
+	if _syllable_left <= 0.0:
+		var pause := randf() < 0.3
+		_syllable_target = randf_range(0.02, 0.08) if pause else randf_range(0.2, 0.85)
+		_syllable_left = randf_range(0.12, 0.45) if pause else randf_range(0.07, 0.22)
+	var target := _syllable_target + randf() * 0.08 + _fake_kick * 0.6
+	_fake_level = lerpf(_fake_level, target, minf(1.0, delta * 18.0))
 
 
 func _shown_level() -> float:

@@ -1,6 +1,7 @@
 extends Node
 ## Autoload "Narrator": plays narrator cues with subtitles. A new line interrupts the current one.
-## Process mode Always (narrator.tscn): lines and subtitles carry on while the tree is paused.
+## Process mode Always (narrator.tscn); the pause menu holds the current line with `set_paused()`.
+## Every line that plays is logged in `GameState.narration_log` (the pause menu's narration log).
 ## Long subtitles are split into short chunks shown one after another (Netflix/BBC style): each chunk
 ## fits on one line at the current width where possible (two at most), breaks go at sentence ends first,
 ## then clause punctuation (, ; : dashes, mid-sentence "..."), then before a conjunction, never mid-word,
@@ -92,7 +93,30 @@ func play(cue_id: StringName) -> void:
 			total += time
 		read_timer.start(total)
 	_show_chunk(0)
+	GameState.log_narration(cue_id, " ".join(cue.subtitle.replace("\n", " ").replace(FORCED_BREAK, " ").split(" ", false)), cue.stream != null)
 	line_started.emit(cue_id)
+
+
+## Holds the current line (voice, reading and subtitle timers) and hides its subtitle while `on`
+## (the pause menu); `set_paused(false)` carries on where it stopped.
+func set_paused(on: bool) -> void:
+	voice.stream_paused = on
+	read_timer.paused = on
+	chunk_timer.paused = on
+	subtitle_label.visible = not on and _subtitles_shown and _chunk_index < _chunks.size()
+
+
+## Cue ids already played this game (for `once` cues). SaveGame stores and restores it.
+func played_cues() -> Array[StringName]:
+	var ids: Array[StringName] = []
+	ids.assign(_played.keys())
+	return ids
+
+
+func set_played_cues(ids: Array) -> void:
+	_played.clear()
+	for id in ids:
+		_played[StringName(id)] = true
 
 
 func is_speaking() -> bool:

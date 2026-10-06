@@ -5,7 +5,6 @@ extends Control
 ## save); SETTINGS is "the button that does nothing" (shakes, plays `settings_cue` if set); EXIT quits
 ## (hidden on the web, where a page can't close itself). Enter presses the focused button (New Game).
 
-const CHARACTER_SELECT := "res://menus/character_select/character_select.tscn"
 const START_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/pop_2.wav")
 const STAGE_SIZE := Vector2(1920, 1080)
 
@@ -29,8 +28,8 @@ func _ready() -> void:
 	Audio.play_music(Audio.MENU_MUSIC)
 	tree_exiting.connect(ComicCursor.reset)
 	exit_button.visible = not OS.has_feature("web")
-	new_game_button.pressed.connect(_start.bind(new_game_button))
-	continue_button.pressed.connect(_start.bind(continue_button))
+	new_game_button.pressed.connect(_start.bind(new_game_button, false))
+	continue_button.pressed.connect(_start.bind(continue_button, true))
 	settings_button.pressed.connect(_do_nothing)
 	exit_button.pressed.connect(get_tree().quit)
 	for button: TextureButton in [new_game_button, continue_button, settings_button, exit_button]:
@@ -97,11 +96,14 @@ func _do_nothing() -> void:
 		Narrator.play(settings_cue)
 
 
-func _start(button: TextureButton) -> void:
+## NEW GAME starts fresh; CONT. LAST GAME resumes the autosave (or starts fresh when there is none).
+func _start(button: TextureButton, resume: bool) -> void:
 	if _starting:
 		return
 	_starting = true
 	Audio.play_sfx(START_SOUND)
 	ComicBurst.spawn(self, button.get_global_rect().get_center(), "GO!")
 	await get_tree().create_timer(0.35).timeout
-	Transition.change_scene(CHARACTER_SELECT)
+	if resume and SaveGame.has_save() and SaveGame.continue_game():
+		return
+	SaveGame.new_game()
