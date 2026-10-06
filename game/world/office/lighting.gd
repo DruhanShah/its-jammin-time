@@ -131,6 +131,7 @@ func _set_emergency(level: float) -> void:
 			l[0].powered = false # Stop the flicker so it doesn't fight us.
 		var index: int = l[0].get_index()
 		var fixture := level > 0.0 and index % every == 0
+		@warning_ignore("integer_division") # Which group of `every` lights this one is in.
 		var accent: bool = data.has("accent") and (index / every) % data.accent_every == 1
 		l[1].visible = fixture
 		l[1].light_color = data.accent if accent else data.color

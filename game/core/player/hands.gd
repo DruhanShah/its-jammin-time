@@ -28,9 +28,9 @@ var _sway := Vector2.ZERO
 
 func _process(delta: float) -> void:
 	_push_left -= delta
-	var push: float = _tree.get(&"parameters/push/blend_amount")
-	push = move_toward(push, 1.0 if _push_left > 0.0 else 0.0, delta / push_blend_time)
-	_tree.set(&"parameters/push/blend_amount", push)
+	var blend: float = _tree.get(&"parameters/push/blend_amount")
+	blend = move_toward(blend, 1.0 if _push_left > 0.0 else 0.0, delta / push_blend_time)
+	_tree.set(&"parameters/push/blend_amount", blend)
 	_update_sway(delta)
 
 

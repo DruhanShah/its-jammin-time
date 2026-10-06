@@ -8,6 +8,7 @@ extends Control
 signal completed
 signal failed
 ## Ask the host to start another minigame (e.g. an ad that spawns more ads).
+@warning_ignore("unused_signal") # Emitted by subclasses (e.g. ad_popup.gd).
 signal request_spawn(id: StringName)
 
 ## Tunables. The host swaps in a per-instance copy with the caller's overrides applied.

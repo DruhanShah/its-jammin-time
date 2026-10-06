@@ -6,8 +6,10 @@ signal unlock_changed(id: StringName, unlocked: bool)
 ## Emitted when the office power goes out or comes back (see `set_power`).
 signal power_changed(on: bool)
 ## Emitted when the computer finishes one queued minigame (`computer_queue`), i.e. the player beat it.
+@warning_ignore("unused_signal") # Emitted by EventManager (minigames/computer/event_manager.gd).
 signal computer_minigame_finished(id: StringName)
 ## Emitted when the computer has played every minigame in `computer_queue`.
+@warning_ignore("unused_signal") # Emitted by EventManager.
 signal computer_queue_finished
 
 ## Where the player stood in each level (by scene path), so returning from a minigame puts them back.
