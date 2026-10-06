@@ -53,9 +53,8 @@ var _pushed_chairs: Dictionary[RigidBody3D, Array] = {}
 
 
 func _ready() -> void:
-	# Browsers only grant pointer lock right after a user gesture; otherwise the next click captures.
-	if not OS.has_feature("web") or JavaScriptBridge.eval("navigator.userActivation.isActive", true):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Browsers only grant pointer lock right after a user gesture; otherwise the next key or click captures.
+	MouseCapture.capture()
 	ray.add_exception(self)
 	var pose: Array = GameState.player_poses.get(owner.scene_file_path, [])
 	if pose:
@@ -78,6 +77,11 @@ func remember_pose() -> void:
 func _process(_delta: float) -> void:
 	if frozen:
 		return
+	# Control is ours (no quiz, no pause, no fade): look around. Desktop recaptures whatever freed the
+	# mouse (a close-up's cleanup, a resumed pause that was opened uncaptured, ...). The web waits for a
+	# gesture instead (`_input`), as asking without one is refused.
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not OS.has_feature("web") and not Transition.is_busy():
+		MouseCapture.capture()
 	var target := _interactable() if not movement_locked else null
 	if target != _target:
 		if is_instance_valid(_target):
@@ -86,6 +90,15 @@ func _process(_delta: float) -> void:
 			target.set_highlighted(true)
 		_target = target
 	hud.show_prompt(target.verb if target else "")
+
+
+## Web: the mouse comes back on the player's first key (movement keys too) or click after the browser
+## refused or dropped the lock. Only asks; the event carries on (movement still happens).
+func _input(event: InputEvent) -> void:
+	if frozen or Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or Transition.is_busy():
+		return
+	if MouseCapture.is_capture_gesture(event):
+		MouseCapture.capture(true)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -99,9 +112,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		PauseMenu.open() # Frees the mouse; Resume captures it again.
-	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseButton and event.pressed:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	elif event is InputEventMouseButton and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		pass # The click that (re)captures the mouse (`_input`) doesn't also touch things.
 	elif event.is_action_pressed("interact"):
 		var target := _interactable()
 		if target:

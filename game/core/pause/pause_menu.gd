@@ -74,9 +74,16 @@ func resume() -> void:
 	if not _open:
 		return
 	_close()
+	# Walking around (also when the browser hadn't captured yet): mouse look again. On the web a resume by
+	# key (Esc) has no gesture, so the player's next key or click captures (player.gd `_input`).
+	var player := get_tree().get_first_node_in_group(&"player")
+	if _mouse_before == Input.MOUSE_MODE_CAPTURED or (player and not player.get(&"frozen")):
+		ComicCursor.reset()
+		MouseCapture.capture()
+		return
 	if _mouse_before != Input.MOUSE_MODE_VISIBLE:
 		ComicCursor.reset() # 3D views and close-ups use the system cursor (or none).
-	Input.mouse_mode = _mouse_before # Captured again in the office (a click recaptures it too).
+	Input.mouse_mode = _mouse_before
 
 
 func _close() -> void:

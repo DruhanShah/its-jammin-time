@@ -449,7 +449,7 @@ func _freeze(on: bool) -> void:
 		return
 	_player.frozen = on
 	if not on:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		MouseCapture.capture() # Else (web, no gesture) the player's next key or click.
 
 
 ## Moves the player onto the hot seat facing the statues (both above the quiz strip).
