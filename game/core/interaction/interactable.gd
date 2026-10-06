@@ -19,7 +19,7 @@ const HIGHLIGHT: Material = preload("res://core/interaction/highlight.tres")
 @export var verb := "interact"
 ## Scene to switch to on interact (e.g. a minigame). Leave empty to only emit `interacted`.
 @export_file("*.tscn") var target_scene := ""
-@export var sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/click_double_on.wav")
+@export var sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/toggle_on.wav")
 @export var sound_volume_db := -4.0
 ## Meshes under this node get the highlight while the player aims at it. Default: the whole prop (our parent).
 @export var highlight_root: NodePath = ^".."

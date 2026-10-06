@@ -63,6 +63,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 - Ceiling grid texture (`world/office/textures/ceiling_grid.png`): 128x128 generated grid.
 - Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
 - Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
+- Start screen art (`assets/ui/start_screen/`): hand-drawn by a teammate (Procreate `Untitled_Artwork.pdf`; its layer pages rendered separately: background + burst outlines, and the hand-lettered NEW GAME / CONT. LAST GAME / SETTINGS / EXIT buttons with the white keyed out), cropped and slightly stretched to 16:9.
 - Placeholder real-life video (`assets/video/real_life.ogv`): recorded with Godot's Movie Maker from a throwaway scene; to be replaced by the team's own footage.
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
@@ -75,6 +76,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > (Comic Sans MS is not used; it is licensed by Microsoft.)
 > Tinos: Copyright 2026 The Tinos Project Authors (https://github.com/googlefonts/tinos). Arimo: Copyright 2026 The Arimo Project Authors (https://github.com/googlefonts/arimo). Office Sans Jam, modified from Carlito: Copyright 2013 The Carlito Project Authors (https://github.com/googlefonts/carlito), Reserved Font Name "Carlito". EB Garamond: Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12). Almendra: Copyright (c) 2011-2012, Ana Sanfelippo, Reserved Font Name 'Almendra'. Anton: Copyright 2020 The Anton Project Authors (https://github.com/googlefonts/AntonFont.git). Jamdings: glyphs Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols). All SIL Open Font License 1.1.
 > Times New Roman, Arial, Helvetica, Calibri, Papyrus, Impact, Wingdings and Comic Sans are trademarks of their respective owners. None of those fonts are included; the menu shows free look-alike fonts.
+> Start screen art by the team (hand-drawn, original)
 > Sound effects from 400 Sounds Pack by Chequered Ink, https://ci.itch.io/
 > Rolling chair sound by alpanaytekin (Freesound), CC0
 > First-person arms: PSX First Person Arms by Drillimpact, https://drillimpact.itch.io/, CC0
