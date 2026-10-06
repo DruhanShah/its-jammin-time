@@ -43,7 +43,7 @@ func touch(target: Vector3) -> void:
 	_tree.set(&"parameters/grab_L/request" if left else &"parameters/grab_R/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-## Call every physics frame the player is pushing something.
+## Call every physics frame the player is pushing something in front of them.
 func push() -> void:
 	_push_left = push_hold
 

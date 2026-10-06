@@ -82,8 +82,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [~] Fix all Godot editor/game errors (e.g. recurring "Identifier not found: GameState/Audio/Narrator" on script reload, twist_demo parse error)
 
 ## Fixes
-- [ ] Remove the big-text signs in the server room (SERVER ROOM, LEGACY / DO NOT TOUCH, DAYS SINCE LAST BLACKOUT) and the green EXIT signs from the lights-out look; keep the other signs
-- [ ] Pushing a chair behind you shouldn't trigger the push arm animation (only when the chair is in front)
+- [x] Remove the big-text signs in the server room (SERVER ROOM, LEGACY / DO NOT TOUCH, DAYS SINCE LAST BLACKOUT) and the green EXIT signs from the lights-out look; keep the other signs
+- [x] Pushing a chair behind you shouldn't trigger the push arm animation (only when the chair is in front)
 
 ## Computer redesign
 - [x] Brainstorm (awaiting approval): make computer minigames comic-ier and more fun; fake desktop instead of terminal (`docs/computer_redesign.md`)
@@ -125,7 +125,6 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - Lights out: a power-down/up sound (clunk + fluorescent tick) and a narrator line on the blackout
 - Lights out: emergency fixtures stutter for a second when they kick in (reuse `light_flicker.gd`)
 - Lights out: C1 keeps a few amber lights on the "generator" while the rest of the office is dark
-- Lights out: glowing backing box behind the EXIT signs (look C)
 - Chairs: only the faster chair bumps in chair-on-chair hits; 2–3 bump variants
 - Door: ease-out at the end of the swing; bump sound when blocked
 - Narrator lines when opening A2's fake door / B1's last door onto bare wall

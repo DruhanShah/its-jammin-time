@@ -14,7 +14,7 @@ extends Node
 const LOOKS := {
 	"neon": {
 		"color": Color(0.1, 0.8, 0.95), "accent": Color(0.95, 0.3, 0.85), "accent_every": 3,
-		"energy": 0.7, "every": 2, "panel_energy": 4.0, "exit_signs": false,
+		"energy": 0.7, "every": 2, "panel_energy": 4.0,
 		"env": {
 			"ambient_light_color": Color(0.3, 0.35, 0.55), "ambient_light_energy": 0.12,
 			"fog_light_color": Color(0.1, 0.3, 0.4), "fog_light_energy": 0.2,
@@ -23,7 +23,7 @@ const LOOKS := {
 	},
 	"red": {
 		"color": Color(1.0, 0.15, 0.1),
-		"energy": 0.6, "every": 2, "panel_energy": 3.5, "exit_signs": false,
+		"energy": 0.6, "every": 2, "panel_energy": 3.5,
 		"env": {
 			"ambient_light_color": Color(0.45, 0.3, 0.32), "ambient_light_energy": 0.12,
 			"fog_light_color": Color(0.3, 0.05, 0.05), "fog_light_energy": 0.15,
@@ -32,7 +32,7 @@ const LOOKS := {
 	},
 	"mix": {
 		"color": Color(1.0, 0.3, 0.12),
-		"energy": 0.7, "every": 2, "panel_energy": 3.0, "exit_signs": true,
+		"energy": 0.7, "every": 2, "panel_energy": 3.0,
 		"env": {
 			"ambient_light_color": Color(0.55, 0.35, 0.35), "ambient_light_energy": 0.14,
 			"fog_light_color": Color(0.4, 0.15, 0.08), "fog_light_energy": 0.25,
@@ -40,7 +40,6 @@ const LOOKS := {
 		},
 	},
 }
-const EXIT_FONT := preload("res://assets/fonts/ComicRelief-Bold.ttf")
 
 @export_enum("neon", "red", "mix") var look := "mix":
 	set(value):
@@ -60,7 +59,6 @@ var _normal_env := {}
 var _lights: Array[Array] = []
 var _off_mat: StandardMaterial3D
 var _panel_mats: Array[StandardMaterial3D] = []
-var _exit_signs: Array[Label3D] = []
 var _tween: Tween
 
 
@@ -77,7 +75,6 @@ func _ready() -> void:
 		_lights.append([light, spot, panel, spot.light_color, spot.light_energy, panel.material_override])
 	_off_mat = StandardMaterial3D.new()
 	_off_mat.albedo_color = Color(0.25, 0.27, 0.3)
-	_add_exit_signs()
 	GameState.power_changed.connect(_on_power_changed)
 	if not GameState.power_on:
 		_build_panels()
@@ -118,8 +115,6 @@ func _set_normal() -> void:
 			l[0].powered = true # Flicker lights restart from their own saved energy.
 	for key in _normal_env:
 		_env.set(key, _normal_env[key])
-	for s in _exit_signs:
-		s.visible = false
 
 
 ## `level` 0 = blackout, 1 = emergency lights fully on.
@@ -142,8 +137,6 @@ func _set_emergency(level: float) -> void:
 	for key in data.env:
 		var value = data.env[key]
 		_env.set(key, value * lerpf(0.3, 1.0, level) if key.ends_with("_energy") else value)
-	for s in _exit_signs:
-		s.visible = data.exit_signs
 
 
 ## Emissive panel materials for the current look: [main, accent].
@@ -156,20 +149,3 @@ func _build_panels() -> void:
 		mat.emission_enabled = true
 		mat.emission = color
 		_panel_mats.append(mat)
-
-
-## Green "EXIT" signs above both sides of every doorway (Doors/*), shown by looks with `exit_signs`.
-func _add_exit_signs() -> void:
-	for door: Node3D in $"../Doors".get_children():
-		for side in [1.0, -1.0]:
-			var label := Label3D.new()
-			label.text = "EXIT"
-			label.font = EXIT_FONT
-			label.font_size = 64
-			label.outline_size = 0
-			label.modulate = Color(0.3, 3.0, 0.6)
-			label.position = Vector3(0, 2.95, 0.12 * side)
-			label.rotation.y = 0.0 if side > 0.0 else PI
-			label.visible = false
-			door.add_child(label)
-			_exit_signs.append(label)

@@ -18,6 +18,9 @@ const CHAIR_JABS := {15.0: &"chair_push_1", 45.0: &"chair_push_2"}
 const CHAIR_NEW_ROOM_JAB := &"chair_new_room"
 ## Seconds after our last push that a rolling chair still counts as pushed by us.
 const CHAIR_PUSH_MEMORY := 2.0
+## The arms only play the push animation for bodies within this angle (60°) of where we look,
+## so backing into a chair still moves it without the arms reaching out in front.
+const PUSH_ANIM_MIN_DOT := 0.5
 
 var _bob_time := 0.0
 var _step := 0
@@ -100,7 +103,6 @@ func _push_bodies(delta: float) -> void:
 		var body := collision.get_collider() as RigidBody3D
 		if not body:
 			continue
-		hands.push()
 		pushed = true
 		if not _pushed_chairs.has(body):
 			_pushed_chairs[body] = [_room_at(body.global_position), 0]
@@ -108,6 +110,10 @@ func _push_bodies(delta: float) -> void:
 		var push := -collision.get_normal()
 		push.y = 0.0  # Only sideways, so standing on or brushing past it doesn't press it into the floor.
 		push = push.normalized()
+		var forward := -camera.global_basis.z
+		forward.y = 0.0
+		if push.dot(forward.normalized()) > PUSH_ANIM_MIN_DOT:
+			hands.push()
 		if body.linear_velocity.dot(push) < speed:
 			body.apply_central_impulse(push * push_force * delta)
 	# Only chairs are rigid bodies so far. The clock pauses while the narrator talks, so a jab never cuts a line off.

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://core/narrator/narrator_trigger.tscn" id="7_7e6co"]
 [ext_resource type="PackedScene" path="res://world/office/props/computer.tscn" id="8_comp"]
 [ext_resource type="MeshLibrary" uid="uid://u3ior7jn1wjd" path="res://world/office/gridmap/structure_library.tres" id="9_slib"]
-[ext_resource type="Script" path="res://world/office/lighting.gd" id="72_wqicl"]
+[ext_resource type="Script" uid="uid://b3j25ugbmd6wc" path="res://world/office/lighting.gd" id="72_wqicl"]
 [ext_resource type="PackedScene" path="res://world/office/props/door.tscn" id="75_puljc"]
 [ext_resource type="PackedScene" path="res://world/office/props/sets/bookshelf_stocked.tscn" id="g_bookshelf_stocked"]
 [ext_resource type="PackedScene" uid="uid://c3wxol22g7n07" path="res://assets/vnb_office/models/Box_Base.fbx" id="g_Box_Base"]
@@ -73,7 +73,7 @@
 [ext_resource type="PackedScene" path="res://world/office/props/sets/server_rack_legacy.tscn" id="p2_server_rack_legacy"]
 [ext_resource type="PackedScene" uid="uid://twj3f5rxbol2" path="res://assets/vnb_office/models/Small_Fan.fbx" id="p2_Small_Fan"]
 [ext_resource type="PackedScene" path="res://world/office/props/power_switch.tscn" id="st_power_switch"]
-[ext_resource type="Script" path="res://world/office/story_stage.gd" id="st_story_stage"]
+[ext_resource type="Script" uid="uid://dko3pufvvrrkn" path="res://world/office/story_stage.gd" id="st_story_stage"]
 
 [sub_resource type="Environment" id="Environment_hchcx"]
 background_mode = 1
@@ -692,17 +692,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62, 1.96, -1.35)
 [node name="LegacySticky" parent="Rooms/C1/Furniture" unique_id=928401339 instance=ExtResource("g_StickNote_1")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 2.62, 1.2, -0.8)
 
-[node name="LegacyLabel" type="Label3D" parent="Rooms/C1/Furniture" unique_id=364614857]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62, 1.55, -0.805)
-pixel_size = 0.004
-modulate = Color(0.133, 0.133, 0.133, 1)
-outline_modulate = Color(1, 1, 1, 0.85)
-text = "LEGACY
-DO NOT TOUCH"
-font = ExtResource("g_ComicRelief_Bold")
-font_size = 30
-outline_size = 8
-
 [node name="SwitchboardSpot" type="Marker3D" parent="Rooms/C1/Furniture" unique_id=695140583]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
 
@@ -807,17 +796,6 @@ model = 2
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.875, 2.9, 1)
 minute = 54
 
-[node name="Sign" type="Label3D" parent="Rooms/C1/Furniture" unique_id=1420087414]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 2.75, -7.86)
-pixel_size = 0.004
-modulate = Color(0.133, 0.133, 0.133, 1)
-outline_modulate = Color(1, 1, 1, 0.85)
-text = "SERVER ROOM
-(budget edition)"
-font = ExtResource("g_ComicRelief_Bold")
-font_size = 80
-outline_size = 8
-
 [node name="Manuals" parent="Rooms/C1/Furniture" unique_id=869214158 instance=ExtResource("g_bookshelf_stocked")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.56, 0, -5)
 
@@ -841,18 +819,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 7.5)
 
 [node name="BlackoutBoard" parent="Rooms/C1/Furniture" unique_id=927105184 instance=ExtResource("g_WhiteBoard_Big")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.865, 1.5, -2.4)
-
-[node name="BlackoutLabel" type="Label3D" parent="Rooms/C1/Furniture" unique_id=244729390]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.7, 1.55, -2.4)
-pixel_size = 0.004
-modulate = Color(0.133, 0.133, 0.133, 1)
-outline_modulate = Color(1, 1, 1, 0.85)
-text = "DAYS SINCE
-LAST BLACKOUT:
-0"
-font = ExtResource("g_ComicRelief_Bold")
-font_size = 64
-outline_size = 8
 
 [node name="A2" type="Node3D" parent="Rooms" unique_id=766370371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
