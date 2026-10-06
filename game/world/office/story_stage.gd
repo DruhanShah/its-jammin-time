@@ -180,8 +180,9 @@ func _on_step_changed(step: Story.Step) -> void:
 		_start_ending()
 
 
-## Puts the spectacles on the desk and starts the blurry vision.
+## Puts the spectacles on the desk, starts the blurry vision and switches the computer off for good.
 func _start_ending() -> void:
+	(_computer.get_node(^"Interactable") as Interactable).enabled = false
 	_vision = VisionBlur.new()
 	_vision.strength = outside_blur_strength
 	add_child(_vision)
