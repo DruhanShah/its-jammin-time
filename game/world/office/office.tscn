@@ -76,6 +76,7 @@
 [ext_resource type="PackedScene" path="res://minigames/switch/kaleidoscope/binoculars.tscn" id="kal_binoculars"]
 [ext_resource type="Script" uid="uid://dko3pufvvrrkn" path="res://world/office/story_stage.gd" id="st_story_stage"]
 [ext_resource type="PackedScene" path="res://world/office/props/gargoyle_gate/gargoyle_gate.tscn" id="gq_gargoyle_gate"]
+[ext_resource type="PackedScene" path="res://world/office/props/spinning_banana.tscn" id="sb_spinning_banana"]
 
 [sub_resource type="Environment" id="Environment_hchcx"]
 background_mode = 1
@@ -1737,6 +1738,9 @@ transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 5.3, 0, 
 
 [node name="Bin" parent="Rooms/C3/Furniture" unique_id=1040575705 instance=ExtResource("g_TrashBin_Small")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -5.6)
+
+[node name="SpinningBanana" parent="Rooms/C3/Furniture" unique_id=1618033988 instance=ExtResource("sb_spinning_banana")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 5.4, 0, -7.4)
 
 [node name="Doors" type="Node3D" parent="." unique_id=1293733539]
 
