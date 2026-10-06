@@ -47,28 +47,22 @@ albedo_color = Color(0.95, 0.75, 0.1, 1)
 material = SubResource("Mat_stripe")
 size = Vector3(0.72, 0.08, 0.15)
 
-[sub_resource type="StandardMaterial3D" id="Mat_lever"]
-albedo_color = Color(0.85, 0.12, 0.08, 1)
+[sub_resource type="StandardMaterial3D" id="Mat_rim"]
+albedo_color = Color(0.2, 0.21, 0.22, 1)
+metallic = 0.4
+roughness = 0.6
 
-[sub_resource type="BoxMesh" id="Mesh_lever"]
-material = SubResource("Mat_lever")
-size = Vector3(0.09, 0.32, 0.09)
+[sub_resource type="BoxMesh" id="Mesh_rim"]
+material = SubResource("Mat_rim")
+size = Vector3(0.6, 0.6, 0.006)
 
-[sub_resource type="BoxMesh" id="Mesh_base"]
-material = SubResource("Mat_box")
-size = Vector3(0.2, 0.2, 0.06)
+[sub_resource type="StandardMaterial3D" id="Mat_recess"]
+albedo_color = Color(0.07, 0.07, 0.08, 1)
+roughness = 0.9
 
-[sub_resource type="StandardMaterial3D" id="Mat_red"]
-albedo_color = Color(0.9, 0.15, 0.1, 1)
-
-[sub_resource type="StandardMaterial3D" id="Mat_blue"]
-albedo_color = Color(0.15, 0.35, 0.95, 1)
-
-[sub_resource type="StandardMaterial3D" id="Mat_yellow"]
-albedo_color = Color(0.95, 0.8, 0.1, 1)
-
-[sub_resource type="BoxMesh" id="Mesh_wire"]
-size = Vector3(0.014, 0.6, 0.014)
+[sub_resource type="BoxMesh" id="Mesh_recess"]
+material = SubResource("Mat_recess")
+size = Vector3(0.54, 0.54, 0.006)
 
 [sub_resource type="StandardMaterial3D" id="Mat_cover"]
 albedo_color = Color(0.58, 0.6, 0.62, 1)
@@ -128,28 +122,13 @@ mesh = SubResource("Mesh_box")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, -0.31)
 mesh = SubResource("Mesh_stripe")
 
-[node name="WireRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24, 0, -0.234)
-mesh = SubResource("Mesh_wire")
-surface_material_override/0 = SubResource("Mat_red")
+[node name="RecessRim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.237)
+mesh = SubResource("Mesh_rim")
 
-[node name="WireBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.94, -0.34, 0, 0.34, 0.94, 0, 0, 0, 1, -0.19, 0, -0.234)
-mesh = SubResource("Mesh_wire")
-surface_material_override/0 = SubResource("Mat_blue")
-
-[node name="WireYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0, -0.234)
-mesh = SubResource("Mesh_wire")
-surface_material_override/0 = SubResource("Mat_yellow")
-
-[node name="LeverBase" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.21)
-mesh = SubResource("Mesh_base")
-
-[node name="Lever" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.08, -0.14)
-mesh = SubResource("Mesh_lever")
+[node name="Recess" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.234)
+mesh = SubResource("Mesh_recess")
 
 [node name="Cover" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.31, 0)
