@@ -1,0 +1,142 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/kaleidoscope/keypad.gd" id="1_keypad"]
+[ext_resource type="Shader" path="res://core/ui/comic/halftone.gdshader" id="2_half"]
+[ext_resource type="Shader" path="res://core/ui/comic/emergency_tint.gdshader" id="3_tint"]
+[ext_resource type="Script" path="res://core/ui/comic/app_window.gd" id="4_window"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicShannsMono-Regular.ttf" id="5_mono"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="6_font"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav" id="7_wrong"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/brass_positive_long.wav" id="8_right"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/slide_and_click.wav" id="9_click"]
+
+[sub_resource type="ShaderMaterial" id="Mat_backdrop"]
+shader = ExtResource("2_half")
+shader_parameter/paper_color = Color(0.1, 0.1, 0.12, 1)
+shader_parameter/dot_color = Color(0.18, 0.18, 0.22, 1)
+shader_parameter/cell_size = 16.0
+shader_parameter/angle_degrees = 45.0
+shader_parameter/min_size = 0.12
+shader_parameter/max_size = 0.9
+shader_parameter/gradient_direction = Vector2(0.3, 1)
+shader_parameter/radial = 1.0
+shader_parameter/softness = 0.8
+
+[sub_resource type="ShaderMaterial" id="Mat_tint"]
+shader = ExtResource("3_tint")
+shader_parameter/tint = Color(1, 0.72, 0.64, 1)
+shader_parameter/vignette = 0.7
+shader_parameter/dot_color = Color(0.2, 0.04, 0.04, 1)
+shader_parameter/cell_size = 14.0
+
+[sub_resource type="StyleBoxFlat" id="Style_lcd"]
+bg_color = Color(0.05, 0.1, 0.05, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 18.0
+content_margin_top = 6.0
+content_margin_right = 18.0
+content_margin_bottom = 6.0
+
+[node name="Keypad" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_keypad")
+wrong_sound = ExtResource("7_wrong")
+right_sound = ExtResource("8_right")
+click_sound = ExtResource("9_click")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+material = SubResource("Mat_backdrop")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Window" type="Container" parent="Center"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_window")
+title = "SWITCHBOARD SECURITY 3000"
+title_color = Color(1, 0.55, 0.25, 1)
+paper_color = Color(0.82, 0.84, 0.86, 1)
+auto_close = false
+draggable = false
+
+[node name="Box" type="VBoxContainer" parent="Center/Window"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Lcd" type="PanelContainer" parent="Center/Window/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_lcd")
+
+[node name="LcdText" type="Label" parent="Center/Window/Box/Lcd"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49, 1, 0.49, 1)
+theme_override_fonts/font = ExtResource("5_mono")
+theme_override_font_sizes/font_size = 52
+text = "_"
+horizontal_alignment = 1
+
+[node name="Keys" type="GridContainer" parent="Center/Window/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 7
+
+[node name="Status" type="Label" parent="Center/Window/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 26
+text = "ENTER PASSWORD"
+horizontal_alignment = 1
+
+[node name="EmergencyTint" type="ColorRect" parent="."]
+material = SubResource("Mat_tint")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Burst" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

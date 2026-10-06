@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/kaleidoscope/binoculars.gd" id="1_bino"]
+[ext_resource type="PackedScene" path="res://assets/models/binoculars/binoculars.glb" id="2_model"]
+[ext_resource type="Script" path="res://core/interaction/interactable.gd" id="3_int"]
+
+[sub_resource type="BoxShape3D" id="Shape_bino"]
+size = Vector3(0.36, 0.2, 0.32)
+
+[node name="Binoculars" type="Node3D"]
+script = ExtResource("1_bino")
+
+[node name="Model" parent="." instance=ExtResource("2_model")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.059, 0)
+
+[node name="Interactable" type="Area3D" parent="."]
+script = ExtResource("3_int")
+verb = "pick up the binoculars"
+
+[node name="Shape" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+shape = SubResource("Shape_bino")

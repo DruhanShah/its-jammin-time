@@ -66,6 +66,7 @@ Credit lines (optional under CC0):
 ## Computer UI sounds
 
 - 400 Sounds Pack (Chequered Ink, licence above), unaltered, in `sfx/400_sounds_pack/`: `pop_2.wav` (pack folder `UI/`): an `AppWindow` popping open; `whoosh_1.wav` (pack folder `Other/`): an `AppWindow` closing ("POOF!"); `power_down.wav` (pack folder `Retro/`): the CRT-off at the end of `Computer.blackout()`.
+- 400 Sounds Pack (Chequered Ink, licence above), unaltered, in `sfx/400_sounds_pack/`: `slide_and_click.wav` (the kaleidoscope clicking into place, the keypad accepting the password) and `brass_positive_long.wav` (password revealed / access granted).
 - `sfx/freesound/spark_crackle_nachtmahr.wav`: "Electricity Sound" by NachtmahrTV, https://freesound.org/people/NachtmahrTV/sounds/556717/, CC0 1.0. **Modified:** cut 0.10–1.15 s from the Freesound HQ preview, short fades, normalised to −2 dB peak. Used for the screen flicker in `Computer.blackout()`.
 
 Credit line (optional under CC0):

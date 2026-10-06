@@ -73,6 +73,8 @@
 [ext_resource type="PackedScene" path="res://world/office/props/sets/server_rack_legacy.tscn" id="p2_server_rack_legacy"]
 [ext_resource type="PackedScene" uid="uid://twj3f5rxbol2" path="res://assets/vnb_office/models/Small_Fan.fbx" id="p2_Small_Fan"]
 [ext_resource type="PackedScene" path="res://world/office/props/power_switch.tscn" id="st_power_switch"]
+[ext_resource type="PackedScene" path="res://minigames/switch/kaleidoscope/twist_me_painting.tscn" id="kal_painting"]
+[ext_resource type="PackedScene" path="res://minigames/switch/kaleidoscope/binoculars.tscn" id="kal_binoculars"]
 [ext_resource type="Script" uid="uid://dko3pufvvrrkn" path="res://world/office/story_stage.gd" id="st_story_stage"]
 
 [sub_resource type="Environment" id="Environment_hchcx"]
@@ -819,6 +821,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 7.5)
 
 [node name="BlackoutBoard" parent="Rooms/C1/Furniture" unique_id=927105184 instance=ExtResource("g_WhiteBoard_Big")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.865, 1.5, -2.4)
+
+[node name="TwistMePainting" parent="Rooms/C1/Furniture" instance=ExtResource("kal_painting")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.88, 1.65, -0.35)
+
+[node name="Binoculars" parent="Rooms/C1/Furniture" instance=ExtResource("kal_binoculars")]
+transform = Transform3D(0.906, 0, 0.423, 0, 1, 0, -0.423, 0, 0.906, -3.25, 0.949, 7.15)
 
 [node name="A2" type="Node3D" parent="Rooms" unique_id=766370371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)

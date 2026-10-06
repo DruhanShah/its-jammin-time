@@ -31,6 +31,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "switch big breaker metal click on, off.flac" (cut) | kyles | https://freesound.org/people/kyles/sounds/451933/ | CC0 1.0 | `assets/audio/sfx/freesound/breaker_clunk_on_kyles.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Neon Lamp, Switch On, Hum" (cut) | Kinoton | https://freesound.org/people/Kinoton/sounds/351430/ | CC0 1.0 | `assets/audio/sfx/freesound/power_on_neon_hum_kinoton.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| 400 Sounds Pack, kaleidoscope sounds (`slide_and_click`, `brass_positive_long`; same pack and licence as above, unaltered) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| "Binoculars" 3D model | Ryan Sullivan | https://poly.pizza/m/fd1MPYUTpLL | CC-BY 3.0 (credit required) | `assets/models/binoculars/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
@@ -63,4 +65,5 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
+> "Binoculars" by Ryan Sullivan (Poly Pizza), CC-BY 3.0, https://poly.pizza/m/fd1MPYUTpLL
 > Made with Godot Engine, https://godotengine.org/license/
