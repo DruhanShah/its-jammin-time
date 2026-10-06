@@ -14,6 +14,7 @@
   - `subtle_knock.wav` (pack folder `Other/`): office chair bumping into something (`world/office/props/office_chair.tscn`). Imported as mono.
   - `foley_creak_1.wav` (pack folder `Footsteps/`): occasional office chair caster creak while rolling (pitched up in the scene). Imported as mono.
   - Visit 1 font step + ad storm (`minigames/computer/minigames/font_picker/`, `ad_storm/`): `select_1.wav`, `pop_1.wav`, `pop_3.wav`, `pop_4.wav`, `toggle_off.wav` (pack folder `UI/`): font list hover, ad pop-up (random pick, `ad_spawn_sfx.tres`), ECO MODE accepted; `wobble.wav`, `punch.wav`, `jump_short.wav` (pack folder `Retro/`): nested ad opening, ad closed ("POW!"), the runner ad's X hopping away; `coins_gather_medium.wav` (pack folder `Items/`): Comic font accepted ("KA-CHING!"); `elastic_twang.wav`, `record_scratch.wav` (pack folder `Other/`): decoy click ("BOING!"), the countdown ad lying; `brass_level_start.wav` (pack folder `Musical Effects/`): the ECO MODE ad sliding in.
+  - Visit 3 boss emails (`minigames/computer/minigames/memo_mail/`): `8_bit_chime_positive.wav`, `8_bit_negative_quick.wav` (pack folder `Musical Effects/`): the boss's mood going up / down a band; `brass_positive_long.wav`, `grand_piano_chime_quick.wav` (pack folder `Musical Effects/`): promoted / the honest reply; `whoosh_2.wav` (pack folder `Other/`): reply sent; `synth_warning.wav` (pack folder `UI/`): Reply All pressing itself. Also reuses `click_double_on.wav` (word picked) and `pop_3.wav` (reply-all toasts).
   - **Modified:** `keyboard_key_1.wav` … `keyboard_key_4.wav`: four single keystrokes cut (85 ms each, 5 ms fades, normalised to −4.4 dB peak) from the pack's `Other/keyboard_typing.wav` at 0.454, 0.984, 1.964 and 2.114 s; the ad storm's scripted typing (`ad_storm/typing_sfx.tres`, random pick + pitch).
 
 Credit line for the game's credits screen (optional per the license):
@@ -57,7 +58,7 @@ Credit lines (optional under CC0):
 - **Author:** Kenney, https://www.kenney.nl/
 - **Source:** https://kenney.nl/assets/interface-sounds
 - **License:** Creative Commons Zero (CC0 1.0), https://creativecommons.org/publicdomain/zero/1.0/ ("free to use in personal, educational and commercial projects", credit not mandatory)
-- **Files used** (unaltered): `tick_001.ogg`: the countdown ad's honest ticks.
+- **Files used** (unaltered): `tick_001.ogg`: the countdown ad's honest ticks; `bong_001.ogg`: a new email arriving in MemoMail (visit 3).
 
 ## Wrong buzzer (`sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav`)
 
