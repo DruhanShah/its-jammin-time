@@ -146,3 +146,14 @@ Targets: 60 FPS at 1280×720 embed and ≥30 FPS in fullscreen on an integrated-
 - Kind of project: **HTML**. Upload `itch_web.zip` with "This file will be played in the browser" ticked (or `butler push itch_web.zip <user>/<game>:html5`). Keep the page **Draft/Restricted** until it's tested.
 - Viewport **1280×720** (16:9; the project stretches with `canvas_items`/`expand`). **Fullscreen button: on.** **Automatically start on page load: off.** Itch's "Run game" click is the gesture that unlocks audio and mic and focuses the iframe. **Mobile friendly: off** (keyboard + mouse only). **SharedArrayBuffer support: off** (no-threads build; turning it on adds COOP/COEP isolation for nothing). Scrollbars: off.
 - Repeat the step 3 checks on the itch draft URL. Itch's iframe allows `microphone` and was already verified. Also check that keys reach the game only after clicking inside the iframe, that Esc exits pointer lock but not fullscreen, and that the arrow keys and Space don't scroll the itch page.
+
+---
+
+## As built (§1 ESDF shift)
+
+- `game/core/input/controls.gd` (`class_name Controls`, static): as the pseudocode (physical keycodes E/S/D/F + C, revert with `InputMap.load_from_project_settings()`, `Input.action_release` on every swap).
+- `core/story.gd`: `CONTROLS_SHIFT_STEP = SWITCH_3` (the third blackout, as planned; change it to `FREE_ROAM` if the shift should come after the fix). `_sync_controls()` runs in every `_go_to()`. `Narrator.line_finished(lights_out_3)` → `controls_shift` (deferred, and only if the narrator is idle, since an interrupt also emits `line_finished`). Fallback/jab: W or A (physical) while shifted, only while walking (mouse captured, so typing on the computer never triggers it) and only when the narrator is idle → `controls_shift` if still pending, else `controls_shift_w` (once).
+- **F8 debug toggle** is handled in code (`Story._unhandled_input`, physical F8, debug builds only), so `project.godot` is untouched.
+- Texts: `controls_shift` "While the lights were out, someone nudged your hands one key to the right. E, S, D, F. The professional's choice. You're welcome."; `controls_shift_w` "W? We don't do W any more. Keep up."
+- **Not done:** the `Player.movement_locked` flag for the twist games (F is both `move_right` and a twist-ring key); whoever builds `kaleidoscope`/`candle` must add it or use a close-up scene. The project's WASD/X stay logical keycodes (no `project.godot` edit).
+- **Verified** (windowed driver after visit 3's blackout): step SWITCH_3, `Controls.shifted`, `lights_out_3` then `controls_shift`; holding W moves 0 m, E moves 1.5 m, S strafes; A → `controls_shift_w`; aiming at the desk computer shows "Press C to use the computer"; F8 → WASD/X (prompt key "X"), F8 again → ESDF. No errors or warnings.

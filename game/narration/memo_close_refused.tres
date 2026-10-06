@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Four thousand Reply Alls at once. The mail server melted, and it took the building's power with it. The switch is where it was last time: A3."
-once = true
+subtitle = "You can't close your inbox. It closes you."
