@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MinigameRegistry" format=3]
+[gd_resource type="Resource" script_class="MinigameRegistry" format=3 uid="uid://dcus80j0h4xus"]
 
-[ext_resource type="Script" path="res://minigames/computer/minigame_registry.gd" id="1_reg"]
+[ext_resource type="PackedScene" uid="uid://bxlo05xd2xsvh" path="res://minigames/computer/minigames/password_scream/password_scream.tscn" id="1_fr80p"]
+[ext_resource type="Script" uid="uid://i2etwekgvoh4" path="res://minigames/computer/minigame_registry.gd" id="1_reg"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/ad_popup/ad_popup.tscn" id="2_ad"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/corporate_speak/corporate_speak.tscn" id="3_cs"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/bot_check/bot_check.tscn" id="4_bc"]
@@ -9,6 +10,7 @@
 script = ExtResource("1_reg")
 entries = Dictionary[StringName, PackedScene]({
 &"ad_popup": ExtResource("2_ad"),
+&"bot_check": ExtResource("4_bc"),
 &"corporate_speak": ExtResource("3_cs"),
-&"bot_check": ExtResource("4_bc")
+&"password_scream": ExtResource("1_fr80p")
 })

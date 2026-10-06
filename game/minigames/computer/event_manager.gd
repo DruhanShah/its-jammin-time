@@ -8,7 +8,7 @@ extends Node
 ## the minigames.
 
 ## Minigame ids (see minigame_registry.tres) played in order on free use (no story queue).
-@export var start_on_open: Array[StringName] = [&"corporate_speak", &"ad_popup", &"bot_check"]
+@export var start_on_open: Array[StringName] = [&"corporate_speak", &"ad_popup", &"bot_check", &"password_scream"]
 ## Seconds between one minigame being beaten and the next starting (also before a retry).
 @export var step_delay := 1.0
 ## Seconds after the last queued minigame before the computer returns to the office by itself
