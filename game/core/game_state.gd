@@ -70,6 +70,17 @@ var document_font_name := ""
 var minigames_completed: Dictionary[StringName, int] = {}
 ## Money in the bank. Sleeping at the computer drains it (it's allowed to go negative).
 var bank_balance := 1000
+## Every narrator line that played, oldest first (the pause menu's log): {"cue": StringName, "text":
+## String (the full subtitle, also for lines whose subtitle isn't shown), "audio": bool}. Saved.
+var narration_log: Array[Dictionary] = []
+
+## Not written to the save (transient).
+const UNSAVED: Array[String] = ["computer_return_scene"]
+## Most entries kept in `narration_log`.
+const NARRATION_LOG_MAX := 1000
+
+## Fresh-game values of every variable above, taken in _ready() (see `reset()`).
+var _defaults := {}
 
 
 func unlock(id: StringName) -> void:
@@ -104,8 +115,62 @@ var _fonts: Array[Font] = [] ## Keeps the fonts (and so their fallback) in the r
 
 
 func _ready() -> void:
+	for property in _state_properties():
+		var value: Variant = get(property)
+		_defaults[property] = value.duplicate(true) if value is Array or value is Dictionary else value
 	for file in ResourceLoader.list_directory(FONT_DIR):
 		if file.ends_with(".ttf") and not file.begins_with("DejaVu") and not file.begins_with("Jamdings"):
 			var font: Font = load(FONT_DIR + file)
 			font.fallbacks = [SYMBOL_FALLBACK]
 			_fonts.append(font)
+
+
+## Adds a line that just played to `narration_log` (called by the Narrator).
+func log_narration(cue_id: StringName, text: String, has_audio: bool) -> void:
+	narration_log.append({"cue": cue_id, "text": text, "audio": has_audio})
+	if narration_log.size() > NARRATION_LOG_MAX:
+		narration_log.remove_at(0)
+
+
+## Back to a fresh game: every variable above returns to its starting value (no signals are emitted).
+func reset() -> void:
+	for property: String in _defaults:
+		_assign(property, _defaults[property])
+
+
+## The saved variables, by name (see SaveGame).
+func to_save() -> Dictionary:
+	var data := {}
+	for property in _state_properties():
+		if property not in UNSAVED:
+			data[property] = get(property)
+	return data
+
+
+## Restores `to_save()` data: unknown keys are ignored, missing ones keep their fresh-game value.
+func from_save(data: Dictionary) -> void:
+	reset()
+	for property: String in data:
+		if _defaults.has(property) and property not in UNSAVED:
+			_assign(property, data[property])
+
+
+## Typed arrays and dictionaries are filled in place, so their element types stay.
+func _assign(property: String, value: Variant) -> void:
+	var current: Variant = get(property)
+	if current is Array and value is Array:
+		current.assign((value as Array).duplicate(true))
+	elif current is Dictionary and value is Dictionary:
+		current.assign((value as Dictionary).duplicate(true))
+	elif typeof(current) == typeof(value):
+		set(property, value)
+	else:
+		push_warning("GameState: ignoring saved '%s' (wrong type)" % property)
+
+
+func _state_properties() -> Array[String]:
+	var names: Array[String] = []
+	for info in get_property_list():
+		if info.usage & PROPERTY_USAGE_SCRIPT_VARIABLE and not info.name.begins_with("_"):
+			names.append(info.name)
+	return names
