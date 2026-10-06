@@ -13,6 +13,9 @@ bus = &"Voice"
 [node name="ReadTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ChunkTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Subtitles" type="CanvasLayer" parent="."]
 layer = 101
 

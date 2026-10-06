@@ -82,6 +82,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [~] Fix all Godot editor/game errors (e.g. recurring "Identifier not found: GameState/Audio/Narrator" on script reload, twist_demo parse error)
 
 ## Fixes
+- [x] Subtitles: split long lines into short chunks shown one after another (timed to the voice line or reading speed) [review: `core/narrator/narrator.gd` (`split_subtitle()`, `_time_chunks()`); push a chair for 15 s or walk off the path in the office, and open the computer (font line) to see the chunks; "|" in a cue's text forces a break]
+- [~] Bundle free look-alike fonts for the wrong choices in the font picker (Times/Arial/etc.) so they render on web too
 - [x] Mini-map at the bottom of the screen while exploring: current position and surrounding rooms [review: `core/player/minimap.gd`, `HUD/Minimap` in `core/player/hud.tscn`, subtitle margins in `core/narrator/narrator.tscn`; walk Start → A2 → B2 → C1 and turn around, F5 for the lights-out look]
 - [x] Remove the big-text signs in the server room (SERVER ROOM, LEGACY / DO NOT TOUCH, DAYS SINCE LAST BLACKOUT) and the green EXIT signs from the lights-out look; keep the other signs
 - [x] Pushing a chair behind you shouldn't trigger the push arm animation (only when the chair is in front)
