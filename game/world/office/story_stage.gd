@@ -26,6 +26,9 @@ extends Node
 @export var lost_hint_time := 45.0
 ## Seconds without any key/mouse input before "Are you still around?".
 @export var afk_time := 60.0
+## After the controls shift: seconds without getting closer to the server room before the ESDF
+## reminder, repeated at that interval until they get there.
+@export var esdf_hint_time := 10.0
 ## Different rooms visited in one step (this load) before "Yes, we know the office is beautiful".
 @export var wander_rooms := 5
 
@@ -41,6 +44,7 @@ const IDLE_PER_STEP := 2
 ## Lost in a blackout (once each, `once` cues): the first blackout, then the second or third.
 const LOST_HINTS := {Story.Step.SWITCH_1: &"hint_server_corner", Story.Step.SWITCH_2: &"hint_server_corner_again", Story.Step.SWITCH_3: &"hint_server_corner_again"}
 const AFK_CUE := &"afk_still_around"
+const ESDF_HINT_CUE := &"controls_hint_esdf"
 const WANDER_CUE := &"office_beautiful"
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)
 ## Where the server room is built, and the room it swaps places with ("the room on the right" from A2).
@@ -77,6 +81,8 @@ var _silence := 0.0 ## Seconds since the narrator last spoke.
 var _lost_time := 0.0 ## Blackout: seconds in the office (narrator quiet, player free) short of the server room.
 var _reached_switch := false ## Blackout: been in the server room this load.
 var _afk := 0.0 ## Seconds since the last key/mouse input.
+var _no_progress := 0.0 ## Seconds since the player last got closer to the server room (after the shift).
+var _best_distance := INF
 var _visited: Dictionary[StringName, bool] = {} ## Room locations entered this load.
 
 @onready var _rooms: Node3D = $"../Rooms"
@@ -222,6 +228,17 @@ func _check_hints(here: StringName, delta: float) -> void:
 			Narrator.play(lost_cue)
 			_lost_time = -INF # Once per load (and the cue is `once`).
 			return
+	if Controls.shifted and not _reached_switch:
+		var distance := Vector2(offset.x, offset.z).length()
+		if distance < _best_distance - 1.0:
+			_best_distance = distance
+			_no_progress = 0.0
+		else:
+			_no_progress += delta
+			if _no_progress >= esdf_hint_time:
+				_no_progress = 0.0
+				Narrator.play(ESDF_HINT_CUE)
+				return
 	if _afk >= afk_time:
 		_afk = 0.0
 		Narrator.play(AFK_CUE)

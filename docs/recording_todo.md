@@ -25,3 +25,4 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `valve_closing` | Other way. You're un-fixing it. Bold strategy. |
 | `valve_leak` | It's not leaking. It's sharing. |
 | `idle_out` | Oh, I already said that. I am now out of fun facts. Also, it's still me btw.|
+| `controls_hint_esdf` | Just so you know, you move with ESDF now. |
