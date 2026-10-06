@@ -44,9 +44,9 @@ extends MinigameConfig
 ## Seconds of quiet after speaking that end the attempt.
 @export var quiet_time := 0.8
 ## Seconds without any voice before an attempt ends anyway.
-@export var listen_timeout := 6.0
+@export var listen_timeout := 3.5
 ## Seconds an attempt never lasts longer than, even when the player keeps talking.
-@export var max_listen_time := 10.0
+@export var max_listen_time := 3.5
 @export var processing_time := 1.2
 @export var verdict_time := 2.8
 ## Seconds the mic needs to be dead silent (no device, permission denied) before the fake waveform.
