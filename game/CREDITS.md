@@ -37,6 +37,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "Pressure Meter Pipe Noises 1.aif" (cut, looped) | RutgerMuller | https://freesound.org/people/RutgerMuller/sounds/104087/ | CC0 1.0 | `assets/audio/sfx/freesound/pipe_flow_loop_rutgermuller.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "high-voltage.wav" (cut) | fkurz | https://freesound.org/people/fkurz/sounds/136614/ | CC0 1.0 | `assets/audio/sfx/freesound/electric_surge_fkurz.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| 400 Sounds Pack, kaleidoscope sounds (`slide_and_click`, `brass_positive_long`; same pack and licence as above, unaltered) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| "Binoculars" 3D model | Ryan Sullivan | https://poly.pizza/m/fd1MPYUTpLL | CC-BY 3.0 (credit required) | `assets/models/binoculars/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`, `bong_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Candle" 3D model (wick and flame surfaces split off at runtime, flame reused) | Nick Slough | https://poly.pizza/m/HFpLq6iqKu | CC BY 3.0 (attribution required), https://creativecommons.org/licenses/by/3.0/ | `assets/models/candle/` ([CREDITS](assets/models/candle/CREDITS.md)) | Shipped |
@@ -78,4 +80,5 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
 > "Candle" by Nick Slough (https://poly.pizza/m/HFpLq6iqKu), licensed under CC BY 3.0
 > Fire whoosh by LookIMadeAThing, fire crackle by soundofsong, wick creaks by Nox_Sound (Freesound), CC0
+> "Binoculars" by Ryan Sullivan (Poly Pizza), CC-BY 3.0, https://poly.pizza/m/fd1MPYUTpLL
 > Made with Godot Engine, https://godotengine.org/license/

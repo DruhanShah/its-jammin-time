@@ -260,3 +260,13 @@ Deviations:
 - Not built: the optional lit candle on the world switch.
 
 Verification: windowed run of the candle scene via a temporary driver (story at SWITCH_3, `switch_progress = 1`): anticlockwise first (stays at 0), real ring-key presses clockwise (6 steps = 360° at 50 %, done after 12), `interact` key ×3 (2 fizzles + light), arc, lever, lights, then office at FREE_ROAM with power on. Separate Esc run: back to the office with `switch_progress` still 1 and power off. Screenshots of each stage with the emergency light and with the room light forced on.
+
+## As built (kaleidoscope only; the candle is built separately)
+
+- Files as planned under `game/minigames/switch/kaleidoscope/` (no `painting_source.tscn`: `PaintingSource` is a SubViewport built in code by `painting_source.gd`). Keypad registered in `SwitchGames`; the switch opens it, the right password calls `Story.switch_game_done(&"kaleidoscope")` and moves on to `Story.next_switch_scene()` (the candle; the placeholder screen until the candle merges).
+- User decisions: painting only, the painting itself says TWIST ME (Label3D), no sticky note. Script lines used verbatim: `twist_me_bare_hands` (painting without binoculars), `scope_solved` (aligned), new `keypad_intro` (once, keypad first open). Other cues are the placeholders from §3.
+- `Player.movement_locked` (the ESDF plan's name instead of `frozen`): skips look, movement, interact, Esc and the prompt. The scope view sets it and hides `hud.minimap` (restored on close). Verified: holding move_right + move_forward while rolling the ring doesn't move the player.
+- Shader deviation: **12 wedges** (not 6) plus a radius swirl `sin(err) * 1.5 * r`. With 6 wedges and pure rotation the big letters stayed readable (just rotated) on the wall and at the scope's start. Ghosting/seams use `2|sin(err/2)|`, so they stay periodic and a full turn lines up again (`Kaleidoscope.error_steps` wraps mod 24 steps).
+- Targets: `TARGETS = [6, 7, 8, 10, 16, 17, 18, 19, 20]` steps, picked by eye from a gallery of every start frame. Near half a turn all the wedges land upside down and the word reads fine. Past 12 the short way is anticlockwise: the hint's arrow starts the short way round and flips on an overshoot.
+- Painting: Painting.fbx scaled (1.2, 2.4, 1) to a ~1 m square canvas; the shader remaps the canvas's UV sub-rect. C1-local (5.88, 1.65, −0.35), between the switch and the whiteboard after the mirror (in `MIRRORED_TO_WEST_WALL`). Binoculars on the ControlDesk at (−3.25, 0.949, 7.15), scaled 0.6. `StoryStage._check_off_path` pauses while a `scope_view` is open.
+- Cut: §1.8 world-spin gag (deadline). Feedback label sits at the top so it clears the subtitles.

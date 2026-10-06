@@ -133,6 +133,10 @@ func next_off_path_cue() -> StringName:
 func _go_to(new_step: Step) -> void:
 	GameState.story_step = new_step
 	GameState.switch_progress = 0
+	GameState.scope_password = ""
+	GameState.scope_target = 0
+	GameState.has_scope = false
+	GameState.scope_solved = false
 	_off_path_count = 0
 	_arrival_cue = ARRIVAL_CUES.get(new_step, &"")
 	if new_step in MINIGAMES:

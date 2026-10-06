@@ -28,7 +28,8 @@ const SWAP_ROOM := &"A3"
 ## Doorways of A3 that C1's furniture would cover after the swap: C1's switch wall (east) holds A3's
 ## east doorway, so the switch, its marker and the clock above it move to the west wall (C1's own west
 ## doorway, a plain wall at A3's spot, at the end of the same aisle).
-const MIRRORED_TO_WEST_WALL: Array[NodePath] = [^"Furniture/PowerSwitch", ^"Furniture/SwitchboardSpot", ^"Furniture/Clock"]
+## The TWIST ME painting (kaleidoscope, third blackout) hangs beside the switch, so it moves with it.
+const MIRRORED_TO_WEST_WALL: Array[NodePath] = [^"Furniture/PowerSwitch", ^"Furniture/SwitchboardSpot", ^"Furniture/Clock", ^"Furniture/TwistMePainting"]
 ## A3's LONDON clock and its label would hang over C1's south doorway; they slide east along the wall.
 const A3_CLEAR_OF_SOUTH_DOOR: Array[NodePath] = [^"Furniture/Clock2", ^"Furniture/Label2"]
 const A3_CLEAR_X := 5.5
@@ -162,7 +163,7 @@ func _check_server_room(here: StringName) -> void:
 
 func _check_off_path(here: StringName, delta: float) -> void:
 	var target := objective()
-	if not target or here.is_empty() or Narrator.is_speaking():
+	if not target or here.is_empty() or Narrator.is_speaking() or get_tree().get_first_node_in_group(&"scope_view"):
 		return
 	_since_nag += delta
 	var dist := rooms_between(here, room_at(target.global_position))
