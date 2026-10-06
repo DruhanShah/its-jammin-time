@@ -4,7 +4,8 @@ extends Node2D
 ## row, a toolbar with the font dropdown button and B/I/U toggles that do nothing, a ruler and a white
 ## page) that hosts minigames. Doesn't know about the office:
 ## enter with Computer.open() (or Transition.change_scene(SCENE), e.g. an Interactable's
-## target_scene), leave with exit() (the Power button).
+## target_scene), leave with exit() (the Power button, only shown in free use: story visits end by
+## themselves). The Sleep button naps at the desk (see sleep()).
 ## The EventManager child decides when minigames start; this only hosts them.
 
 signal minigame_started(id: StringName, minigame: Minigame)
@@ -12,6 +13,7 @@ signal minigame_completed(id: StringName)
 signal minigame_failed(id: StringName)
 signal buffer_changed
 signal score_changed(score: int)
+signal bank_changed(balance: int)
 
 const SCENE := "res://minigames/computer/computer.tscn"
 const FALLBACK_RETURN_SCENE := "res://world/office/office.tscn"
@@ -80,6 +82,17 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_fit_screen)
 	_fit_screen()
 	$Screen/PowerButton.pressed.connect(exit)
+	$Screen/SleepButton.pressed.connect(sleep)
+	if not GameState.computer_queue.is_empty():
+		# Story visit: it ends by itself (blackout / auto-return), so no Power button to get confused by.
+		# Sleep slides into its corner.
+		var power: Button = $Screen/PowerButton
+		var sleep_button: Button = $Screen/SleepButton
+		power.hide()
+		sleep_button.offset_left = power.offset_left
+		sleep_button.offset_right = power.offset_right
+		status_bar.offset_right = power.offset_left - 14.0 # Room for the long goal notes + bank.
+	bank_changed.connect(func(_b: int) -> void: _refresh_status())
 	page.item_rect_changed.connect(_fit_editor)
 	_fit_editor.call_deferred()
 	apply_document_font()
@@ -151,6 +164,12 @@ func stop_all() -> void:
 		minigame.queue_free()
 
 
+## Naps at the desk: the screen dims and the bank balance drains until Wake Up (see sleep.gd). Works
+## over a running minigame too: that one is frozen underneath and carries on after waking.
+func sleep() -> void:
+	start_minigame(&"sleep")
+
+
 func exit() -> void:
 	stop_all()
 	var target := GameState.computer_return_scene if GameState.computer_return_scene else FALLBACK_RETURN_SCENE
@@ -168,6 +187,7 @@ func blackout() -> void:
 	_blacking_out = true
 	set_process_unhandled_key_input(false)
 	$Screen/PowerButton.disabled = true
+	$Screen/SleepButton.disabled = true
 	var backdrop := ColorRect.new()
 	backdrop.color = Color.BLACK
 	backdrop.size = get_viewport_rect().size
@@ -233,4 +253,15 @@ func _refresh_editor() -> void:
 func _refresh_status() -> void:
 	var words := buffer.replace("\n", " ").replace("\t", " ").split(" ", false).size()
 	var note := status_note + "    " if status_note else ""
-	status_bar.text = "Page 1 of 1    %s%d words    Score: %d" % [note, words, GameState.score]
+	status_bar.text = "Page 1 of 1    %s%d words    Score: %d    Bank: %s" % [note, words, GameState.score, bank_text()]
+
+
+## "$1,000" / "-$25". Shared by the status bar and the sleep screen.
+static func bank_text() -> String:
+	var b := GameState.bank_balance
+	var digits := str(absi(b))
+	var out := ""
+	while digits.length() > 3:
+		out = "," + digits.right(3) + out
+		digits = digits.left(-3)
+	return "%s$%s%s" % ["-" if b < 0 else "", digits, out]
