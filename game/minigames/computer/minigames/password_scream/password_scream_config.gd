@@ -45,4 +45,4 @@ extends MinigameConfig
 @export var processing_time := 1.2
 @export var verdict_time := 2.8
 ## Seconds the mic needs to be dead silent (no device, permission denied) before the fake waveform.
-@export var fake_after := 1.5
+@export var fake_after := 0.6
