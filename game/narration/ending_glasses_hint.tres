@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+
+[resource]
+script = ExtResource("1_cue")
+subtitle = "Okay, this headache is getting a bit much. You can't go much longer without your glasses. Oh yeah you work at a screen, of course you have glasses!"
+once = true

@@ -4,7 +4,8 @@ extends Node
 ## comes back on; each scene derives what it shows from the current step (the office: see
 ## `world/office/story_stage.gd`), so reloading a scene always shows the right state.
 ## The power comes back once the step's switch games (`SWITCH_GAMES`) are beaten.
-## Debug builds: F7 (`debug_next_story_step`) skips to the next step and reloads the office.
+## Debug builds: F7 (`debug_next_story_step`) skips to the next step and reloads the office; F8 toggles
+## the ESDF control shift (see `Controls`).
 
 signal step_changed(step: Step)
 ## Emitted when the current switch game changes (new step, or one was beaten); empty = none.
@@ -17,16 +18,18 @@ enum Step {
 	SWITCH_2, ## Lights out, and the server room has swapped places with A3.
 	COMPUTER_3, ## Back to the desk: minigame 3.
 	SWITCH_3, ## Lights out again; the server room stays in A3.
-	FREE_ROAM, ## End of the current content.
+	ENDING, ## Power's back for good: blurry vision, glasses on the desk, the real-life video, credits (see story_stage.gd).
 }
 
 const OFFICE := "res://world/office/office.tscn"
+## Where putting on the glasses leads: the real-life video, then the credits (game/ending/).
+const REAL_LIFE := "res://ending/real_life.tscn"
 ## Computer minigames each computer visit plays, in order (registry ids, see
 ## minigames/computer/minigame_registry.tres). Edit these lists to change a visit; the step ends
 ## once the whole list is beaten.
 const FIRST_VISIT: Array[StringName] = [&"password_scream", &"font_picker", &"ad_storm"]
-const SECOND_VISIT: Array[StringName] = [&"corporate_speak"]
-const THIRD_VISIT: Array[StringName] = [&"bot_check"]
+const SECOND_VISIT: Array[StringName] = [&"antivirus_offer", &"antivirus_download"]
+const THIRD_VISIT: Array[StringName] = [&"memo_mail"]
 const MINIGAMES := {Step.INTRO: FIRST_VISIT, Step.COMPUTER_2: SECOND_VISIT, Step.COMPUTER_3: THIRD_VISIT}
 ## Narrator line when the lights go out in each switch step.
 const BLACKOUT_CUES := {Step.SWITCH_1: &"lights_out_1", Step.SWITCH_2: &"lights_out_2", Step.SWITCH_3: &"lights_out_3"}
@@ -39,9 +42,15 @@ const SWITCH_GAMES := {
 	Step.SWITCH_3: [&"kaleidoscope", &"candle"],
 }
 ## Narrator line for the next office load after entering a step.
-const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2", Step.FREE_ROAM: &"to_be_continued"}
+const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2", Step.ENDING: &"ending_lights_back"}
 ## Escalating lines when the player wanders off the objective (see story_stage.gd), in order.
 const OFF_PATH_CUES: Array[StringName] = [&"off_path_1", &"off_path_2", &"off_path_3", &"off_path_4"]
+## From this step on the controls are shifted one key to the right (WASD → ESDF, X → C; see `Controls`).
+const CONTROLS_SHIFT_STEP := Step.SWITCH_3
+## Played once the shift's blackout line (`BLACKOUT_CUES[CONTROLS_SHIFT_STEP]`) has finished.
+const CONTROLS_SHIFT_CUE := &"controls_shift"
+## Played when the player presses W or A (by position) after the shift was explained.
+const CONTROLS_SHIFT_W_CUE := &"controls_shift_w"
 
 ## The current step (stored in GameState so it sits with the rest of the persistent state).
 var step: Step:
@@ -56,12 +65,15 @@ var _off_path_count := 0
 var _fresh_start := true
 ## The opening line waits for the computer scene, so the scene change doesn't cut it.
 var _intro_pending := false
+## The controls just shifted and `CONTROLS_SHIFT_CUE` hasn't been played yet.
+var _controls_cue_pending := false
 
 
 func _ready() -> void:
 	GameState.computer_queue_finished.connect(_on_computer_queue_finished)
 	GameState.power_changed.connect(_on_power_changed)
 	get_tree().scene_changed.connect(_on_scene_changed)
+	Narrator.line_finished.connect(_on_line_finished)
 	_go_to(GameState.story_step as Step)
 
 
@@ -123,11 +135,16 @@ func next_off_path_cue() -> StringName:
 func _go_to(new_step: Step) -> void:
 	GameState.story_step = new_step
 	GameState.switch_progress = 0
+	GameState.scope_password = ""
+	GameState.scope_target = 0
+	GameState.has_scope = false
+	GameState.scope_solved = false
 	_off_path_count = 0
 	_arrival_cue = ARRIVAL_CUES.get(new_step, &"")
 	if new_step in MINIGAMES:
 		Computer.queue(MINIGAMES[new_step], false) # The visit ends with Computer.blackout(), not an exit.
 	_sync_unlocks()
+	_sync_controls()
 	step_changed.emit(new_step)
 	switch_game_changed.emit(switch_game())
 
@@ -142,6 +159,24 @@ func _sync_unlocks() -> void:
 		GameState.lock(Unlocks.SWITCHBOARD)
 	else:
 		GameState.unlock(Unlocks.SWITCHBOARD)
+
+
+## Derived from the step, so debug skips and scene reloads stay right with no extra state.
+func _sync_controls() -> void:
+	var was := Controls.shifted
+	Controls.set_shifted(step >= CONTROLS_SHIFT_STEP)
+	_controls_cue_pending = Controls.shifted and not was
+
+
+func _on_line_finished(cue_id: StringName) -> void:
+	if _controls_cue_pending and cue_id == BLACKOUT_CUES.get(CONTROLS_SHIFT_STEP):
+		_play_controls_cue.call_deferred() # Not from inside Narrator.play() (an interrupt emits this too).
+
+
+func _play_controls_cue() -> void:
+	if _controls_cue_pending and not Narrator.is_speaking():
+		_controls_cue_pending = false
+		Narrator.play(CONTROLS_SHIFT_CUE)
 
 
 ## A beaten visit ends with the computer itself cutting the power (the office loads already dark).
@@ -171,13 +206,26 @@ func _on_scene_changed() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if OS.is_debug_build() and event.is_action_pressed("debug_next_story_step"):
 		_debug_skip()
+		return
+	var key := event as InputEventKey
+	if not key or not key.pressed or key.echo:
+		return
+	if OS.is_debug_build() and key.physical_keycode == KEY_F8:
+		Controls.set_shifted(not Controls.shifted)
+		print("Story: controls ", "shifted (ESDF, C)" if Controls.shifted else "normal (WASD, X)")
+	elif Controls.shifted and key.physical_keycode in [KEY_W, KEY_A] \
+			and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not Narrator.is_speaking():
+		# Walking around (not typing), and never over another line (e.g. the blackout's directions).
+		Narrator.play(CONTROLS_SHIFT_CUE if _controls_cue_pending else CONTROLS_SHIFT_W_CUE)
+		_controls_cue_pending = false
 
 
 ## Finishes the current step as if the player did it, then (re)loads the office.
 func _debug_skip() -> void:
-	if step == Step.FREE_ROAM:
-		return
 	print("Story: skipping ", Step.keys()[step])
+	if step == Step.ENDING:
+		Transition.change_scene(REAL_LIFE) # As if the glasses went on.
+		return
 	if step in MINIGAMES:
 		GameState.computer_queue.clear()
 		_go_to(step + 1 as Step)

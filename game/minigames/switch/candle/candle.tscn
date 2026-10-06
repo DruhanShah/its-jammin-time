@@ -1,0 +1,449 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/candle/candle.gd" id="1_cd"]
+[ext_resource type="PackedScene" path="res://assets/models/candle/candle.glb" id="2_model"]
+[ext_resource type="Script" path="res://core/input/twist_input.gd" id="3_twist"]
+[ext_resource type="PackedScene" path="res://core/input/twist_hint.tscn" id="4_hint"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="5_font"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/wick_twist_1_noxsound.wav" id="6_w1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/wick_twist_2_noxsound.wav" id="7_w2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/slide_and_click.wav" id="8_plant"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/light_match.wav" id="9_match"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/fire_lighting.wav" id="10_light"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/flame_whoosh_lookimadeathing.wav" id="11_whoosh"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/flame_crackle_loop_soundofsong.wav" id="12_crackle"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/spark_zap_grinnell.wav" id="13_zap"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/breaker_clunk_on_kyles.wav" id="14_lever"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/power_on_neon_hum_kinoton.wav" id="15_hum"]
+
+[sub_resource type="AudioStreamRandomizer" id="Rand_twist"]
+random_pitch = 1.15
+streams_count = 2
+stream_0/stream = ExtResource("6_w1")
+stream_1/stream = ExtResource("7_w2")
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 1
+background_color = Color(0.03, 0.03, 0.04, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.6, 0.7, 1)
+ambient_light_energy = 0.12
+glow_enabled = true
+glow_intensity = 0.9
+glow_bloom = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Mat_wall"]
+albedo_color = Color(0.32, 0.32, 0.3, 1)
+
+[sub_resource type="QuadMesh" id="Mesh_wall"]
+material = SubResource("Mat_wall")
+size = Vector2(4, 3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_box"]
+albedo_color = Color(0.42, 0.44, 0.46, 1)
+metallic = 0.5
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="Mesh_box"]
+material = SubResource("Mat_box")
+size = Vector3(0.5, 0.56, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stripe"]
+albedo_color = Color(0.95, 0.75, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_stripe"]
+material = SubResource("Mat_stripe")
+size = Vector3(0.52, 0.05, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="Mat_lever"]
+albedo_color = Color(0.85, 0.12, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_lever"]
+material = SubResource("Mat_lever")
+size = Vector3(0.05, 0.2, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_base"]
+material = SubResource("Mat_box")
+size = Vector3(0.14, 0.2, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="Mat_shelf"]
+albedo_color = Color(0.36, 0.24, 0.14, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Mesh_shelf"]
+material = SubResource("Mat_shelf")
+size = Vector3(0.66, 0.03, 0.36)
+
+[sub_resource type="StandardMaterial3D" id="Mat_brass"]
+albedo_color = Color(0.85, 0.66, 0.28, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="CylinderMesh" id="Mesh_post"]
+material = SubResource("Mat_brass")
+top_radius = 0.008
+bottom_radius = 0.012
+height = 0.17
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_arm"]
+material = SubResource("Mat_brass")
+top_radius = 0.005
+bottom_radius = 0.005
+height = 0.07
+radial_segments = 10
+rings = 1
+
+[sub_resource type="SphereMesh" id="Mesh_tip"]
+material = SubResource("Mat_brass")
+radius = 0.008
+height = 0.016
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="Mat_spool"]
+albedo_color = Color(0.62, 0.45, 0.28, 1)
+roughness = 0.8
+
+[sub_resource type="CylinderMesh" id="Mesh_spool"]
+material = SubResource("Mat_spool")
+top_radius = 0.022
+bottom_radius = 0.022
+height = 0.004
+radial_segments = 16
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_cotton"]
+albedo_color = Color(0.93, 0.9, 0.8, 1)
+roughness = 0.95
+
+[sub_resource type="CylinderMesh" id="Mesh_wound"]
+material = SubResource("Mat_cotton")
+top_radius = 0.016
+bottom_radius = 0.016
+height = 0.026
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_strand"]
+top_radius = 0.0018
+bottom_radius = 0.0018
+height = 0.12
+radial_segments = 6
+rings = 40
+
+[sub_resource type="SphereMesh" id="Mesh_knot"]
+material = SubResource("Mat_cotton")
+radius = 0.0065
+height = 0.011
+radial_segments = 10
+rings = 5
+
+[sub_resource type="StandardMaterial3D" id="Mat_matchbox"]
+albedo_color = Color(0.85, 0.22, 0.12, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="Mesh_matchbox"]
+material = SubResource("Mat_matchbox")
+size = Vector3(0.08, 0.025, 0.055)
+
+[sub_resource type="StandardMaterial3D" id="Mat_striker"]
+albedo_color = Color(0.22, 0.13, 0.08, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="Mesh_striker"]
+material = SubResource("Mat_striker")
+size = Vector3(0.07, 0.016, 0.002)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stick"]
+albedo_color = Color(0.93, 0.8, 0.55, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="Mesh_stick"]
+material = SubResource("Mat_stick")
+top_radius = 0.0022
+bottom_radius = 0.0022
+height = 0.06
+radial_segments = 6
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_head"]
+albedo_color = Color(0.8, 0.08, 0.06, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="Mesh_head"]
+material = SubResource("Mat_head")
+radius = 0.0042
+height = 0.011
+radial_segments = 10
+rings = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_key"]
+bg_color = Color(0.95, 0.93, 0.86, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 7
+border_color = Color(0.25, 0.23, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 18.0
+content_margin_top = 6.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+
+[node name="Candle" type="Node3D"]
+script = ExtResource("1_cd")
+twist_sound = SubResource("Rand_twist")
+plant_sound = ExtResource("8_plant")
+match_sound = ExtResource("9_match")
+light_sound = ExtResource("10_light")
+whoosh_sound = ExtResource("11_whoosh")
+zap_sound = ExtResource("13_zap")
+lever_sound = ExtResource("14_lever")
+hum_sound = ExtResource("15_hum")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.6)
+current = true
+fov = 32.0
+
+[node name="KeyLamp" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.25, 0.7)
+light_color = Color(1, 0.85, 0.65, 1)
+light_energy = 0.55
+omni_range = 2.5
+
+[node name="RedFill" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.15, 0.45)
+light_color = Color(1, 0.25, 0.15, 1)
+light_energy = 0.9
+omni_range = 2.5
+
+[node name="RoomLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, 0.9)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 0.0
+omni_range = 3.0
+
+[node name="FlameLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22, -0.09)
+light_color = Color(1, 0.6, 0.25, 1)
+light_energy = 0.0
+omni_range = 1.2
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.38)
+mesh = SubResource("Mesh_wall")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, -0.31)
+mesh = SubResource("Mesh_box")
+
+[node name="Stripe" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.425, -0.31)
+mesh = SubResource("Mesh_stripe")
+
+[node name="LeverBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, -0.215)
+mesh = SubResource("Mesh_base")
+
+[node name="Lever" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.939693, -0.34202, 0, 0.34202, -0.939693, 0, 0.17, -0.19)
+
+[node name="Handle" type="MeshInstance3D" parent="Lever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+mesh = SubResource("Mesh_lever")
+
+[node name="On" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.27, -0.238)
+pixel_size = 0.001
+modulate = Color(0.95, 0.95, 0.9, 1)
+outline_modulate = Color(0.1, 0.1, 0.1, 1)
+text = "ON"
+font = ExtResource("5_font")
+font_size = 44
+
+[node name="Off" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.07, -0.238)
+pixel_size = 0.001
+modulate = Color(0.95, 0.95, 0.9, 1)
+outline_modulate = Color(0.1, 0.1, 0.1, 1)
+text = "OFF"
+font = ExtResource("5_font")
+font_size = 44
+
+[node name="Shelf" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.435, -0.2)
+mesh = SubResource("Mesh_shelf")
+
+[node name="TerminalPlus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11, -0.42, -0.12)
+
+[node name="Post" type="MeshInstance3D" parent="TerminalPlus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 0)
+mesh = SubResource("Mesh_post")
+
+[node name="Arm" type="MeshInstance3D" parent="TerminalPlus"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.035, 0.17, 0)
+mesh = SubResource("Mesh_arm")
+
+[node name="Tip" type="MeshInstance3D" parent="TerminalPlus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07, 0.17, 0)
+mesh = SubResource("Mesh_tip")
+
+[node name="Sign" type="Label3D" parent="TerminalPlus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015, 0.1006)
+pixel_size = 0.001
+modulate = Color(1, 0.35, 0.25, 1)
+outline_modulate = Color(0.1, 0.05, 0.03, 1)
+text = "+"
+font = ExtResource("5_font")
+font_size = 40
+
+[node name="TerminalMinus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, -0.42, -0.12)
+
+[node name="Post" type="MeshInstance3D" parent="TerminalMinus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 0)
+mesh = SubResource("Mesh_post")
+
+[node name="Arm" type="MeshInstance3D" parent="TerminalMinus"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.035, 0.17, 0)
+mesh = SubResource("Mesh_arm")
+
+[node name="Tip" type="MeshInstance3D" parent="TerminalMinus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 0.17, 0)
+mesh = SubResource("Mesh_tip")
+
+[node name="Sign" type="Label3D" parent="TerminalMinus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015, 0.1006)
+pixel_size = 0.001
+modulate = Color(0.85, 0.85, 0.9, 1)
+outline_modulate = Color(0.05, 0.05, 0.05, 1)
+text = "−"
+font = ExtResource("5_font")
+font_size = 40
+
+[node name="CandleModel" parent="." instance=ExtResource("2_model")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, -0.3664, -0.12)
+
+[node name="Spool" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21, -0.405, -0.12)
+mesh = SubResource("Mesh_wound")
+
+[node name="FlangeBottom" type="MeshInstance3D" parent="Spool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013, 0)
+mesh = SubResource("Mesh_spool")
+
+[node name="FlangeTop" type="MeshInstance3D" parent="Spool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013, 0)
+mesh = SubResource("Mesh_spool")
+
+[node name="Thread" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21, -0.39, -0.12)
+
+[node name="Strands" type="Node3D" parent="Thread"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Strand0" type="MeshInstance3D" parent="Thread/Strands"]
+mesh = SubResource("Mesh_strand")
+
+[node name="Strand1" type="MeshInstance3D" parent="Thread/Strands"]
+mesh = SubResource("Mesh_strand")
+
+[node name="Strand2" type="MeshInstance3D" parent="Thread/Strands"]
+mesh = SubResource("Mesh_strand")
+
+[node name="Knots" type="Node3D" parent="Thread"]
+
+[node name="Top" type="MeshInstance3D" parent="Thread/Knots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+mesh = SubResource("Mesh_knot")
+
+[node name="Matchbox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21, -0.4075, -0.11)
+mesh = SubResource("Mesh_matchbox")
+
+[node name="Striker" type="MeshInstance3D" parent="Matchbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0285)
+mesh = SubResource("Mesh_striker")
+
+[node name="Label" type="Label3D" parent="Matchbox"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.0131, 0)
+pixel_size = 0.0005
+modulate = Color(1, 0.9, 0.3, 1)
+outline_modulate = Color(0.2, 0.05, 0.02, 1)
+text = "MATCHES"
+font = ExtResource("5_font")
+font_size = 28
+
+[node name="Match" type="Node3D" parent="."]
+transform = Transform3D(0.825336, -0.564642, 0, 0.564642, 0.825336, 0, 0, 0, 1, 0.175, -0.355, -0.075)
+
+[node name="Stick" type="MeshInstance3D" parent="Match"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032, 0)
+mesh = SubResource("Mesh_stick")
+
+[node name="Head" type="MeshInstance3D" parent="Match"]
+mesh = SubResource("Mesh_head")
+
+[node name="Arc" type="Node3D" parent="."]
+
+[node name="TwistInput" type="Node" parent="."]
+script = ExtResource("3_twist")
+
+[node name="MatchPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="Crackle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_crackle")
+volume_db = -16.0
+bus = &"SFX"
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Bursts" type="Control" parent="Hud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Keycap" type="PanelContainer" parent="Hud"]
+offset_right = 60.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_key")
+
+[node name="Key" type="Label" parent="Hud/Keycap"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.13, 0.12, 1)
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 36
+text = "X"
+horizontal_alignment = 1
+
+[node name="Hint" parent="Hud" node_paths=PackedStringArray("twist") instance=ExtResource("4_hint")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -460.0
+offset_right = -20.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+twist = NodePath("../../TwistInput")
+arrow_direction = 1
+intro_cue = &""

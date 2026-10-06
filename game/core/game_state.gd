@@ -28,6 +28,14 @@ var story_step := 0
 ## How many switch games of the current switch step are beaten (`Story.SWITCH_GAMES`; reset each step).
 var switch_progress := 0
 
+## Kaleidoscope (third blackout, minigames/switch/kaleidoscope/): the password hidden in the TWIST ME
+## painting, how many 15° twist steps line it up, whether the binoculars were picked up and whether the
+## scope has shown the password. Picked by `Kaleidoscope.ensure()`, reset with each new story step.
+var scope_password := ""
+var scope_target := 0
+var has_scope := false
+var scope_solved := false
+
 ## False while the lights are out: the office runs on emergency lighting (`world/office/lighting.gd`).
 var power_on := true
 

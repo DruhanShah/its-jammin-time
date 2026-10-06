@@ -1,0 +1,106 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/kaleidoscope/scope_view.gd" id="1_scope"]
+[ext_resource type="Shader" path="res://minigames/switch/kaleidoscope/scope_kaleido.gdshader" id="2_shader"]
+[ext_resource type="Script" path="res://core/input/twist_input.gd" id="3_twist"]
+[ext_resource type="PackedScene" path="res://core/input/twist_hint.tscn" id="4_hint"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="5_font"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/screw_click_1_toman.wav" id="6_tick"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/slide_and_click.wav" id="7_click"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/brass_positive_long.wav" id="8_fanfare"]
+
+[sub_resource type="ShaderMaterial" id="Mat_view"]
+shader = ExtResource("2_shader")
+shader_parameter/err = 0.0
+shader_parameter/glow = 0.0
+shader_parameter/aspect = 1.7778
+shader_parameter/radius = 0.38
+shader_parameter/seam_color = Color(0.05, 0.05, 0.08, 1)
+shader_parameter/tint = Color(1, 0.9, 0.84, 1)
+
+[node name="ScopeView" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_scope")
+tick_sound = ExtResource("6_tick")
+solve_sound = ExtResource("7_click")
+fanfare_sound = ExtResource("8_fanfare")
+
+[node name="View" type="ColorRect" parent="."]
+material = SubResource("Mat_view")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Barrel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TwistInput" type="Node" parent="."]
+script = ExtResource("3_twist")
+
+[node name="Hint" parent="." node_paths=PackedStringArray("twist") instance=ExtResource("4_hint")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -380.0
+offset_right = -20.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+twist = NodePath("../TwistInput")
+arrow_direction = 1
+intro_cue = &""
+
+[node name="Feedback" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 56
+text = "Almost!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 560.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(1, 0.86, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 34
+text = "TWIST ME"
+
+[node name="Exit" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 66.0
+offset_right = 560.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 22
+text = "Esc: lower the binoculars"
+
+[node name="Ticker" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

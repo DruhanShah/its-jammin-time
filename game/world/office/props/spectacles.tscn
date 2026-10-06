@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://d2e71s5c2yvui" path="res://assets/models/spectacles/glasses_ipoly3d.glb" id="1_glasses"]
+[ext_resource type="Script" uid="uid://bq6885trbk7cd" path="res://core/interaction/interactable.gd" id="2_int"]
+[ext_resource type="Script" path="res://world/office/props/spectacles.gd" id="3_spec"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glasses"]
+size = Vector3(0.3, 0.16, 0.3)
+
+[node name="Spectacles" type="Node3D"]
+script = ExtResource("3_spec")
+
+[node name="Model" parent="." instance=ExtResource("1_glasses")]
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.0262, 0)
+
+[node name="Interactable" type="Area3D" parent="."]
+script = ExtResource("2_int")
+verb = "try on the glasses"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, -0.04)
+shape = SubResource("BoxShape3D_glasses")
