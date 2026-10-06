@@ -126,7 +126,7 @@ const SECTIONS: Array = [
 	], true],
 	["MADE BY THE TEAM", [
 		"Start screen art: hand-drawn by Kimaya Arora",
-		"Character select art: drawn by the team (PiBot314)",
+		"Character select art: drawn by Nandini Chakaravarthy",
 		"Real-life ending video: filmed by the team",
 		"Narrator voices: recorded by the team",
 		"Cursor, halftone shader, ceiling texture, all scripts and scenes: made for this game",

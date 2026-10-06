@@ -66,7 +66,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 - Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
 - Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
 - Start screen art (`assets/ui/start_screen/`): hand-drawn by Kimaya Arora (Procreate `Untitled_Artwork.pdf`; its layer pages rendered separately: background + burst outlines, and the hand-lettered NEW GAME / CONT. LAST GAME / SETTINGS / EXIT buttons with the white keyed out), cropped and slightly stretched to 16:9.
-- Character select art (`menus/character_select/categories/*/*.PNG`: skin, eyes, hair and outfit layers): drawn by the team (PiBot314's branch).
+- Character select art (`menus/character_select/categories/*/*.PNG`: skin, eyes, hair and outfit layers): drawn by Nandini Chakaravarthy.
 - Real-life ending video (`assets/video/real_life.ogv`): the team's own footage, filmed by us for this game (converted from the phone recording to Ogg Theora/Vorbis).
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
@@ -102,6 +102,6 @@ The in-game roll (`ending/credits.gd`, `SECTIONS`) lists all of the above: prima
 > Crank ratchet ("Socket Wrench") by xxqmanxx (Freesound), CC0
 > "Piece for Disaffected Piano Two" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, http://creativecommons.org/licenses/by/4.0/
 > "Cheerful Comedy Funny Quirky Background" by alex-morgan (Pixabay), Pixabay Content License, https://pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/
-> Character select art by the team (hand-drawn, original)
+> Character select art by Nandini Chakaravarthy (hand-drawn, original)
 > Made with Godot Engine, https://godotengine.org/license/ ; Godot logo by Andrea Calabró, CC BY 4.0
 > Built with the help of editor plugins: Godot AI, Godot Asset Placer, Snappy (MIT)
