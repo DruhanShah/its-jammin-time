@@ -39,6 +39,11 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`, `bong_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Candle" 3D model (wick and flame surfaces split off at runtime, flame reused) | Nick Slough | https://poly.pizza/m/HFpLq6iqKu | CC BY 3.0 (attribution required), https://creativecommons.org/licenses/by/3.0/ | `assets/models/candle/` ([CREDITS](assets/models/candle/CREDITS.md)) | Shipped |
+| 400 Sounds Pack, candle game sounds (`light_match`, `slide_and_click`, `fire_lighting`, unaltered; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Basic Fire whoosh" | LookIMadeAThing | https://freesound.org/people/LookIMadeAThing/sounds/260554/ | CC0 1.0 | `assets/audio/sfx/freesound/flame_whoosh_lookimadeathing.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "fire crackling loop.wav" (cut into a loop) | soundofsong | https://freesound.org/people/soundofsong/sounds/650574/ | CC0 1.0 | `assets/audio/sfx/freesound/flame_crackle_loop_soundofsong.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Foley_Leather_Stress_Mono.wav" (2 creaks cut from it) | Nox_Sound | https://freesound.org/people/Nox_Sound/sounds/559079/ | CC0 1.0 | `assets/audio/sfx/freesound/wick_twist_*_noxsound.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -71,4 +76,6 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Valve squeaks by joedeshon, rusty wheel by Nox_Sound, pipe clunk by brittmosel, pipe noises by RutgerMuller, high voltage by fkurz (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
+> "Candle" by Nick Slough (https://poly.pizza/m/HFpLq6iqKu), licensed under CC BY 3.0
+> Fire whoosh by LookIMadeAThing, fire crackle by soundofsong, wick creaks by Nox_Sound (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/
