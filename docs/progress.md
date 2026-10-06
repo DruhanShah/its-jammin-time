@@ -59,6 +59,13 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Third chair jab: narrator line when you push a chair into another room [review: `core/player/player.gd` (`_check_chair_rooms`, `_room_at`), `narration/chair_new_room.tres`; push a chair from Start through the door into A2]
 - [x] "Lights went out" phase: dimmer emergency lighting; try neon-ish vs red, pick what still reads as an office and shows off the map (comparison screenshots for the user) [review: `docs/map/screenshots/lights_out/comparison.png` (normal / A neon / B red / C mix, recommended + default); pick with `Lighting.look` in office.tscn; in game F5 toggles the power, F6 cycles the looks (debug builds only); `world/office/lighting.gd`, `GameState.set_power()`]
 
+## Current: teammate code + story flow
+- [~] Integrate teammate's `computer-minigames` branch (computer screen, ad popup, corporate speak, captcha) on an integration branch, then into master
+- [~] Comic font family: research licenses, add usable fonts to the game + credits
+- [ ] Story flow: start at the computer minigame → lights out → server room switch → back → minigame 2 → lights out, server room swapped with A3 → switch there → minigame 3 → lights out → switch again
+- [ ] Switch = highlighted interactable that opens a placeholder switch minigame (real switch minigames later)
+- [ ] Off-path narrator: cues when the player wanders away from the current objective for a while
+
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
 ## Conventions
