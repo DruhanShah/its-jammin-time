@@ -90,10 +90,10 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [~] Visit 1 part A: comic window kit, Computer.blackout(), mic password (building on teammate Kimaya's `password_scream`)
     - [x] Comic UI kit: `AppWindow` (outline, title bar, X, squash-and-stretch, POOF! burst), halftone shader, glove cursor [review: `core/ui/comic/`; open the computer, watch the login window pop in]
     - [x] `Computer.blackout()`: flicker + CRT-off from the computer, the office loads already dark with `lights_out_1` (no second delayed cut) [review: `computer.gd` `blackout()`, `story.gd` `_on_computer_queue_finished`/`_on_power_changed`, `story_stage.gd` `_blackout()`]
-    - [~] VoiceLogin on top of `password_scream` (live waveform, 5 scripted fails, silence timeout, fake waveform, text box, in an AppWindow): built and tested in an isolated copy, waiting for the `git pull` of the teammate's `password_scream` (needs the user's OK) before it lands; then `FIRST_VISIT = [password_scream, corporate_speak]`
+    - [~] VoiceLogin on top of `password_scream` (live waveform, 2 scripted fails, silence timeout, fake waveform, text box, in an AppWindow): built and tested in an isolated copy, waiting for the `git pull` of the teammate's `password_scream` (needs the user's OK) before it lands; then `FIRST_VISIT = [password_scream, corporate_speak]`
     - [x] Export: macOS mic usage text + `audio_input` entitlement; Web preset (no threads) for itch.io
 - [ ] Visit 1 part B: font picker, ad storm (ECO MODE ad causes the blackout), wire FIRST_VISIT
-- [ ] Visit 1 (approved design): password via fake mic (live waveform, fails 5×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
+- [ ] Visit 1 (approved design): password via fake mic (live waveform, fails 2×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
 
 - [ ] Visit 2 (approved design): software_update → memo_mail → inky
 - [ ] Visit 3: redo — 3 concepts in `docs/computer_redesign.md` §8 (recommended: LightGuard), awaiting user pick

@@ -1,6 +1,6 @@
 extends Minigame
 ## Login screen (VoiceLogin): scream/say the password, it fails `screams_needed` times on purpose
-## (5 scripted verdicts, PasswordScreamConfig: prompts / fail_lines / fail_cues), then it lets you type
+## (2 scripted verdicts, PasswordScreamConfig: prompts / fail_lines / fail_cues), then it lets you type
 ## it instead: the mic slides off and a plain text box accepts anything → complete(). A full-screen
 ## halftone login over the desktop with an AppWindow, a cartoon mic and a live waveform of the real mic.
 ##
@@ -38,11 +38,9 @@ var _fake_kick := 0.0
 var _bar_time := 0.0
 var _player: AudioStreamPlayer
 var _capture: AudioEffectCapture
-var _shake := 0.0
 
 @onready var window: AppWindow = %Window
 @onready var prompt: Label = %Prompt
-@onready var count: Label = %Count
 @onready var mic: Control = %Mic
 @onready var waveform: Control = %Waveform
 @onready var wave_note: Label = %WaveNote
@@ -84,7 +82,6 @@ func _process(delta: float) -> void:
 		_bar_time = 0.0
 		waveform.push(_shown_level())
 	mic.level = _shown_level() if _phase == Phase.LISTEN else 0.0
-	_update_shake(delta)
 	match _phase:
 		Phase.LISTEN:
 			_update_listen(delta)
@@ -120,15 +117,11 @@ func _listen() -> void:
 	_quiet = 0.0
 	_heard = false
 	prompt.text = cfg.prompts[_attempt]
-	count.text = "Attempt %d / %d" % [_attempt + 1, _attempts()]
 	verdict.text = ""
 	no_button.hide()
 	waveform.status = "● REC"
 	waveform.status_color = Color("#ff5a4f")
 	waveform.blink = true
-	if _attempt + 1 == cfg.shake_attempt:
-		_shake = 1.0
-		_pop(prompt, 1.5)
 
 
 func _update_listen(delta: float) -> void:
@@ -140,8 +133,6 @@ func _update_listen(delta: float) -> void:
 		_heard = _heard or _voice >= cfg.scream_time
 	elif _heard:
 		_quiet += delta
-	if _attempt + 1 == cfg.shake_attempt:
-		_shake = maxf(_shake, 0.6)
 	var finished := _heard and _quiet >= cfg.quiet_time
 	var timed_out := not _heard and _timer >= cfg.listen_timeout
 	if finished or timed_out or _timer >= cfg.max_listen_time:
@@ -156,11 +147,10 @@ func _show_verdict() -> void:
 	var number := _attempt + 1
 	_set_phase(Phase.VERDICT)
 	waveform.status = "✗ FAILED"
-	verdict.text = cfg.fail_lines[_attempt]
+	var silent_verdict := not _heard and _attempt == 0
+	verdict.text = cfg.silent_line if silent_verdict else cfg.fail_lines[_attempt]
 	if not _heard:
 		_silent_attempts += 1
-		if _attempt == 0:
-			verdict.text = cfg.silent_line
 	_pop(verdict, 1.25)
 	window.shake(6.0)
 	var cue: StringName = cfg.fail_cues[_attempt] if _attempt < cfg.fail_cues.size() else &""
@@ -168,12 +158,9 @@ func _show_verdict() -> void:
 		cue = cfg.silent_cue
 	if cue:
 		Narrator.play(cue)
-	if number == cfg.comic_wave_attempt:
-		waveform.comic = true
-		wave_note.text = "Waveform now in Comic Sans."
 	if number == cfg.droop_attempt:
 		mic.droop()
-	if number == cfg.no_button_attempt:
+	if number == cfg.no_button_attempt and not silent_verdict: # [No] answers a guess, not silence.
 		_set_phase(Phase.WAIT_NO)
 		no_button.show()
 		_pop(no_button, 1.3)
@@ -196,7 +183,6 @@ func _next_attempt() -> void:
 ## The mic gives up: it slides off and a plain text box drops in.
 func _fallback() -> void:
 	_set_phase(Phase.FALLBACK)
-	_shake = 0.0
 	_stop_mic()
 	var tween := create_tween()
 	tween.tween_property(listen_row, "modulate:a", 0.0, 0.35)
@@ -210,7 +196,6 @@ func _show_text_box() -> void:
 	wave_note.hide()
 	verdict.text = ""
 	prompt.text = "Or just type it, I guess."
-	count.hide()
 	var cue := (config as PasswordScreamConfig).type_cue
 	if cue:
 		Narrator.play(cue)
@@ -330,18 +315,6 @@ func _shown_level() -> float:
 
 
 # --- Juice -------------------------------------------------------------------------------------------
-
-func _update_shake(delta: float) -> void:
-	if _shake <= 0.0:
-		return
-	_shake = maxf(0.0, _shake - delta * 0.5)
-	waveform.pivot_offset = waveform.size / 2.0
-	waveform.rotation = randf_range(-0.04, 0.04) * _shake
-	waveform.scale = Vector2.ONE * (1.0 + randf_range(0.0, 0.05) * _shake)
-	if _shake <= 0.0:
-		waveform.rotation = 0.0
-		waveform.scale = Vector2.ONE
-
 
 func _pop(control: Control, from_scale: float) -> void:
 	control.pivot_offset = control.size / 2.0
