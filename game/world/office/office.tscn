@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d348kwd73ai4v" path="res://assets/vnb_office/models/CoffeeCup_Filled.fbx" id="g_CoffeeCup_Filled"]
 [ext_resource type="PackedScene" uid="uid://8ckx220p4xkn" path="res://assets/vnb_office/models/CoffeeMachine.fbx" id="g_CoffeeMachine"]
 [ext_resource type="PackedScene" uid="uid://daothui4nxg3u" path="res://assets/vnb_office/models/CoffeeTable.fbx" id="g_CoffeeTable"]
-[ext_resource type="FontFile" uid="uid://b6u2kvx0c1qoo" path="res://assets/fonts/ComicNeue-Bold.ttf" id="g_ComicNeue_Bold"]
+[ext_resource type="FontFile" uid="uid://ctm718ad8xjn8" path="res://assets/fonts/ComicRelief-Bold.ttf" id="g_ComicRelief_Bold"]
 [ext_resource type="PackedScene" uid="uid://c386atnoywmlm" path="res://assets/vnb_office/models/Computer_Case.fbx" id="g_Computer_Case"]
 [ext_resource type="PackedScene" uid="uid://ckvb3i7d4gefh" path="res://assets/vnb_office/models/Computer_Keyboard.fbx" id="g_Computer_Keyboard"]
 [ext_resource type="PackedScene" uid="uid://de85c1qxh76jf" path="res://assets/vnb_office/models/Computer_Mouse.fbx" id="g_Computer_Mouse"]
@@ -697,7 +697,7 @@ modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "LEGACY
 DO NOT TOUCH"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 30
 outline_size = 8
 
@@ -809,7 +809,7 @@ modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "SERVER ROOM
 (budget edition)"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 80
 outline_size = 8
 
@@ -845,7 +845,7 @@ outline_modulate = Color(1, 1, 1, 0.85)
 text = "DAYS SINCE
 LAST BLACKOUT:
 0"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 64
 outline_size = 8
 
@@ -1060,7 +1060,7 @@ modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "EMPLOYEE OF THE MONTH
 (EVERY MONTH)"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 96
 outline_size = 8
 
@@ -1346,7 +1346,7 @@ pixel_size = 0.004
 modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "NEW YORK"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 64
 outline_size = 8
 
@@ -1360,7 +1360,7 @@ pixel_size = 0.004
 modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "LONDON"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 64
 outline_size = 8
 
@@ -1374,7 +1374,7 @@ pixel_size = 0.004
 modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "TOKYO"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 64
 outline_size = 8
 
@@ -1388,7 +1388,7 @@ pixel_size = 0.004
 modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "HERE"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 64
 outline_size = 8
 
@@ -1402,7 +1402,7 @@ pixel_size = 0.004
 modulate = Color(0.133, 0.133, 0.133, 1)
 outline_modulate = Color(1, 1, 1, 0.85)
 text = "DEADLINE"
-font = ExtResource("g_ComicNeue_Bold")
+font = ExtResource("g_ComicRelief_Bold")
 font_size = 64
 outline_size = 8
 

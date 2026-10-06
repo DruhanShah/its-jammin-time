@@ -40,7 +40,7 @@ const LOOKS := {
 		},
 	},
 }
-const EXIT_FONT := preload("res://assets/fonts/ComicNeue-Bold.ttf")
+const EXIT_FONT := preload("res://assets/fonts/ComicRelief-Bold.ttf")
 
 @export_enum("neon", "red", "mix") var look := "mix":
 	set(value):

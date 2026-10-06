@@ -15,7 +15,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Tutorial: placing asset objects in the map (`docs/tutorials/placing-assets.md`) [review: macOS shortcuts not verified on 4.7]
 - [x] (e) Sound system: audio buses, SFX player, looping background music, footsteps [review: `core/audio/audio.gd`, footstep timing in `player.gd`]
 - [x] (a) Narrator cue system: play cues from game-state triggers + placeable trigger area [review: `core/narrator/narrator.gd` play()]
-- [x] (f) Subtitles shown with narrator lines (Comic Neue font) [review: `core/narrator/narrator.tscn`]
+- [x] (f) Subtitles shown with narrator lines (Comic Neue Italic) [review: `core/narrator/narrator.tscn`]
 - [x] (b) Object interaction: "Press X to interact" when close, sends to a placeholder minigame scene [review: `core/interaction/interactable.gd`, `player.gd` input handling]
 - [x] (c) Crosshair at screen centre [review: `core/player/hud.tscn`]
 - [x] (d) Placeholder cuboid hands; left click tries to touch objects [review: `core/player/hands.gd`]
@@ -61,7 +61,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 
 ## Current: teammate code + story flow
 - [x] Integrate teammate's `computer-minigames` branch (computer screen, ad popup, corporate speak, captcha) on branch `integrate/computer-minigames` (not in master yet): office computer opens the computer screen, Power returns to the desk, story API `Computer.open()`/`queue()` + `GameState.computer_minigame_finished`/`computer_queue_finished` [review: `minigames/computer/event_manager.gd`, `computer.gd` `open()`/`queue()`/`exit()`, `core/game_state.gd`; X at the desk, play memo → ad → bot check, press Power]
-- [~] Comic font family: research licenses, add usable fonts to the game + credits
+- [x] Comic font family: research licenses, add usable fonts to the game + credits (Comic Sans MS itself not usable: Microsoft licence) [review: `core/ui/theme.tres` (project theme, `gui/theme/custom`), `assets/fonts/CREDITS.md`, `CREDITS.md`; check the HUD prompt, a subtitle, the computer screen, signs in B2/C1 and EXIT signs (F5)]
 - [ ] Story flow: start at the computer minigame → lights out → server room switch → back → minigame 2 → lights out, server room swapped with A3 → switch there → minigame 3 → lights out → switch again
 - [ ] Switch = highlighted interactable that opens a placeholder switch minigame (real switch minigames later)
 - [ ] Off-path narrator: cues when the player wanders away from the current objective for a while

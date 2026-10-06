@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" path="res://minigames/computer/computer.gd" id="1_comp"]
 [ext_resource type="Resource" path="res://minigames/computer/minigame_registry.tres" id="2_reg"]
-[ext_resource type="FontFile" path="res://assets/fonts/ComicNeue-Bold.ttf" id="3_font"]
+[ext_resource type="FontFile" uid="uid://dx4r2hlqtprds" path="res://assets/fonts/ComicShannsMono-Regular.ttf" id="3_font"]
 [ext_resource type="Script" path="res://minigames/computer/event_manager.gd" id="4_events"]
 
 [sub_resource type="Theme" id="Theme_screen"]
-default_font = ExtResource("3_font")
 default_font_size = 22
 
 [node name="Computer" type="Node2D"]
@@ -44,6 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.86, 0.87, 0.82, 1)
+theme_override_fonts/normal_font = ExtResource("3_font")
 scroll_following = true
 
 [node name="StatusBar" type="Label" parent="Screen"]
@@ -59,6 +59,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.55, 0.85, 0.45, 1)
+theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 18
 text = "-- INSERT --"
 

@@ -36,6 +36,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/godot_ai/plugin.cfg", "res://addons/snappy/plugin.cfg")
 
+[gui]
+
+theme/custom="res://core/ui/theme.tres"
+
 [input]
 
 move_forward={
