@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Infinium Game Jam"
-run/main_scene="res://world/office/office.tscn"
+config/name="It's Over Time"
+run/main_scene="res://menus/start_menu/start_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

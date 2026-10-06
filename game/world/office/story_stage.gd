@@ -12,9 +12,19 @@ extends Node
 ## or the last nag) resets the clock; otherwise, outside the objective's room, the clock runs, and
 ## after `off_path_time` the next of Story's escalating off-path lines plays (at most one per
 ## `off_path_cooldown`), and the best is reset to where you are. The clock stops while the narrator talks.
+##
+## Ending (Story.Step.ENDING, after the third blackout is fixed): the view drifts in and out of focus
+## (`VisionBlur`, mild anywhere, full strength in the Start office), a pair of spectacles lies on the
+## player's desk (the objective). Walking into Start cues the narrator to try them on, with nudges
+## while you dawdle there; putting them on plays the glasses sliding down over the eyes, then
+## `Story.REAL_LIFE` (the real-life video, then the credits).
 
 ## Seconds back in the office before the lights go out in a switch step.
 @export var blackout_delay := 1.5
+## Ending: seconds in the Start office without trying the glasses on between two nudges.
+@export var glasses_nudge_time := 20.0
+## Ending: blur strength outside the Start office (1 inside).
+@export_range(0.0, 1.0) var outside_blur_strength := 0.4
 ## Seconds without getting closer to the objective before the narrator nags.
 @export var off_path_time := 25.0
 ## Minimum seconds between two off-path lines.
@@ -28,10 +38,22 @@ const SWAP_ROOM := &"A3"
 ## Doorways of A3 that C1's furniture would cover after the swap: C1's switch wall (east) holds A3's
 ## east doorway, so the switch, its marker and the clock above it move to the west wall (C1's own west
 ## doorway, a plain wall at A3's spot, at the end of the same aisle).
-const MIRRORED_TO_WEST_WALL: Array[NodePath] = [^"Furniture/PowerSwitch", ^"Furniture/SwitchboardSpot", ^"Furniture/Clock"]
+## The TWIST ME painting (kaleidoscope, third blackout) hangs beside the switch, so it moves with it.
+const MIRRORED_TO_WEST_WALL: Array[NodePath] = [^"Furniture/PowerSwitch", ^"Furniture/SwitchboardSpot", ^"Furniture/Clock", ^"Furniture/TwistMePainting"]
 ## A3's LONDON clock and its label would hang over C1's south doorway; they slide east along the wall.
 const A3_CLEAR_OF_SOUTH_DOOR: Array[NodePath] = [^"Furniture/Clock2", ^"Furniture/Label2"]
 const A3_CLEAR_X := 5.5
+## Ending: the room with the player's desk, the spectacles and where they lie (Start's furniture
+## coordinates: left of the keyboard as you sit at the desk).
+const OWN_ROOM := &"Start"
+const SPECTACLES_SCENE := preload("res://world/office/props/spectacles.tscn")
+const SPECTACLES_SPOT := Transform3D(Basis(Vector3.UP, deg_to_rad(75.0)), Vector3(-4.22, 0.949, -0.5))
+## Ending lines: walking into Start, nudges while there (in order, then they stop), putting them on.
+const GLASSES_HINT := &"ending_glasses_hint"
+const GLASSES_NUDGES: Array[StringName] = [&"ending_glasses_nudge_1", &"ending_glasses_nudge_2"]
+const GLASSES_ON := &"ending_glasses_on"
+## Longest wait for the putting-on line before the video starts anyway.
+const GLASSES_ON_MAX_WAIT := 6.0
 
 ## Room centres as built (before any swap), by room name: these are fixed locations.
 var _cells: Dictionary[StringName, Vector3] = {}
@@ -41,6 +63,13 @@ var _tick := 0.0
 var _best := -1 ## Fewest rooms to the objective since this load / the last nag; -1 = not measured.
 var _stall := 0.0 ## Seconds without a new best.
 var _since_nag := INF
+## Ending state (null/false until the ENDING step is set up in this load).
+var _vision: VisionBlur
+var _spectacles: Node3D
+var _hinted := false ## The "try them on" line played (this load).
+var _in_room_time := 0.0 ## Seconds in Start since the hint or the last nudge.
+var _nudges := 0
+var _putting_on := false
 
 @onready var _rooms: Node3D = $"../Rooms"
 @onready var _player: Node3D = $"../Player"
@@ -65,6 +94,9 @@ func _ready() -> void:
 		get_tree().create_timer(blackout_delay).timeout.connect(_blackout)
 	GameState.power_changed.connect(_reset_tracking.unbind(1))
 	Story.step_changed.connect(_reset_tracking.unbind(1))
+	Story.step_changed.connect(_on_step_changed)
+	if Story.step == Story.Step.ENDING:
+		_start_ending()
 
 
 func _process(delta: float) -> void:
@@ -74,6 +106,7 @@ func _process(delta: float) -> void:
 	var here := room_at(_player.global_position)
 	_check_server_room(here)
 	_check_off_path(here, _tick)
+	_check_ending(here, _tick)
 	_tick = 0.0
 
 
@@ -104,8 +137,8 @@ func rooms_between(from: StringName, to: StringName) -> int:
 ## The objective's node: the switch while the lights are out, the desk computer while a
 ## minigame is queued, nothing otherwise.
 func objective() -> Node3D:
-	if Story.step == Story.Step.FREE_ROAM:
-		return null
+	if Story.step == Story.Step.ENDING:
+		return _spectacles if not _putting_on else null
 	if Story.is_switch_step():
 		return _switch if not GameState.power_on else null
 	return _computer if GameState.computer_queue else null
@@ -162,7 +195,7 @@ func _check_server_room(here: StringName) -> void:
 
 func _check_off_path(here: StringName, delta: float) -> void:
 	var target := objective()
-	if not target or here.is_empty() or Narrator.is_speaking():
+	if not target or here.is_empty() or Narrator.is_speaking() or get_tree().get_first_node_in_group(&"scope_view"):
 		return
 	_since_nag += delta
 	var dist := rooms_between(here, room_at(target.global_position))
@@ -186,3 +219,75 @@ func _check_off_path(here: StringName, delta: float) -> void:
 func _reset_tracking() -> void:
 	_best = -1
 	_stall = 0.0
+
+
+## Power came back while the player was in the office (an in-world restore game): set the ending up now
+## and play its arrival line once the narrator has finished the current one.
+func _on_step_changed(step: Story.Step) -> void:
+	if step != Story.Step.ENDING or _vision:
+		return
+	_start_ending()
+	var cue := Story.take_arrival_cue()
+	while cue and Narrator.is_speaking():
+		await get_tree().create_timer(0.25).timeout
+	if cue:
+		Narrator.play(cue)
+
+
+## Puts the spectacles on the desk and starts the blurry vision.
+func _start_ending() -> void:
+	_vision = VisionBlur.new()
+	_vision.strength = outside_blur_strength
+	add_child(_vision)
+	_spectacles = SPECTACLES_SCENE.instantiate()
+	_spectacles.transform = SPECTACLES_SPOT
+	_computer.get_parent().add_child(_spectacles) # Start's Furniture, beside the computer.
+	var interactable: Interactable = _spectacles.get_node(^"Interactable")
+	interactable.interacted.connect(_put_on_glasses)
+	# The desk's welcome line ("Ah, the desk...") would talk over the ending.
+	var desk_trigger := _rooms.get_node_or_null(^"Start/DeskNarratorTrigger") as Area3D
+	if desk_trigger:
+		desk_trigger.monitoring = false
+
+
+## Ending: full blur in the Start office, the hint on walking in, nudges while you dawdle there.
+func _check_ending(here: StringName, delta: float) -> void:
+	if not _vision or _putting_on:
+		return
+	var home := here == OWN_ROOM
+	_vision.strength = 1.0 if home else outside_blur_strength
+	if not home or Narrator.is_speaking():
+		return
+	if not _hinted:
+		_hinted = true
+		_in_room_time = 0.0
+		Narrator.play(GLASSES_HINT)
+		return
+	_in_room_time += delta
+	if _in_room_time >= glasses_nudge_time and _nudges < GLASSES_NUDGES.size():
+		Narrator.play(GLASSES_NUDGES[_nudges])
+		_nudges += 1
+		_in_room_time = 0.0
+
+
+## The spectacles go on: the player stops, the glasses slide down over the eyes (sharp through the
+## lenses), the narrator has a word, then the real-life video.
+func _put_on_glasses() -> void:
+	if _putting_on:
+		return
+	_putting_on = true
+	_spectacles.visible = false
+	(_spectacles.get_node(^"Interactable") as Interactable).enabled = false
+	_player.set_physics_process(false)
+	_player.set_process_unhandled_input(false)
+	var hud := _player.get_node_or_null(^"HUD") as CanvasLayer
+	if hud:
+		hud.visible = false
+	Narrator.play(GLASSES_ON)
+	await _vision.put_on()
+	var waited := 0.0
+	while Narrator.is_speaking() and waited < GLASSES_ON_MAX_WAIT:
+		await get_tree().create_timer(0.1).timeout
+		waited += 0.1
+	await get_tree().create_timer(0.4).timeout
+	Transition.change_scene(Story.REAL_LIFE)

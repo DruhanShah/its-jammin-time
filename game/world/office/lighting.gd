@@ -6,6 +6,9 @@ extends Node
 ## the normal lights snap back on, like fluorescent tubes.
 ##
 ## Story code: `GameState.set_power(false)` / `GameState.set_power(true)`.
+## Overrides (`OVERRIDES`, e.g. the gargoyle quiz's game-show look) sit on top of either state:
+## `set_override("quiz")` slams one on instantly, `clear_override()` fades back to the power state.
+## Find this node with `get_tree().get_first_node_in_group(&"office_lighting")`.
 ## Debug builds: F5 toggles the power, F6 cycles the emergency looks.
 
 ## Emergency looks. `energy` scales each light's normal energy; `every` = 2 keeps a checkerboard
@@ -41,10 +44,22 @@ const LOOKS := {
 	},
 }
 
+## Temporary looks on top of the power state, same keys as `LOOKS` (see `set_override`).
+const OVERRIDES := {
+	"quiz": {
+		"color": Color(0.25, 0.3, 1.0), "energy": 0.15, "every": 4, "panel_energy": 1.0,
+		"env": {
+			"ambient_light_color": Color(0.35, 0.15, 0.55), "ambient_light_energy": 0.08,
+			"fog_light_color": Color(0.25, 0.05, 0.4), "fog_light_energy": 0.35,
+			"glow_intensity": 1.4, "glow_bloom": 0.2,
+		},
+	},
+}
+
 @export_enum("neon", "red", "mix") var look := "mix":
 	set(value):
 		look = value
-		if is_node_ready() and not GameState.power_on:
+		if is_node_ready() and not GameState.power_on and _override.is_empty():
 			if _tween:
 				_tween.kill()
 			_build_panels()
@@ -60,6 +75,9 @@ var _lights: Array[Array] = []
 var _off_mat: StandardMaterial3D
 var _panel_mats: Array[StandardMaterial3D] = []
 var _tween: Tween
+var _override := "" ## Name of the active override, or empty.
+## Environment values an override changed that neither the normal state nor the look sets: key -> old value.
+var _override_env := {}
 
 
 func _ready() -> void:
@@ -92,7 +110,48 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("Emergency look: ", look)
 
 
+## Slams look `name` from `OVERRIDES` on at once (no fade), over whatever the power state is.
+func set_override(name: String) -> void:
+	if _tween:
+		_tween.kill()
+	_override = name
+	var data: Dictionary = OVERRIDES[name]
+	for key in data.env:
+		if not _normal_env.has(key) and not _override_env.has(key):
+			_override_env[key] = _env.get(key)
+	_build_panels(data)
+	_apply(data, 1.0)
+
+
+## Dims or restores the active override (0 = dark, 1 = full), e.g. for a quick flicker.
+func set_override_level(level: float) -> void:
+	if _override:
+		_apply(OVERRIDES[_override], level)
+
+
+## Removes the override: back to the emergency look (fading in over `fade`) or the normal lights.
+func clear_override(fade := 0.4) -> void:
+	if _override.is_empty():
+		return
+	_override = ""
+	if _tween:
+		_tween.kill()
+	for key in _override_env:
+		_env.set(key, _override_env[key])
+	_override_env.clear()
+	if GameState.power_on:
+		_set_normal()
+		return
+	_build_panels()
+	if fade <= 0.0:
+		_set_emergency(1.0)
+		return
+	_tween = create_tween()
+	_tween.tween_method(_set_emergency, 0.3, 1.0, fade).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+
 func _on_power_changed(on: bool) -> void:
+	clear_override(0.0)
 	if _tween:
 		_tween.kill()
 	_build_panels()
@@ -119,7 +178,11 @@ func _set_normal() -> void:
 
 ## `level` 0 = blackout, 1 = emergency lights fully on.
 func _set_emergency(level: float) -> void:
-	var data: Dictionary = LOOKS[look]
+	_apply(LOOKS[look], level)
+
+
+## Applies a look (an entry of `LOOKS` or `OVERRIDES`) at `level` (0 = blackout, 1 = fully on).
+func _apply(data: Dictionary, level: float) -> void:
 	var every: int = data.every
 	for l in _lights:
 		if "powered" in l[0] and l[0].powered:
@@ -139,9 +202,10 @@ func _set_emergency(level: float) -> void:
 		_env.set(key, value * lerpf(0.3, 1.0, level) if key.ends_with("_energy") else value)
 
 
-## Emissive panel materials for the current look: [main, accent].
-func _build_panels() -> void:
-	var data: Dictionary = LOOKS[look]
+## Emissive panel materials for a look (default: the current emergency look): [main, accent].
+func _build_panels(data: Dictionary = {}) -> void:
+	if data.is_empty():
+		data = LOOKS[look]
 	_panel_mats.clear()
 	for color: Color in [data.color, data.get("accent", data.color)]:
 		var mat := StandardMaterial3D.new()

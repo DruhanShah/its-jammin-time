@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/kaleidoscope/twist_me_painting.gd" id="1_paint"]
+[ext_resource type="PackedScene" uid="uid://6k0ebfrj1nmt" path="res://assets/vnb_office/models/Painting.fbx" id="2_frame"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="3_font"]
+[ext_resource type="Script" path="res://core/interaction/interactable.gd" id="4_int"]
+
+[sub_resource type="BoxShape3D" id="Shape_canvas"]
+size = Vector3(1.04, 1.02, 0.12)
+
+[node name="TwistMePainting" type="Node3D"]
+script = ExtResource("1_paint")
+
+[node name="Frame" parent="." instance=ExtResource("2_frame")]
+transform = Transform3D(1.2, 0, 0, 0, 2.4, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="TwistMe" type="Label3D" parent="."]
+transform = Transform3D(0.990268, 0.139173, 0, -0.139173, 0.990268, 0, 0, 0, 1, -0.17, 0.37, 0.025)
+pixel_size = 0.0011
+shaded = false
+double_sided = false
+modulate = Color(1, 0.86, 0.2, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "TWIST ME"
+font = ExtResource("3_font")
+font_size = 96
+outline_size = 26
+
+[node name="Interactable" type="Area3D" parent="."]
+script = ExtResource("4_int")
+verb = "twist the painting"
+
+[node name="Shape" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+shape = SubResource("Shape_canvas")

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "And the lights stayed on, and our hero worked happily ever after. To be continued... as soon as someone writes the next panel."
+subtitle = "Looking for the X? There isn't one. They're very confident in their product."
 once = true

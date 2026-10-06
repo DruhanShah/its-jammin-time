@@ -12,9 +12,9 @@ const PLACEHOLDER := "res://minigames/switch/switch_minigame.tscn"
 const GAMES := {
 	&"screwdriver": {verb = "unscrew the panel", scene = "res://minigames/switch/screwdriver/screwdriver.tscn"},
 	&"wires": {verb = "fix the wiring", scene = "res://minigames/switch/wires/wires.tscn"},
-	&"gargoyles": {verb = "get past the gargoyles"},
+	&"gargoyles": {verb = "get past the gargoyles", scene = ""}, # In-world: world/office/props/gargoyle_gate/.
 	&"valve": {verb = "turn the valve", scene = "res://minigames/switch/valve/valve.tscn"},
-	&"kaleidoscope": {verb = "type the password"},
+	&"kaleidoscope": {verb = "type the password", scene = "res://minigames/switch/kaleidoscope/keypad.tscn"},
 	&"candle": {verb = "light the candle", scene = "res://minigames/switch/candle/candle.tscn"},
 }
 

@@ -17,10 +17,11 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | Almendra (Regular, unmodified; "Papyrus" option) | Copyright (c) 2011-2012, Ana Sanfelippo (anasanfe@gmail.com), Reserved Font Name 'Almendra' | https://github.com/google/fonts/tree/main/ofl/almendra | SIL Open Font License 1.1 (`OFL-almendra.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
 | Anton (Regular, subset to Latin; "Impact" option) | Copyright 2020 The Anton Project Authors | https://github.com/googlefonts/AntonFont.git | SIL Open Font License 1.1 (`OFL-anton.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
 | Jamdings (glyphs from Noto Sans Symbols and Noto Sans Symbols 2, scaled and mapped to letters by the team; "Wingdings" option) | glyphs Copyright 2022 The Noto Project Authors | https://github.com/notofonts/symbols | SIL Open Font License 1.1 (`OFL-Jamdings-NotoSymbols.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
-| 400 Sounds Pack (32 files, 4 of them cut from `keyboard_typing.wav`) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | Free for any use incl. commercial, credit optional; may not sell/redistribute the unaltered assets as your own assets (verbatim text in [CREDITS](assets/audio/CREDITS.md)) | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| 400 Sounds Pack (42 files, 4 of them cut from `keyboard_typing.wav`) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | Free for any use incl. commercial, credit optional; may not sell/redistribute the unaltered assets as your own assets (verbatim text in [CREDITS](assets/audio/CREDITS.md)) | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | "rolling_office_chair.WAV" (trimmed into a 3 s loop) | alpanaytekin | https://freesound.org/people/alpanaytekin/sounds/213086/ | CC0 1.0 (public domain) | `assets/audio/sfx/chair_roll_loop.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | PSX First Person Arms (Free) v1.1.0 | Drillimpact, https://drillimpact.itch.io/ | https://drillimpact.itch.io/psx-first-person-arms-free | CC0 (public domain) | `assets/models/arms/` ([CREDITS](assets/models/arms/CREDITS.md)) | Shipped |
 | "Screwdriver" 3D model | CreativeTrio | https://poly.pizza/m/qBFMjkrKzH | CC0 1.0 (public domain) | `assets/models/screwdriver/` ([CREDITS](assets/models/screwdriver/CREDITS.md)) | Shipped |
+| "Glasses" 3D model (ending spectacles) | iPoly3D | https://poly.pizza/m/p5QgQxkMBE | CC0 1.0 (public domain) | `assets/models/spectacles/` ([CREDITS](assets/models/spectacles/CREDITS.md)) | Shipped |
 | "Screwdriver 1" (2 clicks cut from it) | 16GPanskaToman_Kristian | https://freesound.org/people/16GPanskaToman_Kristian/sounds/496286/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_click_*.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Bolts into Iron Pipe Flange" (cut) | zembacraftworks | https://freesound.org/people/zembacraftworks/sounds/428340/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_drop_bolt_zemba.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Vent cover removal (cut) | ME_Studios_Official | https://freesound.org/people/ME_Studios_Official/sounds/649765/ | CC0 1.0 | `assets/audio/sfx/freesound/panel_clatter_vent_me_studios.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
@@ -37,13 +38,20 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "Pressure Meter Pipe Noises 1.aif" (cut, looped) | RutgerMuller | https://freesound.org/people/RutgerMuller/sounds/104087/ | CC0 1.0 | `assets/audio/sfx/freesound/pipe_flow_loop_rutgermuller.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "high-voltage.wav" (cut) | fkurz | https://freesound.org/people/fkurz/sounds/136614/ | CC0 1.0 | `assets/audio/sfx/freesound/electric_surge_fkurz.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| 400 Sounds Pack, kaleidoscope sounds (`slide_and_click`, `brass_positive_long`; same pack and licence as above, unaltered) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| "Binoculars" 3D model | Ryan Sullivan | https://poly.pizza/m/fd1MPYUTpLL | CC-BY 3.0 (credit required) | `assets/models/binoculars/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`, `bong_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Demon" 3D models, two variants (recoloured as stone in code: the gargoyles) | Quaternius | https://poly.pizza/m/Mo2ky6vkf8, https://poly.pizza/m/LnfIziKv4o | CC0 1.0 (public domain) | `assets/models/gargoyle/` ([CREDITS](assets/models/gargoyle/CREDITS.md)) | Shipped |
+| "Pedestal" 3D model | Quaternius | https://poly.pizza/m/wUeoDKnFBF | CC0 1.0 (public domain) | `assets/models/gargoyle/` ([CREDITS](assets/models/gargoyle/CREDITS.md)) | Shipped |
+| Gargoyle quiz sounds (cuts): "quiz game music loop BPM 90" (portwain, /220060), "heartbeat-60bpm" (loudernoises, /332821), "S_Spotlight_On" (Grubzyy, /422736), "Cinematic Hit With Horns" (DeVern, /427803), "DSGNStngr_basic trailer boom impact" (harrisonlace, /816376), "Correct.wav" (bwg2020, /456161), "Good answer harp glissando" (oggraphics, /610703), "Heavy stone door opens 2" (PostProdDog, /578491), "Rumble · fade in 10s" (unfa, /258341) | as listed | https://freesound.org/s/<id>/ (full links in [CREDITS](assets/audio/CREDITS.md)) | CC0 1.0 | `assets/audio/sfx/freesound/quiz_*.wav`, `stone_grind_step_aside_postproddog.wav`, `rumble_step_aside_unfa.wav` | Shipped |
+| 400 Sounds Pack, quiz sounds (`clock_ticking`, `clock_tick_only`, `stone_push_short`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | "Candle" 3D model (wick and flame surfaces split off at runtime, flame reused) | Nick Slough | https://poly.pizza/m/HFpLq6iqKu | CC BY 3.0 (attribution required), https://creativecommons.org/licenses/by/3.0/ | `assets/models/candle/` ([CREDITS](assets/models/candle/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, candle game sounds (`light_match`, `slide_and_click`, `fire_lighting`, unaltered; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Basic Fire whoosh" | LookIMadeAThing | https://freesound.org/people/LookIMadeAThing/sounds/260554/ | CC0 1.0 | `assets/audio/sfx/freesound/flame_whoosh_lookimadeathing.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "fire crackling loop.wav" (cut into a loop) | soundofsong | https://freesound.org/people/soundofsong/sounds/650574/ | CC0 1.0 | `assets/audio/sfx/freesound/flame_crackle_loop_soundofsong.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Foley_Leather_Stress_Mono.wav" (2 creaks cut from it) | Nox_Sound | https://freesound.org/people/Nox_Sound/sounds/559079/ | CC0 1.0 | `assets/audio/sfx/freesound/wick_twist_*_noxsound.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Socket Wrench" (3 ratchet bursts cut from it) | xxqmanxx | https://freesound.org/people/xxqmanxx/sounds/147018/ | CC0 1.0 | `assets/audio/sfx/freesound/crank_ratchet_*.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -54,6 +62,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 - Ceiling grid texture (`world/office/textures/ceiling_grid.png`): 128x128 generated grid.
 - Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
 - Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
+- Placeholder real-life video (`assets/video/real_life.ogv`): recorded with Godot's Movie Maker from a throwaway scene; to be replaced by the team's own footage.
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
 ## Credits screen text (suggested)
@@ -69,6 +78,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Rolling chair sound by alpanaytekin (Freesound), CC0
 > First-person arms: PSX First Person Arms by Drillimpact, https://drillimpact.itch.io/, CC0
 > Screwdriver model by CreativeTrio (Poly Pizza), CC0
+> Spectacles model by iPoly3D (Poly Pizza), CC0
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Electricity crackle by NachtmahrTV (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
@@ -76,6 +86,10 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Valve squeaks by joedeshon, rusty wheel by Nox_Sound, pipe clunk by brittmosel, pipe noises by RutgerMuller, high voltage by fkurz (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
+> Gargoyle (demon) and pedestal models by Quaternius (Poly Pizza), CC0
+> Quiz sounds by portwain, loudernoises, Grubzyy, DeVern, harrisonlace, bwg2020, oggraphics, PostProdDog and unfa (Freesound), CC0
 > "Candle" by Nick Slough (https://poly.pizza/m/HFpLq6iqKu), licensed under CC BY 3.0
 > Fire whoosh by LookIMadeAThing, fire crackle by soundofsong, wick creaks by Nox_Sound (Freesound), CC0
+> "Binoculars" by Ryan Sullivan (Poly Pizza), CC-BY 3.0, https://poly.pizza/m/fd1MPYUTpLL
+> Crank ratchet ("Socket Wrench") by xxqmanxx (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/

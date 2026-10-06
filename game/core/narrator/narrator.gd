@@ -42,6 +42,7 @@ var _line_scene_id := 0 ## Instance ID of the scene that was current when the li
 var _chunks := PackedStringArray()
 var _chunk_times := PackedFloat32Array() ## Seconds each chunk stays up (the last one is unused for voiced lines).
 var _chunk_index := 0
+var _subtitles_shown := true ## False while a cue with `show_subtitle = false` plays.
 
 @onready var voice: AudioStreamPlayer = $Voice
 @onready var read_timer: Timer = $ReadTimer
@@ -76,6 +77,7 @@ func play(cue_id: StringName) -> void:
 	voice.stop()
 	read_timer.stop()
 	chunk_timer.stop()
+	_subtitles_shown = cue.show_subtitle
 	_chunks = split_subtitle(cue.subtitle)
 	var length := cue.stream.get_length() if cue.stream else 0.0
 	if length > 0.0:
@@ -227,9 +229,10 @@ func _time_chunks(chunks: PackedStringArray, audio_length: float) -> PackedFloat
 
 func _show_chunk(index: int) -> void:
 	_chunk_index = index
-	subtitle_label.visible = index < _chunks.size()
-	if not subtitle_label.visible:
+	if index >= _chunks.size():
+		subtitle_label.hide()
 		return
+	subtitle_label.visible = _subtitles_shown
 	subtitle_label.text = _chunks[index]
 	if index < _chunks.size() - 1:
 		chunk_timer.start(_chunk_times[index])
