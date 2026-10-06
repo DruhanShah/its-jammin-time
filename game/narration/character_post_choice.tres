@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://dpb8auqx40xps" path="res://assets/audio/narrator/voice/post_choice.ogg" id="2_voice"]
+
+[resource]
+script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
+subtitle = "Thanks for choosing your character! This character will never be used in the game! Don't worry. No one can choose their character in real life either! If they could, why would anyone choose to be you?"

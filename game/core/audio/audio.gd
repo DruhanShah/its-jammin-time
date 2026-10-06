@@ -4,7 +4,8 @@ extends Node
 ##
 ## Music: the start menu and character select play MENU_MUSIC (they call play_music themselves); the
 ## character's destruction fades it out (fade_out_music), the intro's black screen is silent, and
-## GAME_MUSIC starts when the game proper begins (intro_darkness.gd) and loops for the rest of the game.
+## GAME_MUSIC starts when the game proper begins (intro_darkness.gd) and loops for the rest of the game;
+## the credits roll crossfades back to MENU_MUSIC (ending/credits.gd).
 ## Running any other scene directly (editor F6) starts GAME_MUSIC so the game never runs silent.
 
 ## Character select music: "Cheerful Comedy Funny Quirky Background" by alex-morgan (Pixabay).
@@ -16,6 +17,7 @@ const SCENES_WITH_OWN_MUSIC := [
 	"res://menus/start_menu/start_menu.tscn",
 	"res://menus/character_select/character_select.tscn",
 	"res://menus/intro/intro_darkness.tscn",
+	"res://ending/credits.tscn",
 ]
 
 ## How much quieter the music gets while the narrator speaks.
@@ -76,6 +78,18 @@ func stop_music() -> void:
 	_kill_tween()
 	_fading_out = false
 	music.stop()
+
+
+## Fades whatever is playing out over `fade_out` seconds, then fades `stream` in over `fade_in` seconds.
+## Does nothing if `stream` is already playing.
+func crossfade_to(stream: AudioStream, fade_out := 1.0, fade_in := 1.0) -> void:
+	if music.stream == stream and music.playing and not _fading_out:
+		return
+	if not music.playing or fade_out <= 0.0:
+		play_music(stream, fade_in)
+		return
+	_fading_out = true
+	_tween_volume(-60.0, fade_out).tween_callback(play_music.bind(stream, fade_in))
 
 
 ## Fades the music out over `time` seconds, then stops it.

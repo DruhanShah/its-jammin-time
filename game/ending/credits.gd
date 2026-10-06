@@ -162,6 +162,7 @@ var _stopped := false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	Audio.crossfade_to(Audio.MENU_MUSIC, 1.0, 1.5) # The opening music again, looping under the roll.
 	_build_background()
 	_roll = VBoxContainer.new()
 	_roll.add_theme_constant_override(&"separation", 56)
