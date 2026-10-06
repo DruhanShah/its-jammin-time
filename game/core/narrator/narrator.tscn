@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator.gd" id="1_narr"]
-[ext_resource type="FontFile" path="res://assets/fonts/ComicNeue-Bold.ttf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://cc1m45jfx4q15" path="res://assets/fonts/ComicNeue-Italic.ttf" id="2_font"]
 
 [node name="Narrator" type="Node"]
 process_mode = 3

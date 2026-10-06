@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+
+[resource]
+script = ExtResource("1_cue")
+subtitle = "Ah. The server room is... not here. Someone has misplaced an entire server room. I'd try somewhere near where you started. Down and to the right, as they say."
+once = true

@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/switch_minigame.gd" id="1_sw"]
+
+[node name="SwitchMinigame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sw")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13, 0.12, 0.1, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="Title" type="Label" parent="Center/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "The Switch"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="Center/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Placeholder: this switch game isn't built yet.
+For now there is one very big button. Esc leaves it in the dark."
+horizontal_alignment = 1
+
+[node name="FlipButton" type="Button" parent="Center/Box"]
+custom_minimum_size = Vector2(420, 160)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 52
+text = "FLIP THE SWITCH"

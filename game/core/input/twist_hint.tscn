@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://core/input/twist_hint.gd" id="1_hint"]
+
+[sub_resource type="StyleBoxFlat" id="Style_bg"]
+bg_color = Color(0.05, 0.05, 0.07, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="TwistHint" type="Control"]
+custom_minimum_size = Vector2(280, 340)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 280.0
+offset_bottom = 340.0
+mouse_filter = 2
+script = ExtResource("1_hint")
+
+[node name="Background" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_bg")
+
+[node name="Feedback" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -70.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Roll the keys in a circle, following the arrow"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

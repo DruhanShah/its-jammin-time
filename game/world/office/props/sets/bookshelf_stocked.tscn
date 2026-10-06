@@ -1,0 +1,74 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://f1qjvyrbioqo" path="res://assets/vnb_office/models/Bookshelf.fbx" id="g_Bookshelf"]
+[ext_resource type="PackedScene" uid="uid://cwycu2pjl03dp" path="res://assets/vnb_office/models/Book_Big.fbx" id="g_Book_Big"]
+[ext_resource type="PackedScene" uid="uid://beciue18ham2a" path="res://assets/vnb_office/models/Book_Fat.fbx" id="g_Book_Fat"]
+[ext_resource type="PackedScene" uid="uid://bw2y8nwv7klw5" path="res://assets/vnb_office/models/Book_Small.fbx" id="g_Book_Small"]
+[ext_resource type="PackedScene" uid="uid://dhif4dgr5pcmc" path="res://assets/vnb_office/models/Book_St.fbx" id="g_Book_St"]
+[ext_resource type="PackedScene" uid="uid://dk85kn67cs3ne" path="res://assets/vnb_office/models/Book_FileArchive.fbx" id="g_Book_FileArchive"]
+[ext_resource type="PackedScene" uid="uid://bhq2y0lak4dit" path="res://assets/vnb_office/models/Book_Folder.fbx" id="g_Book_Folder"]
+[ext_resource type="PackedScene" uid="uid://bgxvkiu7laex1" path="res://assets/vnb_office/models/Office_Files_A.fbx" id="g_Office_Files_A"]
+[ext_resource type="PackedScene" uid="uid://dy0gerfxrl5g8" path="res://assets/vnb_office/models/Office_Files_E.fbx" id="g_Office_Files_E"]
+[ext_resource type="PackedScene" uid="uid://c0wiwdcoquiui" path="res://assets/vnb_office/models/Office_Files_F.fbx" id="g_Office_Files_F"]
+[ext_resource type="PackedScene" uid="uid://4sjdkn5loq6o" path="res://assets/vnb_office/models/Office_Files_B.fbx" id="g_Office_Files_B"]
+
+[node name="BookshelfStocked" type="Node3D" unique_id=1794062153]
+
+[node name="Bookshelf" parent="." unique_id=414743898 instance=ExtResource("g_Bookshelf")]
+
+[node name="Top1" parent="." unique_id=1766425270 instance=ExtResource("g_Book_Big")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49, 1.533, 0.05)
+
+[node name="Top2" parent="." unique_id=2017909016 instance=ExtResource("g_Book_Fat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409, 1.533, 0.05)
+
+[node name="Top3" parent="." unique_id=247094927 instance=ExtResource("g_Book_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.327, 1.533, 0.05)
+
+[node name="Top4" parent="." unique_id=627763167 instance=ExtResource("g_Book_Big")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.262, 1.533, 0.05)
+
+[node name="Top5" parent="." unique_id=1022710674 instance=ExtResource("g_Book_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.197, 1.533, 0.05)
+
+[node name="TopEnd" parent="." unique_id=2046645365 instance=ExtResource("g_Book_St")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.533, 0.05)
+
+[node name="Mid1" parent="." unique_id=1198069807 instance=ExtResource("g_Book_FileArchive")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.069, 1.046, 0.05)
+
+[node name="Mid2" parent="." unique_id=2146836472 instance=ExtResource("g_Book_FileArchive")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112, 1.046, 0.05)
+
+[node name="Mid3" parent="." unique_id=1312827762 instance=ExtResource("g_Book_FileArchive")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155, 1.046, 0.05)
+
+[node name="Mid4" parent="." unique_id=510694215 instance=ExtResource("g_Book_FileArchive")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198, 1.046, 0.05)
+
+[node name="Mid5" parent="." unique_id=312397593 instance=ExtResource("g_Book_FileArchive")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.241, 1.046, 0.05)
+
+[node name="Mid6" parent="." unique_id=1193766473 instance=ExtResource("g_Book_Folder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.298, 1.046, 0.05)
+
+[node name="Mid7" parent="." unique_id=1354311810 instance=ExtResource("g_Book_Folder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 1.046, 0.05)
+
+[node name="MidStack" parent="." unique_id=1419745621 instance=ExtResource("g_Office_Files_A")]
+transform = Transform3D(0.997564, 0, 0.069756, 0, 1, 0, -0.069756, 0, 0.997564, -0.32, 1.046, 0.05)
+
+[node name="Low1" parent="." unique_id=1075072794 instance=ExtResource("g_Office_Files_E")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.43, 0.691, 0.05)
+
+[node name="Low2" parent="." unique_id=5210124 instance=ExtResource("g_Office_Files_F")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.286, 0.691, 0.05)
+
+[node name="Low3" parent="." unique_id=1827763783 instance=ExtResource("g_Office_Files_E")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.142, 0.691, 0.05)
+
+[node name="LowFat" parent="." unique_id=601167582 instance=ExtResource("g_Book_Fat")]
+transform = Transform3D(0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0, 1, 0.4, 0.558, 0.05)
+
+[node name="BottomStack" parent="." unique_id=60883826 instance=ExtResource("g_Office_Files_B")]
+transform = Transform3D(0.99863, 0, -0.052336, 0, 1, 0, 0.052336, 0, 0.99863, 0.25, 0.115, 0.05)

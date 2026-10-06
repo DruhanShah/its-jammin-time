@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+
+[resource]
+script = ExtResource("1_cue")
+subtitle = "Power restored. The server room seems happy in its new spot. Don't get attached; nothing in this office stays put. Back to work."
+once = true

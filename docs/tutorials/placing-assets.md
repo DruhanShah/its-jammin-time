@@ -23,16 +23,16 @@ How to get the VNB office models (desks, chairs, plants, printers…) into `offi
   - Trimesh shapes only work on static bodies. If a prop needs to be picked up or knocked over later (a `RigidBody3D`), switch its shape type to Single Convex or Box in Advanced Import Settings.
 - **Grid and origins:**
   - Walls and floor tiles are 2 m pieces with their origin at a **corner**. In the room they are painted with GridMaps (see [Painting walls and floors with the GridMap](#painting-walls-and-floors-with-the-gridmap)), which handles the corner origin for you.
-  - The room spans x and z from −5 to 5. The ceiling is at y = 3.875. Walls are scaled 1.29× on Y so they reach the ceiling.
-  - Furniture has its origin **centred at its base**. For example, the test desk `Office_Desk_1` is at `(0, 0, -3)`.
-- **Scene tree:** `Office` → `WorldEnvironment`, `Floor` (GridMap), `Player`, `Walls` (GridMap), `Ceiling`, `CeilingLights`, `Furniture` (`Office_Desk_1`, `Computer`), `DeskNarratorTrigger`.
+  - The office is 10 rooms of 12 × 16 m (see [`docs/map/README.md`](../map/README.md) for the map and every room's coordinates). Room walls are on **even** coordinates (multiples of 2). The ceiling is at y = 3.875. Walls are scaled 1.29× on Y so they reach the ceiling.
+  - Furniture has its origin **centred at its base**. Desk tops are at y = 0.949, so things on a desk go at that height.
+- **Scene tree:** `Office` → `WorldEnvironment`, `Floor`, `Walls`, `Ceiling` (three GridMaps), `Player`, `Rooms` → one Node3D per room (`Start`, `A1` … `C3`), each with `Lights` (12 `CeilingLight`s) and `Furniture`. The Start room also holds `Furniture/PlayerDesk`, `Furniture/Computer` and `DeskNarratorTrigger`.
 
 ## Step by step
 
 1. **Open the map.** In the FileSystem dock, double-click `world/office/office.tscn`.
-2. **Pick a group for props.** Furniture goes under the `Furniture` node.
+2. **Pick a group for props.** Furniture goes under the room's `Rooms/<Room>/Furniture` node.
    - To add another group (e.g. `Decor`, `Electronics`), select `Office`, press **Cmd+A**, choose **Node3D** and rename it.
-   - Keep the group nodes at position (0, 0, 0) so child positions stay in world coordinates.
+   - Each room node sits at the room's centre, so child positions are **room-local**: x from −6 to 6, z from −8 to 8, (0, 0, 0) is the middle of the floor. Keep group nodes inside a room at (0, 0, 0).
 3. **Add a model.**
    - Select the group node in the Scene dock.
    - Drag an `.fbx` (e.g. `Chair_Office_Base_A.fbx`) from the FileSystem dock into the **3D viewport**. It lands where the mouse points.
@@ -54,7 +54,7 @@ How to get the VNB office models (desks, chairs, plants, printers…) into `offi
      | Small desk items (cups, pens, staplers) | snapping off, or `0.05` | `15` |
 
    - Snapping moves the object in steps from where it **started**; it doesn't jump to absolute grid lines. For walls and floor tiles, use the GridMap instead (see below).
-   - Tile centres are at even coordinates (−4, −2, 0, 2, 4). With 0.5 m snapping, furniture lines up with both tile centres and tile edges.
+   - Tile edges are at even coordinates and tile centres at odd ones (in room-local coordinates too, since room centres are on even coordinates). With 0.5 m snapping, furniture lines up with both tile centres and tile edges.
 6. **Snap to floor.** Select an object and press **PageDown** (**Fn+↓** on a MacBook keyboard), or use **Transform → Snap Object to Floor**.
    - This drops the object onto the nearest collision surface below it.
    - It's ideal for putting a monitor or cup on a desk, because the desk has generated collision.
@@ -80,10 +80,10 @@ Both plugins are in `game/addons/` and already enabled (**Project → Project Se
 
 1. **Our models are already in the library.** The team shares one library (see below) that already contains the `res://assets/vnb_office/models` folder, so the 170 models show up in the **Assets** tab. Thumbnails are generated on your machine the first time you open the tab. If the tab is empty, restart the editor.
 2. **Set the options** (Options panel in the same tab):
-   - **Assets Parent:** pick `Furniture` (or tick **Resolve Parent from Selected Nodes** to place next to whatever is selected).
+   - **Assets Parent:** pick the room's `Furniture` node (or tick **Resolve Parent from Selected Nodes** to place next to whatever is selected).
    - **Randomize Rotation On Placement:** turn it **off**. It is on by default (every editor start) and spins every desk to a random angle.
    - **Auto-Group by Collections:** turn it off unless you use collections; otherwise it creates extra group nodes.
-   - **Grid Snapping:** on, **Grid Step** `0.5` for furniture (lines up with tile centres and edges, see the table above). The grid is absolute, from the world origin. Don't use it for 2 m floor/wall pieces: their origin is at a corner on odd coordinates, which a 2 m step can't reach (step `1` works).
+   - **Grid Snapping:** on, **Grid Step** `0.5` for furniture (lines up with tile centres and edges, see the table above). The grid is absolute, from the world origin. For 2 m floor/wall pieces use step `2` (their corner origin is on even coordinates), but painting them with the GridMap is easier.
    - **Placement Mode:** Surface Collisions (default). Our models have generated collision, so you can place a monitor straight onto a desk.
 3. **Place.** With `office.tscn` open, click an asset in the **Assets** tab; a preview follows the mouse in the 3D viewport. **Left click** places it, **Shift+Left click** places it and selects it for normal editing. Press **Esc** or **Shift+A** to leave placement mode.
 4. **Before placing:** **E** rotate, **R** scale, **W** move along an axis (switches to plane mode); pick the axis with **X / Y / Z**, then use the **mouse wheel** (5° / 0.1 m per notch, change in Settings). **Q** cycles placement modes, **S** toggles grid snapping. These keys replace Godot's own shortcuts only while placement mode is active.
@@ -110,14 +110,14 @@ The move/rotate gizmo can get in the way; press **Q** (select mode) first, or st
 
 ## Painting walls and floors with the GridMap
 
-The office's floor and walls are two [GridMap](https://docs.godotengine.org/en/stable/tutorials/3d/using_gridmaps.html) nodes, `Floor` and `Walls`. Each one paints pieces from the same MeshLibrary, `world/office/gridmap/structure_library.tres`. The pieces are: `Floor`, `Wall`, `WallDoorway`, `WallPanelledA/B`, `WallPillar`, `Partition`, `PartitionDoorway`, `PartitionLow` and `Ceiling`. The pack has no window walls.
+The office's floor, walls and ceiling are three [GridMap](https://docs.godotengine.org/en/stable/tutorials/3d/using_gridmaps.html) nodes, `Floor`, `Walls` and `Ceiling` (the `Ceiling` item has no collision; paint it on level 0, it already sits at y = 3.875). Each one paints pieces from the same MeshLibrary, `world/office/gridmap/structure_library.tres`. The pieces are: `Floor`, `Wall`, `WallDoorway`, `WallPanelledA/B`, `WallPillar`, `Partition`, `PartitionDoorway`, `PartitionLow` and `Ceiling`. The pack has no window walls.
 
 **How the grid works:**
 - A cell is 2 × 3.875 × 2 m: one floor tile, one storey high.
-- Both GridMaps sit at `(-1, 0, -1)`, so cell `(i, 0, k)` is centred on world `(2i, 0, 2k)`. The room is cells −2…2.
+- The GridMaps sit at the origin, so cell `(i, 0, k)` covers world x 2i…2i+2 and z 2k…2k+2 (centre `(2i+1, 0, 2k+1)`). Room cells are listed in [`docs/map/README.md`](../map/README.md).
 - A wall piece sits on the **north edge** of its cell. Rotate it to put it on another edge.
 - A cell holds one piece. That's why floors and walls live in separate GridMaps.
-- If a corner cell needs two walls, paint the second one in the neighbouring cell, rotated to face back. The room's west and east walls live in the column just outside the room.
+- Walls are 0.2 m thick and centred on the cell edge, so a wall between two rooms is one shared piece, painted in either neighbouring cell. If a cell already holds a wall on another edge, paint the new one in the cell on the other side, rotated to face back (that's why some walls sit in cells outside the building).
 
 **Painting** (shortcuts are the same on macOS; they only apply while a GridMap is selected and the mouse is over the 3D viewport):
 1. Select `Walls` (or `Floor`) in the Scene dock. The **GridMap** panel opens at the bottom with the pieces, and a GridMap toolbar appears above the viewport.
@@ -125,7 +125,7 @@ The office's floor and walls are two [GridMap](https://docs.godotengine.org/en/s
 3. **S** rotates the piece 90° around Y before you click; **A** / **D** rotate around X / Z (not needed for us). **Option+G** clears the rotation.
 4. **W** (Erase) + left click removes pieces. **R** (Pick) copies the piece and rotation under the mouse. **Q** selects an area, then **Z** fills, **X** moves, **C** duplicates or **V** deletes it.
 5. **Change floor level:** **1** / **3**, **Cmd+mouse wheel**, or the Floor box in the GridMap toolbar. Level 1 starts at y = 3.875, right above our ceiling.
-6. Paint walls into `Walls` and floors into `Floor`. Don't stack them in one GridMap. Save with **Cmd+S**. Collision comes with the pieces (layer 1, same as before).
+6. Paint walls into `Walls`, floors into `Floor` and ceiling tiles into `Ceiling` (every floor cell needs a ceiling cell). Don't stack them in one GridMap. Save with **Cmd+S**. Collision comes with the pieces (layer 1, same as before).
 
 **Adding a piece to the library:**
 1. Open `world/office/gridmap/structure_library_source.tscn`. Each piece is a `MeshInstance3D` (its name becomes the item name) with a `StaticBody3D` → `CollisionShape3D` child. The pieces are spread out under `…Slot` nodes so you can see them; the export ignores the slots' positions.
@@ -154,8 +154,8 @@ The alternative is right-click the `.fbx` → **New Inherited Scene**. That's us
 - **Floating or sinking objects.** Furniture should have y = 0 when it stands on the floor, or press PageDown. If something floats after snapping to floor, it probably landed on another object's collision. Check with Visible Collision Shapes.
 - **Rotation drift.** Free-rotating without snapping leaves angles like 89.7°. Turn snapping on (Y), or type `0/90/180/270` in the Inspector.
 - **Too many lights.** We use the Compatibility renderer, which shades each mesh with a limited number of lights.
-  - We raised **Project Settings → Rendering → Limits → OpenGL → Max Lights Per Object** to `16`. There are 9 ceiling spotlights today.
+  - We raised **Project Settings → Rendering → Limits → OpenGL → Max Lights Per Object** to `16` and **Max Renderable Lights** (lights on screen at once) to `128`. There are 120 ceiling spotlights today (12 per room, 4 m apart, range 6 m).
   - If you add lamps (`Lamp_1.fbx` plus an `OmniLight3D`) or more `CeilingLight`s, a large object like a floor tile can exceed that limit. Some lights will then silently stop affecting it.
-  - The GridMaps merge their pieces into big chunks (an octant is 8×8×8 cells, so the whole room is only a few objects). Every light in the room counts against each chunk, so keep the total lights in a room under 16, or lower the GridMap's **Cell → Octant Size**.
+  - The GridMaps draw their pieces in chunks (octants). `Floor` and `Walls` use **Cell → Octant Size** `2` (4 × 4 m chunks), so each chunk is touched by about 9 ceiling lights, leaving room for ~7 more nearby. A light counts for a chunk when its bounding box overlaps the chunk (a spotlight's box is about `range × sin(angle)` wide), so long-range or wide lights count against many chunks. Before adding lamps, keep them short-range (2–3 m).
   - Raise the limit, or split big meshes. Also keep an eye on **Max Renderable Lights** in the same section.
 - **Lost in the tree.** Always select the right group before adding. Collapse groups you're not working on. Use the Scene dock's filter box to find nodes by name.

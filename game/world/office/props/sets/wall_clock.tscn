@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/office/props/sets/wall_clock.gd" id="g_wall_clock"]
+[ext_resource type="PackedScene" uid="uid://b14ef5en005o8" path="res://assets/vnb_office/models/Clock.fbx" id="g_Clock"]
+[ext_resource type="PackedScene" uid="uid://dfdlrrg0kjdk1" path="res://assets/vnb_office/models/Clock_A.fbx" id="g_Clock_A"]
+
+[node name="WallClock" type="Node3D" unique_id=31393588]
+script = ExtResource("g_wall_clock")
+
+[node name="Face" parent="." unique_id=1532036569 instance=ExtResource("g_Clock")]
+
+[node name="MinuteHand" parent="." unique_id=245699978 instance=ExtResource("g_Clock_A")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.038)
+
+[node name="HourHand" parent="." unique_id=1815372136 instance=ExtResource("g_Clock_A")]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0.03)

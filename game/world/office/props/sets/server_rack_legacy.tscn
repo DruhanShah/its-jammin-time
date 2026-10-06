@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/vnb_office/meshes/Computer_Case_Old.res" id="g_Computer_Case_Old"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rack"]
+size = Vector3(0.58, 1.84, 0.96)
+
+[node name="ServerRackLegacy" type="StaticBody3D" unique_id=1392248070]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=34017049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
+shape = SubResource("BoxShape3D_rack")
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=743220394]
+transform = Transform3D(3.2, 0, 0, 0, 4.6, 0, 0, 0, 2.6, 0, 0, 0)
+mesh = ExtResource("g_Computer_Case_Old")

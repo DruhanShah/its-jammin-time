@@ -2,11 +2,78 @@
 
 [ext_resource type="PackedScene" uid="uid://q86qmdd6qix0" path="res://core/player/player.tscn" id="2_53oc1"]
 [ext_resource type="PackedScene" uid="uid://cskdpba2q450m" path="res://assets/vnb_office/models/Office_Desk_1.fbx" id="3_k6ab6"]
-[ext_resource type="PackedScene" uid="uid://dcquyxa1g3boj" path="res://world/office/parts/ceiling_tile.tscn" id="5_7e6co"]
 [ext_resource type="PackedScene" uid="uid://5jkehwkyc25m" path="res://world/office/parts/ceiling_light.tscn" id="6_8w2hi"]
 [ext_resource type="PackedScene" path="res://core/narrator/narrator_trigger.tscn" id="7_7e6co"]
 [ext_resource type="PackedScene" path="res://world/office/props/computer.tscn" id="8_comp"]
-[ext_resource type="MeshLibrary" path="res://world/office/gridmap/structure_library.tres" id="9_slib"]
+[ext_resource type="MeshLibrary" uid="uid://u3ior7jn1wjd" path="res://world/office/gridmap/structure_library.tres" id="9_slib"]
+[ext_resource type="Script" uid="uid://b3j25ugbmd6wc" path="res://world/office/lighting.gd" id="72_wqicl"]
+[ext_resource type="PackedScene" path="res://world/office/props/door.tscn" id="75_puljc"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/bookshelf_stocked.tscn" id="g_bookshelf_stocked"]
+[ext_resource type="PackedScene" uid="uid://c3wxol22g7n07" path="res://assets/vnb_office/models/Box_Base.fbx" id="g_Box_Base"]
+[ext_resource type="PackedScene" uid="uid://jtkt7v8d0lp7" path="res://assets/vnb_office/models/Chair_A.fbx" id="g_Chair_A"]
+[ext_resource type="PackedScene" uid="uid://sf2qn2386w4j" path="res://assets/vnb_office/models/Chair_B.fbx" id="g_Chair_B"]
+[ext_resource type="PackedScene" uid="uid://bj6rixxrl20wm" path="res://assets/vnb_office/models/CoffeeCup.fbx" id="g_CoffeeCup"]
+[ext_resource type="PackedScene" uid="uid://d348kwd73ai4v" path="res://assets/vnb_office/models/CoffeeCup_Filled.fbx" id="g_CoffeeCup_Filled"]
+[ext_resource type="PackedScene" uid="uid://8ckx220p4xkn" path="res://assets/vnb_office/models/CoffeeMachine.fbx" id="g_CoffeeMachine"]
+[ext_resource type="PackedScene" uid="uid://daothui4nxg3u" path="res://assets/vnb_office/models/CoffeeTable.fbx" id="g_CoffeeTable"]
+[ext_resource type="FontFile" uid="uid://ctm718ad8xjn8" path="res://assets/fonts/ComicRelief-Bold.ttf" id="g_ComicRelief_Bold"]
+[ext_resource type="PackedScene" uid="uid://c386atnoywmlm" path="res://assets/vnb_office/models/Computer_Case.fbx" id="g_Computer_Case"]
+[ext_resource type="PackedScene" uid="uid://ckvb3i7d4gefh" path="res://assets/vnb_office/models/Computer_Keyboard.fbx" id="g_Computer_Keyboard"]
+[ext_resource type="PackedScene" uid="uid://de85c1qxh76jf" path="res://assets/vnb_office/models/Computer_Mouse.fbx" id="g_Computer_Mouse"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/desk_pair.tscn" id="g_desk_pair"]
+[ext_resource type="PackedScene" uid="uid://dm1f5vosm3fc7" path="res://assets/vnb_office/models/FileCabinet_Standard.fbx" id="g_FileCabinet_Standard"]
+[ext_resource type="PackedScene" uid="uid://d3gyuh2qr4fh8" path="res://assets/vnb_office/models/FileCabinet_Standard_Drawer.fbx" id="g_FileCabinet_Standard_Drawer"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/file_cabinet.tscn" id="g_file_cabinet"]
+[ext_resource type="PackedScene" uid="uid://bsy3nsrm07xa7" path="res://assets/vnb_office/models/Fruit_Plate.fbx" id="g_Fruit_Plate"]
+[ext_resource type="PackedScene" uid="uid://bdqw321dhbkth" path="res://assets/vnb_office/models/Lamp_1.fbx" id="g_Lamp_1"]
+[ext_resource type="PackedScene" uid="uid://7wo4akakew0n" path="res://assets/vnb_office/models/Lamp_1_Small.fbx" id="g_Lamp_1_Small"]
+[ext_resource type="PackedScene" uid="uid://crppmlfdlvv1f" path="res://assets/vnb_office/models/Microwave_Old.fbx" id="g_Microwave_Old"]
+[ext_resource type="PackedScene" uid="uid://lntexm4qdmuq" path="res://assets/vnb_office/models/Nature_Deco.fbx" id="g_Nature_Deco"]
+[ext_resource type="PackedScene" uid="uid://bfa1yepnk4r5r" path="res://assets/vnb_office/models/Nature_Deco_2.fbx" id="g_Nature_Deco_2"]
+[ext_resource type="PackedScene" uid="uid://n5c53b717jl" path="res://assets/vnb_office/models/Nature_Deco_3.fbx" id="g_Nature_Deco_3"]
+[ext_resource type="PackedScene" uid="uid://2wdwoefjko4a" path="res://assets/vnb_office/models/Nature_Deco_Bamboo1.fbx" id="g_Nature_Deco_Bamboo1"]
+[ext_resource type="PackedScene" uid="uid://b1mnib40bxr5c" path="res://assets/vnb_office/models/Nature_Deco_Bamboo2.fbx" id="g_Nature_Deco_Bamboo2"]
+[ext_resource type="PackedScene" uid="uid://drtxd73rnopd4" path="res://assets/vnb_office/models/Notepad.fbx" id="g_Notepad"]
+[ext_resource type="PackedScene" path="res://world/office/props/office_chair.tscn" id="g_office_chair"]
+[ext_resource type="PackedScene" uid="uid://c8darh28m04ue" path="res://assets/vnb_office/models/Office_CounterA1.fbx" id="g_Office_CounterA1"]
+[ext_resource type="PackedScene" uid="uid://1fyqrt4resho" path="res://assets/vnb_office/models/Office_Deco.fbx" id="g_Office_Deco"]
+[ext_resource type="PackedScene" uid="uid://6k0ebfrj1nmt" path="res://assets/vnb_office/models/Painting.fbx" id="g_Painting"]
+[ext_resource type="Material" path="res://world/office/materials/painting_3.tres" id="g_painting_3"]
+[ext_resource type="Material" path="res://world/office/materials/painting_4.tres" id="g_painting_4"]
+[ext_resource type="PackedScene" uid="uid://ckjoarjrqnxwt" path="res://assets/vnb_office/models/Painting_Small.fbx" id="g_Painting_Small"]
+[ext_resource type="PackedScene" uid="uid://6m8027l4ooid" path="res://assets/vnb_office/models/Painting_Small2.fbx" id="g_Painting_Small2"]
+[ext_resource type="PackedScene" uid="uid://bm3cxd4pes70" path="res://assets/vnb_office/models/Printer.fbx" id="g_Printer"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/shelf_stocked.tscn" id="g_shelf_stocked"]
+[ext_resource type="PackedScene" uid="uid://brielekt0mxjo" path="res://assets/vnb_office/models/StickNote_1.fbx" id="g_StickNote_1"]
+[ext_resource type="PackedScene" uid="uid://cjfao5elcl2ig" path="res://assets/vnb_office/models/Stool_A.fbx" id="g_Stool_A"]
+[ext_resource type="PackedScene" uid="uid://cuw3qbjl7yu3" path="res://assets/vnb_office/models/Table_Box.fbx" id="g_Table_Box"]
+[ext_resource type="PackedScene" uid="uid://du1iqwmimdvud" path="res://assets/vnb_office/models/Table_Circular.fbx" id="g_Table_Circular"]
+[ext_resource type="PackedScene" uid="uid://oi170oi262dx" path="res://assets/vnb_office/models/TrashBin.fbx" id="g_TrashBin"]
+[ext_resource type="PackedScene" uid="uid://d314qbji7p4bj" path="res://assets/vnb_office/models/TrashBin_Small.fbx" id="g_TrashBin_Small"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/wall_clock.tscn" id="g_wall_clock"]
+[ext_resource type="PackedScene" uid="uid://biwchmkmj6ftt" path="res://assets/vnb_office/models/Wall_TV.fbx" id="g_Wall_TV"]
+[ext_resource type="PackedScene" uid="uid://bx1qa8ts08i04" path="res://assets/vnb_office/models/WaterCup_Filled.fbx" id="g_WaterCup_Filled"]
+[ext_resource type="PackedScene" uid="uid://cisvg0y2lwitq" path="res://assets/vnb_office/models/WhiteBoard_Big.fbx" id="g_WhiteBoard_Big"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/ws_modern.tscn" id="g_ws_modern"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/ws_retro.tscn" id="g_ws_retro"]
+[ext_resource type="PackedScene" uid="uid://c8h42a8cqgv71" path="res://assets/vnb_office/models/AirConditioner_A.fbx" id="p2_AirConditioner_A"]
+[ext_resource type="PackedScene" uid="uid://diqos13trahb0" path="res://assets/vnb_office/models/Briefcase_1.fbx" id="p2_Briefcase_1"]
+[ext_resource type="Material" path="res://world/office/materials/ceiling_light_panel_amber.tres" id="p2_ceiling_light_panel_amber"]
+[ext_resource type="PackedScene" uid="uid://bufw0spxne01w" path="res://assets/vnb_office/models/Computer_Old_Monitor.fbx" id="p2_Computer_Old_Monitor"]
+[ext_resource type="PackedScene" uid="uid://bfsprmknyeayt" path="res://assets/vnb_office/models/Food_Bread.fbx" id="p2_Food_Bread"]
+[ext_resource type="PackedScene" uid="uid://c4pfskag8nx40" path="res://assets/vnb_office/models/Food_CheeseSlice.fbx" id="p2_Food_CheeseSlice"]
+[ext_resource type="PackedScene" uid="uid://bt3x60whhotg4" path="res://assets/vnb_office/models/Food_LettuceSlice.fbx" id="p2_Food_LettuceSlice"]
+[ext_resource type="PackedScene" uid="uid://ctebarkovif7r" path="res://assets/vnb_office/models/Food_TomatoSlice.fbx" id="p2_Food_TomatoSlice"]
+[ext_resource type="Script" uid="uid://d28u61m12rkvw" path="res://world/office/parts/light_flicker.gd" id="p2_light_flicker"]
+[ext_resource type="PackedScene" uid="uid://catnb01ln3buo" path="res://assets/vnb_office/models/Office_Desk_3.fbx" id="p2_Office_Desk_3"]
+[ext_resource type="Material" path="res://world/office/materials/painting_2.tres" id="p2_painting_2"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/pc_shelf_stack.tscn" id="p2_pc_shelf_stack"]
+[ext_resource type="PackedScene" uid="uid://bojs81kry4w0p" path="res://assets/vnb_office/models/Projector.fbx" id="p2_Projector"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/server_rack.tscn" id="p2_server_rack"]
+[ext_resource type="PackedScene" path="res://world/office/props/sets/server_rack_legacy.tscn" id="p2_server_rack_legacy"]
+[ext_resource type="PackedScene" uid="uid://twj3f5rxbol2" path="res://assets/vnb_office/models/Small_Fan.fbx" id="p2_Small_Fan"]
+[ext_resource type="PackedScene" path="res://world/office/props/power_switch.tscn" id="st_power_switch"]
+[ext_resource type="Script" uid="uid://dko3pufvvrrkn" path="res://world/office/story_stage.gd" id="st_story_stage"]
 
 [sub_resource type="Environment" id="Environment_hchcx"]
 background_mode = 1
@@ -33,139 +100,1707 @@ fog_density = 0.02
 environment = SubResource("Environment_hchcx")
 
 [node name="Floor" type="GridMap" parent="." unique_id=977428144]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+mesh_library = ExtResource("9_slib")
+cell_size = Vector3(2, 3.875, 2)
+cell_octant_size = 2
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65530, 65532, 0, 65530, 65533, 0, 65530, 65534, 0, 65530, 65535, 0, 65530, 0, 0, 65530, 1, 0, 65530, 2, 0, 65530, 3, 0, 65531, 65532, 0, 65531, 65533, 0, 65531, 65534, 0, 65531, 65535, 0, 65531, 0, 0, 65531, 1, 0, 65531, 2, 0, 65531, 3, 0, 65532, 65532, 0, 65532, 65533, 0, 65532, 65534, 0, 65532, 65535, 0, 65532, 0, 0, 65532, 1, 0, 65532, 2, 0, 65532, 3, 0, 65533, 65532, 0, 65533, 65533, 0, 65533, 65534, 0, 65533, 65535, 0, 65533, 0, 0, 65533, 1, 0, 65533, 2, 0, 65533, 3, 0, 65534, 65532, 0, 65534, 65533, 0, 65534, 65534, 0, 65534, 65535, 0, 65534, 0, 0, 65534, 1, 0, 65534, 2, 0, 65534, 3, 0, 65535, 65532, 0, 65535, 65533, 0, 65535, 65534, 0, 65535, 65535, 0, 65535, 0, 0, 65535, 1, 0, 65535, 2, 0, 65535, 3, 0, 0, 65524, 0, 0, 65525, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 1, 65524, 0, 1, 65525, 0, 1, 65526, 0, 1, 65527, 0, 1, 65528, 0, 1, 65529, 0, 1, 65530, 0, 1, 65531, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 1, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 2, 65524, 0, 2, 65525, 0, 2, 65526, 0, 2, 65527, 0, 2, 65528, 0, 2, 65529, 0, 2, 65530, 0, 2, 65531, 0, 2, 65532, 0, 2, 65533, 0, 2, 65534, 0, 2, 65535, 0, 2, 0, 0, 2, 1, 0, 2, 2, 0, 2, 3, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 2, 7, 0, 2, 8, 0, 2, 9, 0, 2, 10, 0, 2, 11, 0, 3, 65524, 0, 3, 65525, 0, 3, 65526, 0, 3, 65527, 0, 3, 65528, 0, 3, 65529, 0, 3, 65530, 0, 3, 65531, 0, 3, 65532, 0, 3, 65533, 0, 3, 65534, 0, 3, 65535, 0, 3, 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 6, 0, 3, 7, 0, 3, 8, 0, 3, 9, 0, 3, 10, 0, 3, 11, 0, 4, 65524, 0, 4, 65525, 0, 4, 65526, 0, 4, 65527, 0, 4, 65528, 0, 4, 65529, 0, 4, 65530, 0, 4, 65531, 0, 4, 65532, 0, 4, 65533, 0, 4, 65534, 0, 4, 65535, 0, 4, 0, 0, 4, 1, 0, 4, 2, 0, 4, 3, 0, 4, 4, 0, 4, 5, 0, 4, 6, 0, 4, 7, 0, 4, 8, 0, 4, 9, 0, 4, 10, 0, 4, 11, 0, 5, 65524, 0, 5, 65525, 0, 5, 65526, 0, 5, 65527, 0, 5, 65528, 0, 5, 65529, 0, 5, 65530, 0, 5, 65531, 0, 5, 65532, 0, 5, 65533, 0, 5, 65534, 0, 5, 65535, 0, 5, 0, 0, 5, 1, 0, 5, 2, 0, 5, 3, 0, 5, 4, 0, 5, 5, 0, 5, 6, 0, 5, 7, 0, 5, 8, 0, 5, 9, 0, 5, 10, 0, 5, 11, 0, 6, 65524, 0, 6, 65525, 0, 6, 65526, 0, 6, 65527, 0, 6, 65528, 0, 6, 65529, 0, 6, 65530, 0, 6, 65531, 0, 6, 65532, 0, 6, 65533, 0, 6, 65534, 0, 6, 65535, 0, 6, 0, 0, 6, 1, 0, 6, 2, 0, 6, 3, 0, 6, 4, 0, 6, 5, 0, 6, 6, 0, 6, 7, 0, 6, 8, 0, 6, 9, 0, 6, 10, 0, 6, 11, 0, 7, 65524, 0, 7, 65525, 0, 7, 65526, 0, 7, 65527, 0, 7, 65528, 0, 7, 65529, 0, 7, 65530, 0, 7, 65531, 0, 7, 65532, 0, 7, 65533, 0, 7, 65534, 0, 7, 65535, 0, 7, 0, 0, 7, 1, 0, 7, 2, 0, 7, 3, 0, 7, 4, 0, 7, 5, 0, 7, 6, 0, 7, 7, 0, 7, 8, 0, 7, 9, 0, 7, 10, 0, 7, 11, 0, 8, 65524, 0, 8, 65525, 0, 8, 65526, 0, 8, 65527, 0, 8, 65528, 0, 8, 65529, 0, 8, 65530, 0, 8, 65531, 0, 8, 65532, 0, 8, 65533, 0, 8, 65534, 0, 8, 65535, 0, 8, 0, 0, 8, 1, 0, 8, 2, 0, 8, 3, 0, 8, 4, 0, 8, 5, 0, 8, 6, 0, 8, 7, 0, 8, 8, 0, 8, 9, 0, 8, 10, 0, 8, 11, 0, 9, 65524, 0, 9, 65525, 0, 9, 65526, 0, 9, 65527, 0, 9, 65528, 0, 9, 65529, 0, 9, 65530, 0, 9, 65531, 0, 9, 65532, 0, 9, 65533, 0, 9, 65534, 0, 9, 65535, 0, 9, 0, 0, 9, 1, 0, 9, 2, 0, 9, 3, 0, 9, 4, 0, 9, 5, 0, 9, 6, 0, 9, 7, 0, 9, 8, 0, 9, 9, 0, 9, 10, 0, 9, 11, 0, 10, 65524, 0, 10, 65525, 0, 10, 65526, 0, 10, 65527, 0, 10, 65528, 0, 10, 65529, 0, 10, 65530, 0, 10, 65531, 0, 10, 65532, 0, 10, 65533, 0, 10, 65534, 0, 10, 65535, 0, 10, 0, 0, 10, 1, 0, 10, 2, 0, 10, 3, 0, 10, 4, 0, 10, 5, 0, 10, 6, 0, 10, 7, 0, 10, 8, 0, 10, 9, 0, 10, 10, 0, 10, 11, 0, 11, 65524, 0, 11, 65525, 0, 11, 65526, 0, 11, 65527, 0, 11, 65528, 0, 11, 65529, 0, 11, 65530, 0, 11, 65531, 0, 11, 65532, 0, 11, 65533, 0, 11, 65534, 0, 11, 65535, 0, 11, 0, 0, 11, 1, 0, 11, 2, 0, 11, 3, 0, 11, 4, 0, 11, 5, 0, 11, 6, 0, 11, 7, 0, 11, 8, 0, 11, 9, 0, 11, 10, 0, 11, 11, 0, 12, 65524, 0, 12, 65525, 0, 12, 65526, 0, 12, 65527, 0, 12, 65528, 0, 12, 65529, 0, 12, 65530, 0, 12, 65531, 0, 12, 65532, 0, 12, 65533, 0, 12, 65534, 0, 12, 65535, 0, 12, 0, 0, 12, 1, 0, 12, 2, 0, 12, 3, 0, 12, 4, 0, 12, 5, 0, 12, 6, 0, 12, 7, 0, 12, 8, 0, 12, 9, 0, 12, 10, 0, 12, 11, 0, 13, 65524, 0, 13, 65525, 0, 13, 65526, 0, 13, 65527, 0, 13, 65528, 0, 13, 65529, 0, 13, 65530, 0, 13, 65531, 0, 13, 65532, 0, 13, 65533, 0, 13, 65534, 0, 13, 65535, 0, 13, 0, 0, 13, 1, 0, 13, 2, 0, 13, 3, 0, 13, 4, 0, 13, 5, 0, 13, 6, 0, 13, 7, 0, 13, 8, 0, 13, 9, 0, 13, 10, 0, 13, 11, 0, 14, 65524, 0, 14, 65525, 0, 14, 65526, 0, 14, 65527, 0, 14, 65528, 0, 14, 65529, 0, 14, 65530, 0, 14, 65531, 0, 14, 65532, 0, 14, 65533, 0, 14, 65534, 0, 14, 65535, 0, 14, 0, 0, 14, 1, 0, 14, 2, 0, 14, 3, 0, 14, 4, 0, 14, 5, 0, 14, 6, 0, 14, 7, 0, 14, 8, 0, 14, 9, 0, 14, 10, 0, 14, 11, 0, 15, 65524, 0, 15, 65525, 0, 15, 65526, 0, 15, 65527, 0, 15, 65528, 0, 15, 65529, 0, 15, 65530, 0, 15, 65531, 0, 15, 65532, 0, 15, 65533, 0, 15, 65534, 0, 15, 65535, 0, 15, 0, 0, 15, 1, 0, 15, 2, 0, 15, 3, 0, 15, 4, 0, 15, 5, 0, 15, 6, 0, 15, 7, 0, 15, 8, 0, 15, 9, 0, 15, 10, 0, 15, 11, 0, 16, 65524, 0, 16, 65525, 0, 16, 65526, 0, 16, 65527, 0, 16, 65528, 0, 16, 65529, 0, 16, 65530, 0, 16, 65531, 0, 16, 65532, 0, 16, 65533, 0, 16, 65534, 0, 16, 65535, 0, 16, 0, 0, 16, 1, 0, 16, 2, 0, 16, 3, 0, 16, 4, 0, 16, 5, 0, 16, 6, 0, 16, 7, 0, 16, 8, 0, 16, 9, 0, 16, 10, 0, 16, 11, 0, 17, 65524, 0, 17, 65525, 0, 17, 65526, 0, 17, 65527, 0, 17, 65528, 0, 17, 65529, 0, 17, 65530, 0, 17, 65531, 0, 17, 65532, 0, 17, 65533, 0, 17, 65534, 0, 17, 65535, 0, 17, 0, 0, 17, 1, 0, 17, 2, 0, 17, 3, 0, 17, 4, 0, 17, 5, 0, 17, 6, 0, 17, 7, 0, 17, 8, 0, 17, 9, 0, 17, 10, 0, 17, 11, 0)
+}
+
+[node name="Walls" type="GridMap" parent="." unique_id=924174595]
+mesh_library = ExtResource("9_slib")
+cell_size = Vector3(2, 3.875, 2)
+cell_octant_size = 2
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65530, 65531, 655361, 65530, 65532, 1048577, 65530, 65533, 1048577, 65530, 65534, 1048577, 65530, 65535, 1048577, 65530, 0, 1048577, 65530, 1, 1048577, 65530, 2, 1048577, 65530, 3, 1048577, 65530, 4, 1, 65531, 65532, 1, 65531, 4, 1, 65532, 65532, 1, 65532, 4, 1, 65533, 65532, 1, 65533, 4, 1, 65534, 65532, 1, 65534, 4, 1, 65535, 65531, 1441793, 65535, 65532, 1, 65535, 3, 1441793, 65535, 4, 1, 0, 65523, 655361, 0, 65524, 1048577, 0, 65525, 1048577, 0, 65526, 1048577, 0, 65527, 1048577, 0, 65528, 1048577, 0, 65529, 1048577, 0, 65530, 1048577, 0, 65531, 655361, 0, 65532, 1048577, 0, 65533, 1048577, 0, 65534, 1048577, 0, 65535, 1048577, 0, 0, 1048578, 0, 1, 1048577, 0, 2, 1048577, 0, 3, 655361, 0, 4, 1048577, 0, 5, 1048577, 0, 6, 1048577, 0, 7, 1048577, 0, 8, 1048577, 0, 9, 1048577, 0, 10, 1048577, 0, 11, 1048577, 0, 12, 1, 1, 65524, 1, 1, 65532, 1, 1, 4, 1, 1, 12, 1, 2, 65524, 1, 2, 65532, 1, 2, 4, 1, 2, 12, 1, 3, 65524, 1, 3, 65532, 2, 3, 4, 2, 3, 12, 1, 4, 65524, 1, 4, 65532, 1, 4, 4, 1, 4, 12, 1, 5, 65524, 1, 5, 65531, 1441793, 5, 65532, 1, 5, 3, 1441793, 5, 4, 1, 5, 12, 1, 6, 65523, 655361, 6, 65524, 1048577, 6, 65525, 1048577, 6, 65526, 1048577, 6, 65527, 1048577, 6, 65528, 1048578, 6, 65529, 1048577, 6, 65530, 1048577, 6, 65531, 655361, 6, 65532, 1048577, 6, 65533, 1048577, 6, 65534, 1048577, 6, 65535, 1048577, 6, 0, 1048578, 6, 1, 1048577, 6, 2, 1048577, 6, 3, 655361, 6, 4, 1048577, 6, 5, 1048577, 6, 6, 1048577, 6, 7, 1048577, 6, 8, 1048578, 6, 9, 1048577, 6, 10, 1048577, 6, 11, 1048577, 6, 12, 1, 7, 65524, 1, 7, 65532, 1, 7, 4, 1, 7, 12, 1, 8, 65524, 1, 8, 65532, 1, 8, 4, 1, 8, 12, 1, 9, 65524, 1, 9, 65532, 2, 9, 4, 2, 9, 12, 1, 10, 65524, 1, 10, 65532, 1, 10, 4, 1, 10, 12, 1, 11, 65524, 1, 11, 65531, 1441793, 11, 65532, 1, 11, 3, 1441793, 11, 4, 1, 11, 12, 1, 12, 65523, 655361, 12, 65524, 1048577, 12, 65525, 1048577, 12, 65526, 1048577, 12, 65527, 1048577, 12, 65528, 1048578, 12, 65529, 1048577, 12, 65530, 1048577, 12, 65531, 655361, 12, 65532, 1048577, 12, 65533, 1048577, 12, 65534, 1048577, 12, 65535, 1048577, 12, 0, 1048578, 12, 1, 1048577, 12, 2, 1048577, 12, 3, 655361, 12, 4, 1048577, 12, 5, 1048577, 12, 6, 1048577, 12, 7, 1048577, 12, 8, 1048578, 12, 9, 1048577, 12, 10, 1048577, 12, 11, 1048577, 12, 12, 1, 13, 65524, 1, 13, 65532, 1, 13, 4, 1, 13, 12, 1, 14, 65524, 1, 14, 65532, 1, 14, 4, 1, 14, 12, 1, 15, 65524, 1, 15, 65532, 2, 15, 4, 2, 15, 12, 1, 16, 65524, 1, 16, 65532, 1, 16, 4, 1, 16, 12, 1, 17, 65524, 1, 17, 65532, 1, 17, 4, 1, 17, 12, 1, 18, 65524, 1048577, 18, 65525, 1048577, 18, 65526, 1048577, 18, 65527, 1048577, 18, 65528, 1048577, 18, 65529, 1048577, 18, 65530, 1048577, 18, 65531, 1048577, 18, 65532, 1048577, 18, 65533, 1048577, 18, 65534, 1048577, 18, 65535, 1048577, 18, 0, 1048577, 18, 1, 1048577, 18, 2, 1048577, 18, 3, 1048577, 18, 4, 1048577, 18, 5, 1048577, 18, 6, 1048577, 18, 7, 1048577, 18, 8, 1048577, 18, 9, 1048577, 18, 10, 1048577, 18, 11, 1048577)
+}
+
+[node name="Ceiling" type="GridMap" parent="." unique_id=1062577071]
 mesh_library = ExtResource("9_slib")
 cell_size = Vector3(2, 3.875, 2)
 cell_center_y = false
+collision_layer = 0
+collision_mask = 0
 data = {
-"cells": PackedInt32Array(65534, 65534, 0, 65534, 65535, 0, 65534, 0, 0, 65534, 1, 0, 65534, 2, 0, 65535, 65534, 0, 65535, 65535, 0, 65535, 0, 0, 65535, 1, 0, 65535, 2, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 1, 1, 0, 1, 2, 0, 2, 65534, 0, 2, 65535, 0, 2, 0, 0, 2, 1, 0, 2, 2, 0)
+"cells": PackedInt32Array(65530, 65532, 9, 65530, 65533, 9, 65530, 65534, 9, 65530, 65535, 9, 65530, 0, 9, 65530, 1, 9, 65530, 2, 9, 65530, 3, 9, 65531, 65532, 9, 65531, 65533, 9, 65531, 65534, 9, 65531, 65535, 9, 65531, 0, 9, 65531, 1, 9, 65531, 2, 9, 65531, 3, 9, 65532, 65532, 9, 65532, 65533, 9, 65532, 65534, 9, 65532, 65535, 9, 65532, 0, 9, 65532, 1, 9, 65532, 2, 9, 65532, 3, 9, 65533, 65532, 9, 65533, 65533, 9, 65533, 65534, 9, 65533, 65535, 9, 65533, 0, 9, 65533, 1, 9, 65533, 2, 9, 65533, 3, 9, 65534, 65532, 9, 65534, 65533, 9, 65534, 65534, 9, 65534, 65535, 9, 65534, 0, 9, 65534, 1, 9, 65534, 2, 9, 65534, 3, 9, 65535, 65532, 9, 65535, 65533, 9, 65535, 65534, 9, 65535, 65535, 9, 65535, 0, 9, 65535, 1, 9, 65535, 2, 9, 65535, 3, 9, 0, 65524, 9, 0, 65525, 9, 0, 65526, 9, 0, 65527, 9, 0, 65528, 9, 0, 65529, 9, 0, 65530, 9, 0, 65531, 9, 0, 65532, 9, 0, 65533, 9, 0, 65534, 9, 0, 65535, 9, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 11, 9, 1, 65524, 9, 1, 65525, 9, 1, 65526, 9, 1, 65527, 9, 1, 65528, 9, 1, 65529, 9, 1, 65530, 9, 1, 65531, 9, 1, 65532, 9, 1, 65533, 9, 1, 65534, 9, 1, 65535, 9, 1, 0, 9, 1, 1, 9, 1, 2, 9, 1, 3, 9, 1, 4, 9, 1, 5, 9, 1, 6, 9, 1, 7, 9, 1, 8, 9, 1, 9, 9, 1, 10, 9, 1, 11, 9, 2, 65524, 9, 2, 65525, 9, 2, 65526, 9, 2, 65527, 9, 2, 65528, 9, 2, 65529, 9, 2, 65530, 9, 2, 65531, 9, 2, 65532, 9, 2, 65533, 9, 2, 65534, 9, 2, 65535, 9, 2, 0, 9, 2, 1, 9, 2, 2, 9, 2, 3, 9, 2, 4, 9, 2, 5, 9, 2, 6, 9, 2, 7, 9, 2, 8, 9, 2, 9, 9, 2, 10, 9, 2, 11, 9, 3, 65524, 9, 3, 65525, 9, 3, 65526, 9, 3, 65527, 9, 3, 65528, 9, 3, 65529, 9, 3, 65530, 9, 3, 65531, 9, 3, 65532, 9, 3, 65533, 9, 3, 65534, 9, 3, 65535, 9, 3, 0, 9, 3, 1, 9, 3, 2, 9, 3, 3, 9, 3, 4, 9, 3, 5, 9, 3, 6, 9, 3, 7, 9, 3, 8, 9, 3, 9, 9, 3, 10, 9, 3, 11, 9, 4, 65524, 9, 4, 65525, 9, 4, 65526, 9, 4, 65527, 9, 4, 65528, 9, 4, 65529, 9, 4, 65530, 9, 4, 65531, 9, 4, 65532, 9, 4, 65533, 9, 4, 65534, 9, 4, 65535, 9, 4, 0, 9, 4, 1, 9, 4, 2, 9, 4, 3, 9, 4, 4, 9, 4, 5, 9, 4, 6, 9, 4, 7, 9, 4, 8, 9, 4, 9, 9, 4, 10, 9, 4, 11, 9, 5, 65524, 9, 5, 65525, 9, 5, 65526, 9, 5, 65527, 9, 5, 65528, 9, 5, 65529, 9, 5, 65530, 9, 5, 65531, 9, 5, 65532, 9, 5, 65533, 9, 5, 65534, 9, 5, 65535, 9, 5, 0, 9, 5, 1, 9, 5, 2, 9, 5, 3, 9, 5, 4, 9, 5, 5, 9, 5, 6, 9, 5, 7, 9, 5, 8, 9, 5, 9, 9, 5, 10, 9, 5, 11, 9, 6, 65524, 9, 6, 65525, 9, 6, 65526, 9, 6, 65527, 9, 6, 65528, 9, 6, 65529, 9, 6, 65530, 9, 6, 65531, 9, 6, 65532, 9, 6, 65533, 9, 6, 65534, 9, 6, 65535, 9, 6, 0, 9, 6, 1, 9, 6, 2, 9, 6, 3, 9, 6, 4, 9, 6, 5, 9, 6, 6, 9, 6, 7, 9, 6, 8, 9, 6, 9, 9, 6, 10, 9, 6, 11, 9, 7, 65524, 9, 7, 65525, 9, 7, 65526, 9, 7, 65527, 9, 7, 65528, 9, 7, 65529, 9, 7, 65530, 9, 7, 65531, 9, 7, 65532, 9, 7, 65533, 9, 7, 65534, 9, 7, 65535, 9, 7, 0, 9, 7, 1, 9, 7, 2, 9, 7, 3, 9, 7, 4, 9, 7, 5, 9, 7, 6, 9, 7, 7, 9, 7, 8, 9, 7, 9, 9, 7, 10, 9, 7, 11, 9, 8, 65524, 9, 8, 65525, 9, 8, 65526, 9, 8, 65527, 9, 8, 65528, 9, 8, 65529, 9, 8, 65530, 9, 8, 65531, 9, 8, 65532, 9, 8, 65533, 9, 8, 65534, 9, 8, 65535, 9, 8, 0, 9, 8, 1, 9, 8, 2, 9, 8, 3, 9, 8, 4, 9, 8, 5, 9, 8, 6, 9, 8, 7, 9, 8, 8, 9, 8, 9, 9, 8, 10, 9, 8, 11, 9, 9, 65524, 9, 9, 65525, 9, 9, 65526, 9, 9, 65527, 9, 9, 65528, 9, 9, 65529, 9, 9, 65530, 9, 9, 65531, 9, 9, 65532, 9, 9, 65533, 9, 9, 65534, 9, 9, 65535, 9, 9, 0, 9, 9, 1, 9, 9, 2, 9, 9, 3, 9, 9, 4, 9, 9, 5, 9, 9, 6, 9, 9, 7, 9, 9, 8, 9, 9, 9, 9, 9, 10, 9, 9, 11, 9, 10, 65524, 9, 10, 65525, 9, 10, 65526, 9, 10, 65527, 9, 10, 65528, 9, 10, 65529, 9, 10, 65530, 9, 10, 65531, 9, 10, 65532, 9, 10, 65533, 9, 10, 65534, 9, 10, 65535, 9, 10, 0, 9, 10, 1, 9, 10, 2, 9, 10, 3, 9, 10, 4, 9, 10, 5, 9, 10, 6, 9, 10, 7, 9, 10, 8, 9, 10, 9, 9, 10, 10, 9, 10, 11, 9, 11, 65524, 9, 11, 65525, 9, 11, 65526, 9, 11, 65527, 9, 11, 65528, 9, 11, 65529, 9, 11, 65530, 9, 11, 65531, 9, 11, 65532, 9, 11, 65533, 9, 11, 65534, 9, 11, 65535, 9, 11, 0, 9, 11, 1, 9, 11, 2, 9, 11, 3, 9, 11, 4, 9, 11, 5, 9, 11, 6, 9, 11, 7, 9, 11, 8, 9, 11, 9, 9, 11, 10, 9, 11, 11, 9, 12, 65524, 9, 12, 65525, 9, 12, 65526, 9, 12, 65527, 9, 12, 65528, 9, 12, 65529, 9, 12, 65530, 9, 12, 65531, 9, 12, 65532, 9, 12, 65533, 9, 12, 65534, 9, 12, 65535, 9, 12, 0, 9, 12, 1, 9, 12, 2, 9, 12, 3, 9, 12, 4, 9, 12, 5, 9, 12, 6, 9, 12, 7, 9, 12, 8, 9, 12, 9, 9, 12, 10, 9, 12, 11, 9, 13, 65524, 9, 13, 65525, 9, 13, 65526, 9, 13, 65527, 9, 13, 65528, 9, 13, 65529, 9, 13, 65530, 9, 13, 65531, 9, 13, 65532, 9, 13, 65533, 9, 13, 65534, 9, 13, 65535, 9, 13, 0, 9, 13, 1, 9, 13, 2, 9, 13, 3, 9, 13, 4, 9, 13, 5, 9, 13, 6, 9, 13, 7, 9, 13, 8, 9, 13, 9, 9, 13, 10, 9, 13, 11, 9, 14, 65524, 9, 14, 65525, 9, 14, 65526, 9, 14, 65527, 9, 14, 65528, 9, 14, 65529, 9, 14, 65530, 9, 14, 65531, 9, 14, 65532, 9, 14, 65533, 9, 14, 65534, 9, 14, 65535, 9, 14, 0, 9, 14, 1, 9, 14, 2, 9, 14, 3, 9, 14, 4, 9, 14, 5, 9, 14, 6, 9, 14, 7, 9, 14, 8, 9, 14, 9, 9, 14, 10, 9, 14, 11, 9, 15, 65524, 9, 15, 65525, 9, 15, 65526, 9, 15, 65527, 9, 15, 65528, 9, 15, 65529, 9, 15, 65530, 9, 15, 65531, 9, 15, 65532, 9, 15, 65533, 9, 15, 65534, 9, 15, 65535, 9, 15, 0, 9, 15, 1, 9, 15, 2, 9, 15, 3, 9, 15, 4, 9, 15, 5, 9, 15, 6, 9, 15, 7, 9, 15, 8, 9, 15, 9, 9, 15, 10, 9, 15, 11, 9, 16, 65524, 9, 16, 65525, 9, 16, 65526, 9, 16, 65527, 9, 16, 65528, 9, 16, 65529, 9, 16, 65530, 9, 16, 65531, 9, 16, 65532, 9, 16, 65533, 9, 16, 65534, 9, 16, 65535, 9, 16, 0, 9, 16, 1, 9, 16, 2, 9, 16, 3, 9, 16, 4, 9, 16, 5, 9, 16, 6, 9, 16, 7, 9, 16, 8, 9, 16, 9, 9, 16, 10, 9, 16, 11, 9, 17, 65524, 9, 17, 65525, 9, 17, 65526, 9, 17, 65527, 9, 17, 65528, 9, 17, 65529, 9, 17, 65530, 9, 17, 65531, 9, 17, 65532, 9, 17, 65533, 9, 17, 65534, 9, 17, 65535, 9, 17, 0, 9, 17, 1, 9, 17, 2, 9, 17, 3, 9, 17, 4, 9, 17, 5, 9, 17, 6, 9, 17, 7, 9, 17, 8, 9, 17, 9, 9, 17, 10, 9, 17, 11, 9)
 }
 
 [node name="Player" parent="." unique_id=1054194273 instance=ExtResource("2_53oc1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.5, 0, -1)
 
-[node name="Walls" type="GridMap" parent="." unique_id=924174595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
-mesh_library = ExtResource("9_slib")
-cell_size = Vector3(2, 3.875, 2)
-cell_center_y = false
-data = {
-"cells": PackedInt32Array(65534, 65534, 1, 65534, 2, 655361, 65533, 65534, 1441793, 3, 65534, 1048577, 65535, 65534, 1, 65535, 2, 655361, 65533, 65535, 1441793, 3, 65535, 1048577, 0, 65534, 1, 0, 2, 655361, 65533, 0, 1441793, 3, 0, 1048577, 1, 65534, 1, 1, 2, 655361, 65533, 1, 1441793, 3, 1, 1048577, 2, 65534, 1, 2, 2, 655361, 65533, 2, 1441793, 3, 2, 1048577)
-}
+[node name="Rooms" type="Node3D" parent="." unique_id=174635431]
 
-[node name="Ceiling" type="Node3D" parent="." unique_id=264047971]
+[node name="Start" type="Node3D" parent="Rooms" unique_id=1447464256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
-[node name="CeilingTile1" parent="Ceiling" unique_id=1526488712 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.875, -5)
+[node name="Lights" type="Node3D" parent="Rooms/Start" unique_id=615438353]
 
-[node name="CeilingTile2" parent="Ceiling" unique_id=445554788 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.875, -3)
+[node name="CeilingLight1" parent="Rooms/Start/Lights" unique_id=1969603465 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
 
-[node name="CeilingTile3" parent="Ceiling" unique_id=41528547 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.875, -1)
+[node name="CeilingLight2" parent="Rooms/Start/Lights" unique_id=619966368 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
 
-[node name="CeilingTile4" parent="Ceiling" unique_id=1618114591 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.875, 1)
+[node name="CeilingLight3" parent="Rooms/Start/Lights" unique_id=1094840045 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
 
-[node name="CeilingTile5" parent="Ceiling" unique_id=1268015349 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.875, 3)
+[node name="CeilingLight4" parent="Rooms/Start/Lights" unique_id=423357888 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
 
-[node name="CeilingTile6" parent="Ceiling" unique_id=1140209715 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, -5)
+[node name="CeilingLight5" parent="Rooms/Start/Lights" unique_id=1681396085 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
 
-[node name="CeilingTile7" parent="Ceiling" unique_id=1380552635 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, -3)
+[node name="CeilingLight6" parent="Rooms/Start/Lights" unique_id=1200525749 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
 
-[node name="CeilingTile8" parent="Ceiling" unique_id=961667494 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, -1)
+[node name="CeilingLight7" parent="Rooms/Start/Lights" unique_id=500779187 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
 
-[node name="CeilingTile9" parent="Ceiling" unique_id=899660872 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, 1)
+[node name="CeilingLight8" parent="Rooms/Start/Lights" unique_id=1124254775 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
 
-[node name="CeilingTile10" parent="Ceiling" unique_id=809797923 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, 3)
+[node name="CeilingLight9" parent="Rooms/Start/Lights" unique_id=1342966885 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
 
-[node name="CeilingTile11" parent="Ceiling" unique_id=2051895221 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.875, -5)
+[node name="CeilingLight10" parent="Rooms/Start/Lights" unique_id=1126854608 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
 
-[node name="CeilingTile12" parent="Ceiling" unique_id=1756780064 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.875, -3)
+[node name="CeilingLight11" parent="Rooms/Start/Lights" unique_id=1522111460 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
 
-[node name="CeilingTile13" parent="Ceiling" unique_id=1318974328 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.875, -1)
+[node name="CeilingLight12" parent="Rooms/Start/Lights" unique_id=1170206198 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
 
-[node name="CeilingTile14" parent="Ceiling" unique_id=418209921 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.875, 1)
+[node name="Furniture" type="Node3D" parent="Rooms/Start" unique_id=187528388]
 
-[node name="CeilingTile15" parent="Ceiling" unique_id=1912832807 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.875, 3)
+[node name="PlayerDesk" parent="Rooms/Start/Furniture" unique_id=1423475538 instance=ExtResource("3_k6ab6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.5, 0, -1)
 
-[node name="CeilingTile16" parent="Ceiling" unique_id=1075481614 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.875, -5)
+[node name="Computer" parent="Rooms/Start/Furniture" unique_id=1733019834 instance=ExtResource("8_comp")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.6, 0.949, -1)
 
-[node name="CeilingTile17" parent="Ceiling" unique_id=855497761 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.875, -3)
+[node name="PlayerChair" parent="Rooms/Start/Furniture" unique_id=1270646829 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.75, 0, -1)
 
-[node name="CeilingTile18" parent="Ceiling" unique_id=1804356417 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.875, -1)
+[node name="Keyboard" parent="Rooms/Start/Furniture" unique_id=2075443165 instance=ExtResource("g_Computer_Keyboard")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.32, 0.949, -1)
 
-[node name="CeilingTile19" parent="Ceiling" unique_id=505252637 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.875, 1)
+[node name="Mouse" parent="Rooms/Start/Furniture" unique_id=1671098288 instance=ExtResource("g_Computer_Mouse")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.32, 0.949, -1.33)
 
-[node name="CeilingTile20" parent="Ceiling" unique_id=1206349623 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.875, 3)
+[node name="Mug" parent="Rooms/Start/Furniture" unique_id=946466064 instance=ExtResource("g_CoffeeCup_Filled")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.45, 0.949, -1.55)
 
-[node name="CeilingTile21" parent="Ceiling" unique_id=41413473 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, -5)
+[node name="PCCase" parent="Rooms/Start/Furniture" unique_id=250934580 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.6, 0, -1.5)
 
-[node name="CeilingTile22" parent="Ceiling" unique_id=942372002 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, -3)
+[node name="Plant" parent="Rooms/Start/Furniture" unique_id=16087819 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -4.6, 0, -2.3)
 
-[node name="CeilingTile23" parent="Ceiling" unique_id=1378054612 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, -1)
+[node name="Clock" parent="Rooms/Start/Furniture" unique_id=194655651 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.875, 2.4, -1)
 
-[node name="CeilingTile24" parent="Ceiling" unique_id=288201497 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, 1)
-
-[node name="CeilingTile25" parent="Ceiling" unique_id=478427218 instance=ExtResource("5_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, 3)
-
-[node name="CeilingLights" type="Node3D" parent="." unique_id=1491756438]
-
-[node name="CeilingLight1" parent="CeilingLights" unique_id=1527440329 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, -3)
-
-[node name="CeilingLight2" parent="CeilingLights" unique_id=54378088 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, 0)
-
-[node name="CeilingLight3" parent="CeilingLights" unique_id=1690017689 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.875, 3)
-
-[node name="CeilingLight4" parent="CeilingLights" unique_id=1312870644 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -3)
-
-[node name="CeilingLight5" parent="CeilingLights" unique_id=1434780751 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 0)
-
-[node name="CeilingLight6" parent="CeilingLights" unique_id=1210242155 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 3)
-
-[node name="CeilingLight7" parent="CeilingLights" unique_id=1774634447 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, -3)
-
-[node name="CeilingLight8" parent="CeilingLights" unique_id=96227561 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, 0)
-
-[node name="CeilingLight9" parent="CeilingLights" unique_id=2112238344 instance=ExtResource("6_8w2hi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.875, 3)
-
-[node name="Furniture" type="Node3D" parent="." unique_id=187528388]
-
-[node name="Office_Desk_1" parent="Furniture" unique_id=1423475538 instance=ExtResource("3_k6ab6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
-
-[node name="Computer" parent="Furniture" unique_id=1733019834 instance=ExtResource("8_comp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -3.1)
-
-[node name="DeskNarratorTrigger" parent="." unique_id=1834073676 instance=ExtResource("7_7e6co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+[node name="DeskNarratorTrigger" parent="Rooms/Start" unique_id=1834073676 instance=ExtResource("7_7e6co")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3, 0, -1)
 cue_id = &"desk_intro"
+
+[node name="A1" type="Node3D" parent="Rooms" unique_id=1845618529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -16)
+
+[node name="Lights" type="Node3D" parent="Rooms/A1" unique_id=1622784938]
+
+[node name="CeilingLight1" parent="Rooms/A1/Lights" unique_id=1630862310 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/A1/Lights" unique_id=69002472 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/A1/Lights" unique_id=231351945 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/A1/Lights" unique_id=24652361 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/A1/Lights" unique_id=505362776 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/A1/Lights" unique_id=250172013 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/A1/Lights" unique_id=172560685 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="CeilingLight8" parent="Rooms/A1/Lights" unique_id=1590689964 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/A1/Lights" unique_id=552659836 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/A1/Lights" unique_id=991465063 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/A1/Lights" unique_id=1235829606 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/A1/Lights" unique_id=916615550 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/A1" unique_id=791475278]
+
+[node name="Pinwheel" type="Node3D" parent="Rooms/A1/Furniture" unique_id=743220394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -3)
+
+[node name="Desk1" parent="Rooms/A1/Furniture/Pinwheel" unique_id=1392248070 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.375, 0, -0.74)
+
+[node name="Desk1Chair" parent="Rooms/A1/Furniture/Pinwheel" unique_id=1338486782 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0, -1.49)
+
+[node name="Desk2" parent="Rooms/A1/Furniture/Pinwheel" unique_id=1039910183 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.74, 0, 0.375)
+
+[node name="Desk2Chair" parent="Rooms/A1/Furniture/Pinwheel" unique_id=1322454143 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 1.49, 0, 0.375)
+model = 0
+
+[node name="Desk3" parent="Rooms/A1/Furniture/Pinwheel" unique_id=995461691 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.74)
+
+[node name="Mug" parent="Rooms/A1/Furniture/Pinwheel/Desk3" index="4" unique_id=16087819]
+visible = false
+
+[node name="Desk3Chair" parent="Rooms/A1/Furniture/Pinwheel" unique_id=319018672 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.375, 0, 1.49)
+freeze = true
+
+[node name="Desk4" parent="Rooms/A1/Furniture/Pinwheel" unique_id=196037793 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.74, 0, -0.375)
+
+[node name="Desk4Chair" parent="Rooms/A1/Furniture/Pinwheel" unique_id=393184162 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.49, 0, -0.375)
+model = 2
+
+[node name="Fern" parent="Rooms/A1/Furniture/Pinwheel" unique_id=1532036569 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.375, 0.55, 1.49)
+
+[node name="FernWater" parent="Rooms/A1/Furniture/Pinwheel" unique_id=245699978 instance=ExtResource("g_WaterCup_Filled")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175, 0.949, 0.79)
+
+[node name="TeamLeadVase" parent="Rooms/A1/Furniture/Pinwheel" unique_id=1815372136 instance=ExtResource("g_Nature_Deco_2")]
+
+[node name="CounterL" parent="Rooms/A1/Furniture" unique_id=31393588 instance=ExtResource("g_Office_CounterA1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -7.57)
+
+[node name="CounterR" parent="Rooms/A1/Furniture" unique_id=1080363996 instance=ExtResource("g_Office_CounterA1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -7.57)
+
+[node name="CoffeeMachine" parent="Rooms/A1/Furniture" unique_id=1045290968 instance=ExtResource("g_CoffeeMachine")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.949, -7.6)
+
+[node name="Microwave" parent="Rooms/A1/Furniture" unique_id=1890795833 instance=ExtResource("g_Microwave_Old")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55, 0.949, -7.62)
+
+[node name="PrinterTable" parent="Rooms/A1/Furniture" unique_id=2072110336 instance=ExtResource("g_Table_Box")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3.6, 0, 7.45)
+
+[node name="Printer" parent="Rooms/A1/Furniture" unique_id=536501703 instance=ExtResource("g_Printer")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3.6, 0.949, 7.4)
+
+[node name="Bin" parent="Rooms/A1/Furniture" unique_id=138646444 instance=ExtResource("g_TrashBin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 7.55)
+
+[node name="WhiteBoard" parent="Rooms/A1/Furniture" unique_id=1432920373 instance=ExtResource("g_WhiteBoard_Big")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.865, 1.5, 4.5)
+
+[node name="CrookedPainting" parent="Rooms/A1/Furniture" unique_id=1161978031 instance=ExtResource("g_Painting_Small")]
+transform = Transform3D(0.994522, -0.104528, 0, 0.104528, 0.994522, 0, 0, 0, 1, -3, 1.7, -7.874)
+
+[node name="Clock" parent="Rooms/A1/Furniture" unique_id=1959181851 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.6, -7.875)
+minute = 57
+
+[node name="MeetTable" parent="Rooms/A1/Furniture" unique_id=1651548869 instance=ExtResource("g_Table_Circular")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0, 4.5)
+
+[node name="MeetChair1" parent="Rooms/A1/Furniture" unique_id=256554303 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0, 3.72)
+
+[node name="MeetChair2" parent="Rooms/A1/Furniture" unique_id=2016693617 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.6, 0, 5.28)
+
+[node name="MeetChair3" parent="Rooms/A1/Furniture" unique_id=1137735008 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.82, 0, 4.5)
+
+[node name="CoffeeTable" parent="Rooms/A1/Furniture" unique_id=221390538 instance=ExtResource("g_Table_Circular")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, -5)
+
+[node name="Stool1" parent="Rooms/A1/Furniture" unique_id=1781168373 instance=ExtResource("g_Stool_A")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 3.55, 0, -5)
+
+[node name="Stool2" parent="Rooms/A1/Furniture" unique_id=1805111143 instance=ExtResource("g_Stool_A")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.05, 0, -5)
+
+[node name="Shelf" parent="Rooms/A1/Furniture" unique_id=1041961545 instance=ExtResource("g_shelf_stocked")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.62, 0, 5)
+
+[node name="PlantNW" parent="Rooms/A1/Furniture" unique_id=809214148 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -5.3, 0, -7.3)
+
+[node name="Bookshelf" parent="Rooms/A1/Furniture" unique_id=1756070385 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -7.56)
+
+[node name="B1" type="Node3D" parent="Rooms" unique_id=1879511464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -16)
+
+[node name="Lights" type="Node3D" parent="Rooms/B1" unique_id=467549730]
+
+[node name="CeilingLight1" parent="Rooms/B1/Lights" unique_id=11983355 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -3.5, 2.6, -7.9)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight1" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight2" parent="Rooms/B1/Lights" unique_id=184476447 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 3.5, 2.6, -7.9)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight2" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight3" parent="Rooms/B1/Lights" unique_id=351103249 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -3.5, 2.6, 7.9)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight3" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight4" parent="Rooms/B1/Lights" unique_id=1070843619 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 4.5, 2.6, 7.9)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight4" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight5" parent="Rooms/B1/Lights" unique_id=288260311 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -5.9, 2.6, -2.2)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight5" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight6" parent="Rooms/B1/Lights" unique_id=455559895 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -5.9, 2.6, 5)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight6" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight7" parent="Rooms/B1/Lights" unique_id=275011750 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 5.9, 2.6, -6.2)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight7" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight8" parent="Rooms/B1/Lights" unique_id=356669604 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 5.9, 2.6, -2.2)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight8" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="CeilingLight9" parent="Rooms/B1/Lights" unique_id=2030513659 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 5.9, 2.6, 5)
+
+[node name="SpotLight3D" parent="Rooms/B1/Lights/CeilingLight9" index="1" unique_id=1227595920]
+light_energy = 3.0
+spot_range = 7.5
+spot_angle = 75.0
+
+[node name="Furniture" type="Node3D" parent="Rooms/B1" unique_id=128729621]
+
+[node name="PairSW" parent="Rooms/B1/Furniture" unique_id=655825841 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, 5.2)
+
+[node name="PairSE" parent="Rooms/B1/Furniture" unique_id=975261843 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0, 5.2)
+
+[node name="Lamborghini" parent="Rooms/B1/Furniture" unique_id=331937661 instance=ExtResource("g_Painting")]
+transform = Transform3D(0, 0, 1, 1, 0, 0, 0, 1, 0, -5.885, 1.8, -4)
+
+[node name="Painting" parent="Rooms/B1/Furniture/Lamborghini" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("g_painting_3")
+
+[node name="SideTV" parent="Rooms/B1/Furniture" unique_id=644830872 instance=ExtResource("g_Wall_TV")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.875, 1.8, -4)
+
+[node name="BackwardsWhiteboard" parent="Rooms/B1/Furniture" unique_id=2050242689 instance=ExtResource("g_WhiteBoard_Big")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.5, 1.5, -7.77)
+
+[node name="Trough" parent="Rooms/B1/Furniture" unique_id=1820185003 instance=ExtResource("g_Nature_Deco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, -6.8)
+
+[node name="BambooA" parent="Rooms/B1/Furniture" unique_id=331896599 instance=ExtResource("g_Nature_Deco_Bamboo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0.3, -7.1)
+
+[node name="BambooB" parent="Rooms/B1/Furniture" unique_id=1673255590 instance=ExtResource("g_Nature_Deco_Bamboo2")]
+transform = Transform3D(-0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, -0.766044, -5.6, 0.3, -6.5)
+
+[node name="TVChair1" parent="Rooms/B1/Furniture" unique_id=2068876746 instance=ExtResource("g_Chair_B")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4, 0, -4.6)
+
+[node name="TVChair2" parent="Rooms/B1/Furniture" unique_id=337519114 instance=ExtResource("g_Chair_B")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4, 0, -3.4)
+
+[node name="TVTable" parent="Rooms/B1/Furniture" unique_id=1246430042 instance=ExtResource("g_CoffeeTable")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4.95, 0, -4)
+
+[node name="PlantNE" parent="Rooms/B1/Furniture" unique_id=1949895001 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, -7.3)
+
+[node name="Shelf" parent="Rooms/B1/Furniture" unique_id=2025082672 instance=ExtResource("g_shelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0, 5.5)
+
+[node name="Door1" parent="Rooms/B1/Furniture" unique_id=1822691239 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.75)
+leaf = 1
+transom = false
+
+[node name="Door2" parent="Rooms/B1/Furniture" unique_id=735034272 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3.75)
+leaf = 2
+transom = false
+
+[node name="Door3" parent="Rooms/B1/Furniture" unique_id=1986309761 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5.75)
+transom = false
+
+[node name="LastDoor" parent="Rooms/B1/Furniture" unique_id=1597498103 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7.775)
+transom = false
+one_way = true
+
+[node name="C1" type="Node3D" parent="Rooms" unique_id=62804894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)
+
+[node name="Lights" type="Node3D" parent="Rooms/C1" unique_id=1432125593]
+
+[node name="CeilingLight1" parent="Rooms/C1/Lights" unique_id=209583786 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight1" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight1" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight2" parent="Rooms/C1/Lights" unique_id=1527203548 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight2" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight2" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight3" parent="Rooms/C1/Lights" unique_id=936512130 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight3" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight3" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight4" parent="Rooms/C1/Lights" unique_id=135262387 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight4" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight4" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight5" parent="Rooms/C1/Lights" unique_id=392200738 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight5" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight5" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight6" parent="Rooms/C1/Lights" unique_id=2044302815 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+script = ExtResource("p2_light_flicker")
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight6" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight6" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight7" parent="Rooms/C1/Lights" unique_id=586348791 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight7" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight7" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight8" parent="Rooms/C1/Lights" unique_id=264500168 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight8" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight8" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight9" parent="Rooms/C1/Lights" unique_id=831443105 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+script = ExtResource("p2_light_flicker")
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight9" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight9" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight10" parent="Rooms/C1/Lights" unique_id=1040273413 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight10" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight10" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight11" parent="Rooms/C1/Lights" unique_id=489499242 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight11" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight11" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="CeilingLight12" parent="Rooms/C1/Lights" unique_id=341350387 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Panel" parent="Rooms/C1/Lights/CeilingLight12" index="0" unique_id=1719876300]
+material_override = ExtResource("p2_ceiling_light_panel_amber")
+
+[node name="SpotLight3D" parent="Rooms/C1/Lights/CeilingLight12" index="1" unique_id=1227595920]
+light_color = Color(1, 0.7, 0.32, 1)
+light_energy = 3.0
+
+[node name="Furniture" type="Node3D" parent="Rooms/C1" unique_id=1979177918]
+
+[node name="RackN1" parent="Rooms/C1/Furniture" unique_id=1570165793 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -1.3)
+
+[node name="RackN2" parent="Rooms/C1/Furniture" unique_id=1392291757 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.58, 0, -1.3)
+
+[node name="RackN3" parent="Rooms/C1/Furniture" unique_id=983131549 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96, 0, -1.3)
+
+[node name="RackN4" parent="Rooms/C1/Furniture" unique_id=1093237373 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34, 0, -1.3)
+
+[node name="RackN5" parent="Rooms/C1/Furniture" unique_id=1249746234 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72, 0, -1.3)
+
+[node name="RackN6" parent="Rooms/C1/Furniture" unique_id=1986767163 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0, -1.3)
+
+[node name="RackN7" parent="Rooms/C1/Furniture" unique_id=160312482 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48, 0, -1.3)
+
+[node name="RackN8" parent="Rooms/C1/Furniture" unique_id=890344988 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0, -1.3)
+
+[node name="RackN9" parent="Rooms/C1/Furniture" unique_id=1525377668 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76, 0, -1.3)
+
+[node name="RackN10" parent="Rooms/C1/Furniture" unique_id=390978323 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38, 0, -1.3)
+
+[node name="RackN11" parent="Rooms/C1/Furniture" unique_id=49190703 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1.3)
+
+[node name="RackN12" parent="Rooms/C1/Furniture" unique_id=1691824708 instance=ExtResource("p2_server_rack_legacy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62, 0, -1.3)
+
+[node name="RackS1" parent="Rooms/C1/Furniture" unique_id=864872605 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.2, 0, 3.3)
+
+[node name="RackS2" parent="Rooms/C1/Furniture" unique_id=17250100 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.58, 0, 3.3)
+
+[node name="RackS3" parent="Rooms/C1/Furniture" unique_id=984354961 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.96, 0, 3.3)
+
+[node name="RackS4" parent="Rooms/C1/Furniture" unique_id=231344786 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.34, 0, 3.3)
+
+[node name="RackS5" parent="Rooms/C1/Furniture" unique_id=798326198 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -1.72, 0, 3.3)
+
+[node name="RackS6" parent="Rooms/C1/Furniture" unique_id=246477010 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -1.1, 0, 3.3)
+
+[node name="RackS7" parent="Rooms/C1/Furniture" unique_id=1013731154 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3.1, 0, 3.3)
+
+[node name="RackS8" parent="Rooms/C1/Furniture" unique_id=1330140446 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3.72, 0, 3.3)
+
+[node name="RackS9" parent="Rooms/C1/Furniture" unique_id=139363113 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 4.34, 0, 3.3)
+
+[node name="RackS10" parent="Rooms/C1/Furniture" unique_id=2007035752 instance=ExtResource("p2_server_rack")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 4.96, 0, 3.3)
+
+[node name="LegacyPhoto" parent="Rooms/C1/Furniture" unique_id=1480936723 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62, 1.96, -1.35)
+
+[node name="LegacySticky" parent="Rooms/C1/Furniture" unique_id=928401339 instance=ExtResource("g_StickNote_1")]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 2.62, 1.2, -0.8)
+
+[node name="SwitchboardSpot" type="Marker3D" parent="Rooms/C1/Furniture" unique_id=695140583]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
+
+[node name="PowerSwitch" parent="Rooms/C1/Furniture" unique_id=1588203117 instance=ExtResource("st_power_switch")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
+
+[node name="PCStack1" parent="Rooms/C1/Furniture" unique_id=1775349468 instance=ExtResource("p2_pc_shelf_stack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6, 0, -7.65)
+
+[node name="PCStack2" parent="Rooms/C1/Furniture" unique_id=1055050304 instance=ExtResource("p2_pc_shelf_stack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, 0, -7.65)
+
+[node name="PCStack3" parent="Rooms/C1/Furniture" unique_id=489736502 instance=ExtResource("p2_pc_shelf_stack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7.65)
+
+[node name="PCStack4" parent="Rooms/C1/Furniture" unique_id=1179702902 instance=ExtResource("p2_pc_shelf_stack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -7.65)
+
+[node name="PCWall_1_1" parent="Rooms/C1/Furniture" unique_id=1685466595 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, -7.6)
+
+[node name="PCWall_1_2" parent="Rooms/C1/Furniture" unique_id=160807949 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0.41, -7.6)
+
+[node name="PCWall_1_3" parent="Rooms/C1/Furniture" unique_id=887318948 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0.82, -7.6)
+
+[node name="PCWall_2_1" parent="Rooms/C1/Furniture" unique_id=1045842148 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 0, -7.6)
+
+[node name="PCWall_2_2" parent="Rooms/C1/Furniture" unique_id=1272537446 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 0.41, -7.6)
+
+[node name="PCWall_2_3" parent="Rooms/C1/Furniture" unique_id=1078066829 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 0.82, -7.6)
+
+[node name="PCWall_3_1" parent="Rooms/C1/Furniture" unique_id=1154229407 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0, -7.6)
+
+[node name="PCWall_3_2" parent="Rooms/C1/Furniture" unique_id=975439399 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.41, -7.6)
+
+[node name="PCWall_3_3" parent="Rooms/C1/Furniture" unique_id=1354186589 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.82, -7.6)
+
+[node name="PCWall_4_1" parent="Rooms/C1/Furniture" unique_id=1380759463 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0, -7.6)
+
+[node name="PCWall_4_2" parent="Rooms/C1/Furniture" unique_id=770731292 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0.41, -7.6)
+
+[node name="PCWall_4_3" parent="Rooms/C1/Furniture" unique_id=116606502 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0.82, -7.6)
+
+[node name="PCWall_5_1" parent="Rooms/C1/Furniture" unique_id=1936443377 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -7.6)
+
+[node name="PCWall_5_2" parent="Rooms/C1/Furniture" unique_id=1654689451 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.41, -7.6)
+
+[node name="PCWall_5_3" parent="Rooms/C1/Furniture" unique_id=622969777 instance=ExtResource("g_Computer_Case")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.82, -7.6)
+
+[node name="AirCon" parent="Rooms/C1/Furniture" unique_id=1635636150 instance=ExtResource("p2_AirConditioner_A")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 3.2, -7.72)
+
+[node name="CoolingFan1" parent="Rooms/C1/Furniture" unique_id=892394675 instance=ExtResource("p2_Small_Fan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2.45)
+
+[node name="CoolingFan2" parent="Rooms/C1/Furniture" unique_id=137841872 instance=ExtResource("p2_Small_Fan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.45)
+
+[node name="CoolingFan3" parent="Rooms/C1/Furniture" unique_id=452379478 instance=ExtResource("p2_Small_Fan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0, -2.45)
+
+[node name="ControlDesk" parent="Rooms/C1/Furniture" unique_id=955513022 instance=ExtResource("p2_Office_Desk_3")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.6, 0, 7.45)
+
+[node name="CRT_1_1" parent="Rooms/C1/Furniture" unique_id=192751646 instance=ExtResource("p2_Computer_Old_Monitor")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.9, 0.949, 7.55)
+
+[node name="CRT_1_2" parent="Rooms/C1/Furniture" unique_id=1261835292 instance=ExtResource("p2_Computer_Old_Monitor")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.9, 1.459, 7.55)
+
+[node name="CRT_2_1" parent="Rooms/C1/Furniture" unique_id=1186652300 instance=ExtResource("p2_Computer_Old_Monitor")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.6, 0.949, 7.55)
+
+[node name="CRT_2_2" parent="Rooms/C1/Furniture" unique_id=1089412811 instance=ExtResource("p2_Computer_Old_Monitor")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.6, 1.459, 7.55)
+
+[node name="CRT_3_1" parent="Rooms/C1/Furniture" unique_id=1753992966 instance=ExtResource("p2_Computer_Old_Monitor")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.3, 0.949, 7.55)
+
+[node name="CRT_3_2" parent="Rooms/C1/Furniture" unique_id=1339972247 instance=ExtResource("p2_Computer_Old_Monitor")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.3, 1.459, 7.55)
+
+[node name="ControlChair" parent="Rooms/C1/Furniture" unique_id=179942612 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0, 6.7)
+model = 2
+
+[node name="Clock" parent="Rooms/C1/Furniture" unique_id=1930576351 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.875, 2.9, 1)
+minute = 54
+
+[node name="Manuals" parent="Rooms/C1/Furniture" unique_id=869214158 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.56, 0, -5)
+
+[node name="SpareBox1" parent="Rooms/C1/Furniture" unique_id=1689174863 instance=ExtResource("g_Box_Base")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, -7.3)
+
+[node name="SpareBox2" parent="Rooms/C1/Furniture" unique_id=1941468623 instance=ExtResource("g_Box_Base")]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 5.3, 0.65, -7.3)
+
+[node name="SpareBox3" parent="Rooms/C1/Furniture" unique_id=611419321 instance=ExtResource("g_Box_Base")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, -6.6)
+
+[node name="Cabinet1" parent="Rooms/C1/Furniture" unique_id=1292996793 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.6, 0, 6.2)
+
+[node name="Cabinet2" parent="Rooms/C1/Furniture" unique_id=1855826571 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.6, 0, 5.6)
+
+[node name="Bin" parent="Rooms/C1/Furniture" unique_id=1022456864 instance=ExtResource("g_TrashBin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 7.5)
+
+[node name="BlackoutBoard" parent="Rooms/C1/Furniture" unique_id=927105184 instance=ExtResource("g_WhiteBoard_Big")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.865, 1.5, -2.4)
+
+[node name="A2" type="Node3D" parent="Rooms" unique_id=766370371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Lights" type="Node3D" parent="Rooms/A2" unique_id=487214111]
+
+[node name="CeilingLight1" parent="Rooms/A2/Lights" unique_id=82656527 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/A2/Lights" unique_id=1095598136 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/A2/Lights" unique_id=1897624343 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/A2/Lights" unique_id=1065019362 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/A2/Lights" unique_id=90617 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/A2/Lights" unique_id=1352905442 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/A2/Lights" unique_id=1475791768 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="CeilingLight8" parent="Rooms/A2/Lights" unique_id=524821732 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/A2/Lights" unique_id=1406388305 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/A2/Lights" unique_id=449790742 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/A2/Lights" unique_id=1828219439 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/A2/Lights" unique_id=209807510 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/A2" unique_id=264383334]
+
+[node name="TwinDesk1" parent="Rooms/A2/Furniture" unique_id=1956305977 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -7.45)
+
+[node name="Lamp" parent="Rooms/A2/Furniture/TwinDesk1" unique_id=2024077986 instance=ExtResource("g_Lamp_1_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 0.949, -0.22)
+
+[node name="Notepad" parent="Rooms/A2/Furniture/TwinDesk1" unique_id=2017064809 instance=ExtResource("g_Notepad")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.3, 0.949, 0.12)
+
+[node name="StickNote" parent="Rooms/A2/Furniture/TwinDesk1" unique_id=1733024479 instance=ExtResource("g_StickNote_1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.949, -0.25)
+
+[node name="TwinDesk2" parent="Rooms/A2/Furniture" unique_id=1250324205 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, -7.45)
+
+[node name="Computer_Monitor" parent="Rooms/A2/Furniture/TwinDesk2" index="1" unique_id=1671098288]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0.949, -0.2)
+
+[node name="Lamp" parent="Rooms/A2/Furniture/TwinDesk2" unique_id=75003371 instance=ExtResource("g_Lamp_1_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 0.949, -0.22)
+
+[node name="Notepad" parent="Rooms/A2/Furniture/TwinDesk2" unique_id=1442171594 instance=ExtResource("g_Notepad")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.3, 0.949, 0.12)
+
+[node name="StickNote" parent="Rooms/A2/Furniture/TwinDesk2" unique_id=1488393903 instance=ExtResource("g_StickNote_1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.949, -0.25)
+
+[node name="TwinDesk1Chair" parent="Rooms/A2/Furniture" unique_id=180255972 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.2, 0, -6.7)
+
+[node name="TwinDesk2Chair" parent="Rooms/A2/Furniture" unique_id=211359735 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, -6.7)
+
+[node name="Divider" parent="Rooms/A2/Furniture" unique_id=1646005276 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7.6)
+
+[node name="TimeoutChair" parent="Rooms/A2/Furniture" unique_id=761574165 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 0, 6.6)
+model = 0
+
+[node name="Plant" parent="Rooms/A2/Furniture" unique_id=508545125 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 0, -7.25)
+
+[node name="Bookshelf" parent="Rooms/A2/Furniture" unique_id=37426450 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.5, 0, 7.56)
+
+[node name="Painting" parent="Rooms/A2/Furniture" unique_id=66172593 instance=ExtResource("g_Painting")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.885, 1.7, 5)
+
+[node name="Clock" parent="Rooms/A2/Furniture" unique_id=2118896852 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -7.875)
+minute = 58
+
+[node name="Bookshelf2" parent="Rooms/A2/Furniture" unique_id=634965634 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.72, 0, 7.56)
+
+[node name="WaitingChair1" parent="Rooms/A2/Furniture" unique_id=590646064 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -3.7, 0, 4.6)
+
+[node name="WaitingChair2" parent="Rooms/A2/Furniture" unique_id=266023131 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -3.7, 0, 5.4)
+
+[node name="WaitingChair3" parent="Rooms/A2/Furniture" unique_id=1670031252 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -3.7, 0, 6.2)
+
+[node name="EastWhiteboard" parent="Rooms/A2/Furniture" unique_id=398619912 instance=ExtResource("g_WhiteBoard_Big")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.865, 1.5, -4.5)
+
+[node name="Shelf" parent="Rooms/A2/Furniture" unique_id=894050623 instance=ExtResource("g_shelf_stocked")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.62, 0, -6.15)
+
+[node name="PlantW" parent="Rooms/A2/Furniture" unique_id=936431268 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, -5.35, 0, -4.2)
+
+[node name="FakeDoor" parent="Rooms/A2/Furniture" unique_id=1809550265 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.775, 0.1, 5.5)
+transom = false
+one_way = true
+
+[node name="B2" type="Node3D" parent="Rooms" unique_id=2012938201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+
+[node name="Lights" type="Node3D" parent="Rooms/B2" unique_id=86516851]
+
+[node name="CeilingLight1" parent="Rooms/B2/Lights" unique_id=2014195261 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/B2/Lights" unique_id=882167317 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/B2/Lights" unique_id=1065397297 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/B2/Lights" unique_id=1759511583 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/B2/Lights" unique_id=1675317204 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/B2/Lights" unique_id=1953752473 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/B2/Lights" unique_id=2007732103 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="CeilingLight8" parent="Rooms/B2/Lights" unique_id=364225901 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/B2/Lights" unique_id=86872012 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/B2/Lights" unique_id=916458750 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/B2/Lights" unique_id=1531369841 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/B2/Lights" unique_id=1698126563 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/B2" unique_id=1300691392]
+
+[node name="PairNW" parent="Rooms/B2/Furniture" unique_id=716207454 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, -3.6)
+
+[node name="PhotoN" parent="Rooms/B2/Furniture/PairNW" unique_id=308740337 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.45, 1.069, -0.125)
+
+[node name="PhotoS" parent="Rooms/B2/Furniture/PairNW" unique_id=1524741985 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 1.069, 0.125)
+
+[node name="PairNE" parent="Rooms/B2/Furniture" unique_id=1015388095 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0, -3.6)
+
+[node name="PhotoN" parent="Rooms/B2/Furniture/PairNE" unique_id=1411658033 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.45, 1.069, -0.125)
+
+[node name="PhotoS" parent="Rooms/B2/Furniture/PairNE" unique_id=810347467 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 1.069, 0.125)
+
+[node name="PairSW" parent="Rooms/B2/Furniture" unique_id=358871278 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, 5.2)
+
+[node name="PhotoN" parent="Rooms/B2/Furniture/PairSW" unique_id=116340357 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.45, 1.069, -0.125)
+
+[node name="PhotoS" parent="Rooms/B2/Furniture/PairSW" unique_id=163711222 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 1.069, 0.125)
+
+[node name="PairSE" parent="Rooms/B2/Furniture" unique_id=1261707862 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0, 5.2)
+
+[node name="PhotoN" parent="Rooms/B2/Furniture/PairSE" unique_id=1066401024 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.45, 1.069, -0.125)
+
+[node name="PhotoS" parent="Rooms/B2/Furniture/PairSE" unique_id=352194255 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 1.069, 0.125)
+
+[node name="EmployeeOfTheMonth" parent="Rooms/B2/Furniture" unique_id=161752113 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -3.2, 0.99, -7.3)
+
+[node name="EOTMLabel" type="Label3D" parent="Rooms/B2/Furniture" unique_id=1196857573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 2.7, -7.86)
+pixel_size = 0.004
+modulate = Color(0.133, 0.133, 0.133, 1)
+outline_modulate = Color(1, 1, 1, 0.85)
+text = "EMPLOYEE OF THE MONTH
+(EVERY MONTH)"
+font = ExtResource("g_ComicRelief_Bold")
+font_size = 96
+outline_size = 8
+
+[node name="ChairStack1" parent="Rooms/B2/Furniture" unique_id=461911697 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, -7.2)
+
+[node name="ChairStack2" parent="Rooms/B2/Furniture" unique_id=309765337 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.992546, 0, 0.121869, 0, 1, 0, -0.121869, 0, 0.992546, 5.2, 0.715, -7.2)
+
+[node name="ChairStack3" parent="Rooms/B2/Furniture" unique_id=58258361 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.996195, 0, -0.087156, 0, 1, 0, 0.087156, 0, 0.996195, 5.2, 1.43, -7.2)
+
+[node name="ChairStack4" parent="Rooms/B2/Furniture" unique_id=2012851633 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.987688, 0, 0.156434, 0, 1, 0, -0.156434, 0, 0.987688, 5.2, 2.145, -7.2)
+
+[node name="ChairStack5" parent="Rooms/B2/Furniture" unique_id=743525099 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.990268, 0, -0.139173, 0, 1, 0, 0.139173, 0, 0.990268, 5.2, 2.86, -7.2)
+
+[node name="BambooBin" parent="Rooms/B2/Furniture" unique_id=1655666884 instance=ExtResource("g_TrashBin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4, 0, 7.5)
+
+[node name="Bamboo" parent="Rooms/B2/Furniture" unique_id=238132126 instance=ExtResource("g_Nature_Deco_Bamboo1")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -5.4, 0.15, 7.5)
+
+[node name="Box1" parent="Rooms/B2/Furniture" unique_id=2054998229 instance=ExtResource("g_Box_Base")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, 7.3)
+
+[node name="Box2" parent="Rooms/B2/Furniture" unique_id=1137486080 instance=ExtResource("g_Box_Base")]
+transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 5.3, 0.65, 7.3)
+
+[node name="Box3" parent="Rooms/B2/Furniture" unique_id=303284310 instance=ExtResource("g_Box_Base")]
+transform = Transform3D(0.994522, 0, -0.104528, 0, 1, 0, 0.104528, 0, 0.994522, 5.3, 1.3, 7.3)
+
+[node name="Clock" parent="Rooms/B2/Furniture" unique_id=1439891686 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.875, 2.4, -6.5)
+minute = 56
+
+[node name="Bookshelf" parent="Rooms/B2/Furniture" unique_id=411056546 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.56, 0, -4.4)
+
+[node name="PrinterTable" parent="Rooms/B2/Furniture" unique_id=741631182 instance=ExtResource("g_Table_Box")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.5, 0, 4)
+
+[node name="Printer" parent="Rooms/B2/Furniture" unique_id=232267006 instance=ExtResource("g_Printer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.5, 0.949, 4)
+
+[node name="PlantW" parent="Rooms/B2/Furniture" unique_id=1508948598 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -5.3, 0, -1.6)
+
+[node name="PlantE" parent="Rooms/B2/Furniture" unique_id=1503526169 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 5.3, 0, -1.6)
+
+[node name="PlantSE" parent="Rooms/B2/Furniture" unique_id=1739334151 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 5.3, 0, 3.6)
+
+[node name="C2" type="Node3D" parent="Rooms" unique_id=1689299425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+
+[node name="Lights" type="Node3D" parent="Rooms/C2" unique_id=754357599]
+
+[node name="CeilingLight1" parent="Rooms/C2/Lights" unique_id=1457401355 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/C2/Lights" unique_id=251471759 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/C2/Lights" unique_id=1139539511 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/C2/Lights" unique_id=1500654738 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/C2/Lights" unique_id=1745182258 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/C2/Lights" unique_id=710436026 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/C2/Lights" unique_id=1245569385 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, -4, 0, 2)
+
+[node name="CeilingLight8" parent="Rooms/C2/Lights" unique_id=81481713 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/C2/Lights" unique_id=662537119 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/C2/Lights" unique_id=629945955 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/C2/Lights" unique_id=1036576287 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/C2/Lights" unique_id=397257466 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/C2" unique_id=1217982315]
+
+[node name="CeilingPinwheel" type="Node3D" parent="Rooms/C2/Furniture" unique_id=951451417]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 2, 3.875, 0)
+
+[node name="Desk1" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=2115499865 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.375, 0, -0.74)
+
+[node name="Desk1Chair" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=289528712 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0, -1.49)
+freeze = true
+model = 2
+
+[node name="Desk2" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=1037129497 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.74, 0, 0.375)
+
+[node name="Desk2Chair" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=29610225 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 1.49, 0, 0.375)
+freeze = true
+
+[node name="Desk3" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=1954300995 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.74)
+
+[node name="Desk3Chair" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=1062076151 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.375, 0, 1.49)
+freeze = true
+model = 0
+
+[node name="Desk4" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=14082365 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.74, 0, -0.375)
+
+[node name="Desk4Chair" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=977435121 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.49, 0, -0.375)
+freeze = true
+
+[node name="HangingVase" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=330509846 instance=ExtResource("g_Nature_Deco_2")]
+
+[node name="HangingPhoto" parent="Rooms/C2/Furniture/CeilingPinwheel" unique_id=1203784436 instance=ExtResource("g_Painting_Small2")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.825, 1.069, -0.49)
+
+[node name="CeilingLamp1" parent="Rooms/C2/Furniture" unique_id=942058425 instance=ExtResource("g_Lamp_1")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -2, 3.875, -6)
+
+[node name="CeilingLamp2" parent="Rooms/C2/Furniture" unique_id=917774534 instance=ExtResource("g_Lamp_1")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -2, 3.875, 6)
+
+[node name="CeilingLamp3" parent="Rooms/C2/Furniture" unique_id=764639605 instance=ExtResource("g_Lamp_1")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 2, 3.875, -6)
+
+[node name="CeilingLamp4" parent="Rooms/C2/Furniture" unique_id=1537398815 instance=ExtResource("g_Lamp_1")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 2, 3.875, 6)
+
+[node name="CeilingCabinet1" parent="Rooms/C2/Furniture" unique_id=1350405183 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 5.6, 3.875, -4)
+
+[node name="CeilingCabinet2" parent="Rooms/C2/Furniture" unique_id=210410291 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 5.6, 3.875, -3.4)
+
+[node name="CeilingCounter" parent="Rooms/C2/Furniture" unique_id=1492063607 instance=ExtResource("g_Office_CounterA1")]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -5.55, 3.875, 4)
+
+[node name="CeilingCoffee" parent="Rooms/C2/Furniture" unique_id=1567528182 instance=ExtResource("g_CoffeeMachine")]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -5.6, 2.926, 4)
+
+[node name="CeilingMug" parent="Rooms/C2/Furniture" unique_id=339120179 instance=ExtResource("g_CoffeeCup_Filled")]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -5.55, 2.926, 3.6)
+
+[node name="CeilingPlant1" parent="Rooms/C2/Furniture" unique_id=661985288 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -5.2, 3.875, -7.2)
+
+[node name="CeilingPlant2" parent="Rooms/C2/Furniture" unique_id=25615598 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 5.2, 3.875, 7.2)
+
+[node name="CeilingBin" parent="Rooms/C2/Furniture" unique_id=894630420 instance=ExtResource("g_TrashBin")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -5.5, 3.875, -1.5)
+
+[node name="UpsideDownPainting" parent="Rooms/C2/Furniture" unique_id=1945477521 instance=ExtResource("g_Painting")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -3, 2, -7.885)
+
+[node name="Painting" parent="Rooms/C2/Furniture/UpsideDownPainting" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("p2_painting_2")
+
+[node name="UpsideDownWhiteboard" parent="Rooms/C2/Furniture" unique_id=82468205 instance=ExtResource("g_WhiteBoard_Big")]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, -3, 2.2, 7.82)
+
+[node name="UpsideDownClock" parent="Rooms/C2/Furniture" unique_id=1187022362 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -5.875, 2.6, -3)
+minute = 55
+minutes_per_second = -1.0
+
+[node name="CeilingCoffeeTable" parent="Rooms/C2/Furniture" unique_id=925819187 instance=ExtResource("g_CoffeeTable")]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, 3.8, 3.875, 4.2)
+
+[node name="CeilingArmchair1" parent="Rooms/C2/Furniture" unique_id=66147460 instance=ExtResource("g_Chair_B")]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, 2.9, 3.875, 4.2)
+
+[node name="CeilingArmchair2" parent="Rooms/C2/Furniture" unique_id=573695538 instance=ExtResource("g_Chair_B")]
+transform = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 4.75, 3.875, 4.2)
+
+[node name="UpsideDownTV" parent="Rooms/C2/Furniture" unique_id=604095273 instance=ExtResource("g_Wall_TV")]
+transform = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 5.875, 2.1, -5.5)
+
+[node name="TheOneThatDidntGetTheMemo" parent="Rooms/C2/Furniture" unique_id=1149380429 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, 0.819152, -3, 0, 4.5)
+model = 0
+
+[node name="A3" type="Node3D" parent="Rooms" unique_id=1067610218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 16)
+
+[node name="Lights" type="Node3D" parent="Rooms/A3" unique_id=2114839564]
+
+[node name="CeilingLight1" parent="Rooms/A3/Lights" unique_id=331021748 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/A3/Lights" unique_id=1188623161 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/A3/Lights" unique_id=1919068802 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/A3/Lights" unique_id=98194448 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/A3/Lights" unique_id=278339389 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/A3/Lights" unique_id=2088760521 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/A3/Lights" unique_id=239963217 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="CeilingLight8" parent="Rooms/A3/Lights" unique_id=995897060 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/A3/Lights" unique_id=72314588 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/A3/Lights" unique_id=1133499136 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/A3/Lights" unique_id=228238594 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/A3/Lights" unique_id=1060826124 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/A3" unique_id=1382944028]
+
+[node name="PinwheelMirrored" type="Node3D" parent="Rooms/A3/Furniture" unique_id=1000509548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 3.6)
+
+[node name="Desk1" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=147251336 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.375, 0, -0.74)
+
+[node name="Desk1Chair" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=1291632927 instance=ExtResource("g_office_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, -1.49)
+
+[node name="Desk2" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=1449824052 instance=ExtResource("g_ws_retro")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.74, 0, 0.375)
+
+[node name="Desk2Chair" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=190973210 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.49, 0, 0.375)
+model = 0
+
+[node name="Desk3" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=1106050644 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0, 0.74)
+
+[node name="Desk3Chair" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=1243398801 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.375, 0, 1.49)
+
+[node name="Desk4" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=98709774 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.74, 0, -0.375)
+
+[node name="Desk4Chair" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=578930450 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 1.49, 0, -0.375)
+
+[node name="Vase" parent="Rooms/A3/Furniture/PinwheelMirrored" unique_id=1770346150 instance=ExtResource("g_Nature_Deco_2")]
+
+[node name="Clock1" parent="Rooms/A3/Furniture" unique_id=1194929836 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(-1.4, 0, 0, 0, 1.4, 0, 0, 0, -1.4, 3.5, 2.35, 7.874)
+minute = 57
+
+[node name="Label1" type="Label3D" parent="Rooms/A3/Furniture" unique_id=135458291]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3.5, 1.9, 7.86)
+pixel_size = 0.004
+modulate = Color(0.133, 0.133, 0.133, 1)
+outline_modulate = Color(1, 1, 1, 0.85)
+text = "NEW YORK"
+font = ExtResource("g_ComicRelief_Bold")
+font_size = 64
+outline_size = 8
+
+[node name="Clock2" parent="Rooms/A3/Furniture" unique_id=1384341475 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(-1.4, 0, 0, 0, 1.4, 0, 0, 0, -1.4, 1.5, 2.35, 7.874)
+minute = 57
+
+[node name="Label2" type="Label3D" parent="Rooms/A3/Furniture" unique_id=649461448]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1.5, 1.9, 7.86)
+pixel_size = 0.004
+modulate = Color(0.133, 0.133, 0.133, 1)
+outline_modulate = Color(1, 1, 1, 0.85)
+text = "LONDON"
+font = ExtResource("g_ComicRelief_Bold")
+font_size = 64
+outline_size = 8
+
+[node name="Clock3" parent="Rooms/A3/Furniture" unique_id=1033017744 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(-1.4, 0, 0, 0, 1.4, 0, 0, 0, -1.4, -0.5, 2.35, 7.874)
+minute = 57
+
+[node name="Label3" type="Label3D" parent="Rooms/A3/Furniture" unique_id=1825744135]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.5, 1.9, 7.86)
+pixel_size = 0.004
+modulate = Color(0.133, 0.133, 0.133, 1)
+outline_modulate = Color(1, 1, 1, 0.85)
+text = "TOKYO"
+font = ExtResource("g_ComicRelief_Bold")
+font_size = 64
+outline_size = 8
+
+[node name="Clock4" parent="Rooms/A3/Furniture" unique_id=762870257 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(-1.4, 0, 0, 0, 1.4, 0, 0, 0, -1.4, -2.5, 2.35, 7.874)
+minute = 57
+
+[node name="Label4" type="Label3D" parent="Rooms/A3/Furniture" unique_id=572206130]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.5, 1.9, 7.86)
+pixel_size = 0.004
+modulate = Color(0.133, 0.133, 0.133, 1)
+outline_modulate = Color(1, 1, 1, 0.85)
+text = "HERE"
+font = ExtResource("g_ComicRelief_Bold")
+font_size = 64
+outline_size = 8
+
+[node name="Clock5" parent="Rooms/A3/Furniture" unique_id=535050100 instance=ExtResource("g_wall_clock")]
+transform = Transform3D(-1.4, 0, 0, 0, 1.4, 0, 0, 0, -1.4, -4.5, 2.35, 7.874)
+minute = 52
+
+[node name="Label5" type="Label3D" parent="Rooms/A3/Furniture" unique_id=1407636322]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.5, 1.9, 7.86)
+pixel_size = 0.004
+modulate = Color(0.133, 0.133, 0.133, 1)
+outline_modulate = Color(1, 1, 1, 0.85)
+text = "DEADLINE"
+font = ExtResource("g_ComicRelief_Bold")
+font_size = 64
+outline_size = 8
+
+[node name="Bookshelf1" parent="Rooms/A3/Furniture" unique_id=2004709266 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.56, 0, -4)
+
+[node name="Bookshelf2" parent="Rooms/A3/Furniture" unique_id=429565924 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.56, 0, -5.2)
+
+[node name="HighPainting" parent="Rooms/A3/Furniture" unique_id=973643353 instance=ExtResource("g_Painting")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.1, -7.885)
+
+[node name="Painting" parent="Rooms/A3/Furniture/HighPainting" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("g_painting_4")
+
+[node name="Cabinet1" parent="Rooms/A3/Furniture" unique_id=1882386934 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.6, 0, -6.2)
+
+[node name="Cabinet2" parent="Rooms/A3/Furniture" unique_id=1138512525 instance=ExtResource("g_file_cabinet")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.6, 0, -5.6)
+
+[node name="Cupboard" parent="Rooms/A3/Furniture" unique_id=1428960425 instance=ExtResource("g_shelf_stocked")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.6, 0, -4.5)
+
+[node name="Vase2" parent="Rooms/A3/Furniture" unique_id=41445498 instance=ExtResource("g_Office_Deco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -7.45)
+
+[node name="LoungeTable" parent="Rooms/A3/Furniture" unique_id=2021803348 instance=ExtResource("g_CoffeeTable")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4.2, 0, 5.2)
+
+[node name="LoungeChair1" parent="Rooms/A3/Furniture" unique_id=1091140580 instance=ExtResource("g_Chair_B")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 3.3, 0, 5.2)
+
+[node name="LoungeChair2" parent="Rooms/A3/Furniture" unique_id=151587302 instance=ExtResource("g_Chair_B")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.15, 0, 5.2)
+
+[node name="FruitPlate" parent="Rooms/A3/Furniture" unique_id=12412969 instance=ExtResource("g_Fruit_Plate")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4.2, 0.509, 5.2)
+
+[node name="Shelf" parent="Rooms/A3/Furniture" unique_id=1753987923 instance=ExtResource("g_shelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0, -1.8)
+
+[node name="PlantSW" parent="Rooms/A3/Furniture" unique_id=1409590275 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, -5.3, 0, 7.2)
+
+[node name="Bin" parent="Rooms/A3/Furniture" unique_id=548626942 instance=ExtResource("g_TrashBin_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62, 0, 6.2)
+
+[node name="LoungeLamp" parent="Rooms/A3/Furniture" unique_id=1376629438 instance=ExtResource("g_Lamp_1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 7.4)
+
+[node name="B3" type="Node3D" parent="Rooms" unique_id=492816765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 16)
+
+[node name="Lights" type="Node3D" parent="Rooms/B3" unique_id=1037780019]
+
+[node name="CeilingLight1" parent="Rooms/B3/Lights" unique_id=646554235 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/B3/Lights" unique_id=303219371 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/B3/Lights" unique_id=1832694509 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/B3/Lights" unique_id=1158152492 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/B3/Lights" unique_id=1913902845 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/B3/Lights" unique_id=151621675 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/B3/Lights" unique_id=155848937 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="CeilingLight8" parent="Rooms/B3/Lights" unique_id=1946516981 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/B3/Lights" unique_id=140918260 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/B3/Lights" unique_id=1607599362 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/B3/Lights" unique_id=954575385 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/B3/Lights" unique_id=1882230578 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/B3" unique_id=1262282407]
+
+[node name="ShrinkDesk1" parent="Rooms/B3/Furniture" unique_id=1790763621 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.4, 0, 5.6)
+
+[node name="ShrinkChair1" parent="Rooms/B3/Furniture" unique_id=997510527 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4, 0, 4.85)
+
+[node name="ShrinkDesk2" parent="Rooms/B3/Furniture" unique_id=88181701 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-0.82, 0, 0, 0, 0.82, 0, 0, 0, -0.82, -2.55, 0, 5.6)
+
+[node name="ShrinkChair2" parent="Rooms/B3/Furniture" unique_id=1209261271 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, -2.55, 0, 4.985)
+
+[node name="ShrinkDesk3" parent="Rooms/B3/Furniture" unique_id=829322804 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-0.66, 0, 0, 0, 0.66, 0, 0, 0, -0.66, -1.05, 0, 5.6)
+
+[node name="ShrinkChair3" parent="Rooms/B3/Furniture" unique_id=1641232611 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, -1.05, 0, 5.105)
+
+[node name="ShrinkDesk4" parent="Rooms/B3/Furniture" unique_id=750743750 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-0.5, 0, 0, 0, 0.5, 0, 0, 0, -0.5, 0.14, 0, 5.6)
+
+[node name="ShrinkChair4" parent="Rooms/B3/Furniture" unique_id=1064844273 instance=ExtResource("g_Chair_A")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.14, 0, 5.225)
+
+[node name="DollhouseDesk" parent="Rooms/B3/Furniture" unique_id=733811896 instance=ExtResource("g_ws_modern")]
+transform = Transform3D(-0.15, 0, 0, 0, 0.15, 0, 0, 0, -0.15, -3.95, 0.949, 5.5)
+
+[node name="FileTower1" parent="Rooms/B3/Furniture" unique_id=1251684021 instance=ExtResource("g_FileCabinet_Standard")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0, -4)
+
+[node name="FileTowerDrawer1" parent="Rooms/B3/Furniture" unique_id=1753341072 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.42, 0.685, -4)
+
+[node name="FileTowerDrawer1_1" parent="Rooms/B3/Furniture" unique_id=1005278233 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0.035, -4)
+
+[node name="FileTowerDrawer1_2" parent="Rooms/B3/Furniture" unique_id=1022062446 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0.36, -4)
+
+[node name="FileTower2" parent="Rooms/B3/Furniture" unique_id=97343924 instance=ExtResource("g_FileCabinet_Standard")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 1.05, -4)
+
+[node name="FileTowerDrawer2" parent="Rooms/B3/Furniture" unique_id=1681244096 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.32, 1.735, -4)
+
+[node name="FileTowerDrawer2_1" parent="Rooms/B3/Furniture" unique_id=2003514670 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 1.085, -4)
+
+[node name="FileTowerDrawer2_2" parent="Rooms/B3/Furniture" unique_id=1011121470 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 1.41, -4)
+
+[node name="FileTower3" parent="Rooms/B3/Furniture" unique_id=1868715556 instance=ExtResource("g_FileCabinet_Standard")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 2.1, -4)
+
+[node name="FileTowerDrawer3" parent="Rooms/B3/Furniture" unique_id=1755232890 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.22, 2.785, -4)
+
+[node name="FileTowerDrawer3_1" parent="Rooms/B3/Furniture" unique_id=1277572861 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 2.135, -4)
+
+[node name="FileTowerDrawer3_2" parent="Rooms/B3/Furniture" unique_id=1893152001 instance=ExtResource("g_FileCabinet_Standard_Drawer")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 2.46, -4)
+
+[node name="GiantMug" parent="Rooms/B3/Furniture" unique_id=365010709 instance=ExtResource("g_CoffeeCup")]
+transform = Transform3D(-6.577848, 0, -2.394141, 0, 7, 0, 2.394141, 0, -6.577848, 4.3, 0, -4.5)
+
+[node name="GiantMugPlant" parent="Rooms/B3/Furniture" unique_id=944026078 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 4.3, 0.55, -4.5)
+
+[node name="StairPainting1" parent="Rooms/B3/Furniture" unique_id=1575277425 instance=ExtResource("g_Painting_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.2, -7.875)
+
+[node name="StairPainting2" parent="Rooms/B3/Furniture" unique_id=1677321297 instance=ExtResource("g_Painting_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 1.5, -7.875)
+
+[node name="StairPainting3" parent="Rooms/B3/Furniture" unique_id=1115000634 instance=ExtResource("g_Painting_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 1.8, -7.875)
+
+[node name="StairPainting4" parent="Rooms/B3/Furniture" unique_id=1749643328 instance=ExtResource("g_Painting_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, 2.1, -7.875)
+
+[node name="StairPainting5" parent="Rooms/B3/Furniture" unique_id=940323041 instance=ExtResource("g_Painting_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 2.4, -7.875)
+
+[node name="Bookshelf" parent="Rooms/B3/Furniture" unique_id=578382547 instance=ExtResource("g_bookshelf_stocked")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 0, -7.56)
+
+[node name="Shelf" parent="Rooms/B3/Furniture" unique_id=2087206737 instance=ExtResource("g_shelf_stocked")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0, -6.4)
+
+[node name="GrowPlant1" parent="Rooms/B3/Furniture" unique_id=332530306 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 5.61, 0, 3.4)
+
+[node name="GrowPlant2" parent="Rooms/B3/Furniture" unique_id=1820907631 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0, 0, 0.9, 0, 0.9, 0, -0.9, 0, 0, 5.49, 0, 4.5)
+
+[node name="GrowPlant3" parent="Rooms/B3/Furniture" unique_id=1804915249 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-1.2, 0, 0, 0, 1.2, 0, 0, 0, -1.2, 5.37, 0, 5.8)
+
+[node name="GrowPlant4" parent="Rooms/B3/Furniture" unique_id=2112568729 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0, 0, -1.5, 0, 1.5, 0, 1.5, 0, 0, 5.25, 0, 7.2)
+
+[node name="PlantSW" parent="Rooms/B3/Furniture" unique_id=1546463062 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, -0.939693, -5.3, 0, 7.3)
+
+[node name="Lamp" parent="Rooms/B3/Furniture" unique_id=694688755 instance=ExtResource("g_Lamp_1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45, 0, -7.45)
+
+[node name="C3" type="Node3D" parent="Rooms" unique_id=1274703437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 16)
+
+[node name="Lights" type="Node3D" parent="Rooms/C3" unique_id=1715142363]
+
+[node name="CeilingLight1" parent="Rooms/C3/Lights" unique_id=1973179390 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -6)
+
+[node name="CeilingLight2" parent="Rooms/C3/Lights" unique_id=243784360 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -6)
+
+[node name="CeilingLight3" parent="Rooms/C3/Lights" unique_id=1001403195 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -6)
+
+[node name="CeilingLight4" parent="Rooms/C3/Lights" unique_id=380587028 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, -2)
+
+[node name="CeilingLight5" parent="Rooms/C3/Lights" unique_id=1741767655 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, -2)
+
+[node name="CeilingLight6" parent="Rooms/C3/Lights" unique_id=1815137152 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, -2)
+
+[node name="CeilingLight7" parent="Rooms/C3/Lights" unique_id=2029576119 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 2)
+
+[node name="CeilingLight8" parent="Rooms/C3/Lights" unique_id=467433841 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 2)
+
+[node name="CeilingLight9" parent="Rooms/C3/Lights" unique_id=1308800994 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 2)
+
+[node name="CeilingLight10" parent="Rooms/C3/Lights" unique_id=546372313 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.875, 6)
+
+[node name="CeilingLight11" parent="Rooms/C3/Lights" unique_id=226012782 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.875, 6)
+
+[node name="CeilingLight12" parent="Rooms/C3/Lights" unique_id=1334136465 instance=ExtResource("6_8w2hi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.875, 6)
+
+[node name="Furniture" type="Node3D" parent="Rooms/C3" unique_id=1916177798]
+
+[node name="PairNW" parent="Rooms/C3/Furniture" unique_id=1591106055 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, -4.2)
+
+[node name="PairNE" parent="Rooms/C3/Furniture" unique_id=1201693514 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 4.2, 0, -4.2)
+
+[node name="PairSE" parent="Rooms/C3/Furniture" unique_id=985585549 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3, 0, 5.2)
+
+[node name="PairSW" parent="Rooms/C3/Furniture" unique_id=1084683079 instance=ExtResource("g_desk_pair")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -3.2, 0, 5.2)
+
+[node name="MeetingTable" parent="Rooms/C3/Furniture" unique_id=1130095740 instance=ExtResource("g_Table_Circular")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, 1)
+
+[node name="MeetingChairPlant" parent="Rooms/C3/Furniture" unique_id=520218405 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 4.3, 0.949, 1)
+
+[node name="MeetingChair1" parent="Rooms/C3/Furniture" unique_id=1361888578 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.45, 0, 1)
+model = 2
+
+[node name="MeetingChair2" parent="Rooms/C3/Furniture" unique_id=1504670888 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0.951057, 0, -0.309017, 0, 1, 0, 0.309017, 0, 0.951057, 4.66, 0, -0.09)
+
+[node name="MeetingChair3" parent="Rooms/C3/Furniture" unique_id=1798451244 instance=ExtResource("g_office_chair")]
+transform = Transform3D(0.587785, 0, 0.809017, 0, 1, 0, -0.809017, 0, 0.587785, 3.37, 0, 0.32)
+model = 0
+
+[node name="MeetingChair4" parent="Rooms/C3/Furniture" unique_id=1208750116 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-0.587785, 0, 0.809017, 0, 1, 0, -0.809017, 0, -0.587785, 3.37, 0, 1.68)
+
+[node name="MeetingChair5" parent="Rooms/C3/Furniture" unique_id=240549033 instance=ExtResource("g_office_chair")]
+transform = Transform3D(-0.951057, 0, -0.309017, 0, 1, 0, 0.309017, 0, -0.951057, 4.66, 0, 2.09)
+model = 0
+
+[node name="MeetingProjector" parent="Rooms/C3/Furniture" unique_id=1140449303 instance=ExtResource("p2_Projector")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 4.55, 0.949, 0.8)
+
+[node name="TwistPainting1" parent="Rooms/C3/Furniture" unique_id=1950749053 instance=ExtResource("g_Painting")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.8, -7.885)
+
+[node name="Painting" parent="Rooms/C3/Furniture/TwistPainting1" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("p2_painting_2")
+
+[node name="TwistPainting2" parent="Rooms/C3/Furniture" unique_id=304861980 instance=ExtResource("g_Painting")]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -3.9, 1.8, -7.885)
+
+[node name="Painting" parent="Rooms/C3/Furniture/TwistPainting2" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("p2_painting_2")
+
+[node name="TwistPainting3" parent="Rooms/C3/Furniture" unique_id=859215745 instance=ExtResource("g_Painting")]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -2.8, 1.8, -7.885)
+
+[node name="Painting" parent="Rooms/C3/Furniture/TwistPainting3" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("p2_painting_2")
+
+[node name="TwistPainting4" parent="Rooms/C3/Furniture" unique_id=1812365132 instance=ExtResource("g_Painting")]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.7, 1.8, -7.885)
+
+[node name="Painting" parent="Rooms/C3/Furniture/TwistPainting4" index="0" unique_id=510425877]
+surface_material_override/1 = ExtResource("p2_painting_2")
+
+[node name="SandwichBottom" parent="Rooms/C3/Furniture" unique_id=1474583829 instance=ExtResource("p2_Food_Bread")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0.99, -3.705)
+
+[node name="SandwichCheese" parent="Rooms/C3/Furniture" unique_id=1594203607 instance=ExtResource("p2_Food_CheeseSlice")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.01, -3.705)
+
+[node name="SandwichLettuce" parent="Rooms/C3/Furniture" unique_id=145430945 instance=ExtResource("p2_Food_LettuceSlice")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.025, -3.705)
+
+[node name="SandwichTomato" parent="Rooms/C3/Furniture" unique_id=1829485390 instance=ExtResource("p2_Food_TomatoSlice")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.04, -3.705)
+
+[node name="SandwichTop" parent="Rooms/C3/Furniture" unique_id=1966585200 instance=ExtResource("p2_Food_Bread")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.05, -3.705)
+
+[node name="BriefcaseWall1" parent="Rooms/C3/Furniture" unique_id=385784959 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 0, -7.2)
+
+[node name="BriefcaseWall2" parent="Rooms/C3/Furniture" unique_id=1553456940 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 0, -6.45)
+
+[node name="BriefcaseWall3" parent="Rooms/C3/Furniture" unique_id=2091903844 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 0, -5.7)
+
+[node name="BriefcaseWall4" parent="Rooms/C3/Furniture" unique_id=1950192045 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 0.61, -6.825)
+
+[node name="BriefcaseWall5" parent="Rooms/C3/Furniture" unique_id=926142143 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 0.61, -6.075)
+
+[node name="BriefcaseWall6" parent="Rooms/C3/Furniture" unique_id=785251654 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 1.22, -7.2)
+
+[node name="BriefcaseWall7" parent="Rooms/C3/Furniture" unique_id=54344561 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 1.22, -6.45)
+
+[node name="BriefcaseWall8" parent="Rooms/C3/Furniture" unique_id=1296541708 instance=ExtResource("p2_Briefcase_1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.75, 1.22, -5.7)
+
+[node name="PlantSE" parent="Rooms/C3/Furniture" unique_id=579787460 instance=ExtResource("g_Nature_Deco_3")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 5.3, 0, 7.3)
+
+[node name="Bin" parent="Rooms/C3/Furniture" unique_id=1040575705 instance=ExtResource("g_TrashBin_Small")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -5.6)
+
+[node name="Doors" type="Node3D" parent="." unique_id=1293733539]
+
+[node name="StartA2" parent="Doors" unique_id=2071082252 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 1)
+
+[node name="A1B1" parent="Doors" unique_id=453261327 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, -15)
+
+[node name="B1C1" parent="Doors" unique_id=863673089 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24, 0, -15)
+
+[node name="A2B2" parent="Doors" unique_id=877956501 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, 1)
+
+[node name="B2C2" parent="Doors" unique_id=149864138 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24, 0, 1)
+
+[node name="A3B3" parent="Doors" unique_id=495673131 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, 17)
+
+[node name="B3C3" parent="Doors" unique_id=1316412072 instance=ExtResource("75_puljc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24, 0, 17)
+
+[node name="A1A2" parent="Doors" unique_id=539553098 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -8)
+
+[node name="B1B2" parent="Doors" unique_id=1463478724 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, -8)
+
+[node name="C1C2" parent="Doors" unique_id=553062749 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -8)
+
+[node name="A2A3" parent="Doors" unique_id=765178557 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
+
+[node name="B2B3" parent="Doors" unique_id=721892000 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 8)
+
+[node name="C2C3" parent="Doors" unique_id=786234506 instance=ExtResource("75_puljc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 8)
+
+[node name="Lighting" type="Node" parent="." unique_id=664409914]
+script = ExtResource("72_wqicl")
+
+[node name="StoryStage" type="Node" parent="." unique_id=1309915522]
+script = ExtResource("st_story_stage")
+
+[editable path="Rooms/A1/Furniture/Pinwheel/Desk3"]
+[editable path="Rooms/B1/Lights/CeilingLight1"]
+[editable path="Rooms/B1/Lights/CeilingLight2"]
+[editable path="Rooms/B1/Lights/CeilingLight3"]
+[editable path="Rooms/B1/Lights/CeilingLight4"]
+[editable path="Rooms/B1/Lights/CeilingLight5"]
+[editable path="Rooms/B1/Lights/CeilingLight6"]
+[editable path="Rooms/B1/Lights/CeilingLight7"]
+[editable path="Rooms/B1/Lights/CeilingLight8"]
+[editable path="Rooms/B1/Lights/CeilingLight9"]
+[editable path="Rooms/B1/Furniture/Lamborghini"]
+[editable path="Rooms/C1/Lights/CeilingLight1"]
+[editable path="Rooms/C1/Lights/CeilingLight2"]
+[editable path="Rooms/C1/Lights/CeilingLight3"]
+[editable path="Rooms/C1/Lights/CeilingLight4"]
+[editable path="Rooms/C1/Lights/CeilingLight5"]
+[editable path="Rooms/C1/Lights/CeilingLight6"]
+[editable path="Rooms/C1/Lights/CeilingLight7"]
+[editable path="Rooms/C1/Lights/CeilingLight8"]
+[editable path="Rooms/C1/Lights/CeilingLight9"]
+[editable path="Rooms/C1/Lights/CeilingLight10"]
+[editable path="Rooms/C1/Lights/CeilingLight11"]
+[editable path="Rooms/C1/Lights/CeilingLight12"]
+[editable path="Rooms/A2/Furniture/TwinDesk2"]
+[editable path="Rooms/C2/Furniture/UpsideDownPainting"]
+[editable path="Rooms/A3/Furniture/HighPainting"]
+[editable path="Rooms/C3/Furniture/TwistPainting1"]
+[editable path="Rooms/C3/Furniture/TwistPainting2"]
+[editable path="Rooms/C3/Furniture/TwistPainting3"]
+[editable path="Rooms/C3/Furniture/TwistPainting4"]
