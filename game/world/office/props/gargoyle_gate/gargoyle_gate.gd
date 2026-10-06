@@ -29,7 +29,7 @@ const SUBTITLE_LIFTED_TOP := -360.0
 ## The narrator reads the question, then each option, one recording after another (no subtitles:
 ## it's all on screen). Script line "And your options are..." has no recording yet.
 const QUESTION_CUES: Array[StringName] = [
-	&"quiz_question", &"quiz_option_1", &"quiz_option_2", &"quiz_option_3", &"quiz_option_4",
+	&"quiz_question", &"quiz_options_intro", &"quiz_option_1", &"quiz_option_2", &"quiz_option_3", &"quiz_option_4",
 ]
 const SLAM := preload("res://assets/audio/sfx/freesound/quiz_lights_slam_grubzyy.wav")
 const INTRO_HIT := preload("res://assets/audio/sfx/freesound/quiz_intro_hit_horns_devern.wav")
