@@ -30,14 +30,14 @@ extends Node
 ## Minimum seconds between two off-path lines.
 @export var off_path_cooldown := 30.0
 ## Seconds without any input before the first idle line, then between the next ones.
-@export var idle_first := 30.0
-@export var idle_next := 20.0
+@export var idle_first := 6.0
+@export var idle_next := 6.0
 
 const CHECK_INTERVAL := 0.5
 ## First-entry lines by room *content* (the room node, wherever it stands: C1 moves to A3's spot).
 const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &"C2": &"room_upside_down", &"B2": &"room_employee_month", &"B3": &"room_family_chairs"}
-## Played in order while the player stands idle (they don't restart after input).
-const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6"]
+## Played in order while the player stands idle (they don't restart after input); `idle_out` ends the facts.
+const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6", &"idle_out"]
 ## Seconds idle after which the off-path clock stops (standing still is idle, not lost).
 const IDLE_NOT_LOST := 5.0
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)

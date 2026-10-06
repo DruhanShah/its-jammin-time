@@ -76,3 +76,4 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `wires_crossed` | Crossing the wires. That's how the last intern got his haircut. |
 | `wires_finally` | Oh, NOW it's straight. Took you a few sparks. |
 | `wires_straight_first` | Straight across, first try. Suspicious. Who told you? |
+| `idle_out` | Oh, I already said that. I am now out of fun facts. |
