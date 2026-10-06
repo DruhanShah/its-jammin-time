@@ -25,8 +25,7 @@ const BACKS: Array[Mesh] = [
 @export var bump_volume_db := -3.0
 ## Seconds after a bump before another one can sound.
 @export var bump_cooldown := 0.3
-## Chance of a squeak when the chair starts rolling, and squeaks per second while it rolls.
-@export var start_squeak_chance := 0.3
+## Squeaks per second while the chair rolls.
 @export var squeaks_per_second := 0.15
 
 var _level := 0.0
@@ -53,11 +52,9 @@ func _physics_process(delta: float) -> void:
 	if _level < 0.02:
 		roll.stop()
 		return
-	var squeak_chance := squeaks_per_second * delta
 	if not roll.playing:
 		roll.play(randf() * roll.stream.get_length())
-		squeak_chance = start_squeak_chance
-	if randf() < squeak_chance and not squeak.playing:
+	if randf() < squeaks_per_second * delta and not squeak.playing:
 		squeak.play()
 	roll.volume_db = roll_volume_db + linear_to_db(_level)
 	roll.pitch_scale = lerpf(0.8, 1.2, _level)

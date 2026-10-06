@@ -6,7 +6,6 @@
 [ext_resource type="ArrayMesh" path="res://assets/vnb_office/meshes/Chair_Office_Wheel.res" id="4_wheel"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/chair_roll_loop.wav" id="5_roll"]
 [ext_resource type="AudioStream" uid="uid://bnp41piqw1wjg" path="res://assets/audio/sfx/400_sounds_pack/subtle_knock.wav" id="6_bump"]
-[ext_resource type="AudioStream" uid="uid://3osuwikuw4m1" path="res://assets/audio/sfx/400_sounds_pack/creaky_door_short.wav" id="7_squeak"]
 [ext_resource type="AudioStream" uid="uid://bjxpovlvh4x6w" path="res://assets/audio/sfx/400_sounds_pack/foley_creak_1.wav" id="8_creak"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wheels"]
@@ -14,9 +13,8 @@ friction = 0.05
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_squeak"]
 random_pitch = 1.2
-streams_count = 2
-stream_0/stream = ExtResource("7_squeak")
-stream_1/stream = ExtResource("8_creak")
+streams_count = 1
+stream_0/stream = ExtResource("8_creak")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_chair"]
 height = 1.0

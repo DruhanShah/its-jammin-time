@@ -12,7 +12,7 @@
   - `wood_small_hollow.wav` (pack folder `Materials/`): player hand touching something.
   - `door_open.wav`, `door_close.wav` (pack folder `Environment/`): the openable door prop (`world/office/props/door.tscn`). Imported as mono (import option only; the files are unaltered).
   - `subtle_knock.wav` (pack folder `Other/`): office chair bumping into something (`world/office/props/office_chair.tscn`). Imported as mono.
-  - `creaky_door_short.wav` (pack folder `Environment/`) and `foley_creak_1.wav` (pack folder `Footsteps/`): occasional office chair caster squeak/creak (random pick, pitched up in the scene). Imported as mono.
+  - `foley_creak_1.wav` (pack folder `Footsteps/`): occasional office chair caster creak while rolling (pitched up in the scene). Imported as mono.
 
 Credit line for the game's credits screen (optional per the license):
 
