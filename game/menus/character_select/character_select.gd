@@ -23,6 +23,10 @@ const CURSOR := "▌"
 const HEART := "♥"
 const HEART_COLOR := "#e03030"
 const CONFIRM_TITLE := "IS THIS YOUR CHARACTER?"
+## Narrator lines after YES: one of the two choice lines, then the post-choice line.
+const CHOICE_MADE_CUE := &"character_choice_made"
+const CHOICE_RANDOM_CUE := &"character_choice_random"
+const POST_CHOICE_CUE := &"character_post_choice"
 
 ## Choosable categories, one step each (step id = CharacterCategory.id). Order here only affects the
 ## file listing; the step order is the EventManager's `steps`, the draw order is CharacterCategory.layer.
@@ -41,11 +45,20 @@ const CONFIRM_TITLE := "IS THIS YOUR CHARACTER?"
 ## the current pick; empty = actually random.
 @export var random_preset: Dictionary[StringName, StringName] = {}
 
+@export_group("Ending")
+## Seconds into the post-choice line when the character is destroyed (on "...will never be used in the game!").
+@export var destroy_at := 3.4
+
 var _step := &"" ## Step on screen and taking input; empty while waiting between steps.
 var _picks: Dictionary[StringName, int] = {} ## Option index per category id.
 var _yes_focused := true ## Confirm prompt: YES (true) or NO focused.
 var _typed := "" ## Intro text typed so far.
 var _skip_intro := false
+var _used_random := false ## The final picks came from the random button (any manual change resets it).
+var _finishing := false
+var _line_cue := &"" ## The narrator line finish() is waiting on, when it started and its length.
+var _line_started_msec := 0
+var _line_length := 0.0
 var _layers: Dictionary[StringName, Array] = {} ## Category id -> [TextureRect, placeholder ColorRect].
 
 @onready var screen: Control = $Screen
@@ -68,6 +81,7 @@ var _layers: Dictionary[StringName, Array] = {} ## Category id -> [TextureRect, 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	ComicCursor.apply()
+	Audio.play_music(Audio.MENU_MUSIC) # Already playing from the start menu: keeps going.
 	tree_exiting.connect(ComicCursor.reset)
 	preview.clip_contents = true
 	get_viewport().size_changed.connect(_fit_screen)
@@ -117,15 +131,46 @@ func start_step(id: StringName) -> void:
 	_refresh()
 
 
-## Called by the EventManager after the last step: destroys the character, then cuts to black.
+## Called by the EventManager after the last step: the narrator admires the choice ("W O W."), thanks
+## the player, and on "...will never be used in the game!" the character is destroyed (the music dies
+## with it); after the line ends, a hard cut to black. Input is ignored throughout (_step is empty), and
+## every wait is capped, so a muted or cut-short line can't hang it.
 func finish() -> void:
+	if _finishing:
+		return
+	_finishing = true
 	_step = &""
 	_show_buttons(false)
 	confirm_prompt.hide()
 	picker.hide()
+	status_bar.hide() # The key hints: nothing takes input any more.
+	_say(CHOICE_RANDOM_CUE if _used_random else CHOICE_MADE_CUE)
+	await _line_end()
+	_say(POST_CHOICE_CUE)
+	await _line_end(destroy_at)
+	Audio.fade_out_music(0.3) # The music dies with the character (under the record scratch).
 	await _destroy()
+	await _line_end()
 	await get_tree().create_timer(0.4).timeout
 	get_tree().change_scene_to_file(INTRO_SCENE) # A hard cut to black, no fade.
+
+
+## Starts narrator cue `cue`; _line_end() then waits for it.
+func _say(cue: StringName) -> void:
+	Narrator.play(cue)
+	_line_cue = cue
+	_line_started_msec = Time.get_ticks_msec()
+	var stream: AudioStream = Narrator.voice.stream if Narrator.current_cue == cue and Narrator.voice.playing else null
+	_line_length = stream.get_length() if stream else 0.0
+
+
+## Waits until the line started by _say() ends (finished, cut short or muted), or until `at` seconds into
+## it if given, but never longer than its length plus a second, so nothing can hang here.
+func _line_end(at := -1.0) -> void:
+	var cap := _line_length + 1.0
+	var until := _line_started_msec + int(1000.0 * (minf(at, cap) if at >= 0.0 else cap))
+	while Narrator.current_cue == _line_cue and Narrator.is_speaking() and Time.get_ticks_msec() < until:
+		await get_tree().process_frame
 
 
 ## Record scratch, the portrait shakes, then crumples into a ball with a KRAKK! and drops off screen.
@@ -204,6 +249,7 @@ func _cycle(direction: int) -> void:
 	var category := _category(_step)
 	if category and category.options:
 		_picks[category.id] = posmod(_picks[category.id] + direction, category.options.size())
+		_used_random = false
 		_refresh()
 	elif _step == &"confirm":
 		_yes_focused = not _yes_focused
@@ -251,6 +297,7 @@ func _randomize() -> void:
 				push_warning("CharacterSelect: random_preset option '%s' not in '%s'" % [random_preset[category.id], category.id])
 			else:
 				_picks[category.id] = index
+	_used_random = true
 	_step = &""
 	jump_requested.emit(&"confirm")
 

@@ -95,6 +95,7 @@ func continue_game() -> bool:
 	var scene: String = data.get("scene", OFFICE)
 	if scene == COMPUTER:
 		GameState.computer_return_scene = OFFICE
+	Audio.crossfade_to(Audio.GAME_MUSIC, 0.5, 1.5) # Straight back into the game: skip the menu music.
 	Transition.change_scene(scene if ResourceLoader.exists(scene) else OFFICE)
 	return true
 

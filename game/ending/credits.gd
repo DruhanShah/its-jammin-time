@@ -121,11 +121,12 @@ const SECTIONS: Array = [
 		"* \"Socket Wrench\" by xxqmanxx",
 	], true],
 	["MUSIC", [
-		# TODO(orchestrator): add the track title once the Kevin MacLeod track lands ("<Title>" Kevin MacLeod ...).
-		"Music: Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, creativecommons.org/licenses/by/4.0/",
+		"\"Piece for Disaffected Piano Two\" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, creativecommons.org/licenses/by/4.0/",
+		"\"Cheerful Comedy Funny Quirky Background\" by alex-morgan (Pixabay), pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/, Pixabay Content License",
 	], true],
 	["MADE BY THE TEAM", [
 		"Start screen art: hand-drawn by the team",
+		"Character select art: drawn by the team (PiBot314)",
 		"Real-life ending video: filmed by the team",
 		"Narrator voices: recorded by the team",
 		"Cursor, halftone shader, ceiling texture, all scripts and scenes: made for this game",
@@ -161,6 +162,7 @@ var _stopped := false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	Audio.crossfade_to(Audio.MENU_MUSIC, 1.0, 1.5) # The opening music again, looping under the roll.
 	_build_background()
 	_roll = VBoxContainer.new()
 	_roll.add_theme_constant_override(&"separation", 56)
