@@ -1,0 +1,34 @@
+# The beginning: start menu → character design → destroyed → black intro → password screen
+
+Goal (user): "start menu -> press start you go to character design -> narration that character gets destroyed --> cut to black and narration starts" (script: docs/narration.md, "# Intro" line 1). The character design screen is PiBot314's (`origin/character-select`, b1aecdf), merged with `git merge --no-ff` so their authorship stays; the backdrop must not be a computer.
+
+## Review of the character-select branch
+
+It's a solid base: a data-driven design (CharacterCategory / CharacterOption / ConfirmLine resources, an EventManager that owns the step order, Deltarune-style keyboard flow with Random/Back/Next buttons), nicely layered art and good comments. The issues below come from the rest of the game moving underneath it. None of them are design problems.
+
+- **Parse errors (the scene could not run):** `finish()` called `Story.set_arrival_cue()`, which doesn't exist, and `Transition.change_scene(path, exit_fade)`, which takes one argument. Replaced by the new ending (confirm line → destruction → cut to black); `exit_fade` was removed.
+- **Missing narrator cues:** `character_confirm_default`, `character_confirm_random`, `character_destroyed` and `character_rushed` didn't exist (the Narrator would push_error). Added as subtitle-only placeholders.
+- **Missing uids:** `categories/eyes.tres` referenced its five textures by path only. Added the uids from the `.import` files.
+- **Computer look:** the screen was a dark terminal (boot log, monospace, green status bar), and the user wants an independent backdrop. It now uses `ComicBackdrop` (halftone dots and a turning sunburst, blue "studio" palette). The portrait is a paper comic panel with an offset shadow, the listing is a paper card, the titles are white with a black outline, and the buttons use the comic menu theme. The boot-log intro page became a comic caption ("MEANWHILE, BEFORE THE STORY BEGINS..."). Their "EMPLOYEE #00451 ... configure an acceptable human" page is kept as written.
+- **Art drawn tiny and aliased:** the 2048 px layers were drawn at about 220 px with `TEXTURE_FILTER_NEAREST`, which looked crunchy, and most of each square is empty. Now the layers use linear filtering and are overscanned inside a clipping 300×330 frame, so the figure fills it.
+- **Import size for the web:** there are 24 RGBA layers at 2048², about 16 MB each in VRAM, all loaded with the scene. The `.import` files now set `process/size_limit=1024`, which is 4× less memory and download and still sharp at this display size. The art itself was not re-encoded.
+- **Layout:** the status/hint label spanned the full width under the Random/Back/Next buttons. It now stops before them, and it's hidden during the destruction. The highlighted listing row was white, which became unreadable on paper, so it's red now. The empty `AnimatedSprite2D` node was removed.
+- **Moved** to `game/menus/character_select/` (the project uses snake_case folders, next to the new menus). All `res://` paths were updated, and the uids are unchanged.
+- Small fix: the intro's caret blink rewrote the RichTextLabel text every frame. It now writes only when the text changes.
+
+## As built
+
+- **Start menu** (`game/menus/start_menu/`, the new `run/main_scene`): "IT'S OVER TIME!" in Comic Relief Bold with an outline and shadow. It pops in and then wobbles. Under it is a paper tagline card and the START / QUIT comic buttons. START has keyboard focus, so Enter works. QUIT is hidden on web. START plays a pop and a "GO!" burst, then `Transition` fades to character design. The music keeps playing (Audio autoload). The glove cursor is applied on the menus.
+- **Shared:** `game/menus/comic_backdrop.gd` (`ComicBackdrop`, @tool: the halftone shader on an internal ColorRect plus a sunburst drawn with `_draw`, slowly spinning) and `game/menus/menu_theme.tres` (comic Button styles, plus `PaperPanel`/`CaptionPanel` panel variations).
+- **Destruction** (`CharacterSelect.finish()`): the confirm line plays first (`character_confirm_default`, or `_random` when the picks are still the random preset), then the destroyed line. That's `character_destroyed`, or `character_rushed` if they confirmed under `rushed_threshold` 8 s after their first choice ("snarky anyway"). During the line: a record scratch, the portrait panel shakes, a red "KRAKK!" ComicBurst with a punch, the panel crumples (squash + spin + grey), and with a clatter it drops off-screen. When the line ends there's a hard cut (no fade) to the black scene. Only existing SFX are used, so no new credits.
+- **Black intro** (`game/menus/intro/intro_darkness.tscn`): black with the mouse hidden. After 1 s it plays `story_intro`, now the verbatim Intro line 1. A click, Enter or Space skips it. Then it calls `Story.take_fresh_start()` and fades to the computer, where `Story` already queued FIRST_VISIT, so the password screen opens. Story's own `story_intro` call on reaching the computer is skipped because the cue is `once`. Running the office directly (F6) still works as before and plays the real line at the computer. `story.gd` and `story_stage.gd` are unchanged.
+- **project.godot:** `run/main_scene` = the start menu, and `config/name="It's Over Time"`.
+- **Narrator cues** (subtitle-only, `game/narration/`):
+  - `story_intro`: real script, Intro line 1 verbatim. It replaces the old "Overtime. Again..." placeholder.
+  - Placeholders that need final lines and recordings:
+    - `character_confirm_default`: "Ah. A masterpiece. Nobody has ever looked quite like that before."
+    - `character_confirm_random`: "The random button. Bold. You didn't even look, did you?"
+    - `character_destroyed`: "Lovely. Shame, really. | You see, you don't actually get any control here. | That's not how this works."
+    - `character_rushed`: "Done already? You barely looked. | Doesn't matter. You don't get any control here anyway."
+- **Verified** with a windowed driver (now deleted): start menu → Enter → caption intro (skipped by key) → skin/outfit/hairstyle/eyes changed with arrows → confirm YES → confirm line → shake/KRAKK/crumple → black with the intro subtitle → the password screen ("VoiceLogin™"). No errors or warnings, not even exit leaks.
+- **Limitations:** `random_preset` is empty, so the Random button is truly random and `character_confirm_random` never plays (as in the original). There's no idle timeout on the design screen; it ends on YES only. The portrait overscan offsets are tuned for this art's framing.
