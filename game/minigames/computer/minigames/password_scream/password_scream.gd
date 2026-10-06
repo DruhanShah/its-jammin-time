@@ -229,9 +229,6 @@ func _finish(_reason := "") -> void:
 ## The login screen can't be closed: you're not logged in.
 func _on_close_requested() -> void:
 	window.shake()
-	var cue := (config as PasswordScreamConfig).close_refused_cue
-	if cue:
-		Narrator.play(cue)
 
 
 func _attempts() -> int:

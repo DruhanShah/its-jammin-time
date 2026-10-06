@@ -299,7 +299,6 @@ func _send() -> void:
 	var reply: String = _email.honest_reply if honest else _email.replies.get(BANDS[band], "")
 	var cue := &""
 	if honest:
-		cue = cfg.honest_cue
 		_target = 0.45 # Relieved: he hates it here too.
 		_sfx(cfg.honest_sfx, -4.0)
 	elif BANDS[band] == &"starry" and _email.promote_on_starry:

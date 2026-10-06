@@ -70,7 +70,6 @@ func open(source: Texture2D) -> void:
 		_show_password(false)
 	else:
 		_hint.arrow_direction = 1 if Kaleidoscope.error_steps(0) < 0 else -1 # The short way round.
-		Narrator.play(&"scope_open")
 	_update_view()
 	# Raise it: the eyepiece grows in from a squint.
 	_view.scale = Vector2(1.0, 0.15)

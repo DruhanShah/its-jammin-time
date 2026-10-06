@@ -40,7 +40,7 @@ shadow_offset = Vector2(9, 9)
 [node name="CharacterSelect" type="Node2D" unique_id=1271057006]
 script = ExtResource("1_bsyg0")
 categories = Array[ExtResource("7_cat")]([ExtResource("6_skin"), ExtResource("5_outfit"), ExtResource("2_hair"), ExtResource("8_eyes")])
-intro_pages = Array[String](["MEANWHILE, BEFORE THE STORY BEGINS...", "WELCOME, EMPLOYEE #00451.
+intro_pages = Array[String](["WELCOME, EMPLOYEE #00451.
 Your appearance has not been approved yet.
 Please configure an acceptable human."])
 

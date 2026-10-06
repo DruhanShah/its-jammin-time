@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="NarratorCue" format=3]
-
-[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
-
-[resource]
-script = ExtResource("1_cue")
-subtitle = "You can't close the login screen. Where would you go? You work here."

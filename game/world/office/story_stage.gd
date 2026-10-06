@@ -139,8 +139,6 @@ func _check_server_room(here: StringName) -> void:
 		return
 	if Story.step == Story.Step.SWITCH_2:
 		Narrator.play(&"server_room_empty")
-	elif Story.step == Story.Step.SWITCH_3:
-		Narrator.play(&"server_room_still_empty")
 
 
 ## A room's line the first time you're inside its content.

@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/idle_out.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Oh, I already said that. I am now out of fun facts."
+stream = ExtResource("2_voice")
+subtitle = "Oh, I already said that. I am now out of fun facts. Also, it's still me btw."
 once = true
