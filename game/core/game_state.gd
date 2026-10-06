@@ -8,6 +8,9 @@ signal unlock_changed(id: StringName, unlocked: bool)
 ## Each value is [body transform, head pitch].
 var player_poses: Dictionary[String, Array] = {}
 
+## Seconds the player has spent pushing chairs, for the narrator's jabs (Player.CHAIR_JABS).
+var chair_push_time := 0.0
+
 ## Unlocked ids, global across scenes. Ids are snake_case names of the thing, e.g. &"genie_lamp".
 var unlocked: Dictionary[StringName, bool] = {}
 

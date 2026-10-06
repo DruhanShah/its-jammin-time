@@ -12,6 +12,9 @@ extends CharacterBody3D
 ## Force (N) on rigid bodies we walk into, e.g. office chairs. Only while they're slower than us.
 @export var push_force := 300.0
 
+## Narrator cues played once the player has pushed chairs for this many seconds in total.
+const CHAIR_JABS := {15.0: &"chair_push_1", 45.0: &"chair_push_2"}
+
 var _bob_time := 0.0
 var _step := 0
 var _target: Interactable ## What we're aiming at (highlighted), or null.
@@ -85,17 +88,26 @@ func _physics_process(delta: float) -> void:
 
 ## CharacterBody3D doesn't move rigid bodies by itself, so nudge what we bumped into.
 func _push_bodies(delta: float) -> void:
+	var pushed := false
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var body := collision.get_collider() as RigidBody3D
 		if not body:
 			continue
 		hands.push()
+		pushed = true
 		var push := -collision.get_normal()
 		push.y = 0.0  # Only sideways, so standing on or brushing past it doesn't press it into the floor.
 		push = push.normalized()
 		if body.linear_velocity.dot(push) < speed:
 			body.apply_central_impulse(push * push_force * delta)
+	# Only chairs are rigid bodies so far. The clock pauses while the narrator talks, so a jab never cuts a line off.
+	if pushed and not Narrator.is_speaking():
+		var before := GameState.chair_push_time
+		GameState.chair_push_time += delta
+		for seconds: float in CHAIR_JABS:
+			if before < seconds and GameState.chair_push_time >= seconds:
+				Narrator.play(CHAIR_JABS[seconds])
 
 
 func _update_head_bob(delta: float) -> void:
