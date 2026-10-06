@@ -15,7 +15,7 @@ signal score_changed(score: int)
 
 const SCENE := "res://minigames/computer/computer.tscn"
 const FALLBACK_RETURN_SCENE := "res://world/office/office.tscn"
-const CURSOR := "▌"
+const CURSOR := "|" # Plain ASCII: the web build has no system fallback font for block glyphs.
 const FLICKER_SOUND := preload("res://assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav")
 const CRT_OFF_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/power_down.wav")
 const DEFAULT_DOCUMENT_FONT := preload("res://assets/fonts/ComicShannsMono-Regular.ttf")

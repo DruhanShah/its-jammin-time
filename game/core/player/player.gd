@@ -36,7 +36,9 @@ var _pushed_chairs: Dictionary[RigidBody3D, Array] = {}
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Browsers only grant pointer lock right after a user gesture; otherwise the next click captures.
+	if not OS.has_feature("web") or JavaScriptBridge.eval("navigator.userActivation.isActive", true):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	ray.add_exception(self)
 	var pose: Array = GameState.player_poses.get(owner.scene_file_path, [])
 	if pose:

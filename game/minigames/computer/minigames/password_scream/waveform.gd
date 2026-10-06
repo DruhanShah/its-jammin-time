@@ -49,4 +49,11 @@ func _draw() -> void:
 		var x := 20.0 + (i + 0.5) * step
 		draw_line(Vector2(x, mid - half), Vector2(x, mid + half), BAR_COLOR, step * 0.55, true)
 	if status and (not blink or fmod(_time, 1.0) < 0.65):
-		draw_string(FONT, Vector2(16, 30), status, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, status_color)
+		# The bundled fonts have no "●", and the web build has no system fallback font, so draw the dot.
+		var text := status
+		var x := 16.0
+		if text.begins_with("● "):
+			draw_circle(Vector2(x + 6.0, 24.0), 6.0, status_color)
+			text = text.substr(2)
+			x += 18.0
+		draw_string(FONT, Vector2(x, 30), text, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, status_color)

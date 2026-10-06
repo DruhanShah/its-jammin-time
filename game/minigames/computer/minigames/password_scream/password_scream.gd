@@ -146,7 +146,7 @@ func _show_verdict() -> void:
 	var cfg := config as PasswordScreamConfig
 	var number := _attempt + 1
 	_set_phase(Phase.VERDICT)
-	waveform.status = "✗ FAILED"
+	waveform.status = "X FAILED"
 	var silent_verdict := not _heard and _attempt == 0
 	verdict.text = cfg.silent_line if silent_verdict else cfg.fail_lines[_attempt]
 	if not _heard:
