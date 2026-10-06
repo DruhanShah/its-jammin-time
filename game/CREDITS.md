@@ -64,7 +64,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 - Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
 - Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
 - Start screen art (`assets/ui/start_screen/`): hand-drawn by a teammate (Procreate `Untitled_Artwork.pdf`; its layer pages rendered separately: background + burst outlines, and the hand-lettered NEW GAME / CONT. LAST GAME / SETTINGS / EXIT buttons with the white keyed out), cropped and slightly stretched to 16:9.
-- Placeholder real-life video (`assets/video/real_life.ogv`): recorded with Godot's Movie Maker from a throwaway scene; to be replaced by the team's own footage.
+- Real-life ending video (`assets/video/real_life.ogv`): the team's own footage, filmed by us for this game (converted from the phone recording to Ogg Theora/Vorbis).
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
 ## Credits screen text (suggested)
