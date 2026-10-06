@@ -8,7 +8,8 @@
 - **AI disclosure:** The itch.io page states no generative AI was used.
 - **Files used** (unaltered, original filenames, in `sfx/400_sounds_pack/`):
   - `foley_footstep_carpet_1.wav` … `foley_footstep_carpet_4.wav` (pack folder `Footsteps/`): player footsteps, via `core/audio/footsteps.tres`.
-  - `click_double_on.wav` (pack folder `UI/`): default `Interactable` sound.
+  - `toggle_on.wav` (pack folder `UI/`): default `Interactable` sound (a single soft click; replaced `click_double_on.wav`).
+  - `click_double_on.wav` (pack folder `UI/`): switch flips and computer-minigame clicks.
   - `wood_small_hollow.wav` (pack folder `Materials/`): player hand touching something.
   - `door_open.wav`, `door_close.wav` (pack folder `Environment/`): the openable door prop (`world/office/props/door.tscn`). Imported as mono (import option only; the files are unaltered).
   - `subtle_knock.wav` (pack folder `Other/`): office chair bumping into something (`world/office/props/office_chair.tscn`). Imported as mono.
