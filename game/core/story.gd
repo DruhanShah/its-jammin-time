@@ -26,7 +26,7 @@ const OFFICE := "res://world/office/office.tscn"
 ## minigames/computer/minigame_registry.tres). Edit these lists to change a visit; the step ends
 ## once the whole list is beaten.
 const FIRST_VISIT: Array[StringName] = [&"password_scream", &"font_picker", &"ad_storm"]
-const SECOND_VISIT: Array[StringName] = [&"corporate_speak"]
+const SECOND_VISIT: Array[StringName] = [&"antivirus_offer", &"antivirus_download"]
 const THIRD_VISIT: Array[StringName] = [&"memo_mail"]
 const MINIGAMES := {Step.INTRO: FIRST_VISIT, Step.COMPUTER_2: SECOND_VISIT, Step.COMPUTER_3: THIRD_VISIT}
 ## Narrator line when the lights go out in each switch step.
