@@ -28,7 +28,6 @@ const CLICK_COLOR := Color("#7dff7d")
 @export var hum_sound: AudioStream
 @export var hum_volume_db := -8.0
 
-var _matches := 0 ## Colour-match attempts.
 var _mocked := 0 ## Mocking lines actually played.
 var _done := false
 var _time := 0.0
@@ -80,11 +79,9 @@ func _on_dropped(wire: int, socket: int) -> void:
 		_board.plug(wire, socket)
 		Audio.play_sfx(plug_sound)
 		_pop(_global(socket), CLICK_COLOR, 40)
-		Narrator.play(&"wires_finally" if _matches > 0 else &"wires_straight_first")
 		if _board.all_straight():
 			_board.lever_ready = true
 	elif _board.socket_order[socket] == wire:
-		_matches += 1
 		_zap(socket, zap_sound, zap_volume_db, 46)
 		_board.snap_back(wire)
 		_shake_board()
@@ -95,7 +92,6 @@ func _on_dropped(wire: int, socket: int) -> void:
 	else:
 		_zap(socket, small_zap_sound, small_zap_volume_db, 28)
 		_board.snap_back(wire)
-		Narrator.play(&"wires_crossed")
 
 
 ## Lever up: breaker clunk, the lights flicker back on, then back to the office.

@@ -29,7 +29,6 @@ extends MinigameConfig
 @export var reply_all_cue := &"memo_reply_all"
 @export var promoted_cue := &"memo_promoted"
 @export var honest_cue := &"memo_honest"
-@export var close_refused_cue := &"memo_close_refused"
 
 @export_group("Sounds")
 @export var arrive_sfx: AudioStream

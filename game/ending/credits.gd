@@ -110,7 +110,6 @@ func _layout() -> void:
 
 func _stop() -> void:
 	_stopped = true
-	Narrator.play(&"credits_end")
 	var tween := create_tween()
 	tween.tween_property(_the_end, "scale", Vector2.ONE * 1.15, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_the_end, "scale", Vector2.ONE, 0.2)

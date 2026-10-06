@@ -42,9 +42,7 @@ const SWITCH_GAMES := {
 	Step.SWITCH_3: [&"kaleidoscope", &"candle"],
 }
 ## Narrator line for the next office load after entering a step.
-const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2", Step.ENDING: &"ending_lights_back"}
-## Escalating lines when the player wanders off the objective (see story_stage.gd), in order.
-const OFF_PATH_CUES: Array[StringName] = [&"off_path_1", &"off_path_2", &"off_path_3", &"off_path_4"]
+const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2"}
 ## From this step on the controls are shifted one key to the right (WASD → ESDF, X → C; see `Controls`).
 const CONTROLS_SHIFT_STEP := Step.SWITCH_3
 ## Played when the lights go out in the shift's step, *before* its blackout line
@@ -60,8 +58,6 @@ var step: Step:
 
 ## Line the office plays when it next loads (see `take_arrival_cue`).
 var _arrival_cue := &""
-## Off-path lines played in the current step, so they escalate and reset with each new step.
-var _off_path_count := 0
 ## True until the game opens the computer for the intro (only on a fresh start).
 var _fresh_start := true
 ## The opening line waits for the computer scene, so the scene change doesn't cut it.
@@ -127,14 +123,6 @@ func take_arrival_cue() -> StringName:
 	return cue
 
 
-## The next escalating off-path line, or empty once all of them were played this step.
-func next_off_path_cue() -> StringName:
-	if _off_path_count >= OFF_PATH_CUES.size():
-		return &""
-	_off_path_count += 1
-	return OFF_PATH_CUES[_off_path_count - 1]
-
-
 func _go_to(new_step: Step) -> void:
 	GameState.story_step = new_step
 	GameState.switch_progress = 0
@@ -142,7 +130,6 @@ func _go_to(new_step: Step) -> void:
 	GameState.scope_target = 0
 	GameState.has_scope = false
 	GameState.scope_solved = false
-	_off_path_count = 0
 	_blackout_cue_after_controls = &""
 	_arrival_cue = ARRIVAL_CUES.get(new_step, &"")
 	if new_step in MINIGAMES:
@@ -173,7 +160,7 @@ func _sync_controls() -> void:
 
 
 ## Chains the blackout line straight onto the keyboard line. A natural finish clears
-## `Narrator.current_cue` before emitting, so playing here leaves no gap for room/idle/off-path lines
+## `Narrator.current_cue` before emitting, so playing here leaves no gap for room/idle lines
 ## to slip in; if the keyboard line was cut by another line instead, the blackout line waits for that
 ## one to finish.
 func _on_line_finished(_cue_id: StringName) -> void:

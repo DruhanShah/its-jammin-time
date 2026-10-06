@@ -3,15 +3,8 @@ extends Node
 ## current step: begins at the computer on a fresh start, swaps the server room (C1) with A3 from
 ## the second blackout on and plays the step's arrival line (after a blackout from the computer that's
 ## the lights_out line, since the power is already off); in a switch step that still has the power on
-## (e.g. after F7) it puts the lights out a moment after you're back. While you play it tracks the objective (the desk computer, or the
-## power switch while the lights are out) and the narrator nags when you stop getting closer.
-##
-## Off-path heuristic: rooms and doors form a graph (room cells as built, linked by the `Doors`
-## children, named after the two rooms they join). Every `CHECK_INTERVAL` it takes the number of
-## rooms between you and the objective's room. Reaching a new best (closer than ever since this load
-## or the last nag) resets the clock; otherwise, outside the objective's room, the clock runs, and
-## after `off_path_time` the next of Story's escalating off-path lines plays (at most one per
-## `off_path_cooldown`), and the best is reset to where you are. The clock stops while the narrator talks.
+## (e.g. after F7) it puts the lights out a moment after you're back. While you play it plays the room,
+## idle and server-room lines.
 ##
 ## Ending (Story.Step.ENDING, after the third blackout is fixed): the view drifts in and out of focus
 ## (`VisionBlur`, mild anywhere, full strength in the Start office), a pair of spectacles lies on the
@@ -25,10 +18,6 @@ extends Node
 @export var glasses_nudge_time := 20.0
 ## Ending: blur strength outside the Start office (1 inside).
 @export_range(0.0, 1.0) var outside_blur_strength := 0.4
-## Seconds without getting closer to the objective before the narrator nags.
-@export var off_path_time := 25.0
-## Minimum seconds between two off-path lines.
-@export var off_path_cooldown := 30.0
 ## Seconds of narrator silence before the next idle fun fact plays.
 @export var idle_silence := 7.0
 
@@ -39,8 +28,6 @@ const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &
 const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6", &"idle_out"]
 ## Most idle lines played per story step (i.e. per lights-out).
 const IDLE_PER_STEP := 2
-## Seconds idle after which the off-path clock stops (standing still is idle, not lost).
-const IDLE_NOT_LOST := 5.0
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)
 ## Where the server room is built, and the room it swaps places with ("the room on the right" from A2).
 const SERVER_ROOM := &"C1"
@@ -60,16 +47,11 @@ const SPECTACLES_SCENE := preload("res://world/office/props/spectacles.tscn")
 const SPECTACLES_SPOT := Transform3D(Basis(Vector3.UP, deg_to_rad(75.0)), Vector3(-4.22, 0.949, -0.5))
 ## Ending lines: walking into Start, then nudges while there (in order, then they stop).
 const GLASSES_HINT := &"ending_glasses_hint"
-const GLASSES_NUDGES: Array[StringName] = [&"ending_glasses_nudge_1", &"ending_glasses_nudge_2"]
+const GLASSES_NUDGES: Array[StringName] = [&"ending_glasses_nudge_1"]
 
 ## Room centres as built (before any swap), by room name: these are fixed locations.
 var _cells: Dictionary[StringName, Vector3] = {}
-## Room name -> neighbouring room names through a door.
-var _links: Dictionary[StringName, Array] = {}
 var _tick := 0.0
-var _best := -1 ## Fewest rooms to the objective since this load / the last nag; -1 = not measured.
-var _stall := 0.0 ## Seconds without a new best.
-var _since_nag := INF
 ## Ending state (null/false until the ENDING step is set up in this load).
 var _vision: VisionBlur
 var _spectacles: Node3D
@@ -82,13 +64,11 @@ var _silence := 0.0 ## Seconds since the narrator last spoke.
 @onready var _rooms: Node3D = $"../Rooms"
 @onready var _player: Node3D = $"../Player"
 @onready var _computer: Node3D = $"../Rooms/Start/Furniture/Computer"
-@onready var _switch: Node3D = $"../Rooms/C1/Furniture/PowerSwitch"
 
 
 func _ready() -> void:
 	for room: Node3D in _rooms.get_children():
 		_cells[room.name] = room.position
-	_build_links()
 	if Story.is_swapped():
 		_swap_rooms()
 	if Story.take_fresh_start():
@@ -100,8 +80,6 @@ func _ready() -> void:
 		Narrator.play(cue) # From _ready, so the scene change doesn't cut it.
 	if Story.is_switch_step() and GameState.power_on:
 		get_tree().create_timer(blackout_delay).timeout.connect(_blackout)
-	GameState.power_changed.connect(_reset_tracking.unbind(1))
-	Story.step_changed.connect(_reset_tracking.unbind(1))
 	Story.step_changed.connect(_on_step_changed)
 	if Story.step == Story.Step.ENDING:
 		_start_ending()
@@ -114,8 +92,7 @@ func _process(delta: float) -> void:
 	var here := room_at(_player.global_position)
 	_check_server_room(here)
 	_check_idle(_tick)
-	if not _check_room_lines():
-		_check_off_path(here, _tick)
+	_check_room_lines()
 	_check_ending(here, _tick)
 	_tick = 0.0
 
@@ -127,43 +104,6 @@ func room_at(pos: Vector3) -> StringName:
 		if absf(offset.x) <= ROOM_HALF_SIZE.x and absf(offset.z) <= ROOM_HALF_SIZE.y:
 			return room_name
 	return &""
-
-
-## Number of doors between two rooms (breadth-first over `_links`), -1 if unreachable.
-func rooms_between(from: StringName, to: StringName) -> int:
-	var dist := {from: 0}
-	var todo: Array[StringName] = [from]
-	while todo:
-		var room: StringName = todo.pop_front()
-		if room == to:
-			return dist[room]
-		for next: StringName in _links.get(room, []):
-			if not dist.has(next):
-				dist[next] = dist[room] + 1
-				todo.append(next)
-	return -1
-
-
-## The objective's node: the switch while the lights are out, the desk computer while a
-## minigame is queued, nothing otherwise.
-func objective() -> Node3D:
-	if Story.step == Story.Step.ENDING:
-		return _spectacles if not _putting_on else null
-	if Story.is_switch_step():
-		return _switch if not GameState.power_on else null
-	return _computer if GameState.computer_queue else null
-
-
-func _build_links() -> void:
-	var names := RegEx.create_from_string("Start|[A-C][1-3]")
-	for door in $"../Doors".get_children():
-		var pair := names.search_all(door.name)
-		if pair.size() != 2:
-			continue
-		var a := StringName(pair[0].get_string())
-		var b := StringName(pair[1].get_string())
-		_links.get_or_add(a, []).append(b)
-		_links.get_or_add(b, []).append(a)
 
 
 ## Swaps the server room's contents (furniture, signs, amber/flickering lights, switch) with A3's.
@@ -203,17 +143,16 @@ func _check_server_room(here: StringName) -> void:
 		Narrator.play(&"server_room_still_empty")
 
 
-## A room's line the first time you're inside its content. True if a line started this tick.
-func _check_room_lines() -> bool:
+## A room's line the first time you're inside its content.
+func _check_room_lines() -> void:
 	if Narrator.is_speaking() or _player.get(&"frozen") or get_tree().get_first_node_in_group(&"scope_view"):
-		return false
+		return
 	for room: Node3D in _rooms.get_children():
 		var cue: StringName = ROOM_LINES.get(room.name, &"")
 		var offset := _player.global_position - room.position
 		if cue and absf(offset.x) <= ROOM_HALF_SIZE.x and absf(offset.z) <= ROOM_HALF_SIZE.y:
 			Narrator.play(cue) # `once`: a no-op after the first time.
-			return Narrator.current_cue == cue and Narrator.is_speaking()
-	return false
+			return
 
 
 ## Idle facts: after `idle_silence` s with no narration, play the next fun fact (in order, at most
@@ -237,47 +176,10 @@ func _check_idle(delta: float) -> void:
 		_silence = 0.0
 
 
-func _check_off_path(here: StringName, delta: float) -> void:
-	var target := objective()
-	if not target or here.is_empty() or Narrator.is_speaking() or get_tree().get_first_node_in_group(&"scope_view"):
-		return
-	if _player.get(&"idle_time") > IDLE_NOT_LOST:
-		return # Standing still: the idle lines handle that.
-	_since_nag += delta
-	var dist := rooms_between(here, room_at(target.global_position))
-	if _best < 0 or dist < _best:
-		_best = dist
-		_stall = 0.0
-		return
-	if dist == 0:
-		_stall = 0.0 # In the objective's room: let them look around.
-		return
-	_stall += delta
-	if _stall >= off_path_time and _since_nag >= off_path_cooldown:
-		var cue := Story.next_off_path_cue()
-		if cue:
-			Narrator.play(cue)
-		_since_nag = 0.0
-		_stall = 0.0
-		_best = dist
-
-
-func _reset_tracking() -> void:
-	_best = -1
-	_stall = 0.0
-
-
-## Power came back while the player was in the office (an in-world restore game): set the ending up now
-## and play its arrival line once the narrator has finished the current one.
+## Power came back while the player was in the office (an in-world restore game): set the ending up now.
 func _on_step_changed(step: Story.Step) -> void:
-	if step != Story.Step.ENDING or _vision:
-		return
-	_start_ending()
-	var cue := Story.take_arrival_cue()
-	while cue and Narrator.is_speaking():
-		await get_tree().create_timer(0.25).timeout
-	if cue:
-		Narrator.play(cue)
+	if step == Story.Step.ENDING and not _vision:
+		_start_ending()
 
 
 ## Puts the spectacles on the desk and starts the blurry vision.

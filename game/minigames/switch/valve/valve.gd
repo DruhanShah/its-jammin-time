@@ -106,12 +106,12 @@ func _on_twisted(delta: float) -> void:
 			_tightened -= delta
 			_wheel_deg += delta * 0.5
 			if _tightened >= reverse_degrees:
-				_reverse_gag(&"valve_reverse_thread")
+				_reverse_gag()
 		else: # Clockwise first: it gives. Reverse thread, they found it themselves.
 			_opened += delta
 			_wheel_deg += delta
 			if _opened >= early_degrees:
-				_reverse_gag(&"valve_righty_early")
+				_reverse_gag()
 	else:
 		var before := _opened
 		_opened = clampf(_opened + delta, 0.0, _need())
@@ -128,11 +128,10 @@ func _on_twisted(delta: float) -> void:
 
 
 ## The thread turns out to be reversed: clunk, a jolt, the arrow flips.
-func _reverse_gag(cue: StringName) -> void:
+func _reverse_gag() -> void:
 	_gag = true
 	Audio.play_sfx(clunk_sound, clunk_volume_db)
 	_shake_camera(0.03, 0.35)
-	Narrator.play(cue)
 	_hint.arrow_direction = 1
 	_hint.restart()
 

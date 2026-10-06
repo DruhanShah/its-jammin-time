@@ -20,10 +20,8 @@ var _later_slot: Control
 var _ghost: Control
 var _idle := 0.0
 var _nudged := false
-var _refusals := 0
 var _later_clicks := 0
 var _dragged := false
-var _sprung := false
 var _done := false
 var _shown := false
 
@@ -51,7 +49,6 @@ func _appear() -> void:
 	_window.pop_in()
 	_shown = true
 	_pulse_download()
-	Narrator.play(_cfg().intro_cue)
 
 
 func _process(delta: float) -> void:
@@ -61,7 +58,6 @@ func _process(delta: float) -> void:
 	if _idle >= _cfg().nudge_after and not _nudged:
 		_nudged = true
 		_wiggle_download()
-		Narrator.play(_cfg().nudge_cue)
 
 
 ## Swallow every key while the pop-up is up; Esc is a refused "close". Debug F-keys and shortcuts pass.
@@ -220,7 +216,7 @@ func _on_ghost_input(event: InputEvent) -> void:
 		_refuse(click.global_position)
 
 
-## The "close" that isn't: the window shakes, NOPE!, and the narrator comments.
+## The "close" that isn't: the window shakes, NOPE!
 func _refuse(where: Vector2) -> void:
 	if _done:
 		return
@@ -229,11 +225,6 @@ func _refuse(where: Vector2) -> void:
 	ComicBurst.spawn(self, where, "NOPE!", Color("#ff7a6b"))
 	if _cfg().refuse_sfx:
 		Audio.play_sfx(_cfg().refuse_sfx, _cfg().refuse_db)
-	_refusals += 1
-	if _refusals == 1:
-		Narrator.play(_cfg().no_x_cue)
-	elif not Narrator.is_speaking():
-		Narrator.play(_cfg().no_x_again_cue)
 
 
 ## Clicks reset the idle nudge; a drag that leaves most of the window off screen springs it back.
@@ -257,9 +248,6 @@ func _check_off_screen() -> void:
 		return
 	var tween := create_tween()
 	tween.tween_property(_window, "position", _centre(), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	if not _sprung:
-		_sprung = true
-		Narrator.play(_cfg().drag_away_cue)
 
 
 func _on_later() -> void:
@@ -274,7 +262,6 @@ func _on_later() -> void:
 	var tween := create_tween()
 	tween.tween_property(_later, "position:y", _later.position.y - 16.0, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_later, "position:y", _later.position.y, 0.25).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	Narrator.play(_cfg().remind_cue)
 
 
 func _on_download() -> void:

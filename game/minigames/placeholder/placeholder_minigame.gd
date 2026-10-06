@@ -7,7 +7,6 @@ extends Control
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Center/Box/BackButton.pressed.connect(_go_back)
-	Narrator.play(&"placeholder_minigame")
 
 
 func _unhandled_input(event: InputEvent) -> void:

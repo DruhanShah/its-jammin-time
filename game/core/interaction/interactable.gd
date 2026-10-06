@@ -2,7 +2,7 @@ class_name Interactable
 extends Area3D
 ## Add as a child of any prop, give it a CollisionShape3D covering the prop, set the verb.
 ## The player's interaction ray finds it and calls interact() when the `interact` action is pressed.
-## While locked (see `unlock_id`) it still shows its prompt, but interacting only gets the narrator mocking you.
+## While locked (see `unlock_id`) it still shows its prompt, but interacting does nothing.
 
 signal interacted
 
@@ -21,8 +21,6 @@ const HIGHLIGHT: Material = preload("res://core/interaction/highlight.tres")
 @export_file("*.tscn") var target_scene := ""
 @export var sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/click_double_on.wav")
 @export var sound_volume_db := -4.0
-## Narrator cues for interacting while locked, one picked at random (res://narration/<id>.tres).
-@export var locked_cues: Array[StringName] = [&"locked_1", &"locked_2", &"locked_3"]
 ## Meshes under this node get the highlight while the player aims at it. Default: the whole prop (our parent).
 @export var highlight_root: NodePath = ^".."
 
@@ -47,8 +45,6 @@ func is_locked() -> bool:
 
 func interact() -> void:
 	if is_locked():
-		if locked_cues:
-			Narrator.play(locked_cues.pick_random())
 		return
 	if sound:
 		Audio.play_sfx(sound, sound_volume_db)

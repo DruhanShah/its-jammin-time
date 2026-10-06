@@ -188,7 +188,7 @@ func _wrong_cue(text: String) -> StringName:
 		return &"keypad_old_password"
 	if not GameState.scope_solved and _wrong == 1:
 		return &"keypad_no_password"
-	return &"keypad_wrong_1" if _wrong % 2 == 1 else &"keypad_wrong_2"
+	return &"keypad_wrong_1"
 
 
 func _accept() -> void:

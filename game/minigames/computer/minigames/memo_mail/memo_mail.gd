@@ -212,9 +212,6 @@ func _choose(blank: Blank, index: int) -> void:
 	blank.button.text = blank.word()
 	_sfx(cfg.choose_sfx)
 	_target = _target_mood()
-	var cue: StringName = _email.word_cues.get(blank.word(), &"")
-	if cue and not Narrator.is_speaking():
-		Narrator.play(cue)
 	var unfilled := _blanks.filter(func(b: Blank) -> bool: return b.chosen < 0)
 	if not unfilled.is_empty():
 		_select_blank(unfilled[0])
@@ -393,7 +390,6 @@ func _filled_sentence() -> String:
 
 func _on_close_requested() -> void:
 	window.shake()
-	Narrator.play((config as MemoMailConfig).close_refused_cue)
 
 
 ## Waits for the narrator to finish (at most `max_seconds`), so a story line isn't cut off.

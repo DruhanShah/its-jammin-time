@@ -15,9 +15,8 @@ extends MinigameConfig
 @export_group("Triggers")
 ## Keypresses before the first ad.
 @export var first_ad_after_keys := 3
-## Seconds without typing before wave 1 starts anyway (the nudge line plays at `nudge_after`).
+## Seconds without typing before wave 1 starts anyway.
 @export var wait_typing_idle := 15.0
-@export var nudge_after := 8.0
 ## After wave 1 is cleared: keypresses (or idle seconds) before wave 2.
 @export var next_wave_keys := 6
 @export var next_wave_idle := 8.0
@@ -47,9 +46,7 @@ extends MinigameConfig
 @export var screen_dip_time := 0.9
 
 @export_group("Narrator cues")
-@export var nudge_cue := &"ads_type_nudge"
 @export var first_cue := &"ads_first"
-@export var wave2_cue := &"ads_wave_2"
 @export var eco_cue := &"ads_eco"
 
 @export_group("Sounds")

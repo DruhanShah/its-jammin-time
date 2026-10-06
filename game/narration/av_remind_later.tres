@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="NarratorCue" format=3]
-
-[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
-
-[resource]
-script = ExtResource("1_cue")
-subtitle = "'Remind me NOW.' That's not how reminders work. It's how ZappWare works."
-once = true

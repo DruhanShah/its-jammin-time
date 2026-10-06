@@ -24,7 +24,6 @@ var _cursor := 0 ## Characters typed so far (the next one of script_text, then t
 var _wave1_index := 0
 var _pending := 0 ## Ads scheduled but not spawned yet, so a wave never looks cleared too early.
 var _last_sfx_ms := 0
-var _nudged := false
 var _eco: Minigame
 
 
@@ -75,9 +74,6 @@ func _process(delta: float) -> void:
 		_idle += delta
 	match _phase: # Nobody gets stuck: waiting long enough starts the next wave anyway.
 		Phase.WAIT_TYPING:
-			if _idle >= cfg.nudge_after and not _nudged:
-				_nudged = true
-				Narrator.play(cfg.nudge_cue)
 			if _idle >= cfg.wait_typing_idle:
 				_start_wave_1()
 		Phase.WAIT_2:
@@ -134,7 +130,6 @@ func _spawn_wave1() -> void:
 func _start_wave_2() -> void:
 	var cfg := _cfg()
 	_enter(Phase.WAVE_2)
-	Narrator.play(cfg.wave2_cue)
 	for i in WAVE2_VARIANTS.size():
 		var overrides := {"variant": WAVE2_VARIANTS[i], "ad_size": WAVE2_AD_SIZE, "spawn_position": computer.screen.size * WAVE2_SPOTS[i]}
 		if i < cfg.wave2_headlines.size():

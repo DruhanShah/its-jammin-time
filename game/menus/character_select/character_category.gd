@@ -4,7 +4,7 @@ extends Resource
 ## Add a category by saving a new .tres and appending it to CharacterSelect.categories, then
 ## listing its id in the EventManager's `steps`.
 
-## Step id, used by the EventManager's `steps`, ConfirmLine.requires and CharacterSelect.random_preset.
+## Step id, used by the EventManager's `steps` and CharacterSelect.random_preset.
 @export var id: StringName
 ## Heading shown while choosing, e.g. "SELECT HAIRSTYLE".
 @export var title := ""

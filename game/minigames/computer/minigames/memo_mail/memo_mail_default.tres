@@ -57,9 +57,6 @@ replies = Dictionary[StringName, String]({
 honest_words = Array[String](["really hate working here"])
 honest_reply = "Same. Don't tell anyone."
 promote_on_starry = true
-word_cues = Dictionary[String, StringName]({
-"eepy": &"memo_eepy"
-})
 
 [resource]
 script = ExtResource("1_cfg")

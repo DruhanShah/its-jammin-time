@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="NarratorCue" format=3]
-
-[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
-
-[resource]
-script = ExtResource("1_cue")
-subtitle = "That countdown is lying. I recognise the technique. I use it on you."
-once = true

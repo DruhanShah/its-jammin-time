@@ -57,12 +57,9 @@ func _ready() -> void:
 
 
 func begin() -> void:
-	var cfg := config as PasswordScreamConfig
 	window.hide()
 	window.pop_in.call_deferred()
 	_start_mic()
-	if cfg.intro_cue:
-		Narrator.play(cfg.intro_cue)
 	_listen()
 
 

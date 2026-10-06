@@ -131,7 +131,6 @@ func _on_dodged() -> void:
 	if _dodges_left == 0:
 		var cfg := config as ComicAdConfig
 		ComicBurst.spawn(get_parent(), close_button.get_global_rect().get_center(), cfg.give_up_word, Color("#d9d9d9"))
-		Narrator.play(&"ads_runner")
 
 
 ## Spawned before this one completes, so the wave never looks cleared in between.
@@ -146,13 +145,11 @@ func _open_nested() -> void:
 		"sticker_text": "AGAIN!",
 	}) # Null at the window cap: then it just closes.
 	_play(cfg.nested_sfx)
-	Narrator.play(&"ads_nested")
 
 
 func _boing() -> void:
 	ComicBurst.spawn(get_parent(), decoy.get_global_rect().get_center(), "BOING!", Color("#7af0a0"))
 	_play((config as ComicAdConfig).decoy_sfx)
-	Narrator.play(&"ads_decoy")
 
 
 ## "Skip ad in 5... 4... 7... 12...", then it skips itself (counts as closed).
@@ -178,7 +175,6 @@ func _count(n: int, lie: bool) -> void:
 		countdown.pivot_offset = countdown.size / 2.0
 		countdown.scale = Vector2.ONE * 1.5
 		create_tween().tween_property(countdown, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		Narrator.play(&"ads_countdown")
 
 
 ## The finale: a huge green ad slides up over the word processor.

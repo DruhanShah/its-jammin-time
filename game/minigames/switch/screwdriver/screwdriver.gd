@@ -75,8 +75,6 @@ func _on_twisted(delta: float) -> void:
 	var limit := sticker_degrees if _is_sticker(_current) else _needed()
 	_turned[_current] = clampf(before + unscrew, 0.0, limit)
 	if _turned[_current] == before:
-		if unscrew < 0.0:
-			Narrator.play(&"screwdriver_wrong_way") # Screwing in a screw that's already in.
 		return
 	Audio.play_sfx(click_sound, click_volume_db)
 	if _turned[_current] >= limit:

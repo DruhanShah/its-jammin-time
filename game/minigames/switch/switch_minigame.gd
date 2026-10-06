@@ -14,7 +14,6 @@ func _ready() -> void:
 	if _game:
 		$Center/Box/Title.text = "The Switch: %s" % _game
 	$Center/Box/FlipButton.pressed.connect(_flip)
-	Narrator.play(&"switch_minigame")
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -13,7 +13,7 @@ extends CharacterBody3D
 @export var push_force := 300.0
 
 ## Narrator cues played once the player has pushed chairs for this many seconds in total.
-const CHAIR_JABS := {5.0: &"chair_push_1", 45.0: &"chair_push_2"}
+const CHAIR_JABS := {5.0: &"chair_push_1"}
 ## Narrator cue when a chair we pushed rolls into a different room than it started in.
 const CHAIR_NEW_ROOM_JAB := &"chair_new_room"
 ## Narrator cue on this many-th left-click on something that isn't interactable ("no grabbing").
@@ -38,8 +38,6 @@ var frozen := false:
 ## True while something else owns the controls (e.g. the kaleidoscope's scope view, whose twist ring
 ## shares F with ESDF movement): no looking, walking, interacting or prompt.
 var movement_locked := false
-## Seconds without any player input (keys, mouse buttons, looking around), for the idle lines.
-var idle_time := 0.0
 
 var _bob_time := 0.0
 var _step := 0
@@ -70,11 +68,9 @@ func _exit_tree() -> void:
 	GameState.player_poses[owner.scene_file_path] = [global_transform, head.rotation.x]
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if frozen:
-		idle_time = 0.0 # Something else (e.g. the quiz) has the player: not idle.
 		return
-	idle_time += delta
 	var target := _interactable() if not movement_locked else null
 	if target != _target:
 		if is_instance_valid(_target):
@@ -83,12 +79,6 @@ func _process(delta: float) -> void:
 			target.set_highlighted(true)
 		_target = target
 	hud.show_prompt(target.verb if target else "")
-
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton \
-			or (event is InputEventMouseMotion and event.relative.length() > 2.0):
-		idle_time = 0.0
 
 
 func _unhandled_input(event: InputEvent) -> void:

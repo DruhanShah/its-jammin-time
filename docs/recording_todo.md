@@ -17,13 +17,9 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `keypad_wrong_1` | Access denied. The coffee machine guessed better. |
 | `lights_out_3` | Four thousand Reply Alls at once. The mail server melted, and it took the building's power with it. The switch is where it was last time: A3. |
 | `memo_cc40` | Forty people CC'd. Forty faces. Choose your words. |
-| `memo_honest` | Honesty. In an email. To four thousand people. |
 | `memo_reply_all` | Oh. Oh no. That was Reply All. Everyone saw that. |
-| `mic_close_refused` | You can't close the login screen. Where would you go? You work here. |
-| `scope_almost` | Ooh, almost. It's on the tip of the painting's tongue. |
-| `scope_open` | The painting wants a twist. The kaleidoscope twists. This is the most compatible relationship in the building. |
-| `scope_pickup` | Binoculars! Now you can see the... no. That's a kaleidoscope. Somebody in Facilities has a very specific hobby. |
-| `server_room_still_empty` | Still not here. It moved once; it isn't coming back for you. |
+| `scope_almost` | Ooh, almost. It's on the tip of the painting's tongue. [Unintelligible] |
+| `scope_pickup` | Binoculars! Now you can see the... no. That's a kaleidoscope. |
 | `valve_closing` | Other way. You're un-fixing it. Bold strategy. |
 | `valve_leak` | It's not leaking. It's sharing. |
-| `idle_out` | Oh, I already said that. I am now out of fun facts. |
+| `idle_out` | Oh, I already said that. I am now out of fun facts. Also, it's still me btw.|

@@ -2,8 +2,8 @@ class_name CharacterSelect
 extends Node2D
 ## The character design screen (after the start menu): an autotyped comic caption, then the player
 ## picks one option per CharacterCategory and confirms, Deltarune style, on a comic backdrop. The picks
-## don't persist: they only choose the narrator line; then the character is destroyed (you don't get
-## any control here), and the game cuts to black for the intro (menus/intro/intro_darkness.tscn).
+## don't persist: the character is destroyed (you don't get any control here), and the game cuts to
+## black for the intro (menus/intro/intro_darkness.tscn).
 ## The EventManager child decides which step plays when; this only shows them.
 ## Keys: left/right (or A/D) cycle, Enter/Z next, Backspace/X back. Any key skips the intro.
 
@@ -41,27 +41,11 @@ const CONFIRM_TITLE := "IS THIS YOUR CHARACTER?"
 ## the current pick; empty = actually random.
 @export var random_preset: Dictionary[StringName, StringName] = {}
 
-@export_group("Narration")
-## Checked in order on confirm; the first whose `requires` match the picks is played.
-@export var confirm_lines: Array[ConfirmLine] = []
-## Played on confirm when no confirm line matches.
-@export var default_confirm_cue := &"character_confirm_default"
-## Played on confirm when the picks are still the random button's preset.
-@export var random_confirm_cue := &"character_confirm_random"
-## Played while the character is destroyed.
-@export var office_cue := &"character_destroyed"
-## Played instead of `office_cue` if the player spent under `rushed_threshold` choosing.
-@export var rushed_office_cue := &"character_rushed"
-## Seconds from the first choice to confirming below which the player counts as rushing.
-@export var rushed_threshold := 8.0
-
 var _step := &"" ## Step on screen and taking input; empty while waiting between steps.
 var _picks: Dictionary[StringName, int] = {} ## Option index per category id.
 var _yes_focused := true ## Confirm prompt: YES (true) or NO focused.
-var _used_random := false ## The random button was pressed (the picks may have changed since).
 var _typed := "" ## Intro text typed so far.
 var _skip_intro := false
-var _choosing_since := -1 ## Ticks (ms) when the first category step started; -1 = not yet.
 var _layers: Dictionary[StringName, Array] = {} ## Category id -> [TextureRect, placeholder ColorRect].
 
 @onready var screen: Control = $Screen
@@ -124,8 +108,6 @@ func start_step(id: StringName) -> void:
 	picker.visible = category != null
 	confirm_prompt.visible = id == &"confirm"
 	if category:
-		if _choosing_since < 0:
-			_choosing_since = Time.get_ticks_msec()
 		title.text = category.title
 	elif id == &"confirm":
 		title.text = CONFIRM_TITLE
@@ -135,37 +117,23 @@ func start_step(id: StringName) -> void:
 	_refresh()
 
 
-## Called by the EventManager after the last step: plays the line for these picks, destroys the
-## character while the narrator explains, then cuts to black.
+## Called by the EventManager after the last step: destroys the character, then cuts to black.
 func finish() -> void:
 	_step = &""
 	_show_buttons(false)
-	var spent := (Time.get_ticks_msec() - _choosing_since) / 1000.0 # Before the line, which isn't choosing time.
 	confirm_prompt.hide()
 	picker.hide()
-	var cue := _confirm_cue()
-	if cue:
-		await _say(cue)
-	await _destroy(rushed_office_cue if spent < rushed_threshold else office_cue)
+	await _destroy()
 	await get_tree().create_timer(0.4).timeout
 	get_tree().change_scene_to_file(INTRO_SCENE) # A hard cut to black, no fade.
 
 
-## Plays `cue` and waits until it ends (or another line interrupts it).
-func _say(cue: StringName) -> void:
-	Narrator.play(cue)
-	if Narrator.current_cue == cue:
-		await Narrator.line_finished
-
-
 ## Record scratch, the portrait shakes, then crumples into a ball with a KRAKK! and drops off screen.
-func _destroy(cue: StringName) -> void:
+func _destroy() -> void:
 	Audio.play_sfx(SCRATCH_SOUND)
 	listing.hide()
 	status_bar.hide()
 	title.text = "..."
-	Narrator.play(cue)
-	var speaking := Narrator.current_cue == cue
 	preview.pivot_offset = preview.size / 2.0
 	var origin := preview.position
 	var shake := create_tween()
@@ -185,17 +153,6 @@ func _destroy(cue: StringName) -> void:
 	crumple.parallel().tween_property(preview, "rotation", TAU * 2.5, 0.5)
 	await crumple.finished
 	title.text = ""
-	if speaking and Narrator.current_cue == cue:
-		await Narrator.line_finished
-
-
-## The picks as category id -> option id.
-func selection() -> Dictionary[StringName, StringName]:
-	var picked: Dictionary[StringName, StringName] = {}
-	for category in categories:
-		if category.options:
-			picked[category.id] = category.options[_picks[category.id]].id
-	return picked
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -294,28 +251,8 @@ func _randomize() -> void:
 				push_warning("CharacterSelect: random_preset option '%s' not in '%s'" % [random_preset[category.id], category.id])
 			else:
 				_picks[category.id] = index
-	_used_random = true
-	if _choosing_since < 0:
-		_choosing_since = Time.get_ticks_msec()
 	_step = &""
 	jump_requested.emit(&"confirm")
-
-
-func _confirm_cue() -> StringName:
-	var picked := selection()
-	if _used_random and random_preset and _matches(random_preset, picked):
-		return random_confirm_cue
-	for line in confirm_lines:
-		if line and line.matches(picked):
-			return line.cue
-	return default_confirm_cue
-
-
-func _matches(wanted: Dictionary[StringName, StringName], picked: Dictionary[StringName, StringName]) -> bool:
-	for id in wanted:
-		if picked.get(id) != wanted[id]:
-			return false
-	return true
 
 
 func _category(id: StringName) -> CharacterCategory:

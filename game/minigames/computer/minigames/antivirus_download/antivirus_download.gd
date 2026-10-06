@@ -18,8 +18,6 @@ const ALARM := Color("#ff5a4a")
 const STATUS := Color("#cfc5aa")
 ## Seconds of clockwise steps the speed readout averages over.
 const SPEED_WINDOW := 2.0
-## Seconds a teaching line may wait for the narrator before it's dropped.
-const PENDING_CUE_LIFE := 3.0
 
 ## Downloads started this session (a restart after Power gets a "corrupted" status).
 static var _attempts := 0
@@ -27,14 +25,11 @@ static var _attempts := 0
 var _phase := Phase.WAITING
 var _percent := 0.0
 var _peak := 0.0
-var _idle := 0.0
 var _last_clockwise := 0.0
 var _slip_timer := 0.0
 var _slipping := false
 var _turns := 0 ## Full crank turns so far (one creak each).
 var _steps: Array[Vector2] = [] ## (time, degrees) of recent clockwise steps, for the speed readout.
-var _halfway := false
-var _pending_cues: Dictionary[StringName, float] = {} ## Cue → when it was wanted.
 
 var _window: AppWindow
 var _dial: CrankDial
@@ -67,7 +62,7 @@ func begin() -> void:
 	_hint = TWIST_HINT.instantiate() as TwistHint
 	_hint.twist = _twist
 	_hint.arrow_direction = 1
-	_hint.intro_cue = &"" # The narrator's av_engaged line teaches it here.
+	_hint.intro_cue = &"" # twist_tutorial is about screws; no line here.
 	_hint.key_color = Color(0.36, 0.37, 0.43, 0.95)
 	_hint.hide()
 	add_child(_hint)
@@ -103,41 +98,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if key.keycode == KEY_ESCAPE or (key.keycode >= KEY_F1 and key.keycode <= KEY_F12) or key.ctrl_pressed or key.meta_pressed:
 		return # Debug keys and shortcuts go through.
 	get_viewport().set_input_as_handled() # Nothing types into the document behind the installer.
-	match _phase:
-		Phase.CRANKING:
-			_twist.handle(event)
-		Phase.WAITING:
-			var code := key.physical_keycode if key.physical_keycode != KEY_NONE else key.keycode
-			if key.pressed and not key.echo and code in TwistInput.RING and not Narrator.is_speaking():
-				Narrator.play(_cfg().dial_nudge_cue)
+	if _phase == Phase.CRANKING:
+		_twist.handle(event)
 
 
 func _process(delta: float) -> void:
-	var cfg := _cfg()
-	match _phase:
-		Phase.WAITING:
-			_idle += delta
-			if _idle >= cfg.dial_nudge_after:
-				_idle = -INF
-				Narrator.play(cfg.dial_nudge_cue)
-		Phase.CRANKING:
-			_slip(delta)
-			_refresh_speed()
-			if _pending_cues and not Narrator.is_speaking():
-				var cue: StringName = _pending_cues.keys()[0]
-				var fresh: bool = _now() - _pending_cues[cue] <= PENDING_CUE_LIFE
-				_pending_cues.erase(cue)
-				if fresh:
-					Narrator.play(cue)
-
-
-## Teaching lines wait for the narrator to finish instead of cutting it off (e.g. av_engaged), but are
-## dropped if that takes longer than PENDING_CUE_LIFE (by then the moment has passed).
-func _say_when_quiet(cue: StringName) -> void:
-	if not Narrator.is_speaking():
-		Narrator.play(cue)
-	else:
-		_pending_cues[cue] = _now()
+	if _phase == Phase.CRANKING:
+		_slip(delta)
+		_refresh_speed()
 
 
 func _build_window(cfg: AntivirusDownloadConfig) -> void:
@@ -187,7 +155,6 @@ func _build_window(cfg: AntivirusDownloadConfig) -> void:
 	_bar.size_flags_vertical = SIZE_SHRINK_CENTER
 	_bar.checkpoints = cfg.checkpoints
 	_bar.number_size = 56
-	_bar.pressed.connect(_on_bar_pressed)
 	row.add_child(_bar)
 
 	_status = _label("", MONO_FONT, 18, STATUS)
@@ -207,30 +174,20 @@ func _label(text: String, font: Font, size_px: int, color: Color) -> Label:
 
 
 func _on_dial_pressed() -> void:
-	match _phase:
-		Phase.WAITING:
-			_phase = Phase.CRANKING
-			_dial.engaged = true
-			_dial.pop()
-			_play(_cfg().engage_sfx, _cfg().engage_db)
-			_hint.show()
-			_last_clockwise = _now()
-			_refresh_status()
-			Narrator.play(_cfg().engaged_cue)
-		Phase.CRANKING:
-			if not Narrator.is_speaking():
-				Narrator.play(_cfg().dial_again_cue)
-
-
-func _on_bar_pressed() -> void:
-	if _phase == Phase.WAITING and not Narrator.is_speaking():
-		Narrator.play(_cfg().bar_click_cue)
+	if _phase != Phase.WAITING:
+		return
+	_phase = Phase.CRANKING
+	_dial.engaged = true
+	_dial.pop()
+	_play(_cfg().engage_sfx, _cfg().engage_db)
+	_hint.show()
+	_last_clockwise = _now()
+	_refresh_status()
 
 
 func _on_twisted(delta: float) -> void:
 	if _phase != Phase.CRANKING:
 		return
-	var cfg := _cfg()
 	var now := _now()
 	_ratchet.pitch_scale = 1.0 if delta > 0.0 else 0.85
 	_ratchet.play()
@@ -240,7 +197,6 @@ func _on_twisted(delta: float) -> void:
 		_set_percent(_percent + delta * _per_degree())
 	else:
 		_set_percent(maxf(_floor(), _percent + delta * _per_degree()))
-		_say_when_quiet(cfg.wrong_way_cue)
 
 
 ## Not cranking for `slip_delay` → it unwinds toward the last checkpoint reached, ticking slowly.
@@ -253,7 +209,6 @@ func _slip(delta: float) -> void:
 	if not _slipping:
 		_slipping = true
 		_slip_timer = 0.0
-		_say_when_quiet(cfg.slipping_cue)
 	_slip_timer -= delta
 	if _slip_timer <= 0.0:
 		_slip_timer = cfg.slip_tick
@@ -287,10 +242,6 @@ func _set_percent(value: float) -> void:
 		_turns = turns
 		_play(cfg.creak_sfx, cfg.creak_db)
 	_refresh_status()
-	if _percent >= 50.0 and not _halfway:
-		_halfway = true
-		if not Narrator.is_speaking():
-			Narrator.play(cfg.halfway_cue)
 	if _percent >= 100.0:
 		_finish()
 
@@ -322,7 +273,6 @@ func _finish() -> void:
 	_bar.fill_color = Color("#ff6a3d")
 	ComicBurst.spawn(self, _bar.get_global_rect().get_center(), "DING!")
 	_play(cfg.done_sfx, cfg.done_db)
-	Narrator.play(cfg.done_cue)
 	_status.text = cfg.done_text
 	_status.add_theme_color_override(&"font_color", ALARM)
 	_speed.text = cfg.speed_text % roundi(cfg.done_spin / 6.0)

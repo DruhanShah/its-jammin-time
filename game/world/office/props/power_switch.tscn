@@ -121,7 +121,6 @@ script = ExtResource("1_int")
 unlock_id = &"switchboard"
 verb = "unscrew the panel"
 target_scene = "res://minigames/switch/switch_minigame.tscn"
-locked_cues = Array[StringName]([&"switch_locked"])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0.2)

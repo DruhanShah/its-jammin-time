@@ -4,9 +4,6 @@ extends Control
 ## percentage in big outlined serif text centred on the fill. `value` 0..100 (eases toward it),
 ## `fill_color` (turns red-orange at the end), `flash()` = brief white pulse, `shake()`. `_draw()` only.
 
-## Clicked (the bar is decorative; the minigame makes fun of it).
-signal pressed
-
 const TRACK := Color("#2a2a2d")
 const NUMBER_FONT := preload("res://assets/fonts/Tinos-Regular-Latin.ttf")
 
@@ -44,13 +41,6 @@ func shake(strength := 6.0) -> void:
 	for i in 5:
 		tween.tween_property(self, "_offset", Vector2((1.0 if i % 2 == 0 else -1.0) * strength * (1.0 - i / 5.0), 0), 0.04)
 	tween.tween_property(self, "_offset", Vector2.ZERO, 0.04)
-
-
-func _gui_input(event: InputEvent) -> void:
-	var click := event as InputEventMouseButton
-	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
-		accept_event()
-		pressed.emit()
 
 
 func _draw() -> void:

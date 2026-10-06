@@ -13,8 +13,6 @@ extends MinigameConfig
 @export var slip_rate := 6.0
 ## Slipping and turning the wrong way stop at the highest of these the player has reached.
 @export var checkpoints: Array[float] = [25.0, 50.0, 75.0]
-## Seconds before an unclicked dial gets the narrator's nudge.
-@export var dial_nudge_after := 8.0
 ## Seconds between 100 % and complete() (the self-spinning "quarantine" bit).
 @export var finish_hold := 2.5
 ## Dial degrees per second once it's done ("now it spins by itself").
@@ -44,14 +42,6 @@ extends MinigameConfig
 @export_group("Narrator cues")
 ## When the installer appears (team script: "Download antivirus").
 @export var intro_cue := &"av_download_intro"
-@export var bar_click_cue := &"av_bar_click"
-@export var dial_nudge_cue := &"av_dial_nudge"
-@export var engaged_cue := &"av_engaged"
-@export var slipping_cue := &"av_slipping"
-@export var wrong_way_cue := &"av_wrong_way"
-@export var dial_again_cue := &"av_dial_again"
-@export var halfway_cue := &"av_halfway"
-@export var done_cue := &"av_done"
 
 @export_group("Sounds")
 ## One per key step (an AudioStreamRandomizer).

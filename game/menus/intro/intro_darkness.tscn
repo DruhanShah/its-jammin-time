@@ -1,6 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://menus/intro/intro_darkness.gd" id="1_intro"]
+[ext_resource type="FontFile" uid="uid://ctm718ad8xjn8" path="res://assets/fonts/ComicRelief-Bold.ttf" id="2_quote"]
+[ext_resource type="FontFile" uid="uid://cc1m45jfx4q15" path="res://assets/fonts/ComicNeue-Italic.ttf" id="3_by"]
 
 [node name="IntroDarkness" type="Control"]
 layout_mode = 3
@@ -20,3 +22,32 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Card" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_right = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+theme_override_constants/separation = 18
+
+[node name="Quote" type="Label" parent="Card"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_quote")
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Attribution" type="Label" parent="Card"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_fonts/font = ExtResource("3_by")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1

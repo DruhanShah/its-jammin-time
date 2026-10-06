@@ -19,7 +19,5 @@ extends Resource
 @export var honest_reply := ""
 ## A starry reply to this email gets the boss promoting you (cue, fanfare, "PROMOTED!").
 @export var promote_on_starry := false
-## Narrator cue played when a word is picked (word → cue id), e.g. {"eepy": &"memo_eepy"}.
-@export var word_cues: Dictionary[String, StringName] = {}
 ## Narrator cue played when this email arrives; empty = none.
 @export var arrive_cue: StringName
