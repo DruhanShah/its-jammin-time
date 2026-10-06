@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://core/narrator/narrator_trigger.tscn" id="7_7e6co"]
 [ext_resource type="PackedScene" path="res://world/office/props/computer.tscn" id="8_comp"]
 [ext_resource type="MeshLibrary" uid="uid://u3ior7jn1wjd" path="res://world/office/gridmap/structure_library.tres" id="9_slib"]
+[ext_resource type="Script" path="res://world/office/lighting.gd" id="72_wqicl"]
 [ext_resource type="PackedScene" path="res://world/office/props/door.tscn" id="75_puljc"]
 [ext_resource type="PackedScene" path="res://world/office/props/sets/bookshelf_stocked.tscn" id="g_bookshelf_stocked"]
 [ext_resource type="PackedScene" uid="uid://c3wxol22g7n07" path="res://assets/vnb_office/models/Box_Base.fbx" id="g_Box_Base"]
@@ -1795,6 +1796,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 8)
 
 [node name="C2C3" parent="Doors" unique_id=786234506 instance=ExtResource("75_puljc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 8)
+
+[node name="Lighting" type="Node" parent="." unique_id=664409914]
+script = ExtResource("72_wqicl")
 
 [editable path="Rooms/A1/Furniture/Pinwheel/Desk3"]
 [editable path="Rooms/B1/Lights/CeilingLight1"]

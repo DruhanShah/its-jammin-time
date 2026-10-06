@@ -56,7 +56,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Furnishing 1/2: prefab sets + Start, A1–A3, B1–B3; B1 lights moved onto the walls [review: `docs/map/screenshots/` (`<room>.png` from a doorway, `<room>_top.png` top-down with north on the left), deviations at the end of `docs/map/furnishing_plan.md`; walk A2 → B1, push a chair]
 - [x] Furnishing 2/2: C1 server room (amber lights, flicker), C2 upside-down, C3 [review: `docs/map/screenshots/c1*.png`, `c2*.png`, `c3*.png`; deviations in "As built (part 2)" at the end of `docs/map/furnishing_plan.md`; walk B1 → C1 aisle → switchboard spot, look up in C2, push C2's floor chair]
 - [x] Chairs: bump/squeak sound on hitting walls; narrator jab after pushing chairs for a while (lines needed in script) [review: `world/office/props/office_chair.gd`, `narration/chair_push_1/2.tres`; shove a chair into a wall slowly and fast, pin one against a wall, roll chairs around for the squeak, push chairs for 15 s / 45 s]
-- [ ] "Lights went out" phase: dimmer emergency lighting; try neon-ish vs red, pick what still reads as an office and shows off the map (comparison screenshots for the user)
+- [ ] Third chair jab: narrator line when you push a chair into another room
+- [x] "Lights went out" phase: dimmer emergency lighting; try neon-ish vs red, pick what still reads as an office and shows off the map (comparison screenshots for the user) [review: `docs/map/screenshots/lights_out/comparison.png` (normal / A neon / B red / C mix, recommended + default); pick with `Lighting.look` in office.tscn; in game F5 toggles the power, F6 cycles the looks (debug builds only); `world/office/lighting.gd`, `GameState.set_power()`]
 
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
@@ -64,6 +65,11 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
+- Lights out: a power-down/up sound (clunk + fluorescent tick) and a narrator line on the blackout
+- Lights out: emergency fixtures stutter for a second when they kick in (reuse `light_flicker.gd`)
+- Lights out: C1 keeps a few amber lights on the "generator" while the rest of the office is dark
+- Lights out: glowing backing box behind the EXIT signs (look C)
+- Chairs: only the faster chair bumps in chair-on-chair hits; 2–3 bump variants
 - Door: ease-out at the end of the swing; bump sound when blocked
 - Narrator lines when opening A2's fake door / B1's last door onto bare wall
 - Soft "denied" thunk sound when pressing X on a locked object

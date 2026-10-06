@@ -5,7 +5,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_rg26j"]
 size = Vector3(1, 0.03, 1)
 
-[node name="CeilingLight" type="Node3D" unique_id=1527440329]
+[node name="CeilingLight" type="Node3D" unique_id=1527440329 groups=["office_lights"]]
 
 [node name="Panel" type="MeshInstance3D" parent="." unique_id=1719876300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015, 0)

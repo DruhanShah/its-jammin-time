@@ -3,6 +3,8 @@ extends Node
 
 ## Emitted when an id is unlocked or locked again.
 signal unlock_changed(id: StringName, unlocked: bool)
+## Emitted when the office power goes out or comes back (see `set_power`).
+signal power_changed(on: bool)
 
 ## Where the player stood in each level (by scene path), so returning from a minigame puts them back.
 ## Each value is [body transform, head pitch].
@@ -13,6 +15,9 @@ var chair_push_time := 0.0
 
 ## Unlocked ids, global across scenes. Ids are snake_case names of the thing, e.g. &"genie_lamp".
 var unlocked: Dictionary[StringName, bool] = {}
+
+## False while the lights are out: the office runs on emergency lighting (`world/office/lighting.gd`).
+var power_on := true
 
 
 func unlock(id: StringName) -> void:
@@ -28,3 +33,11 @@ func lock(id: StringName) -> void:
 
 func is_unlocked(id: StringName) -> bool:
 	return unlocked.has(id)
+
+
+## Story switch for the "lights went out" phase: `GameState.set_power(false)` kills the lights,
+## `set_power(true)` brings them back. Survives scene changes; the office applies it on load.
+func set_power(on: bool) -> void:
+	if on != power_on:
+		power_on = on
+		power_changed.emit(on)
