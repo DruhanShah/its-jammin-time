@@ -21,3 +21,7 @@ docs/_minted*/
 
 # Claude Code local files (agent worktrees, settings)
 .claude/
+
+# Raw narrator recordings (converted to voice/*.ogg for Godot)
+game/assets/audio/narrator/*.m4a
+game/assets/audio/narrator/recordings.zip
