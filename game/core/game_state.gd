@@ -70,6 +70,8 @@ var document_font_name := ""
 var minigames_completed: Dictionary[StringName, int] = {}
 ## Money in the bank. Sleeping at the computer drains it (it's allowed to go negative).
 var bank_balance := 1000
+## Rooms the player has stood in, by position id ("x,z" of the room's centre, see Minimap). Saved.
+var visited_rooms: Dictionary[String, bool] = {}
 ## Every narrator line that played, oldest first (the pause menu's log): {"cue": StringName, "text":
 ## String (the full subtitle, also for lines whose subtitle isn't shown), "audio": bool}. Saved.
 var narration_log: Array[Dictionary] = []
