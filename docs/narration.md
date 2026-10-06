@@ -76,6 +76,7 @@
 11. That was all the questions we had. We ran out of budget for more. Thank you for playing Who Wants To Turn On The Lights!
 12. That's an odd looking switch, but I guess it's like a valve that lets electricity flow instead of water? Weird system y'all have in this office.
 13. It's nice and bright again! Time to get back to the headache-inducing computer :D
+14. (Phone a Friend lifeline) Nice try, you don't have any friends.
 
 # Lights out #3
 
