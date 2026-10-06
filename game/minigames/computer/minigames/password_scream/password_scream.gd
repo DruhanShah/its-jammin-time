@@ -7,7 +7,9 @@ extends Minigame
 ## An attempt ends once the input stayed above `threshold_db` for `scream_time` (a scream) and then
 ## went quiet for `quiet_time`, or after `listen_timeout` with no scream at all (so silent players, no mic or a denied permission still get
 ## through). If the input is dead silent for `fake_after` s the waveform is faked (plausible random speech that also reacts to
-## keys and the mouse) and says so.
+## keys and the mouse). That is only the look: a real mic can be silent too (still starting up, the web
+## permission prompt still open, noise suppression in a quiet room). The narrator only claims "no mic
+## access" (`no_mic_cue`) when `has_no_access()` is sure, otherwise it's the normal "too quiet" line.
 ##
 ## Mic capture: an AudioStreamMicrophone plays into a muted "MicTap" bus (created at runtime if
 ## missing) whose AudioEffectCapture is read every frame; needs the project setting
@@ -21,6 +23,36 @@ const BUS := &"MicTap"
 ## Seconds per waveform bar.
 const BAR_TIME := 1.0 / 30.0
 const SPINNER := ["|", "/", "-", "\\"]
+## Web only: records the mic permission state (Permissions API, where supported) and the outcome of
+## Godot's getUserMedia call in `window.__godotMicProbe` {perm, gum}, read back by _no_mic_access().
+const WEB_PROBE := """(function () {
+	var p = window.__godotMicProbe || (window.__godotMicProbe = { perm: '', gum: '' });
+	var md = navigator.mediaDevices;
+	if (!md || !md.getUserMedia) {
+		p.gum = 'unavailable';
+	} else if (!md.__godotMicHooked) {
+		var original = md.getUserMedia.bind(md);
+		md.getUserMedia = function (constraints) {
+			p.gum = 'pending';
+			return original(constraints).then(function (stream) {
+				p.gum = 'ok';
+				return stream;
+			}, function (e) {
+				p.gum = 'error:' + ((e && e.name) || e);
+				throw e;
+			});
+		};
+		md.__godotMicHooked = true;
+	}
+	try {
+		navigator.permissions.query({ name: 'microphone' }).then(function (status) {
+			p.perm = status.state;
+			status.onchange = function () { p.perm = status.state; };
+		}, function () { p.perm = 'unsupported'; });
+	} catch (e) {
+		p.perm = 'unsupported';
+	}
+})();"""
 
 var _phase := Phase.LISTEN
 var _attempt := 0 ## 0-based attempt in progress.
@@ -31,7 +63,9 @@ var _heard := false
 var _level := 0.0 ## Current input level 0..1.
 var _peak_db := -80.0 ## Loudest sample this frame.
 var _dead_time := 0.0 ## Seconds the input has been exactly silent.
-var _fake := false
+var _fake := false ## Showing the fake waveform (input silent right now). Visual only.
+var _mic_time := 0.0 ## Seconds the mic has been running (not while paused or asleep).
+var _ever_signal := false ## The capture delivered at least one non-zero sample since the mic started.
 var _fake_level := 0.0
 var _fake_kick := 0.0
 var _syllable_target := 0.0 ## Fake waveform: level of the current syllable or pause.
@@ -70,6 +104,11 @@ func cleanup() -> void:
 	var bus := AudioServer.get_bus_index(BUS)
 	if bus >= 0:
 		AudioServer.remove_bus(bus)
+
+
+## Also when the scene changes under it (Quit to title, a load) without complete()/stop_all().
+func _exit_tree() -> void:
+	cleanup()
 
 
 func _process(delta: float) -> void:
@@ -149,8 +188,8 @@ func _show_verdict() -> void:
 	_pop(verdict, 1.25)
 	window.shake(6.0)
 	var cue: StringName = cfg.fail_cues[_attempt] if _attempt < cfg.fail_cues.size() else &""
-	if _fake and _attempt == 0 and cfg.no_mic_cue:
-		cue = cfg.no_mic_cue # No mic access at all: the narrator calls it out.
+	if _attempt == 0 and cfg.no_mic_cue and _no_mic_access():
+		cue = cfg.no_mic_cue # Surely no mic access: the narrator calls it out.
 	if cue:
 		Narrator.play(cue)
 	if number == cfg.droop_attempt:
@@ -248,6 +287,10 @@ func _set_phase(phase: Phase) -> void:
 # --- Microphone -------------------------------------------------------------------------------------
 
 func _start_mic() -> void:
+	_mic_time = 0.0
+	_ever_signal = false
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval(WEB_PROBE, true) # Before play(): that's what calls getUserMedia.
 	var bus := AudioServer.get_bus_index(BUS)
 	if bus == -1:
 		bus = AudioServer.bus_count
@@ -290,6 +333,9 @@ func _read_input(delta: float) -> void:
 				sum += sample * sample
 				peak = maxf(peak, absf(sample))
 			read = frames
+	if _player:
+		_mic_time += delta
+		_ever_signal = _ever_signal or peak > 0.0
 	if read > 0:
 		var rms := sqrt(sum / read)
 		_level = clampf((linear_to_db(maxf(rms, 0.000001)) + 60.0) / 60.0, 0.0, 1.0)
@@ -312,6 +358,38 @@ func _read_input(delta: float) -> void:
 		_syllable_left = randf_range(0.12, 0.45) if pause else randf_range(0.07, 0.22)
 	var target := _syllable_target + randf() * 0.08 + _fake_kick * 0.6
 	_fake_level = lerpf(_fake_level, target, minf(1.0, delta * 18.0))
+
+
+## True only when we're sure there is no mic access (see has_no_access()).
+func _no_mic_access() -> bool:
+	var perm := ""
+	var gum := ""
+	if OS.has_feature("web"):
+		var probe = JavaScriptBridge.eval("JSON.stringify(window.__godotMicProbe || {})", true)
+		var state = JSON.parse_string(str(probe)) if probe != null else null
+		if state is Dictionary:
+			perm = str(state.get("perm", ""))
+			gum = str(state.get("gum", ""))
+	return has_no_access(OS.has_feature("web"), perm, gum, _ever_signal, _mic_time,
+			(config as PasswordScreamConfig).no_access_after, not AudioServer.get_input_device_list().is_empty())
+
+
+## The "no mic access" decision. A false "too quiet" is fine, a false "no access" is not, so unsure = false.
+## - Any non-zero sample since the mic started: there is access.
+## - Web: the Permissions API says "denied", getUserMedia failed or doesn't exist, or its prompt is
+##   still unanswered after `after` s. "granted" or a working getUserMedia with silence = too quiet.
+## - Desktop (no permission API; macOS hands a denied app pure zeros): no input device at all, or
+##   not a single non-zero sample for `after` s of running mic.
+## `perm`: "granted"/"denied"/"prompt"/"unsupported"/"" (unknown); `gum`: "pending"/"ok"/"error:<name>"/"unavailable"/"".
+static func has_no_access(web: bool, perm: String, gum: String, ever_signal: bool, mic_time: float,
+		after: float, has_input_device: bool) -> bool:
+	if ever_signal:
+		return false
+	if web:
+		if perm == "denied" or gum.begins_with("error") or gum == "unavailable":
+			return true
+		return gum == "pending" and perm != "granted" and mic_time >= after
+	return not has_input_device or mic_time >= after
 
 
 func _shown_level() -> float:

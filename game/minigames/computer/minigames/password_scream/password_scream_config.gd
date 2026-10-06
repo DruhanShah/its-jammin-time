@@ -46,5 +46,9 @@ extends MinigameConfig
 @export var max_listen_time := 3.5
 @export var processing_time := 1.2
 @export var verdict_time := 2.8
-## Seconds the mic needs to be dead silent (no device, permission denied) before the fake waveform.
+## Seconds the input needs to be dead silent before the fake waveform shows (visual only: a working
+## mic can be silent too, e.g. while starting up or with noise suppression in a quiet room).
 @export var fake_after := 0.6
+## Seconds of running mic without a single non-zero sample (desktop) or with the web permission
+## prompt still unanswered before the narrator may say there's no mic access (see has_no_access()).
+@export var no_access_after := 3.0
