@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_metal"]
+albedo_color = Color(0.78, 0.77, 0.72, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="Mesh_head"]
+material = SubResource("Mat_metal")
+top_radius = 0.022
+bottom_radius = 0.022
+height = 0.01
+radial_segments = 24
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_slot"]
+albedo_color = Color(0.08, 0.08, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_slot"]
+material = SubResource("Mat_slot")
+size = Vector3(0.034, 0.006, 0.004)
+
+[sub_resource type="CylinderMesh" id="Mesh_shaft"]
+material = SubResource("Mat_metal")
+top_radius = 0.008
+bottom_radius = 0.004
+height = 0.05
+radial_segments = 12
+rings = 6
+
+[node name="Screw" type="Node3D"]
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.005)
+mesh = SubResource("Mesh_head")
+
+[node name="Slot" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0095)
+mesh = SubResource("Mesh_slot")
+
+[node name="Shaft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.025)
+mesh = SubResource("Mesh_shaft")

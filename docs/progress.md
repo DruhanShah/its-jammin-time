@@ -78,22 +78,35 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [ ] Vim modes (normal/insert, Esc)
 - [ ] Minigames: floating letters, password scream
 
+## Maintenance
+- [~] Fix all Godot editor/game errors (e.g. recurring "Identifier not found: GameState/Audio/Narrator" on script reload, twist_demo parse error)
+
+## Fixes
+- [ ] Remove the big-text signs in the server room (SERVER ROOM, LEGACY / DO NOT TOUCH, DAYS SINCE LAST BLACKOUT) and the green EXIT signs from the lights-out look; keep the other signs
+- [ ] Pushing a chair behind you shouldn't trigger the push arm animation (only when the chair is in front)
+
 ## Computer redesign
 - [x] Brainstorm (awaiting approval): make computer minigames comic-ier and more fun; fake desktop instead of terminal (`docs/computer_redesign.md`)
-- [ ] First visit: password via fake mic (live waveform, fails 5×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
+- [ ] Visit 1 (approved design): password via fake mic (live waveform, fails 5×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
+
+- [ ] Visit 2 (approved design): software_update → memo_mail → inky
+- [ ] Visit 3: redo — 3 concepts in `docs/computer_redesign.md` §8 (recommended: LightGuard), awaiting user pick
+- [ ] Side monitor in computer mode (waiting for user's media)
 
 ## Switchboard gauntlet (twist minigames)
 - [x] Asset search: 3D models — picks in scratchpad `assets3d/` (Poly Pizza CC0/CC-BY; no free non-AI gargoyle → recoloured Quaternius demons on pedestals)
 - [x] Asset search: sounds — 71 picks in scratchpad `audio2/out/` (Freesound CC0, Kenney CC0, 400 Sounds Pack); quiz loop mood needs a listen
 - [x] Twist input detector: B-H-Y-T-F-V circle around G (direction + amount), reusable
-- [ ] Switchboard framework: obstacle then restore minigame per blackout, wired into the story flow
-- [ ] Obstacle: screwdriver panel
+- [x] Switchboard framework: obstacle then restore minigame per blackout, wired into the story flow [review: `core/story.gd` (`SWITCH_GAMES`, `switch_game()`/`switch_game_done()`/`next_switch_scene()`), `minigames/switch/switch_games.gd`, `world/office/props/power_switch.gd`; F7 to SWITCH_1, X on the switch, leave mid-pair with Esc and come back]
+- [x] Obstacle: screwdriver panel (3 screws + a sticker gag) [review: `minigames/switch/screwdriver/screwdriver.gd`/`.tscn`, tune `turns_per_screw`/`back_out`/`sticker_degrees`; lines `narration/screwdriver_*.tres`; listen to the click/drop/clatter volumes]
+- [x] Twist teaching hint: reusable key-ring widget with demo, live feedback, shrinks once mastered, returns on stall + first-time narrator line [review: `core/input/twist_hint.gd`/`.tscn`, `narration/twist_tutorial.tres`]
 - [ ] Obstacle: gargoyle riddle → Millionaire quiz (dialogue, lighting change, sfx, 3 in a row, random-number timer)
 - [ ] Obstacle: kaleidoscope + "TWIST ME" painting → password for the switchboard keypad
 - [ ] Restore: wires (connect straight, not by colour) + narrator mockery
 - [ ] Restore: pipe valve
 - [ ] Restore: candle wick
 - [ ] After the third blackout: controls shift to ESDF + narration
+- [~] Teach the twist control: reusable key-ring hint (demo animation, live feedback) used by every twist game
 
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 

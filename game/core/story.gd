@@ -3,9 +3,12 @@ extends Node
 ## `GameState.story_step`). Advances when the queued computer minigame is beaten or the power
 ## comes back on; each scene derives what it shows from the current step (the office: see
 ## `world/office/story_stage.gd`), so reloading a scene always shows the right state.
+## The power comes back once the step's switch games (`SWITCH_GAMES`) are beaten.
 ## Debug builds: F7 (`debug_next_story_step`) skips to the next step and reloads the office.
 
 signal step_changed(step: Step)
+## Emitted when the current switch game changes (new step, or one was beaten); empty = none.
+signal switch_game_changed(id: StringName)
 
 enum Step {
 	INTRO, ## At the computer: minigame 1 (the game starts here).
@@ -27,6 +30,14 @@ const THIRD_VISIT: Array[StringName] = [&"bot_check"]
 const MINIGAMES := {Step.INTRO: FIRST_VISIT, Step.COMPUTER_2: SECOND_VISIT, Step.COMPUTER_3: THIRD_VISIT}
 ## Narrator line when the lights go out in each switch step.
 const BLACKOUT_CUES := {Step.SWITCH_1: &"lights_out_1", Step.SWITCH_2: &"lights_out_2", Step.SWITCH_3: &"lights_out_3"}
+## Switch games each blackout plays, in order: an obstacle (to get at the switchboard), then a
+## restore game (finishing it turns the power back on). Ids are listed in
+## minigames/switch/switch_games.gd; progress through a pair is `GameState.switch_progress`.
+const SWITCH_GAMES := {
+	Step.SWITCH_1: [&"screwdriver", &"wires"],
+	Step.SWITCH_2: [&"gargoyles", &"valve"],
+	Step.SWITCH_3: [&"kaleidoscope", &"candle"],
+}
 ## Narrator line for the next office load after entering a step.
 const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2", Step.FREE_ROAM: &"to_be_continued"}
 ## Escalating lines when the player wanders off the objective (see story_stage.gd), in order.
@@ -63,6 +74,30 @@ func is_swapped() -> bool:
 	return step >= Step.SWITCH_2
 
 
+## The switch game to play next in this switch step, or empty (not a switch step / all beaten).
+func switch_game() -> StringName:
+	var games: Array = SWITCH_GAMES.get(step, [])
+	return games[GameState.switch_progress] if GameState.switch_progress < games.size() else &""
+
+
+## Call when switch game `id` is beaten (ignored if it isn't the current one). Beating the last one of
+## the step restores the power, which moves the story on.
+func switch_game_done(id: StringName) -> void:
+	if id.is_empty() or id != switch_game():
+		return
+	GameState.switch_progress += 1
+	switch_game_changed.emit(switch_game())
+	if switch_game().is_empty():
+		GameState.set_power(true)
+
+
+## Where a close-up switch game goes once beaten: straight into the next game's scene, or back to
+## the office (all done, or the next game is in-world).
+func next_switch_scene() -> String:
+	var path := SwitchGames.scene(switch_game())
+	return path if path else OFFICE
+
+
 ## The office calls this on its first load: true once, on a fresh start, to begin at the computer.
 func take_fresh_start() -> bool:
 	var fresh := _fresh_start and step == Step.INTRO
@@ -87,12 +122,14 @@ func next_off_path_cue() -> StringName:
 
 func _go_to(new_step: Step) -> void:
 	GameState.story_step = new_step
+	GameState.switch_progress = 0
 	_off_path_count = 0
 	_arrival_cue = ARRIVAL_CUES.get(new_step, &"")
 	if new_step in MINIGAMES:
 		Computer.queue(MINIGAMES[new_step])
 	_sync_unlocks()
 	step_changed.emit(new_step)
+	switch_game_changed.emit(switch_game())
 
 
 ## The desk computer works while the power is on and nothing needs fixing; the switch only while it's off.

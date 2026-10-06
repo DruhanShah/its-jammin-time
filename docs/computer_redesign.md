@@ -77,7 +77,7 @@ Working name: **ComicOS 95** (boot jingle optional). The screen becomes a deskto
   - **My Documents**: one file, `comic_script_FINAL_final2.cmc`. Opens Comic Writer.
   - **Recycle Bin**: full, and contains "your dreams of stand-up comedy.txt" (ties to the protagonist backstory in the plan).
   - **Light Bulb.exe**: does nothing on visit 1. Later it toggles the screen dimmer as a hint, or the narrator says "That's not how electricity works."
-  - **DO NOT CLICK.exe**: Please-Don't-Touch-Anything gag; each click escalates (window → "I said don't" → it closes itself and deletes its icon → the next visit it's back, bigger).
+  - ~~**DO NOT CLICK.exe**~~ (**cut by the user**): Please-Don't-Touch-Anything gag; each click escalates (window → "I said don't" → it closes itself and deletes its icon → the next visit it's back, bigger).
   - **Inky** (the assistant, see §5) sits in the corner from visit 2 on.
 - **Taskbar** (bottom, chunky outlines):
   - A **"Start"** button labelled **"Stop"**. Its menu: *Shut Down* (greyed out: "You don't have permission to leave"), *Sleep* (the bank-balance gag, §5), *Log Off* ("Logging off is a privilege of salaried employees"), *Run...* (opens a run box that only accepts "Comic").
@@ -278,7 +278,7 @@ Each visit ends with a blackout **caused from the computer** (rule of three, the
 |---|---|---|---|
 | **1** (fixed) | `mic_password` → `font_picker` → `ad_storm` | Eco Mode ad: "TURN OFF LIGHTS" | ~3 min |
 | **2** (after switch 1) | `software_update` → `memo_mail` (corporate speak v2) → `inky` | Inky: "Night Mode for your eyes?" | ~3–4 min |
-| **3** (after switch 2) | `password_expired` → `captcha_gauntlet` (bot check v2) → `exit_vim` | The player presses Power to exit vim | ~4 min |
+| ~~**3** (after switch 2)~~ **REJECTED** (user: "visit 3 we should redo") | ~~`password_expired` → `captcha_gauntlet` (bot check v2) → `exit_vim`~~ | ~~The player presses Power to exit vim~~ | see §8 |
 
 Optional/ambient on visits 2–3: the Sleep gag (Stop menu), the Side Monitor, desktop icon gags, and Twisted Text as a filler between steps if a visit feels short. Wallpaper and clock change every visit (§3).
 
@@ -321,3 +321,43 @@ Optional/ambient on visits 2–3: the Sleep gag (Stop menu), the Side Monitor, d
 **Critical path for visit 1:** T1 → (T4, T5, T6 in parallel) → T3 wiring, with T7 alongside. T2 (the full desktop) can land after visit 1 is playable, because the visit-1 apps work over the current screen as long as they use `AppWindow`.
 
 **Questions for the teammate:** (1) Are you still changing `computer.tscn`, `ad_popup` or `bot_check` on your branch? (2) What did you intend `Score` to become? (3) Do you want to own the vim gag (T14) or the corporate-speak rework (T9)? (4) OK to move the editor into a window and the vim look into visit 3?
+
+---
+
+## 8. Visit 3 — alternatives (v2)
+
+The old visit 3 (§6 row 3: `password_expired` → `captcha_gauntlet` → `exit_vim`) is **rejected**. Those minigames stay in §5 as a parts bin; any of them can be reused as a single beat below if useful.
+
+**Where visit 3 sits:** after switch 2 (gargoyle quiz + valve), before blackout 3 (kaleidoscope painting "TWIST ME" + candle wick in A3), after which WASD → ESDF. By now the player *expects* the computer to cause the blackout (visit 1: the Eco Mode ad, visit 2: Inky's Night Mode). Visit 3 is the third beat of that rule of three, so it must **break the pattern in a bigger, different way**. All three concepts below keep the shared rules from §2: a readable goal in the window title, every beat always winnable, ~3–4 min total, and the side monitor (the user's media) stays visible in computer mode.
+
+### Concept A: "LightGuard™" (protect the light, cause the dark) — scope M
+The computer has learned. The narrator: "Twice now this computer has turned the lights off. Not today. IT installed LightGuard." The goal is the same as always (finish the comic script page), but now the player **defends** the brightness.
+1. **`lightguard_install` (S, ~30 s):** an installer wizard with lying checkboxes ("☑ Protect the lights ☑ Also install Inky Premium ($4.99)"). Untick the bundleware; each untick re-ticks one other box once (rule of three, then it gives up). Teaches "click to stop the bad thing".
+2. **`keep_the_lights_on` (M, ~90 s, the main game):** a big **brightness meter** in the tray drains whenever a threat is on screen. Threats are callbacks to visits 1–2, each a 1-click or 1-drag counter: Eco Mode ads (close X), Inky sneaking toward the brightness slider (drag him to the bin), "Night Light turns on in 3…" toasts (click Snooze), a power-saving screensaver creeping in from the edges (wiggle the mouse), and the side monitor's video (it counts as a power drain; mute/minimise it, it comes back). The Comic Writer page fills by itself while the meter is above 50%; reach 100% to win. Waves get busier but every threat is readable at a glance (one colour = one counter). Like the power meter in [Five Nights at Freddy's](https://store.steampowered.com/app/319510/) mixed with whack-a-mole, and the threat-by-threat variety of [WarioWare](https://en.wikipedia.org/wiki/WarioWare) microgames.
+3. **Ending (the twist):** the page hits 100%, confetti, "LIGHTS PROTECTED: 100%". The narrator, smug: "Third time. No blackout. We beat the pattern." Then a toast: "LightGuard is keeping your screen at **MAXIMUM BRIGHTNESS** using: *the whole building*." The brightness slider overshoots to 400%, the screen becomes blinding white (bloom), the 3D office behind the fade goes dark room by room with a *ka-chunk* per room, and finally the monitor pops. **You caused it by protecting the light.** "Light" is the antagonist even when you're on its side.
+- **ESDF setup (optional stinger):** the white-out "burns in" the keyboard tray icon one key to the right.
+- **Why fun:** a real skill game (triage under pressure) with a visible score you care about, built mostly from parts we already have (ad variants, Inky, toasts).
+
+### Concept B: "The Computer Twists" (the screen literally rotates) — scope M
+The goal: type the final panel of the comic script. The monitor itself has started to twist.
+1. **`level_the_screen` (S–M, ~45 s):** the whole desktop rotates a few degrees with every keypress you type in Comic Writer. Use the twist ring (B-H-Y-T-F-V around G, `TwistInput` + the reusable key-ring hint) to rotate it back. The **side monitor stays upright**, so it is the readable reference ("make the screens match"). A spirit-level bubble in the title bar shows how far off you are; typing only counts while you're within ±10°. Tilt-to-balance like [Super Monkey Ball](https://en.wikipedia.org/wiki/Super_Monkey_Ball), applied to a desktop. It doubles as practice for the kaleidoscope that comes next.
+2. **`twisted_text` (M, ~60 s, §5 NEW 6, trimmed):** the shaking loosened the letters: words become anagrams ("LIGHTS" → "SLIGHT", "COMIC" → "MICCO"). Click a word, twist the ring to cycle its letters until the spelling is right (each twist step = one rotation of the letters). Three words, then a whole sentence upside down; the fix is to twist the whole window 180°, like room C2.
+3. **Ending (the twist):** the narrator: "Stop twisting things. Every time you twist something in this building, something else happens." You ignore him, because the last sentence is still crooked; the final required twist turns the desktop round **like a dimmer knob**: the wallpaper's light bulb dims with each step, and the last step clicks it off → blackout. **The player's own twist input caused it.** Then, at the kaleidoscope, the narrator can say: "Oh good. More twisting."
+- **ESDF setup:** the over-twisted keyboard: in the CRT-off, the on-screen key labels slide one key to the right.
+- **Why fun:** physical, tactile, uses our signature input; a little stressful in a good way. **Risk:** heavy use of twist right before the kaleidoscope could feel repetitive; keep each beat short.
+
+### Concept C: "Keyboard Calibration" (the computer twists your controls) — scope S–M
+The pattern is subverted: the computer **doesn't** cause the blackout; it gets ready for it and drags you along. IT pushes "Keyboard Calibration Wizard 3.0".
+1. **`password_shift` (S, ~40 s):** "Your password has expired." But every key you press types the key **to its right** (an on-screen keyboard highlights both what you pressed and what came out). To type `COMIC`, you press `XINUX`. Readable, a quick decoding puzzle, a little like the rules-as-objects of [Baba Is You](https://store.steampowered.com/app/736260/). Wrong attempts: "Password must not be 'vp,ov'."
+2. **`calibrate` (M, ~60 s):** a [Typing of the Dead](https://store.steampowered.com/app/246580/)-style lane: keys light up on an on-screen keyboard and you press them in time; the wizard keeps "fixing" the layout by sliding rows one key right, so the targets drift and you re-read each time. Success fills a "CALIBRATION" bar. Side monitor gag: its video subtitles are also shifted one key right.
+3. **Ending (the twist):** "Calibration complete. Final step: press the key labelled ⏻ to apply." The player braces for the third computer blackout, presses it, and... the screen just says "Applied ✓". Nothing goes dark. The narrator gloats: "See? No blackout. The computer has learned." Long beat. Then the lights go out on their own, with no cause at all ("I... didn't write that."). When you return to the office, WASD has shifted to ESDF: "Your calibration was applied."
+- **Why fun:** directly teaches the ESDF shift through play, so the post-blackout controls feel earned instead of arbitrary. **Risk:** keyboard puzzles are less "comic visual" than A or B; needs strong on-screen keyboard art.
+
+### Recommendation: **Concept A, "LightGuard™"**
+- It pays off the rule of three best: visits 1 and 2 taught "the computer turns the lights off", visit 3 makes you **fight for the light and win**, and *that* is what kills the power. Biggest, different, and it's the player's doing.
+- It is the most fun to **play**: a short, escalating triage game with a clear meter, not a sequence of jokes.
+- It reuses what visits 1–2 already build (ad variants, Inky, toasts, side monitor), so it's cheap for its payoff and doubles as a "greatest hits" finale for the computer.
+- It leaves the twist input fresh for the kaleidoscope right after.
+- Steal from C for the ESDF hand-off: as the monitor pops, the last toast reads "Keyboard recalibrated for low-light use (→ 1 key)", so the control shift has a cause.
+
+Queue: `Story.THIRD_VISIT = [&"lightguard_install", &"keep_the_lights_on"]` (the second step ends with `Computer.blackout()` in a "white-out" variant). Wallpaper v3: the bulb from §3 now wears a tiny security guard cap.

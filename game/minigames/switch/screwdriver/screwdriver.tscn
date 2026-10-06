@@ -1,0 +1,226 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/screwdriver/screwdriver.gd" id="1_sd"]
+[ext_resource type="PackedScene" path="res://minigames/switch/screwdriver/screw.tscn" id="2_screw"]
+[ext_resource type="PackedScene" path="res://assets/models/screwdriver/screwdriver.glb" id="3_model"]
+[ext_resource type="Script" path="res://core/input/twist_input.gd" id="4_twist"]
+[ext_resource type="PackedScene" path="res://core/input/twist_hint.tscn" id="5_hint"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/screw_click_1_toman.wav" id="7_c1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/screw_click_2_toman.wav" id="8_c2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/screw_drop_bolt_zemba.wav" id="9_drop"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/panel_clatter_vent_me_studios.wav" id="10_clatter"]
+[ext_resource type="PackedScene" path="res://world/office/props/hazard_sign.tscn" id="hz_sign"]
+
+[sub_resource type="AudioStreamRandomizer" id="Rand_click"]
+random_pitch = 1.12
+streams_count = 2
+stream_0/stream = ExtResource("7_c1")
+stream_1/stream = ExtResource("8_c2")
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 1
+background_color = Color(0.04, 0.04, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.6, 0.7, 1)
+ambient_light_energy = 0.35
+
+[sub_resource type="StandardMaterial3D" id="Mat_wall"]
+albedo_color = Color(0.32, 0.32, 0.3, 1)
+
+[sub_resource type="QuadMesh" id="Mesh_wall"]
+material = SubResource("Mat_wall")
+size = Vector2(4, 3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_box"]
+albedo_color = Color(0.42, 0.44, 0.46, 1)
+metallic = 0.5
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="Mesh_box"]
+material = SubResource("Mat_box")
+size = Vector3(0.7, 0.9, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stripe"]
+albedo_color = Color(0.95, 0.75, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_stripe"]
+material = SubResource("Mat_stripe")
+size = Vector3(0.72, 0.08, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="Mat_lever"]
+albedo_color = Color(0.85, 0.12, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_lever"]
+material = SubResource("Mat_lever")
+size = Vector3(0.09, 0.32, 0.09)
+
+[sub_resource type="BoxMesh" id="Mesh_base"]
+material = SubResource("Mat_box")
+size = Vector3(0.2, 0.2, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="Mat_red"]
+albedo_color = Color(0.9, 0.15, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_blue"]
+albedo_color = Color(0.15, 0.35, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_yellow"]
+albedo_color = Color(0.95, 0.8, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_wire"]
+size = Vector3(0.014, 0.6, 0.014)
+
+[sub_resource type="StandardMaterial3D" id="Mat_cover"]
+albedo_color = Color(0.58, 0.6, 0.62, 1)
+metallic = 0.5
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="Mesh_cover"]
+material = SubResource("Mat_cover")
+size = Vector3(0.62, 0.62, 0.24)
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.05, 0.05, 0.07, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+
+[node name="Screwdriver" type="Node3D"]
+script = ExtResource("1_sd")
+click_sound = SubResource("Rand_click")
+drop_sound = ExtResource("9_drop")
+clatter_sound = ExtResource("10_clatter")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.88993, -0.09905, 0.44521, 0.00000, 0.97613, 0.21717, -0.45609, -0.19327, 0.86869, 0.72000, 0.38000, 1.50000)
+current = true
+fov = 30.0
+
+[node name="Lamp" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, 0.9)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 1.6
+omni_range = 3.0
+
+[node name="EmergencyLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.5, 0.4)
+light_color = Color(1, 0.25, 0.15, 1)
+light_energy = 0.8
+omni_range = 2.5
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.38)
+mesh = SubResource("Mesh_wall")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -0.31)
+mesh = SubResource("Mesh_box")
+
+[node name="Stripe" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, -0.31)
+mesh = SubResource("Mesh_stripe")
+
+[node name="WireRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24, 0, -0.234)
+mesh = SubResource("Mesh_wire")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="WireBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.94, -0.34, 0, 0.34, 0.94, 0, 0, 0, 1, -0.19, 0, -0.234)
+mesh = SubResource("Mesh_wire")
+surface_material_override/0 = SubResource("Mat_blue")
+
+[node name="WireYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0, -0.234)
+mesh = SubResource("Mesh_wire")
+surface_material_override/0 = SubResource("Mat_yellow")
+
+[node name="LeverBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.21)
+mesh = SubResource("Mesh_base")
+
+[node name="Lever" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.08, -0.14)
+mesh = SubResource("Mesh_lever")
+
+[node name="Cover" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.31, 0)
+
+[node name="Plate" type="MeshInstance3D" parent="Cover"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, -0.12)
+mesh = SubResource("Mesh_cover")
+
+[node name="HazardSign" parent="Cover" instance=ExtResource("hz_sign")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0.31, 0)
+
+[node name="Screws" type="Node3D" parent="Cover"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, 0)
+
+[node name="Screw1" parent="Cover/Screws" instance=ExtResource("2_screw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, 0)
+
+[node name="Screw2" parent="Cover/Screws" instance=ExtResource("2_screw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, 0)
+
+[node name="Screw3" parent="Cover/Screws" instance=ExtResource("2_screw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.25, 0)
+
+[node name="Sticker" parent="Cover/Screws" instance=ExtResource("2_screw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.25, 0)
+
+[node name="Driver" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, 0)
+
+[node name="Model" parent="Driver" instance=ExtResource("3_model")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, -0.0237, 0.201)
+
+[node name="TwistInput" type="Node" parent="."]
+script = ExtResource("4_twist")
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="Hud"]
+offset_left = 24.0
+offset_top = 24.0
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Box" type="VBoxContainer" parent="Hud/Panel"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Hud/Panel/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Unscrew the panel"
+
+[node name="Help" type="Label" parent="Hud/Panel/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Roll the keys around G anticlockwise to unscrew.
+Esc: leave"
+
+[node name="Count" type="Label" parent="Hud/Panel/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Screws: 0 / 4"
+
+[node name="Hint" parent="Hud" node_paths=PackedStringArray("twist") instance=ExtResource("5_hint")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -460.0
+offset_right = -20.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+twist = NodePath("../../TwistInput")

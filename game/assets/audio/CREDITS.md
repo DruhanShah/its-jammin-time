@@ -30,6 +30,20 @@ Credit line (optional under CC0):
 
 > Rolling chair sound: "rolling_office_chair.WAV" by alpanaytekin (Freesound), CC0
 
+## Freesound clips for the switch games (`sfx/freesound/`)
+
+All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/. **Modified:** each file is a short cut from the Freesound HQ preview (times below), with short fades and normalised peak; one-shots, no loop.
+
+| File | Source sound | Author | Cut | Used for |
+|---|---|---|---|---|
+| `screw_click_1_toman.wav`, `screw_click_2_toman.wav` | "Screwdriver 1", https://freesound.org/people/16GPanskaToman_Kristian/sounds/496286/ | 16GPanskaToman_Kristian | 4.56–4.86 s and 13.42–13.72 s, mono | one per twist step in the screwdriver game (random pick) |
+| `screw_drop_bolt_zemba.wav` | "Bolts into Iron Pipe Flange", https://freesound.org/people/zembacraftworks/sounds/428340/ | zembacraftworks | 0.24–1.20 s | an unscrewed screw dropping |
+| `panel_clatter_vent_me_studios.wav` | (untitled) vent cover taken off, https://freesound.org/people/ME_Studios_Official/sounds/649765/ | ME_Studios_Official | 1.05–2.40 s, mono | the switchboard cover falling off |
+
+Credit lines (optional under CC0):
+
+> Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
+
 ## Placeholders (ours)
 
 Generated procedurally by a small Python script (sine tones and filtered noise), made for this project. No third-party or AI-generated audio. Replace them with real recordings when ready.

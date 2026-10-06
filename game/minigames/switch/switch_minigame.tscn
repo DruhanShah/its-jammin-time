@@ -41,7 +41,7 @@ horizontal_alignment = 1
 [node name="Body" type="Label" parent="Center/Box"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Placeholder: every switch will be a minigame of its own.
+text = "Placeholder: this switch game isn't built yet.
 For now there is one very big button. Esc leaves it in the dark."
 horizontal_alignment = 1
 

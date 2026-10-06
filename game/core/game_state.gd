@@ -23,6 +23,9 @@ var unlocked: Dictionary[StringName, bool] = {}
 ## Where the story is (`Story.Step`). Change it through `Story`, which reacts to it.
 var story_step := 0
 
+## How many switch games of the current switch step are beaten (`Story.SWITCH_GAMES`; reset each step).
+var switch_progress := 0
+
 ## False while the lights are out: the office runs on emergency lighting (`world/office/lighting.gd`).
 var power_on := true
 
