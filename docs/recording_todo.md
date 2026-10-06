@@ -10,6 +10,7 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `ads_first` | Oh no. Advertising. In a workplace. Who could have foreseen this. |
 | `candle_match_fizzle` | Pfft. Matches, like interns, need three tries. |
 | `controls_shift_w` | W? We don't do W any more. Keep up. |
+| `ending_computer_blurry` | You can't even read that. Glasses. Please. Put them on. (placeholder line, ending: after the blurry computer screen) |
 | `ending_glasses_nudge_1` | The glasses. On the desk. They go on your face. That's the whole puzzle. |
 | `keypad_no_password` | You don't know the password. The painting does. Paintings know things. |
 | `keypad_old_password` | That's your computer password. You reuse passwords? In this economy? |

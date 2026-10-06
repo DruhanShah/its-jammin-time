@@ -20,6 +20,7 @@ const FALLBACK_RETURN_SCENE := "res://world/office/office.tscn"
 const CURSOR := "|" # Plain ASCII: the web build has no system fallback font for block glyphs.
 const FLICKER_SOUND := preload("res://assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav")
 const CRT_OFF_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/power_down.wav")
+const BLUR_SHADER := preload("res://world/office/vision_blur.gdshader")
 const DEFAULT_DOCUMENT_FONT := preload("res://assets/fonts/ComicShannsMono-Regular.ttf")
 ## Space between the page's edge and the document text.
 const PAGE_PADDING := Vector2(26, 18)
@@ -175,6 +176,29 @@ func exit() -> void:
 	var target := GameState.computer_return_scene if GameState.computer_return_scene else FALLBACK_RETURN_SCENE
 	GameState.computer_return_scene = ""
 	Transition.change_scene(target)
+
+
+## Ending (no glasses yet): the screen is just a blur. No minigames, no Power/Sleep, input swallowed;
+## after `hold` seconds it goes straight back (normal exit). Story calls it on arrival in the ENDING step.
+func glance_blurry(hold := 1.0) -> void:
+	$EventManager.stop()
+	stop_all()
+	set_process_unhandled_key_input(false)
+	$Screen/PowerButton.hide()
+	$Screen/SleepButton.hide()
+	var layer := CanvasLayer.new() # Above the screen (layer 0), below Transition (100) and subtitles.
+	layer.layer = 1
+	var blur := ColorRect.new()
+	blur.mouse_filter = Control.MOUSE_FILTER_STOP # Swallows clicks too.
+	var material := ShaderMaterial.new()
+	material.shader = BLUR_SHADER
+	material.set_shader_parameter(&"blur", 1.0)
+	material.set_shader_parameter(&"radius", 0.02)
+	blur.material = material
+	layer.add_child(blur)
+	add_child(layer)
+	blur.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	get_tree().create_timer(hold).timeout.connect(exit)
 
 
 ## Ends a visit with a power cut caused by the computer itself: the screen flickers, switches off like

@@ -81,6 +81,13 @@ func _check_step() -> void:
 			_after(exit_delay, computer.exit)
 
 
+## Starts nothing more (the running minigame, if any, stays; see Computer.glance_blurry()).
+func stop() -> void:
+	_free_queue.clear()
+	_current = &""
+	_story = false
+
+
 func _restart(id: StringName) -> void:
 	if _queue() and _queue()[0] == id:
 		_start_next()

@@ -43,6 +43,10 @@ const SWITCH_GAMES := {
 }
 ## Narrator line for the next office load after entering a step.
 const ARRIVAL_CUES := {Step.COMPUTER_2: &"switch_fixed_1", Step.COMPUTER_3: &"switch_fixed_2"}
+## Ending: the line after a look at the computer without glasses (Computer.glance_blurry()), and the
+## seconds before a repeat look plays it again (so clicking the computer over and over doesn't spam it).
+const ENDING_COMPUTER_CUE := &"ending_computer_blurry"
+const ENDING_COMPUTER_CUE_COOLDOWN := 20.0
 ## From this step on the controls are shifted one key to the right (WASD → ESDF, X → C; see `Controls`).
 const CONTROLS_SHIFT_STEP := Step.SWITCH_3
 ## Played when the lights go out in the shift's step, *before* its blackout line
@@ -66,6 +70,8 @@ var _intro_pending := false
 var _controls_cue_pending := false
 ## Blackout line waiting for `CONTROLS_SHIFT_CUE` to finish (empty when none).
 var _blackout_cue_after_controls := &""
+## Ticks (ms) when ENDING_COMPUTER_CUE was last queued, or -1.
+var _computer_cue_msec := -1
 
 
 func _ready() -> void:
@@ -197,6 +203,13 @@ func _on_scene_changed() -> void:
 	if _intro_pending and get_tree().current_scene is Computer:
 		_intro_pending = false
 		Narrator.play(&"story_intro")
+	elif step == Step.ENDING and get_tree().current_scene is Computer:
+		# Can't read a thing without the glasses: a blurry look, straight back, and the office says so.
+		(get_tree().current_scene as Computer).glance_blurry()
+		var now := Time.get_ticks_msec()
+		if _computer_cue_msec < 0 or now - _computer_cue_msec >= ENDING_COMPUTER_CUE_COOLDOWN * 1000.0:
+			_computer_cue_msec = now
+			_arrival_cue = ENDING_COMPUTER_CUE
 
 
 func _unhandled_input(event: InputEvent) -> void:

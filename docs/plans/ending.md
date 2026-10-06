@@ -27,6 +27,7 @@ User request: after the lights come back the third time you walk back to your of
 | `ending_glasses_hint` | first time in Start | team script ("Lights out #3" line 8), verbatim: "Okay, this headache is getting a bit much. You can't go much longer without your glasses. Oh yeah you work at a screen, of course you have glasses!" |
 | `ending_glasses_nudge_1` | 20 s in Start without trying | "The glasses. On the desk. They go on your face. That's the whole puzzle." |
 | `ending_glasses_nudge_2` | 20 s later | "I can wait. I'm a narrator; waiting is most of the job. But the glasses won't put themselves on." |
+| `ending_computer_blurry` | back in the office after using the computer (it only shows a blurry screen for 1 s, then exits; repeats at most every 20 s) | "You can't even read that. Glasses. Please. Put them on." |
 | `ending_glasses_on` | putting them on | "There. Now you can finally see things as they really are." |
 | `credits_end` | THE END | "And that's the end. You can go home now. Unpaid, of course." |
 

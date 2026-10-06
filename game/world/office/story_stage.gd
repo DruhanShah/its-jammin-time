@@ -10,7 +10,9 @@ extends Node
 ## (`VisionBlur`, mild anywhere, full strength in the Start office), a pair of spectacles lies on the
 ## player's desk (the objective). Walking into Start cues the narrator to try them on, with nudges
 ## while you dawdle there; putting them on plays the glasses sliding down over the eyes, then
-## `Story.REAL_LIFE` (the real-life video, then the credits).
+## `Story.REAL_LIFE` (the real-life video, then the credits). Using the computer instead only shows a
+## blurry screen for a second and throws you back out, then the narrator says to put the glasses on
+## (`Story.ENDING_COMPUTER_CUE`, played as the arrival cue).
 
 ## Seconds back in the office before the lights go out in a switch step.
 @export var blackout_delay := 1.5
@@ -189,9 +191,9 @@ func _on_step_changed(step: Story.Step) -> void:
 		_start_ending()
 
 
-## Puts the spectacles on the desk, starts the blurry vision and switches the computer off for good.
+## Puts the spectacles on the desk and starts the blurry vision. The computer still works, but without
+## the glasses it's only a blurry glance (see Story._on_scene_changed / Computer.glance_blurry()).
 func _start_ending() -> void:
-	(_computer.get_node(^"Interactable") as Interactable).enabled = false
 	_vision = VisionBlur.new()
 	_vision.strength = outside_blur_strength
 	add_child(_vision)
