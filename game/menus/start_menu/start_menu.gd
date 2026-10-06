@@ -107,14 +107,17 @@ func _do_nothing() -> void:
 			_show_bubble((load(Narrator.CUE_DIR + settings_cue + ".tres") as NarratorCue).subtitle)
 
 
-func _show_bubble(text: String) -> void:
+## A comic speech balloon whose tail points at `tip` (stage coords). It shrinks away when the narrator
+## line ends, or after `hide_after` seconds if that is set.
+func _show_bubble(text: String, tip := BUBBLE_TAIL_TIP, hide_after := 0.0) -> void:
+	var at := tip + (BUBBLE_AT - BUBBLE_TAIL_TIP)
 	if _bubble:
 		_bubble.queue_free()
 	_bubble = Control.new()
 	_bubble.mouse_filter = MOUSE_FILTER_IGNORE
-	_bubble.position = BUBBLE_AT
+	_bubble.position = at
 	stage.add_child(_bubble)
-	var tail := _tail_points(BUBBLE_TAIL_TIP - BUBBLE_AT)
+	var tail := _tail_points(tip - at)
 	var tail_ink := Polygon2D.new()
 	tail_ink.polygon = tail
 	tail_ink.color = BUBBLE_INK
@@ -141,15 +144,27 @@ func _show_bubble(text: String) -> void:
 	_bubble.add_child(panel)
 	# Paper-coloured tail on top of the panel's border, so the balloon opens into it.
 	var tail_paper := Polygon2D.new()
-	tail_paper.polygon = _tail_points(BUBBLE_TAIL_TIP - BUBBLE_AT, 9.0)
+	tail_paper.polygon = _tail_points(tip - at, 9.0)
 	tail_paper.color = BUBBLE_PAPER
 	_bubble.add_child(tail_paper)
-	_bubble.pivot_offset = BUBBLE_TAIL_TIP - BUBBLE_AT
+	_bubble.pivot_offset = tip - at
 	_bubble.scale = Vector2.ONE * 0.2
 	_bubble.rotation = deg_to_rad(-3.0)
 	_bubble.create_tween().tween_property(_bubble, "scale", Vector2.ONE, 0.3) \
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	Narrator.line_finished.connect(_on_settings_line_finished.bind(_bubble), CONNECT_ONE_SHOT)
+	if hide_after > 0.0:
+		get_tree().create_timer(hide_after).timeout.connect(_on_settings_line_finished.bind(&"", _bubble))
+	else:
+		Narrator.line_finished.connect(_on_settings_line_finished.bind(_bubble), CONNECT_ONE_SHOT)
+
+
+## A quick sideways "nope" shake that always settles back where the button started.
+func _shake(button: TextureButton) -> void:
+	var x: float = button.get_meta(&"home_x", button.position.x)
+	button.set_meta(&"home_x", x)
+	var tween := button.create_tween()
+	for offset: float in [-12.0, 10.0, -6.0, 0.0]:
+		tween.tween_property(button, "position:x", x + offset, 0.05)
 
 
 ## A triangle from the balloon's top edge (local y 0, around x 60..140) up to `tip`, shrunk by `inset`.
@@ -169,14 +184,19 @@ func _on_settings_line_finished(_cue_id: StringName, bubble: Control) -> void:
 	tween.tween_callback(bubble.queue_free)
 
 
-## NEW GAME starts fresh; CONT. LAST GAME resumes the autosave (or starts fresh when there is none).
+## NEW GAME starts fresh; CONT. LAST GAME resumes the autosave (says so if there is none yet).
 func _start(button: TextureButton, resume: bool) -> void:
 	if _starting:
+		return
+	if resume and not SaveGame.has_save():
+		_shake(button)
+		var rect := button.get_rect()
+		_show_bubble("No game started yet!", Vector2(rect.get_center().x, rect.end.y - 20.0), 2.0)
 		return
 	_starting = true
 	Audio.play_sfx(START_SOUND)
 	ComicBurst.spawn(self, button.get_global_rect().get_center(), "GO!")
 	await get_tree().create_timer(0.35).timeout
-	if resume and SaveGame.has_save() and SaveGame.continue_game():
+	if resume and SaveGame.continue_game():
 		return
 	SaveGame.new_game()
