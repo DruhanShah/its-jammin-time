@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="MemoMailConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/memo_mail/memo_mail_config.gd" id="1_cfg"]
+[ext_resource type="Script" path="res://minigames/computer/minigames/memo_mail/memo_email.gd" id="2_email"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/kenney/bong_001.ogg" id="3_arrive_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/click_double_on.wav" id="4_choose_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/8_bit_chime_positive.wav" id="5_mood_up_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/8_bit_negative_quick.wav" id="6_mood_down_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/whoosh_2.wav" id="7_send_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/synth_warning.wav" id="8_reply_all_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/pop_3.wav" id="9_toast_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/brass_positive_long.wav" id="10_promoted_sfx"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/grand_piano_chime_quick.wav" id="11_honest_sfx"]
+
+[sub_resource type="Resource" id="Email_1"]
+script = ExtResource("2_email")
+subject = "Re: Re: Re: Re: why is the deliverable in Comic Sans??"
+body = "Need a status on the comic. Also why is EVERYTHING in Comic Sans. Reply ASAP. Sooner if possible.
+- B."
+reply = "Per my {last email:10|memory:3|vibes:-5}, the {deliverables:10|work:3|chores:-2} are {mission-critical:10|important:3|whatever:-5}."
+replies = Dictionary[StringName, String]({
+&"angry": "See me.",
+&"neutral": "k.",
+&"happy": "Great!!",
+&"starry": "Love the energy. Still Comic Sans though."
+})
+arrive_cue = &"memo_intro"
+
+[sub_resource type="Resource" id="Email_2"]
+script = ExtResource("2_email")
+subject = "Lights keep going out?? (cc: everyone)"
+body = "Team. The lights. Again. Ideas? Reply so everyone can see you care.
+- B."
+reply = "This {paradigm shift:10|change:3|mess:-5} will {unlock synergies:10|help:3|confuse everyone:-5} across {all verticals:10|teams:3|the building:-2}."
+cc_count = 40
+replies = Dictionary[StringName, String]({
+&"angry": "Let's take this offline. Permanently.",
+&"neutral": "Noted. By someone.",
+&"happy": "Finally, a team player.",
+&"starry": "Forwarding this to the board. Framed."
+})
+arrive_cue = &"memo_cc40"
+
+[sub_resource type="Resource" id="Email_3"]
+script = ExtResource("2_email")
+subject = "quick q"
+body = "Be honest. Are you happy here?
+- B."
+reply = "Are you {interested:10|CRAZY?:1|eepy:5}? Because I {sure am:10|am too:4|really hate working here:-5}."
+forced_reply_all = true
+replies = Dictionary[StringName, String]({
+&"angry": "HR will be in touch. Lovingly.",
+&"neutral": "Cool cool cool.",
+&"happy": "Glad to hear it, champ.",
+&"starry": "I have no idea what this means. Promoted."
+})
+honest_words = Array[String](["really hate working here"])
+honest_reply = "Same. Don't tell anyone."
+promote_on_starry = true
+word_cues = Dictionary[String, StringName]({
+"eepy": &"memo_eepy"
+})
+
+[resource]
+script = ExtResource("1_cfg")
+emails = Array[ExtResource("2_email")]([SubResource("Email_1"), SubResource("Email_2"), SubResource("Email_3")])
+reply_all_toasts = Array[String](["Gary (Accounts)|who is this", "Linda (Legal)|Please remove me from this list", "Dave (Sales)|+1", "IT Helpdesk|Reply All: STOP replying all", "Priya (HR)|Out of office until the lights come back", "Steve|Sent from my toaster"])
+flood_toasts = Array[String](["Gary (Accounts)|same tbh", "Dave (Sales)|+1", "Linda (Legal)|REMOVE ME", "Kevin|who's Gary?", "IT Helpdesk|PLEASE STOP", "Mailroom|is it hot in here", "Dave (Sales)|+1", "Facilities|why is the server room humming", "Intern|what's a reply all", "Gary (Accounts)|+1 to Dave's +1", "Mail Server|I can't take any more of this", "Mail Server|goodbye"])
+arrive_sfx = ExtResource("3_arrive_sfx")
+choose_sfx = ExtResource("4_choose_sfx")
+mood_up_sfx = ExtResource("5_mood_up_sfx")
+mood_down_sfx = ExtResource("6_mood_down_sfx")
+send_sfx = ExtResource("7_send_sfx")
+reply_all_sfx = ExtResource("8_reply_all_sfx")
+toast_sfx = ExtResource("9_toast_sfx")
+promoted_sfx = ExtResource("10_promoted_sfx")
+honest_sfx = ExtResource("11_honest_sfx")

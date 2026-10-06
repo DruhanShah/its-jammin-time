@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://menus/start_menu/start_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://menus/menu_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://menus/comic_backdrop.gd" id="3_backdrop"]
+[ext_resource type="FontFile" uid="uid://ctm718ad8xjn8" path="res://assets/fonts/ComicRelief-Bold.ttf" id="4_relief"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_menu")
+
+[node name="Backdrop" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_backdrop")
+
+[node name="Center" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -260.0
+offset_right = 560.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Title" type="Label" parent="Center"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.231373, 0.188235, 1)
+theme_override_colors/font_outline_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+theme_override_constants/shadow_offset_x = 9
+theme_override_constants/shadow_offset_y = 9
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 30
+theme_override_fonts/font = ExtResource("4_relief")
+theme_override_font_sizes/font_size = 100
+text = "IT'S OVER TIME!"
+horizontal_alignment = 1
+
+[node name="TaglineRow" type="CenterContainer" parent="Center"]
+layout_mode = 2
+
+[node name="Tagline" type="PanelContainer" parent="Center/TaglineRow"]
+unique_name_in_owner = true
+layout_mode = 2
+rotation = -0.03
+theme_type_variation = &"PaperPanel"
+
+[node name="Label" type="Label" parent="Center/TaglineRow/Tagline"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "A comic in Comic Sans. Lights not included."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Center"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="StartButton" type="Button" parent="Center/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[node name="QuitButton" type="Button" parent="Center/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 26
+text = "QUIT"

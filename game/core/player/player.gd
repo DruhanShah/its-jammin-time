@@ -32,6 +32,9 @@ var frozen := false:
 			if value and is_instance_valid(_target):
 				_target.set_highlighted(false)
 				_target = null
+## True while something else owns the controls (e.g. the kaleidoscope's scope view, whose twist ring
+## shares F with ESDF movement): no looking, walking, interacting or prompt.
+var movement_locked := false
 
 var _bob_time := 0.0
 var _step := 0
@@ -63,7 +66,7 @@ func _exit_tree() -> void:
 func _process(_delta: float) -> void:
 	if frozen:
 		return
-	var target := _interactable()
+	var target := _interactable() if not movement_locked else null
 	if target != _target:
 		if is_instance_valid(_target):
 			_target.set_highlighted(false)
@@ -74,7 +77,7 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if frozen:
+	if frozen or movement_locked:
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		# Body turns left/right, head tilts up/down.
@@ -100,7 +103,9 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	var input := Vector2.ZERO if frozen else Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var input := Vector2.ZERO
+	if not (frozen or movement_locked):
+		input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input.x, 0, input.y)).normalized()
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed

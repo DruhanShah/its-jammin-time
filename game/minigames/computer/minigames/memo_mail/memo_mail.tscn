@@ -1,0 +1,474 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/memo_mail/memo_mail.gd" id="1_mm"]
+[ext_resource type="Resource" path="res://minigames/computer/minigames/memo_mail/memo_mail_default.tres" id="2_cfg"]
+[ext_resource type="Script" path="res://core/ui/comic/app_window.gd" id="3_win"]
+[ext_resource type="Script" path="res://minigames/computer/minigames/memo_mail/mood_face.gd" id="4_face"]
+[ext_resource type="Script" path="res://minigames/computer/minigames/memo_mail/face_crowd.gd" id="5_crowd"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="6_relief"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicNeue-Regular.ttf" id="7_neue"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicNeue-Italic.ttf" id="8_italic"]
+
+[sub_resource type="StyleBoxFlat" id="Style_button"]
+content_margin_left = 18.0
+content_margin_top = 4.0
+content_margin_right = 18.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.82, 0.25, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_button_hover"]
+content_margin_left = 18.0
+content_margin_top = 4.0
+content_margin_right = 18.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 0.9, 0.5, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_button_pressed"]
+content_margin_left = 18.0
+content_margin_top = 6.0
+content_margin_right = 18.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.42, 0.36, 1)
+border_width_left = 3
+border_width_top = 5
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_button_disabled"]
+content_margin_left = 18.0
+content_margin_top = 4.0
+content_margin_right = 18.0
+content_margin_bottom = 6.0
+bg_color = Color(0.88, 0.86, 0.8, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.55, 0.53, 0.5, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_chip"]
+content_margin_left = 14.0
+content_margin_top = 3.0
+content_margin_right = 14.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(3, 3)
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_chip_hover"]
+content_margin_left = 14.0
+content_margin_top = 3.0
+content_margin_right = 14.0
+content_margin_bottom = 5.0
+bg_color = Color(0.56, 0.83, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(3, 3)
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_blank"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.96, 0.75, 1)
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="Style_blank_active"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.56, 0.83, 1, 1)
+border_width_bottom = 3
+border_color = Color(0.15, 0.35, 0.85, 1)
+
+[sub_resource type="StyleBoxFlat" id="Style_toast"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.97, 0.9, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(5, 5)
+anti_aliasing = true
+
+[sub_resource type="Theme" id="Theme_mail"]
+default_font_size = 20
+ActiveBlankButton/base_type = &"Button"
+ActiveBlankButton/colors/font_color = Color(0.1, 0.2, 0.6, 1)
+ActiveBlankButton/colors/font_hover_color = Color(0.1, 0.2, 0.6, 1)
+ActiveBlankButton/colors/font_pressed_color = Color(0.1, 0.2, 0.6, 1)
+ActiveBlankButton/font_sizes/font_size = 22
+ActiveBlankButton/styles/disabled = SubResource("Style_blank_active")
+ActiveBlankButton/styles/focus = SubResource("Style_blank_active")
+ActiveBlankButton/styles/hover = SubResource("Style_blank_active")
+ActiveBlankButton/styles/normal = SubResource("Style_blank_active")
+ActiveBlankButton/styles/pressed = SubResource("Style_blank_active")
+BlankButton/base_type = &"Button"
+BlankButton/colors/font_color = Color(0.08, 0.08, 0.1, 1)
+BlankButton/colors/font_disabled_color = Color(0.08, 0.08, 0.1, 1)
+BlankButton/colors/font_hover_color = Color(0.15, 0.35, 0.85, 1)
+BlankButton/colors/font_pressed_color = Color(0.15, 0.35, 0.85, 1)
+BlankButton/font_sizes/font_size = 22
+BlankButton/styles/disabled = SubResource("Style_blank")
+BlankButton/styles/focus = SubResource("Style_blank")
+BlankButton/styles/hover = SubResource("Style_blank_active")
+BlankButton/styles/normal = SubResource("Style_blank")
+BlankButton/styles/pressed = SubResource("Style_blank_active")
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.5, 0.48, 0.45, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("6_relief")
+Button/styles/disabled = SubResource("Style_button_disabled")
+Button/styles/focus = SubResource("Style_button")
+Button/styles/hover = SubResource("Style_button_hover")
+Button/styles/hover_pressed = SubResource("Style_button_pressed")
+Button/styles/normal = SubResource("Style_button")
+Button/styles/pressed = SubResource("Style_button_pressed")
+HeaderKey/base_type = &"Label"
+HeaderKey/colors/font_color = Color(0.4, 0.38, 0.36, 1)
+HeaderKey/font_sizes/font_size = 18
+Label/colors/font_color = Color(0.08, 0.08, 0.1, 1)
+Label/font_sizes/font_size = 20
+SentenceLabel/base_type = &"Label"
+SentenceLabel/font_sizes/font_size = 22
+Toast/base_type = &"PanelContainer"
+Toast/styles/panel = SubResource("Style_toast")
+ToastSender/base_type = &"Label"
+ToastSender/colors/font_color = Color(0.15, 0.35, 0.85, 1)
+ToastSender/font_sizes/font_size = 14
+ToastText/base_type = &"Label"
+ToastText/font_sizes/font_size = 19
+WordChip/base_type = &"Button"
+WordChip/fonts/font = ExtResource("7_neue")
+WordChip/styles/focus = SubResource("Style_chip")
+WordChip/styles/hover = SubResource("Style_chip_hover")
+WordChip/styles/normal = SubResource("Style_chip")
+WordChip/styles/pressed = SubResource("Style_chip_hover")
+
+[sub_resource type="StyleBoxFlat" id="Style_body"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_reply"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 0.99, 0.94, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.15, 0.35, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="Style_bubble"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(3, 3)
+anti_aliasing = true
+
+[node name="MemoMail" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_mail")
+script = ExtResource("1_mm")
+config = ExtResource("2_cfg")
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Window" type="Container" parent="Center"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_win")
+title = "MemoMail - Inbox (1)"
+title_color = Color(0.56, 0.83, 1, 1)
+padding = 16.0
+auto_close = false
+draggable = false
+close_word = "SENT!"
+
+[node name="HBox" type="HBoxContainer" parent="Center/Window"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="BossColumn" type="VBoxContainer" parent="Center/Window/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Boss" type="Control" parent="Center/Window/HBox/BossColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 150)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("4_face")
+
+[node name="MoodLabel" type="Label" parent="Center/Window/HBox/BossColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333, 0.333, 0.333, 1)
+theme_override_fonts/font = ExtResource("6_relief")
+theme_override_font_sizes/font_size = 18
+text = "Boss mood: meh"
+horizontal_alignment = 1
+
+[node name="Crowd" type="Control" parent="Center/Window/HBox/BossColumn"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_crowd")
+
+[node name="CrowdLabel" type="Label" parent="Center/Window/HBox/BossColumn"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "CC: 40 people. Happy: 20/40"
+horizontal_alignment = 1
+
+[node name="Bubble" type="PanelContainer" parent="Center/Window/HBox/BossColumn"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_bubble")
+
+[node name="BossReply" type="Label" parent="Center/Window/HBox/BossColumn/Bubble"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(176, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_italic")
+theme_override_font_sizes/font_size = 19
+text = "k."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="MailColumn" type="VBoxContainer" parent="Center/Window/HBox"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="MailBox" type="VBoxContainer" parent="Center/Window/HBox/MailColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="GridContainer" parent="Center/Window/HBox/MailColumn/MailBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="FromKey" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/Header"]
+layout_mode = 2
+theme_type_variation = &"HeaderKey"
+text = "From:"
+horizontal_alignment = 2
+
+[node name="From" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/Header"]
+layout_mode = 2
+text = "Boss (B. Oss)"
+
+[node name="ToKey" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/Header"]
+layout_mode = 2
+theme_type_variation = &"HeaderKey"
+text = "To:"
+horizontal_alignment = 2
+
+[node name="To" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Boss"
+
+[node name="SubjectKey" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/Header"]
+layout_mode = 2
+theme_type_variation = &"HeaderKey"
+text = "Subject:"
+horizontal_alignment = 2
+
+[node name="Subject" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("6_relief")
+text = "Subject"
+text_overrun_behavior = 3
+
+[node name="BodyPanel" type="PanelContainer" parent="Center/Window/HBox/MailColumn/MailBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_body")
+
+[node name="Body" type="Label" parent="Center/Window/HBox/MailColumn/MailBox/BodyPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_neue")
+theme_override_font_sizes/font_size = 20
+text = "Body"
+autowrap_mode = 3
+
+[node name="ReplyLabel" type="Label" parent="Center/Window/HBox/MailColumn/MailBox"]
+layout_mode = 2
+theme_type_variation = &"HeaderKey"
+text = "Your reply (click a blank, pick a word):"
+
+[node name="ReplyPanel" type="PanelContainer" parent="Center/Window/HBox/MailColumn/MailBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_reply")
+
+[node name="Sentence" type="HFlowContainer" parent="Center/Window/HBox/MailColumn/MailBox/ReplyPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 6
+
+[node name="Options" type="HFlowContainer" parent="Center/Window/HBox/MailColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 8
+alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="Center/Window/HBox/MailColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="ReplyAll" type="Button" parent="Center/Window/HBox/MailColumn/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+disabled = true
+toggle_mode = true
+text = "Reply All"
+
+[node name="Send" type="Button" parent="Center/Window/HBox/MailColumn/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Send"
+
+[node name="Toasts" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

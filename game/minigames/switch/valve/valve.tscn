@@ -1,0 +1,639 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/valve/valve.gd" id="1_valve"]
+[ext_resource type="Shader" path="res://minigames/switch/valve/pipe_flow.gdshader" id="2_flow"]
+[ext_resource type="Script" path="res://core/input/twist_input.gd" id="3_twist"]
+[ext_resource type="PackedScene" path="res://core/input/twist_hint.tscn" id="4_hint"]
+[ext_resource type="PackedScene" path="res://world/office/props/hazard_sign.tscn" id="5_hazard"]
+[ext_resource type="PackedScene" path="res://assets/models/pipes/steampunk_pipes.glb" id="6_pipes"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="7_font"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/valve_squeak_1_joedeshon.wav" id="8_sq1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/valve_squeak_2_joedeshon.wav" id="9_sq2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/valve_squeak_3_joedeshon.wav" id="10_sq3"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/valve_turn_rusty_loop_noxsound.wav" id="11_turn"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/pipe_clunk_brittmosel.wav" id="12_clunk"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/pipe_flow_loop_rutgermuller.wav" id="13_flow"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/electric_surge_fkurz.wav" id="14_surge"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/spark_klein.wav" id="15_spark"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/breaker_clunk_on_kyles.wav" id="16_lever"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/power_on_neon_hum_kinoton.wav" id="17_hum"]
+
+[sub_resource type="AudioStreamRandomizer" id="Rand_squeak"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("8_sq1")
+stream_1/stream = ExtResource("9_sq2")
+stream_2/stream = ExtResource("10_sq3")
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 1
+background_color = Color(0.04, 0.04, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.6, 0.7, 1)
+ambient_light_energy = 0.35
+glow_enabled = true
+glow_intensity = 0.8
+glow_bloom = 0.1
+glow_hdr_threshold = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_wall"]
+albedo_color = Color(0.3, 0.32, 0.3, 1)
+
+[sub_resource type="QuadMesh" id="Mesh_wall"]
+material = SubResource("Mat_wall")
+size = Vector2(5, 3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_copper"]
+albedo_color = Color(0.78, 0.42, 0.22, 1)
+metallic = 0.6
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="Mat_brass"]
+albedo_color = Color(0.8, 0.62, 0.24, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_red"]
+albedo_color = Color(0.91, 0.05, 0.03, 1)
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="Mat_glass"]
+transparency = 1
+albedo_color = Color(0.75, 0.9, 1, 0.22)
+roughness = 0.08
+metallic_specular = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_white"]
+albedo_color = Color(0.95, 0.93, 0.86, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_black"]
+albedo_color = Color(0.06, 0.06, 0.06, 1)
+
+[sub_resource type="ShaderMaterial" id="Mat_plasma_in"]
+render_priority = 0
+shader = ExtResource("2_flow")
+shader_parameter/fill = 1.0
+shader_parameter/flow = 0.6
+shader_parameter/half_length = 0.275
+shader_parameter/from_top = 1.0
+shader_parameter/color = Color(0.55, 0.85, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="Mat_plasma_out"]
+render_priority = 0
+shader = ExtResource("2_flow")
+shader_parameter/fill = 0.08
+shader_parameter/flow = 0.08
+shader_parameter/half_length = 0.13
+shader_parameter/from_top = 1.0
+shader_parameter/color = Color(0.55, 0.85, 1, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_pipe_a"]
+material = SubResource("Mat_copper")
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.72
+radial_segments = 20
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_pipe_short"]
+material = SubResource("Mat_copper")
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.09
+radial_segments = 20
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_flange"]
+material = SubResource("Mat_brass")
+top_radius = 0.055
+bottom_radius = 0.055
+height = 0.025
+radial_segments = 20
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_glass_in"]
+material = SubResource("Mat_glass")
+top_radius = 0.046
+bottom_radius = 0.046
+height = 0.55
+radial_segments = 24
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_plasma_in"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.55
+radial_segments = 20
+rings = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_glass_out"]
+material = SubResource("Mat_glass")
+top_radius = 0.046
+bottom_radius = 0.046
+height = 0.26
+radial_segments = 24
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_plasma_out"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.26
+radial_segments = 20
+rings = 8
+
+[sub_resource type="SphereMesh" id="Mesh_body"]
+material = SubResource("Mat_brass")
+radius = 0.085
+height = 0.17
+radial_segments = 24
+rings = 12
+
+[sub_resource type="CylinderMesh" id="Mesh_body_tube"]
+material = SubResource("Mat_brass")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.26
+radial_segments = 20
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_valve_flange"]
+material = SubResource("Mat_brass")
+top_radius = 0.065
+bottom_radius = 0.065
+height = 0.025
+radial_segments = 6
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_bonnet"]
+material = SubResource("Mat_brass")
+top_radius = 0.035
+bottom_radius = 0.045
+height = 0.12
+radial_segments = 20
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_nut"]
+material = SubResource("Mat_brass")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.03
+radial_segments = 6
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_steel"]
+albedo_color = Color(0.7, 0.7, 0.68, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="Mesh_stem"]
+material = SubResource("Mat_steel")
+top_radius = 0.012
+bottom_radius = 0.012
+height = 0.09
+radial_segments = 12
+rings = 1
+
+[sub_resource type="TorusMesh" id="Mesh_rim"]
+material = SubResource("Mat_red")
+inner_radius = 0.084
+outer_radius = 0.11
+rings = 40
+ring_segments = 12
+
+[sub_resource type="BoxMesh" id="Mesh_spoke"]
+material = SubResource("Mat_red")
+size = Vector3(0.19, 0.018, 0.014)
+
+[sub_resource type="CylinderMesh" id="Mesh_hub"]
+material = SubResource("Mat_red")
+top_radius = 0.026
+bottom_radius = 0.026
+height = 0.03
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_hub_nut"]
+material = SubResource("Mat_steel")
+top_radius = 0.012
+bottom_radius = 0.012
+height = 0.036
+radial_segments = 6
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_riser"]
+material = SubResource("Mat_brass")
+top_radius = 0.012
+bottom_radius = 0.012
+height = 0.13
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_gauge_case"]
+material = SubResource("Mat_brass")
+top_radius = 0.075
+bottom_radius = 0.075
+height = 0.04
+radial_segments = 28
+rings = 1
+
+[sub_resource type="CylinderMesh" id="Mesh_dial"]
+material = SubResource("Mat_white")
+top_radius = 0.064
+bottom_radius = 0.064
+height = 0.004
+radial_segments = 28
+rings = 1
+
+[sub_resource type="BoxMesh" id="Mesh_needle"]
+material = SubResource("Mat_red")
+size = Vector3(0.006, 0.056, 0.003)
+
+[sub_resource type="SphereMesh" id="Mesh_cap"]
+material = SubResource("Mat_black")
+radius = 0.008
+height = 0.016
+radial_segments = 10
+rings = 5
+
+[sub_resource type="StandardMaterial3D" id="Mat_spark"]
+shading_mode = 0
+albedo_color = Color(0.85, 0.97, 1, 1)
+
+[sub_resource type="SphereMesh" id="Mesh_spark"]
+material = SubResource("Mat_spark")
+radius = 0.008
+height = 0.016
+radial_segments = 6
+rings = 3
+
+[sub_resource type="Curve" id="Curve_spark"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="Mat_box"]
+albedo_color = Color(0.42, 0.44, 0.46, 1)
+metallic = 0.5
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="Mesh_box"]
+material = SubResource("Mat_box")
+size = Vector3(0.44, 0.6, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stripe"]
+albedo_color = Color(0.95, 0.75, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_stripe"]
+material = SubResource("Mat_stripe")
+size = Vector3(0.46, 0.06, 0.17)
+
+[sub_resource type="BoxMesh" id="Mesh_lever_base"]
+material = SubResource("Mat_box")
+size = Vector3(0.16, 0.16, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="Mat_lever"]
+albedo_color = Color(0.85, 0.12, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_lever"]
+material = SubResource("Mat_lever")
+size = Vector3(0.05, 0.22, 0.05)
+
+[sub_resource type="SphereMesh" id="Mesh_knob"]
+material = SubResource("Mat_black")
+radius = 0.035
+height = 0.07
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="Mat_bulb"]
+albedo_color = Color(0.9, 0.85, 0.6, 1)
+emission_enabled = true
+emission = Color(1, 0.85, 0.4, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="SphereMesh" id="Mesh_bulb"]
+radius = 0.03
+height = 0.06
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_socket"]
+material = SubResource("Mat_black")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.03
+radial_segments = 16
+rings = 1
+
+[node name="Valve" type="Node3D"]
+script = ExtResource("1_valve")
+squeak_sound = SubResource("Rand_squeak")
+clunk_sound = ExtResource("12_clunk")
+spark_sound = ExtResource("15_spark")
+lever_sound = ExtResource("16_lever")
+hum_sound = ExtResource("17_hum")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.99092, -0.01885, 0.13315, 0.00000, 0.99013, 0.14016, -0.13448, -0.13889, 0.98113, 0.40000, 0.42000, 2.75000)
+current = true
+fov = 30.0
+
+[node name="Emergency" type="Node3D" parent="."]
+
+[node name="Lamp" type="OmniLight3D" parent="Emergency"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.8, 1.2)
+light_color = Color(1, 0.85, 0.7, 1)
+light_energy = 0.9
+omni_range = 4.0
+
+[node name="EmergencyLight" type="OmniLight3D" parent="Emergency"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -0.5, 0.8)
+light_color = Color(1, 0.22, 0.12, 1)
+light_energy = 1.6
+omni_range = 3.5
+
+[node name="Normal" type="Node3D" parent="."]
+visible = false
+
+[node name="Ceiling" type="OmniLight3D" parent="Normal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 1.4)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.0
+omni_range = 5.0
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+mesh = SubResource("Mesh_wall")
+
+[node name="Backdrop" parent="." instance=ExtResource("6_pipes")]
+transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, -0.95, 0, 0)
+
+[node name="HazardSign" parent="." instance=ExtResource("5_hazard")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.55, 0.36, -0.345)
+
+[node name="PipeIn" type="Node3D" parent="."]
+
+[node name="Copper" type="MeshInstance3D" parent="PipeIn"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -1.14, 0, 0)
+mesh = SubResource("Mesh_pipe_a")
+
+[node name="FlangeA" type="MeshInstance3D" parent="PipeIn"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.78, 0, 0)
+mesh = SubResource("Mesh_flange")
+
+[node name="Glass" type="MeshInstance3D" parent="PipeIn"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.495, 0, 0)
+mesh = SubResource("Mesh_glass_in")
+
+[node name="Plasma" type="MeshInstance3D" parent="PipeIn"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.495, 0, 0)
+material_override = SubResource("Mat_plasma_in")
+mesh = SubResource("Mesh_plasma_in")
+
+[node name="FlangeB" type="MeshInstance3D" parent="PipeIn"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.21, 0, 0)
+mesh = SubResource("Mesh_flange")
+
+[node name="CopperB" type="MeshInstance3D" parent="PipeIn"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.165, 0, 0)
+mesh = SubResource("Mesh_pipe_short")
+
+[node name="Valve" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Valve"]
+mesh = SubResource("Mesh_body")
+
+[node name="Tube" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_body_tube")
+
+[node name="FlangeL" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.13, 0, 0)
+mesh = SubResource("Mesh_valve_flange")
+
+[node name="FlangeR" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.13, 0, 0)
+mesh = SubResource("Mesh_valve_flange")
+
+[node name="Bonnet" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.11)
+mesh = SubResource("Mesh_bonnet")
+
+[node name="PackingNut" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.18)
+mesh = SubResource("Mesh_nut")
+
+[node name="Stem" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.21)
+mesh = SubResource("Mesh_stem")
+
+[node name="Wheel" type="Node3D" parent="Valve"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+
+[node name="Rim" type="MeshInstance3D" parent="Valve/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("Mesh_rim")
+
+[node name="Spoke1" type="MeshInstance3D" parent="Valve/Wheel"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_spoke")
+
+[node name="Spoke2" type="MeshInstance3D" parent="Valve/Wheel"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_spoke")
+
+[node name="Hub" type="MeshInstance3D" parent="Valve/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("Mesh_hub")
+
+[node name="HubNut" type="MeshInstance3D" parent="Valve/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.006)
+mesh = SubResource("Mesh_hub_nut")
+
+[node name="Open" type="Label3D" parent="Valve/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056, 0.004)
+pixel_size = 0.0003
+modulate = Color(1, 0.93, 0.75, 1)
+outline_modulate = Color(0.35, 0.02, 0.01, 1)
+text = "< OPEN"
+font = ExtResource("7_font")
+font_size = 72
+outline_size = 8
+
+[node name="Riser" type="MeshInstance3D" parent="Valve"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0)
+mesh = SubResource("Mesh_riser")
+
+[node name="Gauge" type="Node3D" parent="Valve"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)
+
+[node name="Case" type="MeshInstance3D" parent="Valve/Gauge"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("Mesh_gauge_case")
+
+[node name="Dial" type="MeshInstance3D" parent="Valve/Gauge"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.021)
+mesh = SubResource("Mesh_dial")
+
+[node name="Ticks" type="Node3D" parent="Valve/Gauge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.024)
+
+[node name="Units" type="Label3D" parent="Valve/Gauge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.026, 0.024)
+pixel_size = 0.0003
+modulate = Color(0.08, 0.08, 0.08, 1)
+outline_size = 0
+text = "VOLTS"
+font = ExtResource("7_font")
+font_size = 52
+
+[node name="Needle" type="Node3D" parent="Valve/Gauge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.026)
+
+[node name="Hand" type="MeshInstance3D" parent="Valve/Gauge/Needle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, 0)
+mesh = SubResource("Mesh_needle")
+
+[node name="Cap" type="MeshInstance3D" parent="Valve/Gauge/Needle"]
+mesh = SubResource("Mesh_cap")
+
+[node name="PipeOut" type="Node3D" parent="."]
+
+[node name="CopperC" type="MeshInstance3D" parent="PipeOut"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.165, 0, 0)
+mesh = SubResource("Mesh_pipe_short")
+
+[node name="FlangeC" type="MeshInstance3D" parent="PipeOut"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.2, 0, 0)
+mesh = SubResource("Mesh_flange")
+
+[node name="Glass" type="MeshInstance3D" parent="PipeOut"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.34, 0, 0)
+mesh = SubResource("Mesh_glass_out")
+
+[node name="Plasma" type="MeshInstance3D" parent="PipeOut"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.34, 0, 0)
+material_override = SubResource("Mat_plasma_out")
+mesh = SubResource("Mesh_plasma_out")
+
+[node name="FlangeD" type="MeshInstance3D" parent="PipeOut"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.48, 0, 0)
+mesh = SubResource("Mesh_flange")
+
+[node name="CopperD" type="MeshInstance3D" parent="PipeOut"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.515, 0, 0)
+mesh = SubResource("Mesh_pipe_short")
+
+[node name="Leaks" type="Node3D" parent="."]
+
+[node name="Leak1" type="CPUParticles3D" parent="Leaks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.04, 0.03)
+emitting = false
+amount = 40
+lifetime = 0.45
+mesh = SubResource("Mesh_spark")
+direction = Vector3(0.2, 1, 0.6)
+spread = 40.0
+gravity = Vector3(0, -4, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+scale_amount_curve = SubResource("Curve_spark")
+
+[node name="Leak2" type="CPUParticles3D" parent="Leaks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48, 0.04, 0.03)
+emitting = false
+amount = 40
+lifetime = 0.45
+mesh = SubResource("Mesh_spark")
+direction = Vector3(-0.2, 1, 0.6)
+spread = 40.0
+gravity = Vector3(0, -4, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+scale_amount_curve = SubResource("Curve_spark")
+
+[node name="Switchboard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.77, 0, 0)
+
+[node name="Box" type="MeshInstance3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -0.02)
+mesh = SubResource("Mesh_box")
+
+[node name="Stripe" type="MeshInstance3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, -0.02)
+mesh = SubResource("Mesh_stripe")
+
+[node name="LeverBase" type="MeshInstance3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.08)
+mesh = SubResource("Mesh_lever_base")
+
+[node name="Lever" type="Node3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0, 0.06, 0.1)
+
+[node name="Arm" type="MeshInstance3D" parent="Switchboard/Lever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+mesh = SubResource("Mesh_lever")
+
+[node name="Knob" type="MeshInstance3D" parent="Switchboard/Lever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_knob")
+
+[node name="Socket" type="MeshInstance3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.22, 0.07)
+mesh = SubResource("Mesh_socket")
+
+[node name="Bulb" type="MeshInstance3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0.1)
+material_override = SubResource("Mat_bulb")
+mesh = SubResource("Mesh_bulb")
+
+[node name="BulbLight" type="OmniLight3D" parent="Switchboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0.18)
+light_color = Color(1, 0.85, 0.45, 1)
+light_energy = 0.0
+omni_range = 0.7
+
+[node name="TwistInput" type="Node" parent="."]
+script = ExtResource("3_twist")
+
+[node name="TurnLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_turn")
+volume_db = -60.0
+autoplay = true
+bus = &"SFX"
+
+[node name="FlowLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_flow")
+volume_db = -30.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Surge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_surge")
+bus = &"SFX"
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Burst" type="Control" parent="Hud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Hint" parent="Hud" node_paths=PackedStringArray("twist") instance=ExtResource("4_hint")]
+custom_minimum_size = Vector2(280, 280)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -400.0
+offset_right = 300.0
+offset_bottom = -120.0
+grow_vertical = 0
+twist = NodePath("../../TwistInput")
+feedback = false
