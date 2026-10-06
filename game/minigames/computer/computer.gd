@@ -1,6 +1,8 @@
 class_name Computer
 extends Node2D
-## The computer screen: a vim-ish editor that hosts minigames. Doesn't know about the office:
+## The computer screen: "ComicWord 97 Lite", a cheap knock-off word processor (an AppWindow with a menu
+## row, a toolbar with the font dropdown button and B/I/U toggles that do nothing, a ruler and a white
+## page) that hosts minigames. Doesn't know about the office:
 ## enter with Computer.open() (or Transition.change_scene(SCENE), e.g. an Interactable's
 ## target_scene), leave with exit() (the Power button).
 ## The EventManager child decides when minigames start; this only hosts them.
@@ -16,6 +18,9 @@ const FALLBACK_RETURN_SCENE := "res://world/office/office.tscn"
 const CURSOR := "▌"
 const FLICKER_SOUND := preload("res://assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav")
 const CRT_OFF_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/power_down.wav")
+const DEFAULT_DOCUMENT_FONT := preload("res://assets/fonts/ComicShannsMono-Regular.ttf")
+## Space between the page's edge and the document text.
+const PAGE_PADDING := Vector2(26, 18)
 ## Screen brightness steps before a blackout: [brightness, seconds held], like a dying fluorescent tube.
 const BLACKOUT_FLICKER: Array[Vector2] = [
 	Vector2(0.35, 0.06), Vector2(1.0, 0.1), Vector2(0.2, 0.05), Vector2(1.0, 0.3), Vector2(0.5, 0.05),
@@ -31,11 +36,20 @@ var buffer := "":
 		if is_node_ready():
 			_refresh_editor()
 		buffer_changed.emit()
+## Text shown in the status bar before the word count (e.g. the ad storm's goal line). Minigames set it.
+var status_note := "":
+	set(value):
+		status_note = value
+		if is_node_ready():
+			_refresh_status()
 
 @onready var screen: Control = $Screen
 @onready var editor: RichTextLabel = $Screen/Editor
 @onready var status_bar: Label = $Screen/StatusBar
 @onready var minigame_layer: Control = $Screen/MinigameLayer
+## The toolbar's font box. The visit-1 font step (font_picker) opens its font list from it.
+@onready var font_button: Button = %FontButton
+@onready var page: Control = %Page
 
 var _blacking_out := false
 
@@ -66,6 +80,9 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_fit_screen)
 	_fit_screen()
 	$Screen/PowerButton.pressed.connect(exit)
+	page.item_rect_changed.connect(_fit_editor)
+	_fit_editor.call_deferred()
+	apply_document_font()
 	_refresh_editor()
 
 
@@ -119,6 +136,14 @@ func add_score(points: int) -> void:
 	score_changed.emit(GameState.score)
 
 
+## Uses GameState.document_font for the document and shows its name in the font box (the visit-1 font
+## step sets them).
+func apply_document_font() -> void:
+	var font: Font = load(GameState.document_font) if GameState.document_font else DEFAULT_DOCUMENT_FONT
+	editor.add_theme_font_override(&"normal_font", font)
+	font_button.text = (GameState.document_font_name if GameState.document_font_name else "Choose font...") + "    v"
+
+
 ## Removes every minigame without emitting completed/failed.
 func stop_all() -> void:
 	for minigame in active_minigames():
@@ -168,7 +193,7 @@ func blackout() -> void:
 	tween.tween_callback(exit)
 
 
-## Plain insert mode for now; vim modes come later. Esc is deliberately not an exit.
+## Plain typing. Esc is deliberately not an exit.
 func _unhandled_key_input(event: InputEvent) -> void:
 	var key := event as InputEventKey
 	if not key.pressed:
@@ -192,6 +217,14 @@ func _fit_screen() -> void:
 	screen.size = get_viewport_rect().size
 
 
+## The editor stays a direct child of the screen (minigames place themselves over `editor.get_rect()`),
+## laid over the page inside the word processor window.
+func _fit_editor() -> void:
+	var rect := page.get_global_rect()
+	editor.position = rect.position - screen.global_position + PAGE_PADDING
+	editor.size = rect.size - PAGE_PADDING * 2.0
+
+
 func _refresh_editor() -> void:
 	editor.text = buffer + CURSOR
 	_refresh_status()
@@ -199,4 +232,5 @@ func _refresh_editor() -> void:
 
 func _refresh_status() -> void:
 	var words := buffer.replace("\n", " ").replace("\t", " ").split(" ", false).size()
-	status_bar.text = "-- INSERT --    %d words    Score: %d" % [words, GameState.score]
+	var note := status_note + "    " if status_note else ""
+	status_bar.text = "Page 1 of 1    %s%d words    Score: %d" % [note, words, GameState.score]

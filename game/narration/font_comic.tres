@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "And that is how an advert turned the lights off. You clicked it, though. Remember that. Now go and find the switch in the server room."
+subtitle = "Ah the classic. A mark of a true professional. Excellent choice! Now let's do some actual work, shall we?"
 once = true

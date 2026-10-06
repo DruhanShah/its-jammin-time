@@ -4,6 +4,107 @@
 [ext_resource type="Resource" path="res://minigames/computer/minigame_registry.tres" id="2_reg"]
 [ext_resource type="FontFile" uid="uid://dx4r2hlqtprds" path="res://assets/fonts/ComicShannsMono-Regular.ttf" id="3_font"]
 [ext_resource type="Script" path="res://minigames/computer/event_manager.gd" id="4_events"]
+[ext_resource type="Shader" path="res://core/ui/comic/halftone.gdshader" id="5_half"]
+[ext_resource type="Script" path="res://core/ui/comic/app_window.gd" id="6_win"]
+[ext_resource type="FontFile" path="res://assets/fonts/ComicRelief-Bold.ttf" id="7_relief"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wall"]
+shader = ExtResource("5_half")
+shader_parameter/paper_color = Color(0.56, 0.82, 0.97, 1)
+shader_parameter/dot_color = Color(0.36, 0.64, 0.93, 1)
+shader_parameter/cell_size = 18.0
+shader_parameter/angle_degrees = 45.0
+shader_parameter/min_size = 0.15
+shader_parameter/max_size = 0.95
+shader_parameter/gradient_direction = Vector2(0.3, 1)
+shader_parameter/radial = 1.0
+shader_parameter/softness = 0.8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tool"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tool_hover"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.88, 0.3, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tool_on"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.48, 0.84, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk"]
+bg_color = Color(0.66, 0.69, 0.74, 1)
+border_width_top = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_page"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 0
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 1
+shadow_offset = Vector2(6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taskbar"]
+bg_color = Color(1, 0.82, 0.25, 1)
+border_width_top = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_tools"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 18
+Button/styles/focus = SubResource("StyleBoxFlat_tool")
+Button/styles/hover = SubResource("StyleBoxFlat_tool_hover")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_tool_on")
+Button/styles/normal = SubResource("StyleBoxFlat_tool")
+Button/styles/pressed = SubResource("StyleBoxFlat_tool_on")
+Label/colors/font_color = Color(0.1, 0.1, 0.12, 1)
+Label/font_sizes/font_size = 17
 
 [sub_resource type="Theme" id="Theme_screen"]
 default_font_size = 22
@@ -22,27 +123,149 @@ offset_bottom = 648.0
 theme = SubResource("Theme_screen")
 
 [node name="Background" type="ColorRect" parent="Screen"]
+material = SubResource("ShaderMaterial_wall")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.11, 0.12, 0.15, 1)
-
-[node name="Editor" type="RichTextLabel" parent="Screen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 24.0
-offset_right = -32.0
-offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_colors/default_color = Color(0.86, 0.87, 0.82, 1)
+
+[node name="Taskbar" type="Panel" parent="Screen"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_taskbar")
+
+[node name="Word" type="Container" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -18.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_tools")
+script = ExtResource("6_win")
+title = "ComicWord 97 Lite (unregistered) - comic_script_FINAL_final2.cmc"
+title_color = Color(0.48, 0.84, 1, 1)
+title_font_size = 20
+title_height = 38.0
+padding = 8.0
+shadow_offset = Vector2(7, 7)
+closable = false
+draggable = false
+close_word = ""
+sounds = false
+
+[node name="Box" type="VBoxContainer" parent="Screen/Word"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="Menu" type="Label" parent="Screen/Word/Box"]
+layout_mode = 2
+text = "  File    Edit    View    Insert    Format    Tools    Window    Help    Buy Full Version"
+
+[node name="Toolbar" type="HBoxContainer" parent="Screen/Word/Box"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="FontButton" type="Button" parent="Screen/Word/Box/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 34)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "Choose font...    v"
+alignment = 0
+text_overrun_behavior = 3
+
+[node name="SizeButton" type="Button" parent="Screen/Word/Box/Toolbar"]
+custom_minimum_size = Vector2(60, 34)
+layout_mode = 2
+focus_mode = 0
+text = "12  v"
+
+[node name="Bold" type="Button" parent="Screen/Word/Box/Toolbar"]
+custom_minimum_size = Vector2(36, 34)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("7_relief")
+toggle_mode = true
+text = "B"
+
+[node name="Italic" type="Button" parent="Screen/Word/Box/Toolbar"]
+custom_minimum_size = Vector2(36, 34)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "I"
+
+[node name="Underline" type="Button" parent="Screen/Word/Box/Toolbar"]
+custom_minimum_size = Vector2(36, 34)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "U"
+
+[node name="Spell" type="Label" parent="Screen/Word/Box/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.45, 0.45, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Spellcheck: OFF (trial expired)"
+horizontal_alignment = 2
+
+[node name="Ruler" type="Label" parent="Screen/Word/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.45, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 12
+text = "        |....1....|....2....|....3....|....4....|....5....|....6....|....7....|....8....|....9....|....10...|....11...|"
+clip_text = true
+
+[node name="Desk" type="PanelContainer" parent="Screen/Word/Box"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_desk")
+
+[node name="PageMargin" type="MarginContainer" parent="Screen/Word/Box/Desk"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 70
+
+[node name="Page" type="Panel" parent="Screen/Word/Box/Desk/PageMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_page")
+
+[node name="Editor" type="RichTextLabel" parent="Screen"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 180.0
+offset_right = 1020.0
+offset_bottom = 570.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.08, 0.08, 0.1, 1)
 theme_override_fonts/normal_font = ExtResource("3_font")
 scroll_following = true
 
@@ -54,14 +277,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = -38.0
-offset_right = -16.0
+offset_right = -110.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.55, 0.85, 0.45, 1)
+theme_override_colors/font_color = Color(0.08, 0.08, 0.1, 1)
 theme_override_fonts/font = ExtResource("3_font")
-theme_override_font_sizes/font_size = 18
-text = "-- INSERT --"
+theme_override_font_sizes/font_size = 17
+text = "Page 1 of 1"
+clip_text = true
 
 [node name="MinigameLayer" type="Control" parent="Screen"]
 layout_mode = 1
@@ -86,7 +310,8 @@ offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_font_sizes/font_size = 16
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_tools")
 text = "Power"
 
 [node name="EventManager" type="Node" parent="."]

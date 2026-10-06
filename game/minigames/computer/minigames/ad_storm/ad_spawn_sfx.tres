@@ -1,0 +1,12 @@
+[gd_resource type="AudioStreamRandomizer" format=3]
+
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/pop_1.wav" id="1_pop"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/pop_3.wav" id="2_pop"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/pop_4.wav" id="3_pop"]
+
+[resource]
+random_pitch = 1.05
+streams_count = 3
+stream_0/stream = ExtResource("1_pop")
+stream_1/stream = ExtResource("2_pop")
+stream_2/stream = ExtResource("3_pop")

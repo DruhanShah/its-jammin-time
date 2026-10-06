@@ -1,0 +1,89 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/font_picker/font_picker.gd" id="1_fp"]
+[ext_resource type="Resource" path="res://minigames/computer/minigames/font_picker/font_picker_default.tres" id="2_cfg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 1
+shadow_offset = Vector2(7, 7)
+anti_aliasing = true
+
+[sub_resource type="Gradient" id="Gradient_confetti"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.17, 0.33, 0.5, 0.67, 0.83)
+colors = PackedColorArray(1, 0.23, 0.19, 1, 1, 0.82, 0.25, 1, 0.12, 0.82, 1, 1, 0.13, 0.77, 0.37, 1, 1, 0.35, 0.71, 1, 0.55, 0.36, 0.96, 1)
+
+[node name="FontPicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fp")
+config = ExtResource("2_cfg")
+
+[node name="Catcher" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dropdown" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 420.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_list")
+
+[node name="Scroll" type="ScrollContainer" parent="Dropdown"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="Dropdown/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="Confetti" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 90
+lifetime = 1.6
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 900)
+initial_velocity_min = 350.0
+initial_velocity_max = 600.0
+angular_velocity_min = -540.0
+angular_velocity_max = 540.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 5.0
+scale_amount_max = 9.0
+color_initial_ramp = SubResource("Gradient_confetti")

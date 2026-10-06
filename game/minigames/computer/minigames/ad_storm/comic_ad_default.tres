@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ComicAdConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/ad_storm/comic_ad_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://minigames/computer/minigames/ad_storm/ad_spawn_sfx.tres" id="2_spawn"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/punch.wav" id="3_close"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/elastic_twang.wav" id="4_decoy"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/jump_short.wav" id="5_dodge"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/wobble.wav" id="6_nested"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/kenney/tick_001.ogg" id="7_tick"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/record_scratch.wav" id="8_lie"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/brass_level_start.wav" id="9_eco"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/toggle_off.wav" id="10_eco_ok"]
+
+[resource]
+script = ExtResource("1_cfg")
+max_concurrent = 8
+close_button_size = 22.0
+dodge_after_closes = 1000
+headlines = Array[String](["LIGHT BULBS 90% OFF: limited time, limited light", "HOT SINGLE FONTS IN YOUR AREA (Comic Sans wants to meet you)", "Download more overtime FREE", "Your monitor is 3% too bright. Click to fix", "Managers HATE this one weird productivity trick"])
+decoy_labels = Array[String](["DOWNLOAD NOW", "CLAIM PRIZE", "OK", "Continue"])
+spawn_sfx = ExtResource("2_spawn")
+close_sfx = ExtResource("3_close")
+decoy_sfx = ExtResource("4_decoy")
+dodge_sfx = ExtResource("5_dodge")
+nested_sfx = ExtResource("6_nested")
+tick_sfx = ExtResource("7_tick")
+lie_sfx = ExtResource("8_lie")
+eco_sfx = ExtResource("9_eco")
+eco_accept_sfx = ExtResource("10_eco_ok")

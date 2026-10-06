@@ -47,6 +47,10 @@ var computer_queue: Array[StringName] = []
 var computer_exit_when_done := true
 ## The password typed at the computer's login (visit 1), so later gags can quote it back. Empty until then.
 var password := ""
+## Res path of the FontFile chosen in the visit-1 font picker; the computer's document uses it. Empty = default.
+var document_font := ""
+## Name shown in the word processor's font box for `document_font` (e.g. "Comic Sans"). Empty = none chosen.
+var document_font_name := ""
 ## How often each computer minigame was beaten, by id (counts queued and free-use runs).
 var minigames_completed: Dictionary[StringName, int] = {}
 

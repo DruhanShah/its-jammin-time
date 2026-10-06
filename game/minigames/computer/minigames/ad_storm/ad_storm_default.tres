@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AdStormConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/ad_storm/ad_storm_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://minigames/computer/minigames/ad_storm/typing_sfx.tres" id="2_type"]
+
+[resource]
+script = ExtResource("1_cfg")
+script_text = "PANEL 1. A man sits at a desk. The lights are on. For now.
+
+MAN: (typing) This is my comic. It is going to be great.
+
+PANEL 2. The man is still typing. Nothing bad has happened yet. Suspicious.
+
+NARRATOR (CAPTION): Nothing bad has happened YET.
+
+PANEL 3. A light bulb, close up. It looks nervous.
+
+MAN: Why does the light bulb look nervous?
+
+LIGHT BULB: No reason.
+
+PANEL 4. The man types faster. The deadline types faster too.
+
+MAN: Nearly done. Just one more panel. What could possibly go wrong?
+
+PANEL 5. Something goes wrong.
+
+"
+type_sfx = ExtResource("2_type")

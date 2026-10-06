@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" format=3]
+
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/keyboard_key_1.wav" id="1_key"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/keyboard_key_2.wav" id="2_key"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/keyboard_key_3.wav" id="3_key"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/keyboard_key_4.wav" id="4_key"]
+
+[resource]
+random_pitch = 1.06
+streams_count = 4
+stream_0/stream = ExtResource("1_key")
+stream_1/stream = ExtResource("2_key")
+stream_2/stream = ExtResource("3_key")
+stream_3/stream = ExtResource("4_key")

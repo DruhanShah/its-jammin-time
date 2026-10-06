@@ -1,6 +1,6 @@
 # Credits and third-party resources
 
-Every external resource in this project. "Shipped" = ends up in the exported game; "editor-only" = only used while developing (not loaded at runtime). Per-folder `CREDITS.md` files have details. Comic Sans MS itself is NOT used (Microsoft licence, can't be bundled); the Comic fonts below are free look-alikes.
+Every external resource in this project. "Shipped" = ends up in the exported game; "editor-only" = only used while developing (not loaded at runtime). Per-folder `CREDITS.md` files have details. Comic Sans MS itself is NOT used (Microsoft licence, can't be bundled); the Comic fonts below are free look-alikes. The word processor's "Comic Sans" font option is rendered with Comic Relief (metric-compatible with Comic Sans MS, OFL). Its other non-Comic options (Times New Roman, Arial, Papyrus, ...) use whatever system font the player has installed (nothing shipped), else the engine's default font.
 
 | Resource | Author | Source | License | Where | Shipped? |
 |---|---|---|---|---|---|
@@ -10,7 +10,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | Comic Neue (Bold, Italic, Regular) | Craig Rozynski & Hrant Papazian; Copyright 2014 The Comic Neue Project Authors | https://github.com/crozynski/comicneue | SIL Open Font License 1.1 (`OFL-ComicNeue.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
 | Comic Relief (Bold, Regular) | Jeff Davis; Copyright 2013 The Comic Relief Project Authors | https://github.com/loudifier/Comic-Relief (from google/fonts) | SIL Open Font License 1.1 (`OFL-ComicRelief.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
 | Comic Shanns Mono (Regular) | Copyright (c) 2018 Shannon Miwa, Copyright (c) 2023 Jesus Gonzalez | https://github.com/jesusmgg/comic-shanns-mono | MIT (`LICENSE-ComicShannsMono.md`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
-| 400 Sounds Pack (13 files) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | Free for any use incl. commercial, credit optional; may not sell/redistribute the unaltered assets as your own assets (verbatim text in [CREDITS](assets/audio/CREDITS.md)) | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| 400 Sounds Pack (26 files, 4 of them cut from `keyboard_typing.wav`) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | Free for any use incl. commercial, credit optional; may not sell/redistribute the unaltered assets as your own assets (verbatim text in [CREDITS](assets/audio/CREDITS.md)) | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | "rolling_office_chair.WAV" (trimmed into a 3 s loop) | alpanaytekin | https://freesound.org/people/alpanaytekin/sounds/213086/ | CC0 1.0 (public domain) | `assets/audio/sfx/chair_roll_loop.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | PSX First Person Arms (Free) v1.1.0 | Drillimpact, https://drillimpact.itch.io/ | https://drillimpact.itch.io/psx-first-person-arms-free | CC0 (public domain) | `assets/models/arms/` ([CREDITS](assets/models/arms/CREDITS.md)) | Shipped |
 | "Screwdriver" 3D model | CreativeTrio | https://poly.pizza/m/qBFMjkrKzH | CC0 1.0 (public domain) | `assets/models/screwdriver/` ([CREDITS](assets/models/screwdriver/CREDITS.md)) | Shipped |
@@ -19,6 +19,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | Vent cover removal (cut) | ME_Studios_Official | https://freesound.org/people/ME_Studios_Official/sounds/649765/ | CC0 1.0 | `assets/audio/sfx/freesound/panel_clatter_vent_me_studios.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Electricity Sound" (cut) | NachtmahrTV | https://freesound.org/people/NachtmahrTV/sounds/556717/ | CC0 1.0 | `assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| Kenney Interface Sounds 1.0 (`tick_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -44,4 +46,6 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Screwdriver model by CreativeTrio (Poly Pizza), CC0
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Electricity crackle by NachtmahrTV (Freesound), CC0
+> Interface sounds by Kenney (www.kenney.nl), CC0
+> "Wrong Buzzer" by KevinVG207 (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/
