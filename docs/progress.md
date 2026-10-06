@@ -60,16 +60,16 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] "Lights went out" phase: dimmer emergency lighting; try neon-ish vs red, pick what still reads as an office and shows off the map (comparison screenshots for the user) [review: `docs/map/screenshots/lights_out/comparison.png` (normal / A neon / B red / C mix, recommended + default); pick with `Lighting.look` in office.tscn; in game F5 toggles the power, F6 cycles the looks (debug builds only); `world/office/lighting.gd`, `GameState.set_power()`]
 
 ## Current: teammate code + story flow
-- [~] Integrate teammate's `computer-minigames` branch (computer screen, ad popup, corporate speak, captcha) on an integration branch, then into master
+- [x] Integrate teammate's `computer-minigames` branch (computer screen, ad popup, corporate speak, captcha) on branch `integrate/computer-minigames` (not in master yet): office computer opens the computer screen, Power returns to the desk, story API `Computer.open()`/`queue()` + `GameState.computer_minigame_finished`/`computer_queue_finished` [review: `minigames/computer/event_manager.gd`, `computer.gd` `open()`/`queue()`/`exit()`, `core/game_state.gd`; X at the desk, play memo → ad → bot check, press Power]
 - [~] Comic font family: research licenses, add usable fonts to the game + credits
 - [ ] Story flow: start at the computer minigame → lights out → server room switch → back → minigame 2 → lights out, server room swapped with A3 → switch there → minigame 3 → lights out → switch again
 - [ ] Switch = highlighted interactable that opens a placeholder switch minigame (real switch minigames later)
 - [ ] Off-path narrator: cues when the player wanders away from the current objective for a while
 
-## Current: computer screen
+## Computer screen (teammate, `computer-minigames` branch)
 - [x] Computer scene (`minigames/computer/computer.tscn`): vim-ish editor (insert mode only), Power button exits back to the office [review: `computer.gd` `start_minigame()`/`exit()`]
 - [x] Modular minigame framework: `Minigame` base, `MinigameConfig` tunables, `minigame_registry.tres` [review: `minigame.gd`]
-- [x] Event manager stub: starts the ad straight away; to be replaced by the real event system [review: `event_manager.gd`]
+- [x] Event manager stub: plays minigames one after another (story queue in `GameState.computer_queue`, else `start_on_open`), retries a failed one; to be replaced by the real event system [review: `event_manager.gd`]
 - [x] Minigame: pop-up ad with a tiny X (decoy spawns more ads, X dodges after 3 closes) [review: tune in `ad_popup_default.tres`]
 - [x] Minigame: corporate-speak memo, fill each blank with the most corporate word; per-word points go to a shared score in the status bar [review: sentences in `corporate_speak_default.tres`, syntax `{word:points|word:points}`]
 - [x] Minigame: bot check, a "click me if you are a bot" trap button (fail, score penalty), an "I'm not a robot" captcha that passes after a random number of tries (5% first try), and a close X that appears after 3s [review: tune in `bot_check_default.tres`]
@@ -81,10 +81,13 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
 ## Conventions
-- Computer minigames live in `minigames/computer/minigames/<name>/`: a scene whose root extends `Minigame`, a `MinigameConfig` subclass + default `.tres`, and one line in `minigame_registry.tres`. Minigames never decide when they start; the event manager calls `Computer.start_minigame(id, overrides)`
+- Computer minigames live in `minigames/computer/minigames/<name>/`: a scene whose root extends `Minigame`, a `MinigameConfig` subclass + default `.tres`, and one line in `minigame_registry.tres`. Minigames never decide when they start; the event manager calls `Computer.start_minigame(id, overrides)`; the story picks them with `Computer.open(ids)` / `Computer.queue(ids)`
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
+- Computer: keep the typed document (`buffer`) in `GameState` so it survives leaving the computer
+- Computer: root as a full-rect Control instead of Node2D + `_fit_screen()`
+- Computer: narrator lines per minigame (bot button, 3rd ad, captcha retries)
 - Lights out: a power-down/up sound (clunk + fluorescent tick) and a narrator line on the blackout
 - Lights out: emergency fixtures stutter for a second when they kick in (reuse `light_flicker.gd`)
 - Lights out: C1 keeps a few amber lights on the "generator" while the rest of the office is dark
