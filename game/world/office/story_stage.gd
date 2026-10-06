@@ -22,16 +22,26 @@ extends Node
 @export_range(0.0, 1.0) var outside_blur_strength := 0.4
 ## Seconds of narrator silence before the next idle fun fact plays.
 @export var idle_silence := 12.0
+## Blackout: seconds in the office without reaching the server room before the "it's in a corner" hint.
+@export var lost_hint_time := 45.0
+## Seconds without any key/mouse input before "Are you still around?".
+@export var afk_time := 60.0
+## Different rooms visited in one step (this load) before "Yes, we know the office is beautiful".
+@export var wander_rooms := 5
 
 const CHECK_INTERVAL := 0.5
 ## First-entry lines by room *content* (the room node, wherever it stands: C1 moves to A3's spot).
 const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &"C2": &"room_upside_down", &"B2": &"room_employee_month", &"B3": &"room_family_chairs"}
 ## Played in order, cycling, when the narrator has been silent for a while.
-const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6"]
+const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6", &"idle_7", &"idle_8", &"idle_9", &"idle_10", &"idle_11"]
 ## Follows the first repeated fact ("Oh, I already said that…"), once.
 const IDLE_REPEAT_CUE := &"idle_out"
 ## Most idle lines played per story step (i.e. per lights-out).
 const IDLE_PER_STEP := 2
+## Lost in a blackout (once each, `once` cues): the first blackout, then the second or third.
+const LOST_HINTS := {Story.Step.SWITCH_1: &"hint_server_corner", Story.Step.SWITCH_2: &"hint_server_corner_again", Story.Step.SWITCH_3: &"hint_server_corner_again"}
+const AFK_CUE := &"afk_still_around"
+const WANDER_CUE := &"office_beautiful"
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)
 ## Where the server room is built, and the room it swaps places with ("the room on the right" from A2).
 const SERVER_ROOM := &"C1"
@@ -64,6 +74,10 @@ var _in_room_time := 0.0 ## Seconds in Start since the hint or the last nudge.
 var _nudges := 0
 var _putting_on := false
 var _silence := 0.0 ## Seconds since the narrator last spoke.
+var _lost_time := 0.0 ## Blackout: seconds in the office (narrator quiet, player free) short of the server room.
+var _reached_switch := false ## Blackout: been in the server room this load.
+var _afk := 0.0 ## Seconds since the last key/mouse input.
+var _visited: Dictionary[StringName, bool] = {} ## Room locations entered this load.
 
 @onready var _rooms: Node3D = $"../Rooms"
 @onready var _player: Node3D = $"../Player"
@@ -96,6 +110,7 @@ func _process(delta: float) -> void:
 	var here := room_at(_player.global_position)
 	_check_server_room(here)
 	_check_idle(_tick)
+	_check_hints(here, _tick)
 	_check_room_lines()
 	_check_ending(here, _tick)
 	_tick = 0.0
@@ -181,12 +196,47 @@ func _check_idle(delta: float) -> void:
 
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
+		_afk = 0.0
+
+
+## One-off nudges, only into silence: lost in a blackout (`LOST_HINTS`), no input for `afk_time` s,
+## or wandering through `wander_rooms` rooms of the office (this load) without finishing the step.
+func _check_hints(here: StringName, delta: float) -> void:
+	_afk += delta
+	if here:
+		_visited[here] = true
+	var server: Node3D = _rooms.get_node(String(SERVER_ROOM))
+	var offset := _player.global_position - server.position
+	if absf(offset.x) <= ROOM_HALF_SIZE.x and absf(offset.z) <= ROOM_HALF_SIZE.y:
+		_reached_switch = true
+	var busy: bool = Narrator.is_speaking() or _player.get(&"frozen") or _player.get(&"movement_locked") \
+			or get_tree().get_first_node_in_group(&"scope_view")
+	if busy:
+		return
+	var lost_cue: StringName = LOST_HINTS.get(Story.step, &"")
+	if lost_cue and not GameState.power_on and not _reached_switch and GameState.switch_progress == 0:
+		_lost_time += delta
+		if _lost_time >= lost_hint_time:
+			Narrator.play(lost_cue)
+			_lost_time = -INF # Once per load (and the cue is `once`).
+			return
+	if _afk >= afk_time:
+		_afk = 0.0
+		Narrator.play(AFK_CUE)
+		return
+	if _visited.size() >= wander_rooms:
+		Narrator.play(WANDER_CUE)
+
+
 func _on_repeat_fact_finished(_cue: StringName) -> void:
 	Narrator.play(IDLE_REPEAT_CUE)
 
 
 ## Power came back while the player was in the office (an in-world restore game): set the ending up now.
 func _on_step_changed(step: Story.Step) -> void:
+	_visited.clear()
 	if step == Story.Step.ENDING and not _vision:
 		_start_ending()
 

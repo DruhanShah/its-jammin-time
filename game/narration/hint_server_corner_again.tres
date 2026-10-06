@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
-[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/intro_20.ogg" id="2_voice"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/intro_16.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
 stream = ExtResource("2_voice")
-subtitle = "Oh yeah there's just doors here. The devs tried rigging up a Doraemon-style anywhere door, but ran out of Claude credits."
+subtitle = "Hey, just a reminder. The server room is still in a corner. Something something Feng Shui and all that, you know?"
 once = true

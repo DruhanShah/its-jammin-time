@@ -225,3 +225,9 @@ Recommended default in **bold**.
 - Quiz question: `quiz_question` = Lights out #2 line 3 only; new `quiz_option_1..4` (lines 5–8, `show_subtitle = false`) are chained by `gargoyle_gate.gd` `QUESTION_CUES` via `Narrator.line_finished` (stops on answer, walk-away, miss or another line cutting in).
 - No recording yet: Lights out #2 line 4 "And your options are..." (would slot between `quiz_question` and `quiz_option_1`), line 14 `quiz_phone_friend`.
 - Duration check: `keypad_right` (Lights out #3 line 4, 85 chars) is only 2.47 s (~34 chars/s vs ~13 typical) — likely truncated or a different take; listen before shipping.
+
+### Script update (2026-10-06, `docs/narration.md`)
+
+- Intro renumbered: `no_grabbing` = Intro 19, `anywhere_door` = Intro 20. Idle facts are their own section (Random DYKs 1–10): `idle_2..idle_11` → `random_dyks_1..10.ogg` (`idle_1` stays Intro 14), `IDLE_CUES` has 11 entries.
+- New cues: `sleep_start` (Intro 21, `SleepConfig.fall_asleep_cue`), `banana_seen` (Intro 22, `spinning_banana.gd`: within 6 m in its room, into silence), `hint_server_corner` / `hint_server_corner_again` (Intro 15/16: SWITCH_1 / SWITCH_2–3, 45 s in the dark office without entering the server room), `afk_still_around` (Intro 17: 60 s without key/mouse input), `office_beautiful` (Intro 18: 5 different rooms in one step), all in `StoryStage._check_hints`, `once`, only into silence. `juniors` (Intro 23) has no trigger yet.
+- `painting_too_early` = Twist Painting 1, `ending_computer_blurry` = Lights out #3 line 9 (both recorded now).

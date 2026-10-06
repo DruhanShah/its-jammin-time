@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
-[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/random_dyks_4.ogg" id="2_voice"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/random_dyks_6.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
 stream = ExtResource("2_voice")
-subtitle = "Did you know that life is meaningless without balance and pursuit of the Tao?"
+subtitle = "Did you know that Oxford University was around at the same time as the Aztec Empire?"

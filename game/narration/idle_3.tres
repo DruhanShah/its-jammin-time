@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
-[ext_resource type="AudioStream" uid="uid://036wkfxvw0hy" path="res://assets/audio/narrator/voice/intro_16.ogg" id="2_voice"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/random_dyks_2.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")

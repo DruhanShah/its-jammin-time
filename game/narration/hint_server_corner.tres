@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/intro_15.ogg" id="2_voice"]
+
+[resource]
+script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
+subtitle = "Hey, just a hint. The light switch is in the server room. The server room is in some corner, I forgot which. Why is it in the corner? Because the architect of this office was a huge Vastu nerd."
+once = true

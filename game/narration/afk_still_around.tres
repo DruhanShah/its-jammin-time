@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/intro_17.ogg" id="2_voice"]
+
+[resource]
+script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
+subtitle = "Are you still around? There's no way your attention has been lost already! Would you like some Subway Surfers gameplay on the side? We can't do that, the best we can do is the Bee Movie."
+once = true

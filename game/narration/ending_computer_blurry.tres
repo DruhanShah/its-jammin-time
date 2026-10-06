@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/lights_out_3_9.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "You can't even read that. Glasses. Please. Put them on."
+stream = ExtResource("2_voice")
+subtitle = "Hey, you have a headache. Are you really going to try and use the computer with its bright screen with that kind of headache? Have you ever had a headache before?"

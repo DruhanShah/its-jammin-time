@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" path="res://assets/audio/narrator/voice/twist_painting_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "It's a painting. It says twist me. You're not ready for that kind of commitment yet."
+stream = ExtResource("2_voice")
+subtitle = "Hey, no touchy, this one isn't relevant to the plot yet. Wait your turn."

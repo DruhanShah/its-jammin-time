@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_u5lgc")
+fall_asleep_cue = &"sleep_start"
 metadata/_custom_type_script = "uid://uqhghqdaoqtn"
