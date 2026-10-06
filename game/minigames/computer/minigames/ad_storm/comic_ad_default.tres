@@ -13,7 +13,7 @@
 
 [resource]
 script = ExtResource("1_cfg")
-max_concurrent = 8
+max_concurrent = 3
 close_button_size = 22.0
 dodge_after_closes = 1000
 headlines = Array[String](["LIGHT BULBS 90% OFF: limited time, limited light", "HOT SINGLE FONTS IN YOUR AREA (Comic Sans wants to meet you)", "Download more overtime FREE", "Your monitor is 3% too bright. Click to fix", "Managers HATE this one weird productivity trick"])

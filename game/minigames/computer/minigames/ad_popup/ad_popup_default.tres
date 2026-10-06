@@ -6,6 +6,6 @@
 
 [resource]
 script = ExtResource("1_cfg")
-max_concurrent = 4
+max_concurrent = 3
 spawn_sfx = ExtResource("2_spawn")
 close_sfx = ExtResource("3_close")

@@ -15,6 +15,7 @@ script = ExtResource("2_int")
 unlock_id = &"computer"
 verb = "use the computer"
 target_scene = "res://minigames/computer/computer.tscn"
+locked_cue = &"computer_no_power"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, -0.045)

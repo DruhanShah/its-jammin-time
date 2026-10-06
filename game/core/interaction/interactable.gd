@@ -2,7 +2,8 @@ class_name Interactable
 extends Area3D
 ## Add as a child of any prop, give it a CollisionShape3D covering the prop, set the verb.
 ## The player's interaction ray finds it and calls interact() when the `interact` action is pressed.
-## While locked (see `unlock_id`) it still shows its prompt, but interacting does nothing.
+## While locked (see `unlock_id`) it still shows its prompt, but interacting does nothing
+## (except play `locked_cue`, if set).
 
 signal interacted
 
@@ -23,8 +24,13 @@ const HIGHLIGHT: Material = preload("res://core/interaction/highlight.tres")
 @export var sound_volume_db := -4.0
 ## Meshes under this node get the highlight while the player aims at it. Default: the whole prop (our parent).
 @export var highlight_root: NodePath = ^".."
+## Narrator cue played when the player interacts while it's locked (e.g. the computer without power).
+## Skipped while the narrator is talking; at most once per `locked_cue_cooldown` seconds.
+@export var locked_cue: StringName
+@export var locked_cue_cooldown := 8.0
 
 var _highlighted := false
+var _locked_cue_msec := -1
 
 
 func _ready() -> void:
@@ -45,6 +51,7 @@ func is_locked() -> bool:
 
 func interact() -> void:
 	if is_locked():
+		_play_locked_cue()
 		return
 	if sound:
 		Audio.play_sfx(sound, sound_volume_db)
@@ -66,3 +73,13 @@ func set_highlighted(on: bool) -> void:
 			mesh.material_overlay = HIGHLIGHT
 		elif not on and mesh.material_overlay == HIGHLIGHT:
 			mesh.material_overlay = null
+
+
+func _play_locked_cue() -> void:
+	if locked_cue.is_empty() or Narrator.is_speaking():
+		return
+	var now := Time.get_ticks_msec()
+	if _locked_cue_msec >= 0 and now - _locked_cue_msec < locked_cue_cooldown * 1000.0:
+		return
+	_locked_cue_msec = now
+	Narrator.play(locked_cue)

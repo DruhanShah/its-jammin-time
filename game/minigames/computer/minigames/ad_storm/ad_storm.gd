@@ -1,8 +1,10 @@
 extends Minigame
 ## Visit 1, beat 3: the ad storm. Any key types the next bit of the comic script (the Emily-is-Away
 ## trick), and typing sets off the ads (`comic_ad`, each a real minigame started through the host):
-## wave 1 = 3 plain ads one at a time; wave 2 = runner, nested, fake X and countdown at once; then the
-## ECO MODE ad. Accepting it ("TURN OFF LIGHTS", or its tiny X) dims the screen twice and completes:
+## wave 1 = 3 plain ads one at a time; wave 2 = runner, nested, fake X and countdown, at most
+## `max_ads` on screen at once (the rest wait for a free slot); then the ECO MODE ad. Ads never exceed
+## `max_ads` (the comic ad's max_concurrent caps decoy and nested spawns too). Typing on (or idling)
+## while ads are open plays the "close those ads" hint (at most twice). Accepting it ("TURN OFF LIGHTS", or its tiny X) dims the screen twice and completes:
 ## in the story the EventManager → Story → Computer.blackout() turns the lights out. This never calls
 ## blackout() itself, so free use doesn't cut the power. The root ignores the mouse: ads are siblings.
 
@@ -25,6 +27,11 @@ var _wave1_index := 0
 var _pending := 0 ## Ads scheduled but not spawned yet, so a wave never looks cleared too early.
 var _last_sfx_ms := 0
 var _eco: Minigame
+var _wave2_queue: Array[Dictionary] = [] ## Wave-2 ads waiting for a free slot under max_ads.
+var _hint_keys := 0 ## Keypresses while ads are open since one was last closed.
+var _hint_idle := 0.0 ## Seconds with ads open and no key/mouse press.
+var _hints_played := 0
+var _hint_msec := -1
 
 
 func begin() -> void:
@@ -32,6 +39,12 @@ func begin() -> void:
 	if computer.buffer and not computer.buffer.ends_with("\n"):
 		computer.buffer += "\n"
 	_refresh_goal()
+
+
+## Mouse clicks go to the ads (siblings); only watch them, for the hint's idle timer.
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		_hint_idle = 0.0
 
 
 func cleanup() -> void:
@@ -56,6 +69,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return # Holding a key types, but doesn't count towards the next wave.
 	_keys += 1
 	_idle = 0.0
+	_hint_idle = 0.0
+	if _ads_open():
+		_hint_keys += 1
 	match _phase:
 		Phase.WAIT_TYPING:
 			if _keys >= _cfg().first_ad_after_keys:
@@ -82,6 +98,31 @@ func _process(delta: float) -> void:
 		Phase.WAIT_3:
 			if _idle >= cfg.eco_idle:
 				_start_eco()
+	_update_hint(delta)
+
+
+## "Close those ads": the player keeps typing (or sits idle) while ads stay open. Never cuts a line.
+func _update_hint(delta: float) -> void:
+	var cfg := _cfg()
+	if not (_phase in [Phase.WAVE_1, Phase.WAVE_2]) or not _ads_open():
+		_hint_idle = 0.0
+		return
+	_hint_idle += delta
+	if _hint_keys < cfg.hint_after_keys and _hint_idle < cfg.hint_after_idle:
+		return
+	if _hints_played >= 2 or Narrator.is_speaking():
+		return
+	if _hints_played == 1 and Time.get_ticks_msec() - _hint_msec < cfg.hint_repeat_after * 1000.0:
+		return
+	_hints_played += 1
+	_hint_msec = Time.get_ticks_msec()
+	_hint_keys = 0
+	_hint_idle = 0.0
+	Narrator.play(cfg.hint_cue)
+
+
+func _ads_open() -> bool:
+	return not computer.active_minigames(AD).is_empty()
 
 
 func _type_next() -> void:
@@ -130,12 +171,24 @@ func _spawn_wave1() -> void:
 func _start_wave_2() -> void:
 	var cfg := _cfg()
 	_enter(Phase.WAVE_2)
+	_wave2_queue.clear()
 	for i in WAVE2_VARIANTS.size():
 		var overrides := {"variant": WAVE2_VARIANTS[i], "ad_size": WAVE2_AD_SIZE, "spawn_position": computer.screen.size * WAVE2_SPOTS[i]}
 		if i < cfg.wave2_headlines.size():
 			overrides["headline"] = cfg.wave2_headlines[i]
+		_wave2_queue.append(overrides)
+	_fill_wave2()
+
+
+## Spawns queued wave-2 ads (staggered) while there's room under max_ads.
+func _fill_wave2() -> void:
+	var room := _cfg().max_ads - computer.active_minigames(AD).size() - _pending
+	var i := 0
+	while room > 0 and not _wave2_queue.is_empty():
 		_pending += 1
-		_after(i * cfg.wave2_stagger, _spawn_pending.bind(overrides))
+		_after(i * _cfg().wave2_stagger, _spawn_pending.bind(_wave2_queue.pop_front()))
+		room -= 1
+		i += 1
 
 
 func _start_eco() -> void:
@@ -149,20 +202,27 @@ func _start_eco() -> void:
 
 
 func _spawn(overrides: Dictionary) -> Minigame:
+	overrides["max_concurrent"] = _cfg().max_ads
 	return computer.start_minigame(AD, overrides)
 
 
 func _spawn_pending(overrides: Dictionary) -> void:
 	_pending -= 1
-	_spawn(overrides)
+	if not _spawn(overrides) and _phase == Phase.WAVE_2:
+		_wave2_queue.push_front(overrides) # Full (a decoy spawn took the slot): wait for a close.
+		_check_cleared.call_deferred()
 
 
 func _on_ad_completed(ad_id: StringName) -> void:
 	if ad_id == AD:
+		_hint_keys = 0
+		_hint_idle = 0.0
 		_check_cleared.call_deferred()
 
 
 func _check_cleared() -> void:
+	if _phase == Phase.WAVE_2 and not _wave2_queue.is_empty():
+		_fill_wave2()
 	if _pending > 0 or not computer.active_minigames(AD).is_empty():
 		return
 	match _phase:

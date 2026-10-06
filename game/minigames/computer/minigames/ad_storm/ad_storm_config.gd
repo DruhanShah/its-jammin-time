@@ -25,6 +25,9 @@ extends MinigameConfig
 @export var eco_idle := 5.0
 
 @export_group("Waves")
+## Most ad windows on screen at once (waves, decoy and nested spawns, the ECO ad). Keep the comic ad's
+## max_concurrent (comic_ad_default.tres) the same, it caps the spawns the ads request themselves.
+@export var max_ads := 3
 ## Wave 1: one ad at a time, in this order.
 @export var wave1_headlines: Array[String] = [
 	"LIGHT BULBS 90% OFF: limited time, limited light",
@@ -33,7 +36,7 @@ extends MinigameConfig
 ]
 ## Seconds between one wave-1 ad closing and the next.
 @export var wave1_gap := 0.6
-## Seconds between the four wave-2 ads popping up.
+## Seconds between wave-2 ads popping up (max_ads at once, the rest as others close).
 @export var wave2_stagger := 0.3
 ## Wave 2 headlines: runner, nested, fake X, countdown.
 @export var wave2_headlines: Array[String] = [
@@ -48,6 +51,12 @@ extends MinigameConfig
 @export_group("Narrator cues")
 @export var first_cue := &"ads_first"
 @export var eco_cue := &"ads_eco"
+## "Close those ads": after this many keypresses (or idle seconds) with ads open and none closed.
+@export var hint_cue := &"ads_close_hint"
+@export var hint_after_keys := 10
+@export var hint_after_idle := 6.0
+## Seconds after the first hint before it may play a second (and last) time.
+@export var hint_repeat_after := 45.0
 
 @export_group("Sounds")
 @export var type_sfx: AudioStream
