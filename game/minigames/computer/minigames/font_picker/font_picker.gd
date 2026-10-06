@@ -5,23 +5,24 @@ extends Minigame
 ## other pick gets a red strike-through, a buzzer and the narrator's "Try again"; from the 2nd wrong
 ## pick the remaining non-Comic rows wobble. A Comic pick → KA-CHING! + confetti, GameState.document_font
 ## (+ name), the document switches font, complete(). Typing before that just opens the font list.
-## Non-Comic fonts are SystemFonts (we don't ship them); missing ones fall back to the engine's default
-## font, never to the project's Comic theme font.
+## Non-Comic rows are drawn with bundled free look-alike fonts (OFL, see `assets/fonts/CREDITS.md`), so
+## they look the same everywhere, web included; the menu labels are the real names, no Microsoft or
+## other commercial font is shipped.
 
 const ROW_FONT_SIZE := 24
 const ROW_HEIGHT := 38.0
 const STRIKE_COLOR := Color("#e0201b")
-## Top to bottom (the Comic ones at the bottom). `system`: SystemFont names; `file`: a shipped font;
-## `comic`: accepted.
+## Top to bottom (the Comic ones at the bottom). `file`: the bundled font the row (and, for a Comic one,
+## the document) is drawn with; `comic`: accepted.
 const FONTS: Array[Dictionary] = [
-	{"name": "Times New Roman", "system": ["Times New Roman", "Times", "Liberation Serif"]},
-	{"name": "Arial", "system": ["Arial", "Liberation Sans"]},
-	{"name": "Helvetica", "system": ["Helvetica", "Helvetica Neue", "Arial"]},
-	{"name": "Calibri", "system": ["Calibri", "Carlito"]},
-	{"name": "Garamond", "system": ["Garamond", "EB Garamond", "Georgia"]},
-	{"name": "Papyrus", "system": ["Papyrus"]},
-	{"name": "Impact", "system": ["Impact"]},
-	{"name": "Wingdings", "system": ["Wingdings", "Webdings"]},
+	{"name": "Times New Roman", "file": "res://assets/fonts/Tinos-Regular-Latin.ttf"},
+	{"name": "Arial", "file": "res://assets/fonts/Arimo-Regular-Latin.ttf"},
+	{"name": "Helvetica", "file": "res://assets/fonts/Arimo-Regular-Latin.ttf"},
+	{"name": "Calibri", "file": "res://assets/fonts/OfficeSans-Regular-Latin.ttf"},
+	{"name": "Garamond", "file": "res://assets/fonts/EBGaramond-Regular-Latin.ttf"},
+	{"name": "Papyrus", "file": "res://assets/fonts/Almendra-Regular.ttf"},
+	{"name": "Impact", "file": "res://assets/fonts/Anton-Regular-Latin.ttf"},
+	{"name": "Wingdings", "file": "res://assets/fonts/Jamdings-Regular.ttf"},
 	{"name": "Comic Neue", "file": "res://assets/fonts/ComicNeue-Regular.ttf", "comic": true},
 	{"name": "Comic Relief", "file": "res://assets/fonts/ComicRelief-Regular.ttf", "comic": true},
 	{"name": "Comic Shanns Mono", "file": "res://assets/fonts/ComicShannsMono-Regular.ttf", "comic": true},
@@ -137,12 +138,7 @@ func _make_row(i: int) -> Button:
 
 
 func _font_for(entry: Dictionary) -> Font:
-	if entry.has("file"):
-		return load(entry.file)
-	var font := SystemFont.new()
-	font.font_names = PackedStringArray(entry.system)
-	font.fallbacks = [ThemeDB.get_default_theme().default_font] # Not the project's Comic theme font.
-	return font
+	return load(entry.file)
 
 
 func _on_hover() -> void:

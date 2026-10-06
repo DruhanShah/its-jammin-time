@@ -21,3 +21,58 @@ All fonts are bundled with the game under their licences (licence text next to t
 - **Copyright:** Copyright (c) 2018 Shannon Miwa, Copyright (c) 2023 Jesus Gonzalez (https://github.com/jesusmgg/comic-shanns-mono).
 - **License:** MIT License, full text in `LICENSE-ComicShannsMono.md`.
 - **Files used:** `ComicShannsMono-Regular.ttf` (the word processor's default document font, ruler and status bar).
+
+## Look-alike fonts for the font picker's wrong options
+
+The word processor's font list (`minigames/computer/minigames/font_picker/font_picker.gd`) shows each wrong option in a free look-alike so it renders the same on every platform, web included. The menu labels are the real font names only; none of those fonts are included.
+
+Times New Roman, Arial, Helvetica, Calibri, Papyrus, Impact, Wingdings and Comic Sans are trademarks of their respective owners. None of those fonts are included; the menu shows free look-alike fonts.
+
+### Tinos
+
+- **Copyright:** Copyright 2026 The Tinos Project Authors (https://github.com/googlefonts/tinos).
+- **License:** SIL Open Font License 1.1, full text in `OFL-tinos.txt`.
+- **Modifications:** subset to Latin.
+- **Files used:** `Tinos-Regular-Latin.ttf` (the "Times New Roman" option).
+
+### Arimo
+
+- **Copyright:** Copyright 2026 The Arimo Project Authors (https://github.com/googlefonts/arimo).
+- **License:** SIL Open Font License 1.1, full text in `OFL-arimo.txt`.
+- **Modifications:** Regular instance of the variable font, subset to Latin.
+- **Files used:** `Arimo-Regular-Latin.ttf` (the "Arial" and "Helvetica" options).
+
+### Office Sans Jam (modified Carlito)
+
+- **Copyright:** Copyright 2013 The Carlito Project Authors (https://github.com/googlefonts/carlito), Reserved Font Name "Carlito".
+- **License:** SIL Open Font License 1.1, full text in `OFL-carlito.txt`.
+- **Modifications:** subset to Latin and renamed to "Office Sans Jam", as the Reserved Font Name requires for a modified version.
+- **Files used:** `OfficeSans-Regular-Latin.ttf` (the "Calibri" option).
+
+### EB Garamond
+
+- **Copyright:** Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12).
+- **License:** SIL Open Font License 1.1, full text in `OFL-ebgaramond.txt`.
+- **Modifications:** Regular instance of the variable font, subset to Latin.
+- **Files used:** `EBGaramond-Regular-Latin.ttf` (the "Garamond" option).
+
+### Almendra
+
+- **Copyright:** Copyright (c) 2011-2012, Ana Sanfelippo (anasanfe@gmail.com), with Reserved Font Name 'Almendra'.
+- **License:** SIL Open Font License 1.1, full text in `OFL-almendra.txt`.
+- **Modifications:** none (unmodified).
+- **Files used:** `Almendra-Regular.ttf` (the "Papyrus" option).
+
+### Anton
+
+- **Copyright:** Copyright 2020 The Anton Project Authors (https://github.com/googlefonts/AntonFont.git).
+- **License:** SIL Open Font License 1.1, full text in `OFL-anton.txt`.
+- **Modifications:** subset to Latin.
+- **Files used:** `Anton-Regular-Latin.ttf` (the "Impact" option).
+
+### Jamdings
+
+- **Copyright:** glyphs Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols), from Noto Sans Symbols and Noto Sans Symbols 2.
+- **License:** SIL Open Font License 1.1, full text in `OFL-Jamdings-NotoSymbols.txt`.
+- **Modifications:** glyphs scaled and mapped to letters by the team.
+- **Files used:** `Jamdings-Regular.ttf` (the "Wingdings" option).
