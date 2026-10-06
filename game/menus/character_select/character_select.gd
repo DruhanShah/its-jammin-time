@@ -68,6 +68,7 @@ var _layers: Dictionary[StringName, Array] = {} ## Category id -> [TextureRect, 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	ComicCursor.apply()
+	Audio.play_music(Audio.MENU_MUSIC) # Already playing from the start menu: keeps going.
 	tree_exiting.connect(ComicCursor.reset)
 	preview.clip_contents = true
 	get_viewport().size_changed.connect(_fit_screen)
@@ -123,6 +124,7 @@ func finish() -> void:
 	_show_buttons(false)
 	confirm_prompt.hide()
 	picker.hide()
+	Audio.fade_out_music(0.3) # The music dies with the character (under the record scratch).
 	await _destroy()
 	await get_tree().create_timer(0.4).timeout
 	get_tree().change_scene_to_file(INTRO_SCENE) # A hard cut to black, no fade.

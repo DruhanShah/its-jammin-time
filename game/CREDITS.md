@@ -53,7 +53,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "fire crackling loop.wav" (cut into a loop) | soundofsong | https://freesound.org/people/soundofsong/sounds/650574/ | CC0 1.0 | `assets/audio/sfx/freesound/flame_crackle_loop_soundofsong.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Foley_Leather_Stress_Mono.wav" (2 creaks cut from it) | Nox_Sound | https://freesound.org/people/Nox_Sound/sounds/559079/ | CC0 1.0 | `assets/audio/sfx/freesound/wick_twist_*_noxsound.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Socket Wrench" (3 ratchet bursts cut from it) | xxqmanxx | https://freesound.org/people/xxqmanxx/sounds/147018/ | CC0 1.0 | `assets/audio/sfx/freesound/crank_ratchet_*.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
-| **Music track, title TBD** (Kevin MacLeod; exact title + file to be filled in) | Kevin MacLeod | https://incompetech.com/ (channel: https://www.youtube.com/channel/UCSZXFhRIx6b0dFX3xS8L1yQ) | CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ ("Licensed under Creative Commons: By Attribution 4.0 License") | `assets/audio/music/` (pending) | Shipped |
+| "Piece for Disaffected Piano Two" (in-game BGM; trimmed, converted to Ogg) | Kevin MacLeod | https://incompetech.com/ (file: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Piece%20for%20Disaffected%20Piano%20Two.mp3; chosen from https://www.youtube.com/watch?v=ZdfqsO0bLBA, audio not taken from YouTube) | CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ ("Licensed under Creative Commons: By Attribution 4.0 License") | `assets/audio/music/piece_for_disaffected_piano_two.ogg` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Cheerful Comedy Funny Quirky Background" (start menu + character select music; converted to Ogg) | alex-morgan (Pixabay) | https://pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/ | Pixabay Content License, https://pixabay.com/service/license-summary/ (free for commercial/non-commercial use incl. games; attribution not required) | `assets/audio/music/character_select_cheerful_comedy.ogg` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -61,11 +62,11 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 ## Made for this project (ours)
 
 - Narrator voice recordings (`assets/audio/narrator/voice/`): recorded by the team (Druhan Shah, Nandini, Vishesh, Arnav).
-- Placeholder music (`assets/audio/music/placeholder_loop.wav`): generated procedurally, see [audio CREDITS](assets/audio/CREDITS.md).
 - Ceiling grid texture (`world/office/textures/ceiling_grid.png`): 128x128 generated grid.
 - Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
 - Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
 - Start screen art (`assets/ui/start_screen/`): hand-drawn by a teammate (Procreate `Untitled_Artwork.pdf`; its layer pages rendered separately: background + burst outlines, and the hand-lettered NEW GAME / CONT. LAST GAME / SETTINGS / EXIT buttons with the white keyed out), cropped and slightly stretched to 16:9.
+- Character select art (`menus/character_select/categories/*/*.PNG`: skin, eyes, hair and outfit layers): drawn by the team (PiBot314's branch).
 - Real-life ending video (`assets/video/real_life.ogv`): the team's own footage, filmed by us for this game (converted from the phone recording to Ogg Theora/Vorbis).
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
@@ -99,6 +100,8 @@ The in-game roll (`ending/credits.gd`, `SECTIONS`) lists all of the above: prima
 > Fire whoosh by LookIMadeAThing, fire crackle by soundofsong, wick creaks by Nox_Sound (Freesound), CC0
 > "Binoculars" by Ryan Sullivan (Poly Pizza), CC-BY 3.0, https://poly.pizza/m/fd1MPYUTpLL
 > Crank ratchet ("Socket Wrench") by xxqmanxx (Freesound), CC0
-> Music: Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License (title TBD)
+> "Piece for Disaffected Piano Two" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, http://creativecommons.org/licenses/by/4.0/
+> "Cheerful Comedy Funny Quirky Background" by alex-morgan (Pixabay), Pixabay Content License, https://pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/
+> Character select art by the team (hand-drawn, original)
 > Made with Godot Engine, https://godotengine.org/license/ ; Godot logo by Andrea Calabró, CC BY 4.0
 > Built with the help of editor plugins: Godot AI, Godot Asset Placer, Snappy (MIT)

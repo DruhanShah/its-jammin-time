@@ -74,4 +74,5 @@ func _wake() -> void:
 	if _leaving:
 		return
 	_leaving = true
+	Audio.play_music(Audio.GAME_MUSIC, 2.0) # The game proper begins: its BGM loops from here on.
 	Transition.change_scene(Computer.SCENE if Story.take_fresh_start() else Story.OFFICE)

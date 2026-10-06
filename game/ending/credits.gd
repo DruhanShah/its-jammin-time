@@ -121,11 +121,12 @@ const SECTIONS: Array = [
 		"* \"Socket Wrench\" by xxqmanxx",
 	], true],
 	["MUSIC", [
-		# TODO(orchestrator): add the track title once the Kevin MacLeod track lands ("<Title>" Kevin MacLeod ...).
-		"Music: Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, creativecommons.org/licenses/by/4.0/",
+		"\"Piece for Disaffected Piano Two\" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, creativecommons.org/licenses/by/4.0/",
+		"\"Cheerful Comedy Funny Quirky Background\" by alex-morgan (Pixabay), pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/, Pixabay Content License",
 	], true],
 	["MADE BY THE TEAM", [
 		"Start screen art: hand-drawn by the team",
+		"Character select art: drawn by the team (PiBot314)",
 		"Real-life ending video: filmed by the team",
 		"Narrator voices: recorded by the team",
 		"Cursor, halftone shader, ceiling texture, all scripts and scenes: made for this game",

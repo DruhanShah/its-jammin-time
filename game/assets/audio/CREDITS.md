@@ -112,8 +112,30 @@ Credit line (optional under CC0):
 
 > Electricity crackle by NachtmahrTV (Freesound), CC0
 
-## Placeholders (ours)
+## Music (`music/`)
 
-Generated procedurally by a small Python script (sine tones and filtered noise), made for this project. No third-party or AI-generated audio. Replace them with real recordings when ready.
+### "Piece for Disaffected Piano Two" (in-game background music)
 
-- `music/placeholder_loop.wav`: 8 s quiet sine-chord loop (C, Am, F, G).
+- **Title:** "Piece for Disaffected Piano Two"
+- **Author:** Kevin MacLeod, https://incompetech.com/
+- **Source:** https://incompetech.com/music/royalty-free/mp3-royaltyfree/Piece%20for%20Disaffected%20Piano%20Two.mp3 (official incompetech download; ISRC USUAN1100458; also https://incompetech.filmmusic.io/song/4215-piece-for-disaffected-piano-two/). The team picked it from the YouTube upload https://www.youtube.com/watch?v=ZdfqsO0bLBA ("Kevin MacLeod Archive" channel); the audio was NOT taken from YouTube, only from incompetech.com.
+- **License:** Creative Commons Attribution 4.0 (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/ (attribution required).
+- **File:** `music/piece_for_disaffected_piano_two.ogg`, **modified**: converted from the 320 kbps MP3 to Ogg Vorbis (q4), leading silence (0.95 s) and trailing silence trimmed (cut at 324.2 s, 0.5 s fade-out). Imported with Loop on. Played by the `Audio` autoload (`GAME_MUSIC`) from the start of the game proper (after the intro) for the rest of the game.
+
+Required credit line (Kevin MacLeod's format):
+
+> "Piece for Disaffected Piano Two" Kevin MacLeod (incompetech.com)
+> Licensed under Creative Commons: By Attribution 4.0 License
+> http://creativecommons.org/licenses/by/4.0/
+
+### "Cheerful Comedy Funny Quirky Background" (start menu + character select)
+
+- **Title:** "Cheerful Comedy Funny Quirky Background"
+- **Author:** alex-morgan (Pixabay user; profile linked from the track page)
+- **Source:** https://pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/ (downloaded from the page's own Pixabay CDN file, `alex-morgan-cheerful-comedy-funny-quirky-background-587373.mp3`, 0:25)
+- **License:** Pixabay Content License, https://pixabay.com/service/license-summary/ (the page states "Free for use under the Pixabay Content License": free for commercial and non-commercial use, including in games; attribution not required, but we credit; may not be sold or redistributed as a standalone file).
+- **File:** `music/character_select_cheerful_comedy.ogg`, **modified**: converted from the 256 kbps MP3 to Ogg Vorbis (q5), otherwise unaltered. Imported with Loop on. Played by the `Audio` autoload (`MENU_MUSIC`) on the start menu and character select; it fades out when the character is destroyed.
+
+Credit line:
+
+> "Cheerful Comedy Funny Quirky Background" by alex-morgan (Pixabay), Pixabay Content License
