@@ -1,9 +1,11 @@
 class_name PlayerHud
 extends CanvasLayer
-## Crosshair and interaction prompt at the centre of the screen.
+## Crosshair and interaction prompt at the centre of the screen, mini-map at the bottom left
+## (`minimap.visible = false` to hide it, e.g. over a close-up).
 
 @onready var crosshair: Panel = $Crosshair
 @onready var prompt_label: Label = $Prompt
+@onready var minimap: Minimap = $Minimap
 
 
 ## Shows "Press <interact key> to <verb>", or hides the prompt if verb is empty.

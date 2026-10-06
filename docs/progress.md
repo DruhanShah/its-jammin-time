@@ -82,6 +82,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [~] Fix all Godot editor/game errors (e.g. recurring "Identifier not found: GameState/Audio/Narrator" on script reload, twist_demo parse error)
 
 ## Fixes
+- [x] Mini-map at the bottom of the screen while exploring: current position and surrounding rooms [review: `core/player/minimap.gd`, `HUD/Minimap` in `core/player/hud.tscn`, subtitle margins in `core/narrator/narrator.tscn`; walk Start → A2 → B2 → C1 and turn around, F5 for the lights-out look]
 - [x] Remove the big-text signs in the server room (SERVER ROOM, LEGACY / DO NOT TOUCH, DAYS SINCE LAST BLACKOUT) and the green EXIT signs from the lights-out look; keep the other signs
 - [x] Pushing a chair behind you shouldn't trigger the push arm animation (only when the chair is in front)
 
@@ -92,7 +93,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
     - [x] `Computer.blackout()`: flicker + CRT-off from the computer, the office loads already dark with `lights_out_1` (no second delayed cut) [review: `computer.gd` `blackout()`, `story.gd` `_on_computer_queue_finished`/`_on_power_changed`, `story_stage.gd` `_blackout()`]
     - [~] VoiceLogin on top of `password_scream` (live waveform, 2 scripted fails, silence timeout, fake waveform, text box, in an AppWindow): built and tested in an isolated copy, waiting for the `git pull` of the teammate's `password_scream` (needs the user's OK) before it lands; then `FIRST_VISIT = [password_scream, corporate_speak]`
     - [x] Export: macOS mic usage text + `audio_input` entitlement; Web preset (no threads) for itch.io
-- [ ] Visit 1 part B: font picker, ad storm (ECO MODE ad causes the blackout), wire FIRST_VISIT
+- [~] Visit 1 part B: font picker, ad storm (ECO MODE ad causes the blackout), wire FIRST_VISIT
 - [ ] Visit 1 (approved design): password via fake mic (live waveform, fails 2×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
 
 - [ ] Visit 2 (approved design): software_update → memo_mail → inky
@@ -125,7 +126,6 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - Story: per-objective off-path lines ("the desk is the other way") and a short hint line when the off-path count runs out
 - Story: a power-down clunk + fluorescent tick sound on the blackout / switch
 - Story: `NarratorTrigger` option to not interrupt a line (the desk trigger's `desk_intro` can cut a story line short)
-- Story: tiny map/compass on the HUD while the lights are out
 - Computer: keep the typed document (`buffer`) in `GameState` so it survives leaving the computer
 - Computer: root as a full-rect Control instead of Node2D + `_fit_screen()`
 - Computer: narrator lines per minigame (bot button, 3rd ad, captcha retries)
