@@ -208,7 +208,7 @@ func _check_server_room(here: StringName) -> void:
 
 ## A room's line the first time you're inside its content. True if a line started this tick.
 func _check_room_lines() -> bool:
-	if Narrator.is_speaking() or get_tree().get_first_node_in_group(&"scope_view"):
+	if Narrator.is_speaking() or _player.get(&"frozen") or get_tree().get_first_node_in_group(&"scope_view"):
 		return false
 	for room: Node3D in _rooms.get_children():
 		var cue: StringName = ROOM_LINES.get(room.name, &"")
