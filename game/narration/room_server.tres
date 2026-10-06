@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://dea673n2jfetb" path="res://assets/audio/narrator/voice/intro_8.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Here's the server room, with a bunch of servers. They're really just PCs cooled by regular fans. I mean the company's going under, they can't really afford servers."
 once = true

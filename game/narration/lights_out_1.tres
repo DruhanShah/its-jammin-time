@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://b74454fxihymw" path="res://assets/audio/narrator/voice/lights_out_1_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "YOU FELL FOR THAT?? You can't work without the lights! Oh well, let's find some way to fix this, shall we? Usually, where there's lights there's a switch somewhere. Oh we also have a server room, I am sure it exists for a reason."
 once = true

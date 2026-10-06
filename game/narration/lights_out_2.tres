@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://cu3te3ibyn7nk" path="res://assets/audio/narrator/voice/lights_out_2_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "So now we know who's the person downloading viruses on company PCs. Finding the switchboard again shouldn't be too hard this time right??"
 once = true

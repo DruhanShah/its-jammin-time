@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://dnrn22mxnlkpq" path="res://assets/audio/narrator/voice/lights_out_1_4.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Well, looks like we're gonna have to do some hodgepodge electrical work. Pity we don't have an expert among us."
 once = true

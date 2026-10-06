@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://b83kqmiom144v" path="res://assets/audio/narrator/voice/lights_out_1_3.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "That fourth screw was a sticker. We couldn't afford too many screws, so ever since the Great Screw Incident of '96, we've been using stickers."
 once = true

@@ -218,3 +218,10 @@ Recommended default in **bold**.
 - memo_mail: `memo_promoted` on the first happy/starry send, `memo_angry` on the first angry send (mid-fill angry trigger dropped).
 - New triggers: `StoryStage._check_room_lines` (by room content; skipped while the player is frozen), `_check_idle` (30 s, then 20 s; index in `GameState.idle_lines_played`; off-path clock paused while idle > 5 s), `Player.idle_time` (reset by any key/button/mouse look; zero while frozen), `no_grabbing` on the 2nd stray left-click (`GameState.stray_touches`), `door.gd open_cue` set to `anywhere_door` on B1's Door1/2/3 and LastDoor.
 - Antivirus (`av_download_intro`), kaleidoscope (`keypad_intro`, `twist_me_bare_hands`, `scope_solved`) and ending already had verbatim lines; `av_dial_nudge` stays a placeholder.
+
+### Recordings (2026-10-06)
+
+- All 52 recordings in `game/assets/audio/narrator/voice/` are wired as `stream` on their cue (`id="2_voice"` ext_resource, by uid). Subtitle text unchanged; chunk timing follows the audio length.
+- Quiz question: `quiz_question` = Lights out #2 line 3 only; new `quiz_option_1..4` (lines 5–8, `show_subtitle = false`) are chained by `gargoyle_gate.gd` `QUESTION_CUES` via `Narrator.line_finished` (stops on answer, walk-away, miss or another line cutting in).
+- No recording yet: Lights out #2 line 4 "And your options are..." (would slot between `quiz_question` and `quiz_option_1`), line 14 `quiz_phone_friend`.
+- Duration check: `keypad_right` (Lights out #3 line 4, 85 chars) is only 2.47 s (~34 chars/s vs ~13 typical) — likely truncated or a different take; listen before shipping.

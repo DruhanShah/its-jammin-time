@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://cvu14al4fhr1o" path="res://assets/audio/narrator/voice/lights_out_2_12.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "That's an odd looking switch, but I guess it's like a valve that lets electricity flow instead of water? Weird system y'all have in this office."
 once = true

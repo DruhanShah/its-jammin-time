@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://cqt1jdnd15d2v" path="res://assets/audio/narrator/voice/lights_out_3_4.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "No light switch, but at least there's a candle. It's all we can work with, I suppose."

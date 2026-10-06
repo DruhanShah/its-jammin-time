@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://ci3lb33xb56c2" path="res://assets/audio/narrator/voice/intro_4.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Good morning sunshine! You've decided to work overtime today for some reason, at a comic publisher of all places. You'd have loved to be a stand-up comic, but that doesn't pay the bills so here you are. Well, dreary work builds character or something. Get to it!"
