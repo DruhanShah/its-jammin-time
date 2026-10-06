@@ -15,7 +15,7 @@ const GAMES := {
 	&"gargoyles": {verb = "get past the gargoyles"},
 	&"valve": {verb = "turn the valve"},
 	&"kaleidoscope": {verb = "type the password"},
-	&"candle": {verb = "light the candle"},
+	&"candle": {verb = "light the candle", scene = "res://minigames/switch/candle/candle.tscn"},
 }
 
 

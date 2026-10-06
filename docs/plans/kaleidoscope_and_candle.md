@@ -242,3 +242,21 @@ Logic checks (gdscript test or debug prints): `Kaleidoscope.ensure()` idempotent
 - **Player freeze** touches `player.gd` input paths (Esc mouse release, saved pose); keep it a single flag and test returning from the keypad still restores the pose.
 - **Model scale/orientation** of poly.pizza GLBs (often metres-off and Y-up/Z-up mixes): wrap in a scene with a fixed transform; verify CC-BY attribution lands in credits before export.
 - Time: kaleidoscope ≈ 60 %, candle ≈ 40 %. If short on time, cut §1.8 and the world candle; strike can be a single X press.
+
+## As built: Candle (§2)
+
+Files: `game/minigames/switch/candle/candle.tscn` + `candle.gd`, `strand_twist.gdshader`, `flame.gdshader`; `game/assets/models/candle/candle.glb` + `CREDITS.md`; cues `candle_intro`, `candle_wick_done`, `candle_match_fizzle`, `candle_circuit`; registered in `switch_games.gd` (`scene = res://minigames/switch/candle/candle.tscn`). Credits rows added to `game/CREDITS.md` and `assets/audio/CREDITS.md`.
+
+Flow as planned: WICK (clockwise, 720° = 12 key steps; anticlockwise untwists, clamped at 0) → PLANT (thread flies into the candle, camera eases from the thread shot to the candle shot) → STRIKE (`interact` action or left click; 2 fizzles with a smoke puff, 3rd lights) → LIGHT (match lights the wick, is shaken out and dropped; crackle loop starts) → CIRCUIT (flame stretches toward both terminals and turns cyan, jittering bolts + "ZZZAP!" burst, camera pulls back, lever flips up by itself, red emergency light flickers off and the room light on, flame calms back to orange) → `Story.switch_game_done(&"candle")` → office (FREE_ROAM, `to_be_continued`). Esc before the circuit returns to the office; the candle restarts, the keypad stays beaten.
+
+Deviations:
+- **Switchboard built from primitives** in the scene (like `screwdriver.tscn`), not a `power_switch.tscn` instance, and smaller (0.5 × 0.56 m) so the lever and the candle fit one shot. ON/OFF labels beside the lever.
+- **The Nick Slough candle has no separate flame mesh**: wick and flame are extra surfaces (materials `mat17` / `mat12`) of one mesh. `candle.gd` rebuilds the body mesh without them at load, uses the wick's position as the socket and reuses the flame surface (re-based to its foot) as both the candle's and the match's flame, with an unshaded over-bright `flame.gdshader` so the scene glow blooms it. No CC0 fallback needed.
+- **No `flame_flicker.gd`**: the flicker is a few lines in `candle.gd`.
+- **Terminals are posts with arms** reaching toward the flame (the holder is 13 cm wide, an 8 cm gap would hit it); flame stretch 2.6× + zigzag bolts from inside the flame to each terminal tip.
+- **On-screen text**: none besides the twist hint and real-object labels (ON/OFF, +/−, MATCHES). No step counter; the strike prompt is a bobbing keycap above the match showing `PlayerHud.key_name(&"interact")`, so it follows a rebind (X → C).
+- **TwistHint `intro_cue` cleared** in this scene (the player has twisted twice by SWITCH_3; the tutorial line would cut `candle_intro`).
+- **Sounds**: wick twist cuts re-cut shorter (0.4 s each, from the 1.75 / 2.2 s scratchpad cuts) so per-step creaks don't pile up; fizzles play the first scratch of `light_match.wav` and fade it out; lever = existing `breaker_clunk_on_kyles.wav`.
+- Not built: the optional lit candle on the world switch.
+
+Verification: windowed run of the candle scene via a temporary driver (story at SWITCH_3, `switch_progress = 1`): anticlockwise first (stays at 0), real ring-key presses clockwise (6 steps = 360° at 50 %, done after 12), `interact` key ×3 (2 fizzles + light), arc, lever, lights, then office at FREE_ROAM with power on. Separate Esc run: back to the office with `switch_progress` still 1 and power off. Screenshots of each stage with the emergency light and with the room light forced on.

@@ -14,6 +14,7 @@
   - `subtle_knock.wav` (pack folder `Other/`): office chair bumping into something (`world/office/props/office_chair.tscn`). Imported as mono.
   - `foley_creak_1.wav` (pack folder `Footsteps/`): occasional office chair caster creak while rolling (pitched up in the scene). Imported as mono.
   - Visit 1 font step + ad storm (`minigames/computer/minigames/font_picker/`, `ad_storm/`): `select_1.wav`, `pop_1.wav`, `pop_3.wav`, `pop_4.wav`, `toggle_off.wav` (pack folder `UI/`): font list hover, ad pop-up (random pick, `ad_spawn_sfx.tres`), ECO MODE accepted; `wobble.wav`, `punch.wav`, `jump_short.wav` (pack folder `Retro/`): nested ad opening, ad closed ("POW!"), the runner ad's X hopping away; `coins_gather_medium.wav` (pack folder `Items/`): Comic font accepted ("KA-CHING!"); `elastic_twang.wav`, `record_scratch.wav` (pack folder `Other/`): decoy click ("BOING!"), the countdown ad lying; `brass_level_start.wav` (pack folder `Musical Effects/`): the ECO MODE ad sliding in.
+  - Candle switch game (`minigames/switch/candle/`): `light_match.wav`, `slide_and_click.wav` (pack folder `Other/`): striking the match (the fizzles play only its first scratch), the wick planted in the candle; `fire_lighting.wav` (pack folder `Environment/`): the candle catching.
   - **Modified:** `keyboard_key_1.wav` … `keyboard_key_4.wav`: four single keystrokes cut (85 ms each, 5 ms fades, normalised to −4.4 dB peak) from the pack's `Other/keyboard_typing.wav` at 0.454, 0.984, 1.964 and 2.114 s; the ad storm's scripted typing (`ad_storm/typing_sfx.tres`, random pick + pitch).
 
 Credit line for the game's credits screen (optional per the license):
@@ -42,15 +43,19 @@ All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/.
 | `screw_drop_bolt_zemba.wav` | "Bolts into Iron Pipe Flange", https://freesound.org/people/zembacraftworks/sounds/428340/ | zembacraftworks | 0.24–1.20 s | an unscrewed screw dropping |
 | `panel_clatter_vent_me_studios.wav` | (untitled) vent cover taken off, https://freesound.org/people/ME_Studios_Official/sounds/649765/ | ME_Studios_Official | 1.05–2.40 s, mono | the switchboard cover falling off |
 | `wire_plug_in_preyk.wav` | "plug getting connected to wall socket", https://freesound.org/people/preyk/sounds/525017/ | preyk | 0–0.38 s | a wire plugged in straight (wires game) |
-| `spark_zap_grinnell.wav` | "Electric zap.wav", https://freesound.org/people/michael_grinnell/sounds/512471/ | michael_grinnell | 0–0.22 s | big zap: a wire plugged into its matching colour (wires game) |
+| `spark_zap_grinnell.wav` | "Electric zap.wav", https://freesound.org/people/michael_grinnell/sounds/512471/ | michael_grinnell | 0–0.22 s | big zap: a wire plugged into its matching colour (wires game); the candle flame arcing between the terminals (candle game) |
 | `spark_klein.wav` | "Spark", https://freesound.org/people/elliott.klein/sounds/189630/ | elliott.klein | 0–0.17 s | small zap: crossed wires (wires game) |
-| `breaker_clunk_on_kyles.wav` | "switch big breaker metal click on, off.flac", https://freesound.org/people/kyles/sounds/451933/ | kyles | 0.10–1.40 s, mono | the wires game's lever pulled |
-| `power_on_neon_hum_kinoton.wav` | "Neon Lamp, Switch On, Hum", https://freesound.org/people/Kinoton/sounds/351430/ | Kinoton | 0.2–6.0 s (fades out) | lights coming back on after the wires game |
+| `breaker_clunk_on_kyles.wav` | "switch big breaker metal click on, off.flac", https://freesound.org/people/kyles/sounds/451933/ | kyles | 0.10–1.40 s, mono | the wires game's lever pulled; the candle game's lever flipping itself up |
+| `power_on_neon_hum_kinoton.wav` | "Neon Lamp, Switch On, Hum", https://freesound.org/people/Kinoton/sounds/351430/ | Kinoton | 0.2–6.0 s (fades out) | lights coming back on after the wires and candle games |
+| `flame_whoosh_lookimadeathing.wav` | "Basic Fire whoosh", https://freesound.org/people/LookIMadeAThing/sounds/260554/ | LookIMadeAThing | 0–2.6 s | the candle catching (candle game) |
+| `flame_crackle_loop_soundofsong.wav` | "fire crackling loop.wav", https://freesound.org/people/soundofsong/sounds/650574/ | soundofsong | 0–4.6 s with a 0.4 s crossfade into a seamless loop; imported with forward looping | the burning candle (candle game) |
+| `wick_twist_1_noxsound.wav`, `wick_twist_2_noxsound.wav` | "Foley_Leather_Stress_Mono.wav", https://freesound.org/people/Nox_Sound/sounds/559079/ | Nox_Sound | 0.70–1.10 s and 4.35–4.70 s, mono, 15 ms / 80 ms fades | one per twist step while twisting the wick (candle game, random pick + pitch) |
 
 Credit lines (optional under CC0):
 
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
+> Fire whoosh by LookIMadeAThing, fire crackle by soundofsong, wick creaks by Nox_Sound (Freesound), CC0
 
 ## Kenney Interface Sounds 1.0 (`sfx/kenney/`)
 
