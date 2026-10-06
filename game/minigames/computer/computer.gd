@@ -1,7 +1,8 @@
 class_name Computer
 extends Node2D
 ## The computer screen: a vim-ish editor that hosts minigames. Doesn't know about the office:
-## enter with Computer.enter() (or change_scene_to_file(SCENE)), leave with exit().
+## enter with Computer.open() (or Transition.change_scene(SCENE), e.g. an Interactable's
+## target_scene), leave with exit() (the Power button).
 ## The EventManager child decides when minigames start; this only hosts them.
 
 signal minigame_started(id: StringName, minigame: Minigame)
@@ -30,10 +31,23 @@ var buffer := "":
 @onready var minigame_layer: Control = $Screen/MinigameLayer
 
 
-## Switches to the computer, remembering where to come back to (defaults to the current scene).
-static func enter(tree: SceneTree, return_scene := "") -> void:
+## Switches to the computer (with a fade), remembering where to come back to (defaults to the
+## current scene). `minigames` (registry ids) are played one after another, see `queue()`;
+## empty = free use with the EventManager's own list.
+static func open(minigames: Array[StringName] = [], exit_when_done := true, return_scene := "") -> void:
+	var tree := Engine.get_main_loop() as SceneTree
 	GameState.computer_return_scene = return_scene if return_scene else tree.current_scene.scene_file_path
-	tree.change_scene_to_file(SCENE)
+	if minigames:
+		queue(minigames, exit_when_done)
+	Transition.change_scene(SCENE)
+
+
+## Queues minigames for the next computer visit without going there (e.g. the story sets it, then the
+## player walks to the desk and presses X). Listen to GameState.computer_minigame_finished /
+## computer_queue_finished; with `exit_when_done` the computer returns to the office by itself.
+static func queue(minigames: Array[StringName], exit_when_done := true) -> void:
+	GameState.computer_queue = minigames.duplicate()
+	GameState.computer_exit_when_done = exit_when_done
 
 
 func _ready() -> void:
@@ -105,7 +119,7 @@ func exit() -> void:
 	stop_all()
 	var target := GameState.computer_return_scene if GameState.computer_return_scene else FALLBACK_RETURN_SCENE
 	GameState.computer_return_scene = ""
-	get_tree().change_scene_to_file(target)
+	Transition.change_scene(target)
 
 
 ## Plain insert mode for now; vim modes come later. Esc is deliberately not an exit.

@@ -5,6 +5,10 @@ extends Node
 signal unlock_changed(id: StringName, unlocked: bool)
 ## Emitted when the office power goes out or comes back (see `set_power`).
 signal power_changed(on: bool)
+## Emitted when the computer finishes one queued minigame (`computer_queue`), i.e. the player beat it.
+signal computer_minigame_finished(id: StringName)
+## Emitted when the computer has played every minigame in `computer_queue`.
+signal computer_queue_finished
 
 ## Where the player stood in each level (by scene path), so returning from a minigame puts them back.
 ## Each value is [body transform, head pitch].
@@ -26,6 +30,15 @@ var computer_return_scene := ""
 var ads_closed := 0
 ## Total score from computer minigames. Change it through Computer.add_score() so the screen updates.
 var score := 0
+## Computer minigames the next computer visit plays, one after another (registry ids, see
+## minigames/computer/minigame_registry.tres). Set with Computer.open() / Computer.queue().
+## The first entry is removed only once it's beaten, so leaving early resumes it next visit.
+## Empty = free use: the computer's EventManager plays its own `start_on_open` list.
+var computer_queue: Array[StringName] = []
+## When true, the computer goes back to the office by itself once `computer_queue` is done.
+var computer_exit_when_done := true
+## How often each computer minigame was beaten, by id (counts queued and free-use runs).
+var minigames_completed: Dictionary[StringName, int] = {}
 
 
 func unlock(id: StringName) -> void:
