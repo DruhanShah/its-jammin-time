@@ -7,8 +7,14 @@ extends Control
 
 const START_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/pop_2.wav")
 const STAGE_SIZE := Vector2(1920, 1080)
+const BUBBLE_FONT := preload("res://assets/fonts/ComicRelief-Bold.ttf")
+const BUBBLE_PAPER := Color("#fff8e7")
+const BUBBLE_INK := Color("#141414")
+## Stage position of the SETTINGS speech bubble's top-left corner, and where its tail points.
+const BUBBLE_AT := Vector2(150, 610)
+const BUBBLE_TAIL_TIP := Vector2(250, 470)
 
-## Narrator cue for the do-nothing SETTINGS button (empty = silent; the team adds the line later).
+## Narrator cue for the do-nothing SETTINGS button (empty = silent). Its subtitle shows over the menu.
 @export var settings_cue: StringName = &""
 
 @onready var stage: Control = %Stage
@@ -20,6 +26,7 @@ const STAGE_SIZE := Vector2(1920, 1080)
 
 var _starting := false
 var _settings_x := 0.0
+var _bubble: Control
 
 
 func _ready() -> void:
@@ -86,13 +93,79 @@ func _squash(button: TextureButton) -> void:
 	tween.tween_property(button, "scale", Vector2.ONE * 1.1, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
-## SETTINGS: the button that does nothing. A tiny shake, and (once the team writes it) a narrator line.
+## SETTINGS: the button that does nothing. A tiny shake and a narrator line, shown in a speech bubble by
+## the button (the cue hides its own subtitle; the narrator's subtitle bar is hard to read on the art).
 func _do_nothing() -> void:
 	var tween := settings_button.create_tween()
 	for offset: float in [-12.0, 10.0, -6.0, 0.0]:
 		tween.tween_property(settings_button, "position:x", _settings_x + offset, 0.05)
-	if settings_cue != &"":
+	# Once per press, and not again while the line is still up.
+	if settings_cue != &"" and Narrator.current_cue != settings_cue:
 		Narrator.play(settings_cue)
+		if Narrator.current_cue == settings_cue:
+			_show_bubble((load(Narrator.CUE_DIR + settings_cue + ".tres") as NarratorCue).subtitle)
+
+
+func _show_bubble(text: String) -> void:
+	if _bubble:
+		_bubble.queue_free()
+	_bubble = Control.new()
+	_bubble.mouse_filter = MOUSE_FILTER_IGNORE
+	_bubble.position = BUBBLE_AT
+	stage.add_child(_bubble)
+	var tail := _tail_points(BUBBLE_TAIL_TIP - BUBBLE_AT)
+	var tail_ink := Polygon2D.new()
+	tail_ink.polygon = tail
+	tail_ink.color = BUBBLE_INK
+	_bubble.add_child(tail_ink)
+	var panel := PanelContainer.new()
+	panel.mouse_filter = MOUSE_FILTER_IGNORE
+	var box := StyleBoxFlat.new()
+	box.bg_color = BUBBLE_PAPER
+	box.border_color = BUBBLE_INK
+	box.set_border_width_all(6)
+	box.set_corner_radius_all(28)
+	box.shadow_color = BUBBLE_INK
+	box.shadow_offset = Vector2(10, 10)
+	box.set_content_margin_all(26)
+	panel.add_theme_stylebox_override(&"panel", box)
+	var label := Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.custom_minimum_size.x = 520
+	label.add_theme_font_override(&"font", BUBBLE_FONT)
+	label.add_theme_font_size_override(&"font_size", 46)
+	label.add_theme_color_override(&"font_color", BUBBLE_INK)
+	panel.add_child(label)
+	_bubble.add_child(panel)
+	# Paper-coloured tail on top of the panel's border, so the balloon opens into it.
+	var tail_paper := Polygon2D.new()
+	tail_paper.polygon = _tail_points(BUBBLE_TAIL_TIP - BUBBLE_AT, 9.0)
+	tail_paper.color = BUBBLE_PAPER
+	_bubble.add_child(tail_paper)
+	_bubble.pivot_offset = BUBBLE_TAIL_TIP - BUBBLE_AT
+	_bubble.scale = Vector2.ONE * 0.2
+	_bubble.rotation = deg_to_rad(-3.0)
+	_bubble.create_tween().tween_property(_bubble, "scale", Vector2.ONE, 0.3) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	Narrator.line_finished.connect(_on_settings_line_finished.bind(_bubble), CONNECT_ONE_SHOT)
+
+
+## A triangle from the balloon's top edge (local y 0, around x 60..140) up to `tip`, shrunk by `inset`.
+func _tail_points(tip: Vector2, inset := 0.0) -> PackedVector2Array:
+	return PackedVector2Array([
+		Vector2(70.0 + inset * 1.6, 8.0 + inset),
+		tip + Vector2(0, inset * 2.2),
+		Vector2(150.0 - inset * 1.6, 8.0 + inset),
+	])
+
+
+func _on_settings_line_finished(_cue_id: StringName, bubble: Control) -> void:
+	if not is_instance_valid(bubble):
+		return
+	var tween := bubble.create_tween()
+	tween.tween_property(bubble, "scale", Vector2.ZERO, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_callback(bubble.queue_free)
 
 
 ## NEW GAME starts fresh; CONT. LAST GAME resumes the autosave (or starts fresh when there is none).
