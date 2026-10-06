@@ -37,3 +37,5 @@ User request: after the lights come back the third time you walk back to your of
 
 ### Verification
 Windowed driver (temporary, deleted): SWITCH_3 with kaleidoscope beaten → `switch_game_done(candle)` → ENDING, power on → office from A2 (mild blur + arrival line) → Start (blurry and sharp frames captured, blur curve sampled: spells ~1–2 s each) → glasses on the desk → interact → glasses slide on → video plays → credits scroll → THE END → end screen → Quit. Screenshots in the scratchpad `ending_shots/`.
+
+- Audio loudness-normalised (2026-10-06, user: "increase volume"): ffmpeg `-c:v copy -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:a libvorbis -q:a 5` (mean -36.5 dB → -19.9 dB, peak -1.1 dB).
