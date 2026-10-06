@@ -15,6 +15,6 @@ From Nandini's `TODO` (branch `nan`), with current status. Edit freely.
 | 9 | Add more clues for the map | In progress: mini-map glowing corner rooms, start marker, visited rooms (+ voiced hints) |
 | 10 | Add and record more fun facts | Done (10 recorded fun facts cycle) |
 | 11 | Fix the cycle fun facts issue | Done (facts play after 12 s of narrator silence, max 2 per lights-out, then 'out of fun facts') |
-| 12 | Add the button that does nothing along with Kimayas wallpaper | In progress: SETTINGS says "You don't get to choose how you play this game! :D" (Kimaya's wallpaper: ?) |
+| 12 | Add the button that does nothing along with Kimayas wallpaper | Wallpaper done (Kimaya's start-screen art). SETTINGS line in progress |
 | 13 | CREDITS ARE SILTENT, add voice | In progress: credits play the initial (character-select) music for now; narration maybe later |
 | 14 | Spinning banana at the end of some room (instead of whatever manequin slop we were talking about) | Done (3D spinning banana shrine in C3 with its voice line) |

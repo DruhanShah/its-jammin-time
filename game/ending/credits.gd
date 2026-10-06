@@ -125,7 +125,7 @@ const SECTIONS: Array = [
 		"\"Cheerful Comedy Funny Quirky Background\" by alex-morgan (Pixabay), pixabay.com/music/cartoons-cheerful-comedy-funny-quirky-background-587373/, Pixabay Content License",
 	], true],
 	["MADE BY THE TEAM", [
-		"Start screen art: hand-drawn by the team",
+		"Start screen art: hand-drawn by Kimaya Arora",
 		"Character select art: drawn by the team (PiBot314)",
 		"Real-life ending video: filmed by the team",
 		"Narrator voices: recorded by the team",
