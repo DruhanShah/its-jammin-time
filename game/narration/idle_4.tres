@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://broxloqm0lan5" path="res://assets/audio/narrator/voice/intro_17.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Did you know that if you dissect a frog on a Sunday, it's still dead on Monday?"
 once = true

@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://bgdlrhi76wxfo" path="res://assets/audio/narrator/voice/lights_out_3_6.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Good job. You actually did a dreary job quite well! You'd do splendidly in a wilderness on your own. It's a shame you have bills to pay."
 once = true

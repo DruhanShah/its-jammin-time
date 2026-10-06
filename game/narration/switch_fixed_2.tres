@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://bxamqh27snfpm" path="res://assets/audio/narrator/voice/lights_out_2_13.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "It's nice and bright again! Time to get back to the headache-inducing computer :D"
 once = true

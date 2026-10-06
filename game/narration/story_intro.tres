@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://bymb81r6p7d6j" path="res://assets/audio/narrator/voice/intro_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "You've finally come to. Don't worry, you didn't miss anything. There's just warm, comforting darkness. You find this exciting somehow, like watching paint dry or watching grass grow. Riveting stuff! Alas, life has more to it than this. You must wake."
 once = true

@@ -26,6 +26,11 @@ const WORD_BLIP_TIME := 0.17
 ## Narrator subtitle top edge (from the screen bottom) while the quiz strip is up.
 const SUBTITLE_LIFTED_TOP := -360.0
 
+## The narrator reads the question, then each option, one recording after another (no subtitles:
+## it's all on screen). Script line "And your options are..." has no recording yet.
+const QUESTION_CUES: Array[StringName] = [
+	&"quiz_question", &"quiz_option_1", &"quiz_option_2", &"quiz_option_3", &"quiz_option_4",
+]
 const SLAM := preload("res://assets/audio/sfx/freesound/quiz_lights_slam_grubzyy.wav")
 const INTRO_HIT := preload("res://assets/audio/sfx/freesound/quiz_intro_hit_horns_devern.wav")
 const THINK_MUSIC := preload("res://assets/audio/sfx/freesound/quiz_think_loop_portwain.wav")
@@ -200,7 +205,12 @@ func _on_statue_interacted() -> void:
 		await get_tree().create_timer(0.1).timeout
 		if run != _run or state != State.QUIZ_ASK or _misses != misses:
 			return
-	Narrator.play(&"quiz_question")
+	for cue: StringName in QUESTION_CUES:
+		Narrator.play(cue)
+		await Narrator.line_finished
+		# Stop if the player answered, left, or another line cut in (it is current while this one ends).
+		if run != _run or state != State.QUIZ_ASK or _misses != misses or Narrator.current_cue != &"":
+			return
 
 
 ## The lights slam into the game-show look, the rig's spots come on one by one, the screen slides up.
@@ -250,7 +260,7 @@ func _on_answer_locked(index: int) -> void:
 	var run := _run
 	_hide_bubbles()
 	_confirm_leave = false
-	if Narrator.current_cue == &"quiz_question":
+	if Narrator.current_cue in QUESTION_CUES:
 		Narrator.stop() # Its silent reading time would hold up the next balloons.
 	Audio.play_sfx(FINAL_BOOM, -3.0)
 	_restore_music()

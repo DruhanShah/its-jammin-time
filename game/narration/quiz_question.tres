@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://sbbwwrkpchhd" path="res://assets/audio/narrator/voice/lights_out_2_3.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Hello, and welcome to Who Wants To Turn On The Lights! Your first question is, Can a Match Box? And your options are... 1. Yes. 2. No. 3. No, but a Tin Can. 4. What?"
+stream = ExtResource("2_voice")
+subtitle = "Hello, and welcome to Who Wants To Turn On The Lights! Your first question is, Can a Match Box?"
 show_subtitle = false

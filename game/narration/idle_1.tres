@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://b6g8v1j8auyej" path="res://assets/audio/narrator/voice/intro_14.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "You seem to like waiting around. I think you'd like playing the game a lot more."
 once = true

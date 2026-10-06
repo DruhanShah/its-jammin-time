@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://ciwr32q2qmcrh" path="res://assets/audio/narrator/voice/lights_out_1_6.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Let there be light! The burning glare of the sterile glow hits your eyes once more. You still have work though! Chop chop!"
 once = true

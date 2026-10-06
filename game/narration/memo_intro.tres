@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://c4m0p0wthqwax" path="res://assets/audio/narrator/voice/corpo_speak_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Management has asked us to up our corpospeak rates. You've been given the grunt work. I'll expect this on my metaphorical desk by EOD."
 once = true

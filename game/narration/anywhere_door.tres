@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://btjyice7j5s53" path="res://assets/audio/narrator/voice/intro_21.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Oh yeah there's just doors here. The devs tried rigging up a Doraemon-style anywhere door, but ran out of Claude credits."
 once = true

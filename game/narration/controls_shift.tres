@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://bvas5er6jf8xb" path="res://assets/audio/narrator/voice/keyboard_shift_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "Dear lord, you messed up your keyboard??? How do you even do that?? Looks like your input is shifted by one character sideways. You'll have to work around it."
 once = true

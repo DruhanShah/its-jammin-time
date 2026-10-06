@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="NarratorCue" format=3]
 
 [ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://ctik528bxpl4q" path="res://assets/audio/narrator/voice/download_antivirus_1.ogg" id="2_voice"]
 
 [resource]
 script = ExtResource("1_cue")
+stream = ExtResource("2_voice")
 subtitle = "That loading bar doesn't seem to want to do its job. How do you feel about making it twist on your own?"
 once = true
