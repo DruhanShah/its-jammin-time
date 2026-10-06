@@ -21,6 +21,11 @@ func change_scene(path: String) -> void:
 	_busy = false
 
 
+## True while a fade/scene change runs.
+func is_busy() -> bool:
+	return _busy
+
+
 func _input(_event: InputEvent) -> void:
 	if _busy:
 		get_viewport().set_input_as_handled()

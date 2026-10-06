@@ -68,6 +68,13 @@ func _exit_tree() -> void:
 	GameState.player_poses[owner.scene_file_path] = [global_transform, head.rotation.x]
 
 
+## SaveGame calls this before saving from this scene. Skipped while something else holds the player
+## (e.g. the gargoyle quiz's hot seat), so a continued game never starts there.
+func remember_pose() -> void:
+	if not frozen and not movement_locked:
+		GameState.player_poses[owner.scene_file_path] = [global_transform, head.rotation.x]
+
+
 func _process(_delta: float) -> void:
 	if frozen:
 		return
@@ -90,7 +97,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clampf(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 	elif event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_viewport().set_input_as_handled()
+		PauseMenu.open() # Frees the mouse; Resume captures it again.
 	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseButton and event.pressed:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
