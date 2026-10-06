@@ -14,10 +14,16 @@ extends CharacterBody3D
 
 ## Narrator cues played once the player has pushed chairs for this many seconds in total.
 const CHAIR_JABS := {15.0: &"chair_push_1", 45.0: &"chair_push_2"}
+## Narrator cue when a chair we pushed rolls into a different room than it started in.
+const CHAIR_NEW_ROOM_JAB := &"chair_new_room"
+## Seconds after our last push that a rolling chair still counts as pushed by us.
+const CHAIR_PUSH_MEMORY := 2.0
 
 var _bob_time := 0.0
 var _step := 0
 var _target: Interactable ## What we're aiming at (highlighted), or null.
+## Chairs we've pushed: body -> [room it was in when first pushed, Time.get_ticks_msec() of the last push].
+var _pushed_chairs: Dictionary[RigidBody3D, Array] = {}
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -96,6 +102,9 @@ func _push_bodies(delta: float) -> void:
 			continue
 		hands.push()
 		pushed = true
+		if not _pushed_chairs.has(body):
+			_pushed_chairs[body] = [_room_at(body.global_position), 0]
+		_pushed_chairs[body][1] = Time.get_ticks_msec()
 		var push := -collision.get_normal()
 		push.y = 0.0  # Only sideways, so standing on or brushing past it doesn't press it into the floor.
 		push = push.normalized()
@@ -108,6 +117,33 @@ func _push_bodies(delta: float) -> void:
 		for seconds: float in CHAIR_JABS:
 			if before < seconds and GameState.chair_push_time >= seconds:
 				Narrator.play(CHAIR_JABS[seconds])
+	_check_chair_rooms()
+
+
+## Jab once a chair we're pushing (or just shoved) crosses into another room. Waits while the narrator talks.
+func _check_chair_rooms() -> void:
+	if Narrator.is_speaking():
+		return
+	for chair: RigidBody3D in _pushed_chairs:
+		var start_room: Node3D = _pushed_chairs[chair][0]
+		if Time.get_ticks_msec() - _pushed_chairs[chair][1] > CHAIR_PUSH_MEMORY * 1000.0:
+			continue
+		var room := _room_at(chair.global_position)
+		if start_room and room and room != start_room:
+			Narrator.play(CHAIR_NEW_ROOM_JAB)
+			return
+
+
+## The room (a child of the level's `Rooms`, at its floor centre, 12 x 16 m) that contains `pos`, or null.
+func _room_at(pos: Vector3) -> Node3D:
+	var rooms := owner.get_node_or_null(^"Rooms")
+	if not rooms:
+		return null
+	for room: Node3D in rooms.get_children():
+		var offset := pos - room.global_position
+		if absf(offset.x) <= 6.0 and absf(offset.z) <= 8.0:
+			return room
+	return null
 
 
 func _update_head_bob(delta: float) -> void:
