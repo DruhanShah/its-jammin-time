@@ -34,7 +34,7 @@ Credit line (optional under CC0):
 
 ## Freesound clips for the switch games (`sfx/freesound/`)
 
-All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/. **Modified:** each file is a short cut from the Freesound HQ preview (times below), with short fades and normalised peak; one-shots, no loop.
+All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/. **Modified:** each file is a short cut from the Freesound HQ preview (times below), with short fades and normalised peak; one-shots unless marked as a loop.
 
 | File | Source sound | Author | Cut | Used for |
 |---|---|---|---|---|
@@ -45,12 +45,18 @@ All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/.
 | `spark_zap_grinnell.wav` | "Electric zap.wav", https://freesound.org/people/michael_grinnell/sounds/512471/ | michael_grinnell | 0–0.22 s | big zap: a wire plugged into its matching colour (wires game) |
 | `spark_klein.wav` | "Spark", https://freesound.org/people/elliott.klein/sounds/189630/ | elliott.klein | 0–0.17 s | small zap: crossed wires (wires game) |
 | `breaker_clunk_on_kyles.wav` | "switch big breaker metal click on, off.flac", https://freesound.org/people/kyles/sounds/451933/ | kyles | 0.10–1.40 s, mono | the wires game's lever pulled |
-| `power_on_neon_hum_kinoton.wav` | "Neon Lamp, Switch On, Hum", https://freesound.org/people/Kinoton/sounds/351430/ | Kinoton | 0.2–6.0 s (fades out) | lights coming back on after the wires game |
+| `power_on_neon_hum_kinoton.wav` | "Neon Lamp, Switch On, Hum", https://freesound.org/people/Kinoton/sounds/351430/ | Kinoton | 0.2–6.0 s (fades out) | lights coming back on after the wires and valve games |
+| `valve_squeak_1_joedeshon.wav`, `valve_squeak_2_joedeshon.wav`, `valve_squeak_3_joedeshon.wav` | "squeak_01.wav", https://freesound.org/people/joedeshon/sounds/339184/ | joedeshon | 0.30–1.20, 2.10–3.00 and 3.85–4.90 s | the valve's hand wheel squeaking (random pick) |
+| `valve_turn_rusty_loop_noxsound.wav` | "Foley_Mechanism_Wheel_Moderate_Rusty_Loop_Mono.wav", https://freesound.org/people/Nox_Sound/sounds/559470/ | Nox_Sound | 8.0 s from 0.3 s, crossfaded into a **loop** (imported with Loop Mode Forward) | while the valve's wheel turns |
+| `pipe_clunk_brittmosel.wav` | "Hitting a Pipe with a Hammer", https://freesound.org/people/brittmosel/sounds/530216/ | brittmosel | 16.64–17.80 s | the valve's reverse-thread gag |
+| `pipe_flow_loop_rutgermuller.wav` | "Pressure Meter Pipe Noises 1.aif", https://freesound.org/people/RutgerMuller/sounds/104087/ | RutgerMuller | 8.0 s from 12.0 s, crossfaded into a **loop** (imported with Loop Mode Forward) | electricity flowing through the valve's pipes |
+| `electric_surge_fkurz.wav` | "high-voltage.wav", https://freesound.org/people/fkurz/sounds/136614/ | fkurz | 0–6.9 s (the game fades it out at 2.5 s) | the valve fully open |
 
 Credit lines (optional under CC0):
 
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
+> Valve squeaks by joedeshon, rusty wheel by Nox_Sound, pipe clunk by brittmosel, pipe noises by RutgerMuller, high voltage by fkurz (Freesound), CC0
 
 ## Kenney Interface Sounds 1.0 (`sfx/kenney/`)
 
