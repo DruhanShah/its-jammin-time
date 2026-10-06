@@ -90,6 +90,13 @@ Decisions on `docs/computer_redesign.md` (user, 2026-10-06): mostly approved. Vi
 
 Decision (user): remove the big-text signs in the server room and the EXIT signs in the lights-out look; other signs stay. Agents must screenshot every asset they add and judge whether it actually looks good.
 
+# Computer: third visit (user-specified, replaces the rejected visit 3 concepts)
+1. An antivirus download pop-up appears with NO close X, so the player has no choice but to download.
+2. Once downloading starts: a loading screen (structure like the user's reference: a round spinner/dial on the left, a wide progress bar with the percentage in big outlined text) that does NOT load on its own: the player clicks the circle and does the twisting mechanic (key ring) to crank it, with a crank sound.
+3. When the download finishes the lights go out and the narrator says something about the antivirus taking out the lights itself.
+Then the controls shift to ESDF (after visit 3, i.e. at the third blackout).
+Decisions: no side monitor (cut). Export templates for 4.7.2 are installed.
+
 # Script (official lines from the team)
 Computer, first visit — opening the text editor (a very cheap Microsoft-Word-like editor replaces the vim screen; font selection is part of opening it; any Comic-family font is accepted ("Comic Sans" entry rendered with Comic Relief since Microsoft's font can't ship, plus Comic Neue, Comic Relief, Comic Shanns Mono)):
 - NARRATOR (on opening the editor): "Really? That's your writing environment? No wonder the company's going under. At least use a more professional font!"
@@ -215,3 +222,4 @@ Computer, first visit — opening the text editor (a very cheap Microsoft-Word-l
   - Emergency light: `core/ui/comic/emergency_tint.gdshader` (`render_mode blend_mul` on a full-screen ColorRect above the board: `tint` multiplies everything, plus a halftone-dot vignette); breathes ±0.05 while dark, tweens to white at the end. Sparks/bursts sit above it so they stay bright.
   - Sounds (Freesound CC0 cuts from the scratchpad picks, credits in `assets/audio/CREDITS.md`): `wire_plug_in_preyk.wav`, `spark_zap_grinnell.wav`, `spark_klein.wav`, `breaker_clunk_on_kyles.wav`, `power_on_neon_hum_kinoton.wav`.
   - Verified with a windowed driver on a scratchpad copy (real mouse drags via `push_input`): screwdriver finish → wires, colour match springs back, crossed, all straight → lever ready, lever → office with `Story.step == COMPUTER_2` and power on; screenshots in red and normal light.
+- Font picker look-alikes: the eight wrong rows no longer use SystemFonts (missing on web and on most machines); each is a bundled OFL font in `assets/fonts/`, labels unchanged: Times New Roman → Tinos, Arial/Helvetica → Arimo, Calibri → "Office Sans Jam" (Carlito subset + renamed, as its Reserved Font Name requires), Garamond → EB Garamond, Papyrus → Almendra (unmodified), Impact → Anton, Wingdings → Jamdings (Noto Sans Symbols/Symbols 2 glyphs scaled and mapped to letters). Latin subsets/static Regular instances keep them small. `FONTS` entries are now all `{"name", "file"}` and `_font_for()` just loads the file. Credits + trademark disclaimer in `assets/fonts/CREDITS.md` and `CREDITS.md`. Verified on a scratchpad copy (headless import, windowed driver opening the list): every row resolves to its file and renders in its look-alike (Wingdings row = symbols), strike-through and wobble still fit; no errors or warnings.
