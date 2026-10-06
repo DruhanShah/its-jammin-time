@@ -41,10 +41,16 @@ All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/.
 | `screw_click_1_toman.wav`, `screw_click_2_toman.wav` | "Screwdriver 1", https://freesound.org/people/16GPanskaToman_Kristian/sounds/496286/ | 16GPanskaToman_Kristian | 4.56–4.86 s and 13.42–13.72 s, mono | one per twist step in the screwdriver game (random pick) |
 | `screw_drop_bolt_zemba.wav` | "Bolts into Iron Pipe Flange", https://freesound.org/people/zembacraftworks/sounds/428340/ | zembacraftworks | 0.24–1.20 s | an unscrewed screw dropping |
 | `panel_clatter_vent_me_studios.wav` | (untitled) vent cover taken off, https://freesound.org/people/ME_Studios_Official/sounds/649765/ | ME_Studios_Official | 1.05–2.40 s, mono | the switchboard cover falling off |
+| `wire_plug_in_preyk.wav` | "plug getting connected to wall socket", https://freesound.org/people/preyk/sounds/525017/ | preyk | 0–0.38 s | a wire plugged in straight (wires game) |
+| `spark_zap_grinnell.wav` | "Electric zap.wav", https://freesound.org/people/michael_grinnell/sounds/512471/ | michael_grinnell | 0–0.22 s | big zap: a wire plugged into its matching colour (wires game) |
+| `spark_klein.wav` | "Spark", https://freesound.org/people/elliott.klein/sounds/189630/ | elliott.klein | 0–0.17 s | small zap: crossed wires (wires game) |
+| `breaker_clunk_on_kyles.wav` | "switch big breaker metal click on, off.flac", https://freesound.org/people/kyles/sounds/451933/ | kyles | 0.10–1.40 s, mono | the wires game's lever pulled |
+| `power_on_neon_hum_kinoton.wav` | "Neon Lamp, Switch On, Hum", https://freesound.org/people/Kinoton/sounds/351430/ | Kinoton | 0.2–6.0 s (fades out) | lights coming back on after the wires game |
 
 Credit lines (optional under CC0):
 
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
+> Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 
 ## Kenney Interface Sounds 1.0 (`sfx/kenney/`)
 

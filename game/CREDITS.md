@@ -18,6 +18,11 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "Bolts into Iron Pipe Flange" (cut) | zembacraftworks | https://freesound.org/people/zembacraftworks/sounds/428340/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_drop_bolt_zemba.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Vent cover removal (cut) | ME_Studios_Official | https://freesound.org/people/ME_Studios_Official/sounds/649765/ | CC0 1.0 | `assets/audio/sfx/freesound/panel_clatter_vent_me_studios.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Electricity Sound" (cut) | NachtmahrTV | https://freesound.org/people/NachtmahrTV/sounds/556717/ | CC0 1.0 | `assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "plug getting connected to wall socket" (cut) | preyk | https://freesound.org/people/preyk/sounds/525017/ | CC0 1.0 | `assets/audio/sfx/freesound/wire_plug_in_preyk.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Electric zap.wav" (cut) | michael_grinnell | https://freesound.org/people/michael_grinnell/sounds/512471/ | CC0 1.0 | `assets/audio/sfx/freesound/spark_zap_grinnell.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Spark" (cut) | elliott.klein | https://freesound.org/people/elliott.klein/sounds/189630/ | CC0 1.0 | `assets/audio/sfx/freesound/spark_klein.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "switch big breaker metal click on, off.flac" (cut) | kyles | https://freesound.org/people/kyles/sounds/451933/ | CC0 1.0 | `assets/audio/sfx/freesound/breaker_clunk_on_kyles.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Neon Lamp, Switch On, Hum" (cut) | Kinoton | https://freesound.org/people/Kinoton/sounds/351430/ | CC0 1.0 | `assets/audio/sfx/freesound/power_on_neon_hum_kinoton.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
@@ -46,6 +51,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Screwdriver model by CreativeTrio (Poly Pizza), CC0
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Electricity crackle by NachtmahrTV (Freesound), CC0
+> Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/

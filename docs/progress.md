@@ -114,7 +114,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Twist teaching hint: reusable key-ring widget with demo, live feedback, shrinks once mastered, returns on stall + first-time narrator line [review: `core/input/twist_hint.gd`/`.tscn`, `narration/twist_tutorial.tres`]
 - [ ] Obstacle: gargoyle riddle → Millionaire quiz (dialogue, lighting change, sfx, 3 in a row, random-number timer)
 - [ ] Obstacle: kaleidoscope + "TWIST ME" painting → password for the switchboard keypad
-- [ ] Restore: wires (connect straight, not by colour) + narrator mockery
+- [x] Restore: wires (connect straight, not by colour) + narrator mockery; no text on screen except the lever's ON/OFF (user's call) [review: `minigames/switch/wires/wires.gd` (rules), `wire_board.gd` (drawing, drag), `core/ui/comic/emergency_tint.gdshader`; lines `narration/wires_*.tres`; F7 to SWITCH_1, unscrew the panel, match colours a few times, then plug straight and pull the lever; listen to the zap/plug/breaker/hum volumes]
 - [ ] Restore: pipe valve
 - [ ] Restore: candle wick
 - [ ] After the third blackout: controls shift to ESDF + narration

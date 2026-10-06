@@ -11,7 +11,7 @@ const PLACEHOLDER := "res://minigames/switch/switch_minigame.tscn"
 
 const GAMES := {
 	&"screwdriver": {verb = "unscrew the panel", scene = "res://minigames/switch/screwdriver/screwdriver.tscn"},
-	&"wires": {verb = "fix the wiring"},
+	&"wires": {verb = "fix the wiring", scene = "res://minigames/switch/wires/wires.tscn"},
 	&"gargoyles": {verb = "get past the gargoyles"},
 	&"valve": {verb = "turn the valve"},
 	&"kaleidoscope": {verb = "type the password"},

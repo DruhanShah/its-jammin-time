@@ -1,0 +1,121 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://minigames/switch/wires/wires.gd" id="1_wires"]
+[ext_resource type="Script" path="res://minigames/switch/wires/wire_board.gd" id="2_board"]
+[ext_resource type="Shader" path="res://core/ui/comic/halftone.gdshader" id="3_half"]
+[ext_resource type="Shader" path="res://core/ui/comic/emergency_tint.gdshader" id="4_tint"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/wire_plug_in_preyk.wav" id="5_plug"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/spark_zap_grinnell.wav" id="6_zap"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/spark_klein.wav" id="7_small"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/breaker_clunk_on_kyles.wav" id="8_lever"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/power_on_neon_hum_kinoton.wav" id="9_hum"]
+
+[sub_resource type="ShaderMaterial" id="Mat_backdrop"]
+shader = ExtResource("3_half")
+shader_parameter/paper_color = Color(0.1, 0.1, 0.12, 1)
+shader_parameter/dot_color = Color(0.18, 0.18, 0.22, 1)
+shader_parameter/cell_size = 16.0
+shader_parameter/angle_degrees = 45.0
+shader_parameter/min_size = 0.12
+shader_parameter/max_size = 0.9
+shader_parameter/gradient_direction = Vector2(0.3, 1)
+shader_parameter/radial = 1.0
+shader_parameter/softness = 0.8
+
+[sub_resource type="ShaderMaterial" id="Mat_tint"]
+shader = ExtResource("4_tint")
+shader_parameter/tint = Color(1, 0.6, 0.5, 1)
+shader_parameter/vignette = 0.7
+shader_parameter/dot_color = Color(0.2, 0.04, 0.04, 1)
+shader_parameter/cell_size = 14.0
+
+[sub_resource type="Gradient" id="Grad_streak"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="Tex_streak"]
+gradient = SubResource("Grad_streak")
+width = 4
+height = 18
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Grad_spark"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(1, 1, 0.85, 1, 1, 0.8, 0.2, 1, 1, 0.35, 0.1, 0)
+
+[node name="Wires" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_wires")
+plug_sound = ExtResource("5_plug")
+zap_sound = ExtResource("6_zap")
+small_zap_sound = ExtResource("7_small")
+lever_sound = ExtResource("8_lever")
+hum_sound = ExtResource("9_hum")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+material = SubResource("Mat_backdrop")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Board" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -276.0
+offset_right = 380.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(380, 235)
+script = ExtResource("2_board")
+
+[node name="EmergencyTint" type="ColorRect" parent="."]
+material = SubResource("Mat_tint")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sparks" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+texture = SubResource("Tex_streak")
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 700)
+initial_velocity_min = 220.0
+initial_velocity_max = 520.0
+scale_amount_min = 0.8
+scale_amount_max = 1.5
+color_ramp = SubResource("Grad_spark")
+
+[node name="Burst" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
