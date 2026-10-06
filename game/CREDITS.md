@@ -21,6 +21,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "rolling_office_chair.WAV" (trimmed into a 3 s loop) | alpanaytekin | https://freesound.org/people/alpanaytekin/sounds/213086/ | CC0 1.0 (public domain) | `assets/audio/sfx/chair_roll_loop.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | PSX First Person Arms (Free) v1.1.0 | Drillimpact, https://drillimpact.itch.io/ | https://drillimpact.itch.io/psx-first-person-arms-free | CC0 (public domain) | `assets/models/arms/` ([CREDITS](assets/models/arms/CREDITS.md)) | Shipped |
 | "Screwdriver" 3D model | CreativeTrio | https://poly.pizza/m/qBFMjkrKzH | CC0 1.0 (public domain) | `assets/models/screwdriver/` ([CREDITS](assets/models/screwdriver/CREDITS.md)) | Shipped |
+| "Glasses" 3D model (ending spectacles) | iPoly3D | https://poly.pizza/m/p5QgQxkMBE | CC0 1.0 (public domain) | `assets/models/spectacles/` ([CREDITS](assets/models/spectacles/CREDITS.md)) | Shipped |
 | "Screwdriver 1" (2 clicks cut from it) | 16GPanskaToman_Kristian | https://freesound.org/people/16GPanskaToman_Kristian/sounds/496286/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_click_*.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Bolts into Iron Pipe Flange" (cut) | zembacraftworks | https://freesound.org/people/zembacraftworks/sounds/428340/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_drop_bolt_zemba.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Vent cover removal (cut) | ME_Studios_Official | https://freesound.org/people/ME_Studios_Official/sounds/649765/ | CC0 1.0 | `assets/audio/sfx/freesound/panel_clatter_vent_me_studios.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
@@ -57,6 +58,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 - Ceiling grid texture (`world/office/textures/ceiling_grid.png`): 128x128 generated grid.
 - Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
 - Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
+- Placeholder real-life video (`assets/video/real_life.ogv`): recorded with Godot's Movie Maker from a throwaway scene; to be replaced by the team's own footage.
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
 ## Credits screen text (suggested)
@@ -72,6 +74,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Rolling chair sound by alpanaytekin (Freesound), CC0
 > First-person arms: PSX First Person Arms by Drillimpact, https://drillimpact.itch.io/, CC0
 > Screwdriver model by CreativeTrio (Poly Pizza), CC0
+> Spectacles model by iPoly3D (Poly Pizza), CC0
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Electricity crackle by NachtmahrTV (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
