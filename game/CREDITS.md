@@ -33,6 +33,10 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Demon" 3D models, two variants (recoloured as stone in code: the gargoyles) | Quaternius | https://poly.pizza/m/Mo2ky6vkf8, https://poly.pizza/m/LnfIziKv4o | CC0 1.0 (public domain) | `assets/models/gargoyle/` ([CREDITS](assets/models/gargoyle/CREDITS.md)) | Shipped |
+| "Pedestal" 3D model | Quaternius | https://poly.pizza/m/wUeoDKnFBF | CC0 1.0 (public domain) | `assets/models/gargoyle/` ([CREDITS](assets/models/gargoyle/CREDITS.md)) | Shipped |
+| Gargoyle quiz sounds (cuts): "quiz game music loop BPM 90" (portwain, /220060), "heartbeat-60bpm" (loudernoises, /332821), "S_Spotlight_On" (Grubzyy, /422736), "Cinematic Hit With Horns" (DeVern, /427803), "DSGNStngr_basic trailer boom impact" (harrisonlace, /816376), "Correct.wav" (bwg2020, /456161), "Good answer harp glissando" (oggraphics, /610703), "Heavy stone door opens 2" (PostProdDog, /578491), "Rumble · fade in 10s" (unfa, /258341) | as listed | https://freesound.org/s/<id>/ (full links in [CREDITS](assets/audio/CREDITS.md)) | CC0 1.0 | `assets/audio/sfx/freesound/quiz_*.wav`, `stone_grind_step_aside_postproddog.wav`, `rumble_step_aside_unfa.wav` | Shipped |
+| 400 Sounds Pack, quiz sounds (`clock_ticking`, `clock_tick_only`, `stone_push_short`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -63,4 +67,6 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
+> Gargoyle (demon) and pedestal models by Quaternius (Poly Pizza), CC0
+> Quiz sounds by portwain, loudernoises, Grubzyy, DeVern, harrisonlace, bwg2020, oggraphics, PostProdDog and unfa (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/

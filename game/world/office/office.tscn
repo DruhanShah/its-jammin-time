@@ -74,6 +74,7 @@
 [ext_resource type="PackedScene" uid="uid://twj3f5rxbol2" path="res://assets/vnb_office/models/Small_Fan.fbx" id="p2_Small_Fan"]
 [ext_resource type="PackedScene" path="res://world/office/props/power_switch.tscn" id="st_power_switch"]
 [ext_resource type="Script" uid="uid://dko3pufvvrrkn" path="res://world/office/story_stage.gd" id="st_story_stage"]
+[ext_resource type="PackedScene" path="res://world/office/props/gargoyle_gate/gargoyle_gate.tscn" id="gq_gargoyle_gate"]
 
 [sub_resource type="Environment" id="Environment_hchcx"]
 background_mode = 1
@@ -697,6 +698,9 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
 
 [node name="PowerSwitch" parent="Rooms/C1/Furniture" unique_id=1588203117 instance=ExtResource("st_power_switch")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
+
+[node name="GargoyleGate" parent="Rooms/C1/Furniture" unique_id=1923374581 instance=ExtResource("gq_gargoyle_gate")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4, 0, 1)
 
 [node name="PCStack1" parent="Rooms/C1/Furniture" unique_id=1775349468 instance=ExtResource("p2_pc_shelf_stack")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6, 0, -7.65)
@@ -1768,7 +1772,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 8)
 [node name="C2C3" parent="Doors" unique_id=786234506 instance=ExtResource("75_puljc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 8)
 
-[node name="Lighting" type="Node" parent="." unique_id=664409914]
+[node name="Lighting" type="Node" parent="." unique_id=664409914 groups=["office_lighting"]]
 script = ExtResource("72_wqicl")
 
 [node name="StoryStage" type="Node" parent="." unique_id=1309915522]

@@ -52,6 +52,29 @@ Credit lines (optional under CC0):
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 
+## Gargoyle quiz ("WHO WANTS TO BE A LUMEN-AIRE?", `world/office/props/gargoyle_gate/`)
+
+Freesound, all CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/, in `sfx/freesound/`. **Modified:** each file is a cut from the Freesound HQ preview (times below) with short fades and normalised level; loops are imported with Loop Mode = Forward. None of it is from the TV show.
+
+| File | Source sound | Author | Cut | Used for |
+|---|---|---|---|---|
+| `quiz_think_loop_portwain.wav` | "quiz game music loop BPM 90.wav", https://freesound.org/people/portwain/sounds/220060/ | portwain | 0–16.0 s, loop | music while a question is up |
+| `quiz_heartbeat_loop_loudernoises.wav` | "heartbeat-60bpm.wav", https://freesound.org/people/loudernoises/sounds/332821/ | loudernoises | 0–4.0 s, loop | suspense after "final answer" |
+| `quiz_lights_slam_grubzyy.wav` | "S_Spotlight_On.wav", https://freesound.org/people/Grubzyy/sounds/422736/ | Grubzyy | 1.40–4.40 s | the lights slamming into the show look, each spotlight |
+| `quiz_intro_hit_horns_devern.wav` | "Cinematic Hit With Horns.wav", https://freesound.org/people/DeVern/sounds/427803/ | DeVern | 0–4.37 s | the show starting |
+| `quiz_final_answer_boom_harrisonlace.wav` | "DSGNStngr_basic trailer boom impact", https://freesound.org/people/harrisonlace/sounds/816376/ | harrisonlace | 0–3.0 s | answer locked in |
+| `quiz_correct_bwg2020.wav` | "Correct.wav", https://freesound.org/people/bwg2020/sounds/456161/ | bwg2020 | 0–1.41 s | right answer |
+| `quiz_correct_harp_oggraphics.wav` | "Good answer harp glissando.wav", https://freesound.org/people/oggraphics/sounds/610703/ | oggraphics | 0–2.5 s | quiz passed |
+| `quiz_wrong_buzzer_kevinvg207.wav` | (see "Wrong buzzer" below) | KevinVG207 | | wrong answer |
+| `stone_grind_step_aside_postproddog.wav` | "Heavy stone door opens 2", https://freesound.org/people/PostProdDog/sounds/578491/ | PostProdDog | 1.0–4.2 s, 0.7 s fade-out | the gargoyles sliding aside |
+| `rumble_step_aside_unfa.wav` | "Rumble · fade in 10s", https://freesound.org/people/unfa/sounds/258341/ | unfa | 7.0–9.5 s, 1.5 s fade-out | rumble under the slide |
+
+400 Sounds Pack (Chequered Ink, licence above), unaltered, in `sfx/400_sounds_pack/`: `clock_ticking.wav` (pack folder `Environment/`, imported with Loop Mode = Forward): ticking under a question; `clock_tick_only.wav` (`Environment/`): each time the "timer" jumps to a new nonsense value; `stone_push_short.wav` (`Materials/`): the gargoyles' per-word "voice" blips (random pitch); `pop_2.wav` (already listed): a lifeline used.
+
+Credit line (optional under CC0):
+
+> Quiz sounds by portwain, loudernoises, Grubzyy, DeVern, harrisonlace, bwg2020, oggraphics, KevinVG207, PostProdDog and unfa (Freesound), CC0
+
 ## Kenney Interface Sounds 1.0 (`sfx/kenney/`)
 
 - **Author:** Kenney, https://www.kenney.nl/

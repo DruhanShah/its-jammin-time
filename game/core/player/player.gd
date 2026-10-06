@@ -22,6 +22,17 @@ const CHAIR_PUSH_MEMORY := 2.0
 ## so backing into a chair still moves it without the arms reaching out in front.
 const PUSH_ANIM_MIN_DOT := 0.5
 
+## While true (e.g. in the gargoyle quiz) the player ignores movement, mouse look and interaction, the
+## HUD is hidden and gravity still applies. Whoever freezes the player handles Esc and the mouse itself.
+var frozen := false:
+	set(value):
+		frozen = value
+		if is_node_ready():
+			hud.visible = not value
+			if value and is_instance_valid(_target):
+				_target.set_highlighted(false)
+				_target = null
+
 var _bob_time := 0.0
 var _step := 0
 var _target: Interactable ## What we're aiming at (highlighted), or null.
@@ -50,6 +61,8 @@ func _exit_tree() -> void:
 
 
 func _process(_delta: float) -> void:
+	if frozen:
+		return
 	var target := _interactable()
 	if target != _target:
 		if is_instance_valid(_target):
@@ -61,6 +74,8 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if frozen:
+		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		# Body turns left/right, head tilts up/down.
 		rotate_y(-event.relative.x * mouse_sensitivity)
@@ -85,7 +100,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var input := Vector2.ZERO if frozen else Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input.x, 0, input.y)).normalized()
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
