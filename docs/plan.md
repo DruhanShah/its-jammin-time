@@ -90,7 +90,8 @@ Decisions on `docs/computer_redesign.md` (user, 2026-10-06): mostly approved. Vi
 
 Decision (user): remove the big-text signs in the server room and the EXIT signs in the lights-out look; other signs stay. Agents must screenshot every asset they add and judge whether it actually looks good.
 
-# Computer: third visit (user-specified, replaces the rejected visit 3 concepts)
+# Computer: second visit = antivirus (user-specified; SWAPPED: originally written as visit 3)
+Decision (user): visits 2 and 3 are swapped — installing the antivirus right after the ad storm makes more sense. The ComicWord editor stays visible in the background behind the pop-up/download. Visit 3 is filling the document with corporate speak (memo_mail plan in `docs/plans/visit2.md`). ESDF still happens after the THIRD visit (third blackout). Blackout 2 now has the antivirus narrator line.
 1. An antivirus download pop-up appears with NO close X, so the player has no choice but to download.
 2. Once downloading starts: a loading screen (structure like the user's reference: a round spinner/dial on the left, a wide progress bar with the percentage in big outlined text) that does NOT load on its own: the player clicks the circle and does the twisting mechanic (key ring) to crank it, with a crank sound.
 3. When the download finishes the lights go out and the narrator says something about the antivirus taking out the lights itself.

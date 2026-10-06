@@ -1,5 +1,7 @@
 # Visit 3 implementation plan: antivirus pop-up → crank download → blackout → ESDF
 
+> **Note (user decision):** visits 2 and 3 are swapped. `visit3.md` (antivirus) is now the SECOND computer visit (blackout 2, editor visible in the background); `visit2.md` (corporate speak / memo_mail) is now the THIRD visit, followed by the ESDF shift.
+
 Status: planning only (2026-10-06). Source: `docs/plan.md` "Computer: third visit (user-specified …)"; ESDF details in `docs/plans/esdf_and_web.md` §1 (user decision: the shift happens **at the third blackout**, i.e. when `SWITCH_3` starts). Conventions as in `docs/plans/visit2.md` "Ground rules" (folder per minigame, `Minigame` root, config + default `.tres`, registry line, never start yourself, `complete()` once, no emoji glyphs, subtitle-only placeholder cues, cue ids in config fields, gate optional lines on `not Narrator.is_speaking()`).
 
 **Flow:** the word processor opens → 0.8 s later the **ZappWare** pop-up (no X) → DOWNLOAD → full-screen download screen, stuck at 0 % → click the dial → it becomes a crank → roll the twist ring clockwise (ratchet clicks) → 100 % → "Quarantining 120 lights…" → `complete()` → Story → `Computer.blackout()` → dark office → `lights_out_3` (the antivirus did it) → `controls_shift` (ESDF).

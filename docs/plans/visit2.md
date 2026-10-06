@@ -1,5 +1,7 @@
 # Visit 2 implementation plan: software_update → memo_mail → inky
 
+> **Note (user decision):** visits 2 and 3 are swapped. `visit3.md` (antivirus) is now the SECOND computer visit (blackout 2, editor visible in the background); `visit2.md` (corporate speak / memo_mail) is now the THIRD visit, followed by the ESDF shift.
+
 Source design: `docs/computer_redesign.md` §5 (NEW 2, Improved corporate_speak, NEW 1), §6 row 2, §7 T8–T11. Engineering conventions: `docs/plan.md` ("Adding a minigame", Comic UI kit, `Computer.blackout()`). Visit length target is about 3–4 min: update ~45 s, mail ~90 s, Inky ~75 s.
 
 **Ground rules (apply to all three):**

@@ -83,7 +83,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 
 ## Fixes
 - [x] Subtitles: split long lines into short chunks shown one after another (timed to the voice line or reading speed) [review: `core/narrator/narrator.gd` (`split_subtitle()`, `_time_chunks()`); push a chair for 15 s or walk off the path in the office, and open the computer (font line) to see the chunks; "|" in a cue's text forces a break]
-- [~] Bundle free look-alike fonts for the wrong choices in the font picker (Times/Arial/etc.) so they render on web too
+- [x] Bundle free look-alike fonts for the wrong choices in the font picker (Times/Arial/etc.) so they render on web too [review: `minigames/computer/minigames/font_picker/font_picker.gd` (`FONTS`, `_font_for()`), `assets/fonts/` (7 new .ttf + OFL texts), `assets/fonts/CREDITS.md`, `CREDITS.md`; open the computer and the font list: every row is drawn in its look-alike, "Wingdings" as symbols]
 - [x] Mini-map at the bottom of the screen while exploring: current position and surrounding rooms [review: `core/player/minimap.gd`, `HUD/Minimap` in `core/player/hud.tscn`, subtitle margins in `core/narrator/narrator.tscn`; walk Start → A2 → B2 → C1 and turn around, F5 for the lights-out look]
 - [x] Remove the big-text signs in the server room (SERVER ROOM, LEGACY / DO NOT TOUCH, DAYS SINCE LAST BLACKOUT) and the green EXIT signs from the lights-out look; keep the other signs
 - [x] Pushing a chair behind you shouldn't trigger the push arm animation (only when the chair is in front)
@@ -101,9 +101,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
     - [x] Ad storm (`ad_storm` + `comic_ad`, which inherits the teammate's untouched `ad_popup`): any key types the comic script; wave 1 (3 ads), wave 2 (runner, nested, fake X, lying countdown), ECO MODE → screen dips → `Computer.blackout()` via the story [review: `minigames/computer/minigames/ad_storm/`, tune `ad_storm_default.tres` / `comic_ad_default.tres`; listen to typing/ad volumes; placeholder lines `narration/ads_*.tres`]
 - [ ] Visit 1 (approved design): password via fake mic (live waveform, fails 2×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
 
-- [ ] Visit 2 (approved design): software_update → memo_mail → inky
-- [ ] Visit 3: redo — 3 concepts in `docs/computer_redesign.md` §8 (recommended: LightGuard), awaiting user pick
-- [ ] Side monitor in computer mode (waiting for user's media)
+- [ ] Visit 2 (SWAPPED, user-specified): antivirus pop-up with no X → crank the download with the twist ring → lights out, narrator blames the antivirus (plan: `docs/plans/visit3.md`, editor visible in the background)
+- [ ] Visit 3 (SWAPPED): filling the document with corporate speak (memo_mail plan in `docs/plans/visit2.md`); then lights out + ESDF
 
 ## Switchboard gauntlet (twist minigames)
 - [x] Asset search: 3D models — picks in scratchpad `assets3d/` (Poly Pizza CC0/CC-BY; no free non-AI gargoyle → recoloured Quaternius demons on pedestals)
@@ -112,7 +111,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [x] Switchboard framework: obstacle then restore minigame per blackout, wired into the story flow [review: `core/story.gd` (`SWITCH_GAMES`, `switch_game()`/`switch_game_done()`/`next_switch_scene()`), `minigames/switch/switch_games.gd`, `world/office/props/power_switch.gd`; F7 to SWITCH_1, X on the switch, leave mid-pair with Esc and come back]
 - [x] Obstacle: screwdriver panel (3 screws + a sticker gag) [review: `minigames/switch/screwdriver/screwdriver.gd`/`.tscn`, tune `turns_per_screw`/`back_out`/`sticker_degrees`; lines `narration/screwdriver_*.tres`; listen to the click/drop/clatter volumes]
 - [x] Twist teaching hint: reusable key-ring widget with demo, live feedback, shrinks once mastered, returns on stall + first-time narrator line [review: `core/input/twist_hint.gd`/`.tscn`, `narration/twist_tutorial.tres`]
-- [ ] Obstacle: gargoyle riddle → Millionaire quiz (dialogue, lighting change, sfx, 3 in a row, random-number timer)
+- [~] Obstacle: gargoyle riddle → Millionaire quiz (dialogue, lighting change, sfx, 3 in a row, random-number timer)
 - [ ] Obstacle: kaleidoscope + "TWIST ME" painting → password for the switchboard keypad
 - [x] Restore: wires (connect straight, not by colour) + narrator mockery; no text on screen except the lever's ON/OFF (user's call) [review: `minigames/switch/wires/wires.gd` (rules), `wire_board.gd` (drawing, drag), `core/ui/comic/emergency_tint.gdshader`; lines `narration/wires_*.tres`; F7 to SWITCH_1, unscrew the panel, match colours a few times, then plug straight and pull the lever; listen to the zap/plug/breaker/hum volumes]
 - [ ] Restore: pipe valve
