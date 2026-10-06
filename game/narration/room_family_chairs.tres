@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Still matching colours. Who taught you that, a video game?"
+subtitle = "Never let it be said that this office is not a family-friendly place."
+once = true

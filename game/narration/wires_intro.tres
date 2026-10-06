@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Three wires, three sockets. Even you can't get this wrong."
+subtitle = "Well, looks like we're gonna have to do some hodgepodge electrical work. Pity we don't have an expert among us."
 once = true

@@ -29,8 +29,17 @@ extends Node
 @export var off_path_time := 25.0
 ## Minimum seconds between two off-path lines.
 @export var off_path_cooldown := 30.0
+## Seconds without any input before the first idle line, then between the next ones.
+@export var idle_first := 30.0
+@export var idle_next := 20.0
 
 const CHECK_INTERVAL := 0.5
+## First-entry lines by room *content* (the room node, wherever it stands: C1 moves to A3's spot).
+const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &"C2": &"room_upside_down", &"B2": &"room_employee_month", &"B3": &"room_family_chairs"}
+## Played in order while the player stands idle (they don't restart after input).
+const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6"]
+## Seconds idle after which the off-path clock stops (standing still is idle, not lost).
+const IDLE_NOT_LOST := 5.0
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)
 ## Where the server room is built, and the room it swaps places with ("the room on the right" from A2).
 const SERVER_ROOM := &"C1"
@@ -70,6 +79,8 @@ var _hinted := false ## The "try them on" line played (this load).
 var _in_room_time := 0.0 ## Seconds in Start since the hint or the last nudge.
 var _nudges := 0
 var _putting_on := false
+var _idle_due := 0.0 ## Player.idle_time at which the next idle line plays.
+var _last_idle := 0.0
 
 @onready var _rooms: Node3D = $"../Rooms"
 @onready var _player: Node3D = $"../Player"
@@ -105,7 +116,9 @@ func _process(delta: float) -> void:
 		return
 	var here := room_at(_player.global_position)
 	_check_server_room(here)
-	_check_off_path(here, _tick)
+	_check_idle(_tick)
+	if not _check_room_lines():
+		_check_off_path(here, _tick)
 	_check_ending(here, _tick)
 	_tick = 0.0
 
@@ -193,10 +206,44 @@ func _check_server_room(here: StringName) -> void:
 		Narrator.play(&"server_room_still_empty")
 
 
+## A room's line the first time you're inside its content. True if a line started this tick.
+func _check_room_lines() -> bool:
+	if Narrator.is_speaking() or get_tree().get_first_node_in_group(&"scope_view"):
+		return false
+	for room: Node3D in _rooms.get_children():
+		var cue: StringName = ROOM_LINES.get(room.name, &"")
+		var offset := _player.global_position - room.position
+		if cue and absf(offset.x) <= ROOM_HALF_SIZE.x and absf(offset.z) <= ROOM_HALF_SIZE.y:
+			Narrator.play(cue) # `once`: a no-op after the first time.
+			return Narrator.current_cue == cue and Narrator.is_speaking()
+	return false
+
+
+## Idle facts: the first after `idle_first` s without input, then every `idle_next` s while still idle.
+## Any input resets the clock, not the order. The clock pauses while the narrator talks.
+func _check_idle(delta: float) -> void:
+	var idle: float = _player.get(&"idle_time")
+	if idle < _last_idle or _idle_due <= 0.0:
+		_idle_due = idle_first # Input since the last check: a new idle spell.
+	_last_idle = idle
+	if GameState.idle_lines_played >= IDLE_CUES.size() or _player.get(&"movement_locked") \
+			or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED or get_tree().get_first_node_in_group(&"scope_view"):
+		return
+	if Narrator.is_speaking():
+		_idle_due += delta
+		return
+	if idle >= _idle_due:
+		Narrator.play(IDLE_CUES[GameState.idle_lines_played])
+		GameState.idle_lines_played += 1
+		_idle_due = idle + idle_next
+
+
 func _check_off_path(here: StringName, delta: float) -> void:
 	var target := objective()
 	if not target or here.is_empty() or Narrator.is_speaking() or get_tree().get_first_node_in_group(&"scope_view"):
 		return
+	if _player.get(&"idle_time") > IDLE_NOT_LOST:
+		return # Standing still: the idle lines handle that.
 	_since_nag += delta
 	var dist := rooms_between(here, room_at(target.global_position))
 	if _best < 0 or dist < _best:
@@ -244,10 +291,6 @@ func _start_ending() -> void:
 	_computer.get_parent().add_child(_spectacles) # Start's Furniture, beside the computer.
 	var interactable: Interactable = _spectacles.get_node(^"Interactable")
 	interactable.interacted.connect(_put_on_glasses)
-	# The desk's welcome line ("Ah, the desk...") would talk over the ending.
-	var desk_trigger := _rooms.get_node_or_null(^"Start/DeskNarratorTrigger") as Area3D
-	if desk_trigger:
-		desk_trigger.monitoring = false
 
 
 ## Ending: full blur in the Start office, the hint on walking in, nudges while you dawdle there.

@@ -26,7 +26,6 @@ var _active: Blank
 var _target := 0.0 ## Mood the picked words add up to (-1..1).
 var _mood := 0.0 ## Shown mood, easing towards _target.
 var _band := 1 ## Shown band (index into BANDS).
-var _angry_cue_done := false
 var _sending := false
 
 @onready var window: AppWindow = %Window
@@ -119,9 +118,6 @@ func _set_band(band: int) -> void:
 	mood_label.add_theme_color_override(&"font_color", BAND_COLORS[band])
 	boss.bounce()
 	_sfx(cfg.mood_up_sfx if up else cfg.mood_down_sfx, -6.0)
-	if BANDS[band] == &"angry" and not _angry_cue_done and not Narrator.is_speaking():
-		_angry_cue_done = true
-		Narrator.play(cfg.angry_cue)
 
 
 func _next_email() -> void:
@@ -313,6 +309,10 @@ func _send() -> void:
 		cue = cfg.promoted_cue
 		_sfx(cfg.promoted_sfx, -4.0)
 		ComicBurst.spawn(self, boss.get_global_rect().get_center(), "PROMOTED!", Color("#ffd23f"))
+	elif BANDS[band] in [&"happy", &"starry"]:
+		cue = cfg.promoted_cue # "HR is pleased" (once).
+	elif BANDS[band] == &"angry":
+		cue = cfg.angry_cue # "HR would like a word" (once).
 	boss_reply.text = reply
 	bubble.visible = reply != ""
 	boss.bounce()

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "See the keys around G? Roll your fingers over them in a circle, the way the arrow points. Like turning a screw. Yes, that's the whole tutorial. We spent the budget on fonts."
+subtitle = "You're gonna have to twist these screws out. Try pressing the keys around G in a circle! That's a well-known mechanic, right?"
 once = true

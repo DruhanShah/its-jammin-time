@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Power's back. All it took was ignoring your instincts. You'll go far here."
+subtitle = "You're not allowed to grab or hold things here. Company policy. Also remember when you tried holding on to your failing relationship? I'm sure there's some Buddhist lesson there."
 once = true

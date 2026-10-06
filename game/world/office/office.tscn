@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://q86qmdd6qix0" path="res://core/player/player.tscn" id="2_53oc1"]
 [ext_resource type="PackedScene" uid="uid://cskdpba2q450m" path="res://assets/vnb_office/models/Office_Desk_1.fbx" id="3_k6ab6"]
 [ext_resource type="PackedScene" uid="uid://5jkehwkyc25m" path="res://world/office/parts/ceiling_light.tscn" id="6_8w2hi"]
-[ext_resource type="PackedScene" path="res://core/narrator/narrator_trigger.tscn" id="7_7e6co"]
 [ext_resource type="PackedScene" path="res://world/office/props/computer.tscn" id="8_comp"]
 [ext_resource type="MeshLibrary" uid="uid://u3ior7jn1wjd" path="res://world/office/gridmap/structure_library.tres" id="9_slib"]
 [ext_resource type="Script" uid="uid://b3j25ugbmd6wc" path="res://world/office/lighting.gd" id="72_wqicl"]
@@ -203,10 +202,6 @@ transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -4
 
 [node name="Clock" parent="Rooms/Start/Furniture" unique_id=194655651 instance=ExtResource("g_wall_clock")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.875, 2.4, -1)
-
-[node name="DeskNarratorTrigger" parent="Rooms/Start" unique_id=1834073676 instance=ExtResource("7_7e6co")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3, 0, -1)
-cue_id = &"desk_intro"
 
 [node name="A1" type="Node3D" parent="Rooms" unique_id=1845618529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -16)
@@ -478,20 +473,24 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.62, 0, 5.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.75)
 leaf = 1
 transom = false
+open_cue = &"anywhere_door"
 
 [node name="Door2" parent="Rooms/B1/Furniture" unique_id=735034272 instance=ExtResource("75_puljc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3.75)
 leaf = 2
 transom = false
+open_cue = &"anywhere_door"
 
 [node name="Door3" parent="Rooms/B1/Furniture" unique_id=1986309761 instance=ExtResource("75_puljc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5.75)
 transom = false
+open_cue = &"anywhere_door"
 
 [node name="LastDoor" parent="Rooms/B1/Furniture" unique_id=1597498103 instance=ExtResource("75_puljc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7.775)
 transom = false
 one_way = true
+open_cue = &"anywhere_door"
 
 [node name="C1" type="Node3D" parent="Rooms" unique_id=62804894]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)

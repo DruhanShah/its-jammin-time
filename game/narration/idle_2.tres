@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Electricity, flowing like water. The safety manual has a whole chapter on why you never do that."
+subtitle = "Did you know that sharks have been around for longer than trees? Just passing time."
 once = true

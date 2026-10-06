@@ -28,7 +28,6 @@ var _timer := 0.0 ## Seconds in the current phase.
 var _voice := 0.0 ## Seconds of voice this attempt.
 var _quiet := 0.0 ## Seconds of quiet since the voice.
 var _heard := false
-var _silent_attempts := 0
 var _level := 0.0 ## Current input level 0..1.
 var _peak_db := -80.0 ## Loudest sample this frame.
 var _dead_time := 0.0 ## Seconds the input has been exactly silent.
@@ -147,20 +146,15 @@ func _show_verdict() -> void:
 	var number := _attempt + 1
 	_set_phase(Phase.VERDICT)
 	waveform.status = "✗ FAILED"
-	var silent_verdict := not _heard and _attempt == 0
-	verdict.text = cfg.silent_line if silent_verdict else cfg.fail_lines[_attempt]
-	if not _heard:
-		_silent_attempts += 1
+	verdict.text = cfg.fail_lines[_attempt]
 	_pop(verdict, 1.25)
 	window.shake(6.0)
 	var cue: StringName = cfg.fail_cues[_attempt] if _attempt < cfg.fail_cues.size() else &""
-	if not _heard and _silent_attempts == 1 and cfg.silent_cue:
-		cue = cfg.silent_cue
 	if cue:
 		Narrator.play(cue)
 	if number == cfg.droop_attempt:
 		mic.droop()
-	if number == cfg.no_button_attempt and not silent_verdict: # [No] answers a guess, not silence.
+	if number == cfg.no_button_attempt:
 		_set_phase(Phase.WAIT_NO)
 		no_button.show()
 		_pop(no_button, 1.3)
@@ -223,7 +217,16 @@ func _on_password_submitted(text: String) -> void:
 	var tween := create_tween()
 	tween.tween_interval(3.0)
 	tween.tween_callback(window.close.bind("ACCESS!"))
-	window.closed.connect(complete)
+	window.closed.connect(_finish)
+
+
+## Lets the (long) welcome line finish before the next screen talks over it.
+func _finish(_reason := "") -> void:
+	var waited := 0.0
+	while Narrator.is_speaking() and waited < 25.0:
+		await get_tree().create_timer(0.25).timeout
+		waited += 0.25
+	complete()
 
 
 ## The login screen can't be closed: you're not logged in.

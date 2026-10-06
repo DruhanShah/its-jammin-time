@@ -8,7 +8,7 @@ extends Control
 
 const ID := &"wires"
 ## Mocking lines for colour matches, in order; the last one repeats.
-const MATCH_CUES: Array[StringName] = [&"wires_match_1", &"wires_match_2", &"wires_match_3", &"wires_match_4", &"wires_match_5"]
+const MATCH_CUES: Array[StringName] = [&"wires_match_1"] ## Repeats on every colour match.
 const ZAP_COLOR := Color("#ff5a3c")
 const CLICK_COLOR := Color("#7dff7d")
 
@@ -88,7 +88,7 @@ func _on_dropped(wire: int, socket: int) -> void:
 		_zap(socket, zap_sound, zap_volume_db, 46)
 		_board.snap_back(wire)
 		_shake_board()
-		# Escalate only through lines the player actually got (the intro may be cut short).
+		# Mock every match (cuts the intro short, never itself).
 		if not Narrator.is_speaking() or Narrator.current_cue == &"wires_intro":
 			Narrator.play(MATCH_CUES[mini(_mocked, MATCH_CUES.size() - 1)])
 			_mocked += 1
@@ -105,7 +105,6 @@ func _on_lever() -> void:
 	create_tween().tween_property(_board, "lever_up", 1.0, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	Audio.play_sfx(lever_sound, lever_volume_db)
 	_pop(_board.get_global_transform() * _board.lever_rect().get_center(), Color("#ffe14d"), 70)
-	Narrator.play(&"wires_done")
 	var lights := create_tween()
 	lights.tween_interval(0.25)
 	for flick in [Color.WHITE, emergency_tint, Color.WHITE, emergency_tint * 0.7]:

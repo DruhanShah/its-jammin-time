@@ -31,6 +31,8 @@ const CLOSE_LEAD := 0.35
 @export var swing_speed := 150.0 ## Degrees per second.
 @export var open_sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/door_open.wav")
 @export var close_sound: AudioStream = preload("res://assets/audio/sfx/400_sounds_pack/door_close.wav")
+## Narrator cue when the door opens (e.g. B1's free-standing doors); make it `once` to hear it a single time.
+@export var open_cue: StringName
 
 var is_open := false
 var _target := 0.0
@@ -61,6 +63,8 @@ func toggle() -> void:
 		_target = -open_degrees if one_way or player_side < 0.0 else open_degrees
 		_close_pending = false
 		_play(open_sound)
+		if open_cue and not Narrator.is_speaking():
+			Narrator.play(open_cue)
 	else:
 		_target = 0.0
 		_close_pending = true
