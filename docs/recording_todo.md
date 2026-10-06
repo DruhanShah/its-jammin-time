@@ -19,6 +19,7 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `lights_out_3` | Four thousand Reply Alls at once. The mail server melted, and it took the building's power with it. The switch is where it was last time: A3. |
 | `memo_cc40` | Forty people CC'd. Forty faces. Choose your words. |
 | `memo_reply_all` | Oh. Oh no. That was Reply All. Everyone saw that. |
+| `painting_too_early` | It's a painting. It says twist me. You're not ready for that kind of commitment yet. (placeholder line: looking at the TWIST ME painting before the kaleidoscope's turn) |
 | `scope_almost` | Ooh, almost. It's on the tip of the painting's tongue. [Unintelligible] |
 | `scope_pickup` | Binoculars! Now you can see the... no. That's a kaleidoscope. |
 | `valve_closing` | Other way. You're un-fixing it. Bold strategy. |
