@@ -24,6 +24,8 @@ extends MinigameConfig
 ## Narrator cue after each verdict (empty = none).
 ## (The 2nd attempt says nothing: `type_cue` follows right after it.)
 @export var fail_cues: Array[StringName] = [&"mic_too_quiet", &""]
+## Played instead of the first verdict cue when there is no mic access (the waveform is faked).
+@export var no_mic_cue := &"mic_no_access"
 @export var accepted_cue := &"mic_accepted"
 ## When the text box appears.
 @export var type_cue := &"password_type_instead"

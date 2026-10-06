@@ -149,6 +149,8 @@ func _show_verdict() -> void:
 	_pop(verdict, 1.25)
 	window.shake(6.0)
 	var cue: StringName = cfg.fail_cues[_attempt] if _attempt < cfg.fail_cues.size() else &""
+	if _fake and _attempt == 0 and cfg.no_mic_cue:
+		cue = cfg.no_mic_cue # No mic access at all: the narrator calls it out.
 	if cue:
 		Narrator.play(cue)
 	if number == cfg.droop_attempt:
