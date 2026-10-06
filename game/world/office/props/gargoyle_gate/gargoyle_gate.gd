@@ -22,7 +22,6 @@ const DIAL_POOL: Array[String] = ["30", "7", "29", "-4", "3.14", "812", "0", "âˆ
 ## Balloons stay up for their reading time (like subtitle-only narrator lines), at least MIN_LINE_TIME.
 const READ_CHARS_PER_SECOND := 15.0
 const MIN_LINE_TIME := 1.6
-const WORD_BLIP_TIME := 0.17
 ## Narrator subtitle top edge (from the screen bottom) while the quiz strip is up.
 const SUBTITLE_LIFTED_TOP := -360.0
 
@@ -43,7 +42,6 @@ const GRIND := preload("res://assets/audio/sfx/freesound/stone_grind_step_aside_
 const RUMBLE := preload("res://assets/audio/sfx/freesound/rumble_step_aside_unfa.wav")
 const CLOCK_LOOP := preload("res://assets/audio/sfx/400_sounds_pack/clock_ticking.wav")
 const CLOCK_TICK := preload("res://assets/audio/sfx/400_sounds_pack/clock_tick_only.wav")
-const STONE_BLIP := preload("res://assets/audio/sfx/400_sounds_pack/stone_push_short.wav")
 const LIFELINE_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/pop_2.wav")
 
 ## How far each statue slides out of the way, and how long it takes.
@@ -64,7 +62,6 @@ var _lines_said := {} ## Rotating reaction lines: list name -> next index.
 var _music_before: AudioStream
 var _player ## The Player (untyped: player.gd has no class_name); `frozen`, `head`.
 var _lighting ## The office's Lighting node (lighting.gd), or null outside the office.
-var _blips: AudioStreamRandomizer
 var _home := {} ## Gargoyle -> its guarding transform.
 var _subtitle_offsets: Array[float] = [] ## The subtitles' own [offset_top, offset_bottom] while lifted.
 
@@ -85,9 +82,6 @@ var _subtitle_offsets: Array[float] = [] ## The subtitles' own [offset_top, offs
 func _ready() -> void:
 	_player = get_tree().get_first_node_in_group(&"player")
 	_lighting = get_tree().get_first_node_in_group(&"office_lighting")
-	_blips = AudioStreamRandomizer.new()
-	_blips.add_stream(-1, STONE_BLIP)
-	_blips.random_pitch = 1.35
 	for gargoyle: Gargoyle in [_gar, _goyle]:
 		_home[gargoyle] = gargoyle.transform
 		gargoyle.interacted.connect(_on_statue_interacted)
@@ -96,6 +90,8 @@ func _ready() -> void:
 		spot.look_at(target.global_position + Vector3.UP * 1.3)
 	_bubbles[_goyle].lean = -1.0 # Goyle stands on the left from the hot seat, Gar on the right.
 	_bubbles[_gar].lean = 1.0
+	_bubbles[_gar].voice_pitch = 0.72 # Gar babbles low, Goyle high.
+	_bubbles[_goyle].voice_pitch = 1.2
 	_set_rig(false)
 	_wake_zone.body_entered.connect(_on_wake_zone_entered)
 	_dial_timer.timeout.connect(_on_dial_tick)
@@ -524,13 +520,11 @@ func _say_rotating(gargoyle: Gargoyle, list: String, seconds: float) -> void:
 	_show_for(gargoyle, lines[index], seconds)
 
 
-## Head wobble + a soft stone blip per word while the words "come out".
+## Head wobble while the balloon types its text out (the balloon babbles, see SpeechBubble).
 func _talk(gargoyle: Gargoyle, text: String) -> void:
 	gargoyle.talking = true
 	var tween := create_tween()
-	for word in mini(text.split(" ", false).size(), 14):
-		tween.tween_callback(Audio.play_sfx.bind(_blips, -18.0))
-		tween.tween_interval(WORD_BLIP_TIME)
+	tween.tween_interval(_bubbles[gargoyle].reveal_time(text))
 	tween.tween_callback(func() -> void: gargoyle.talking = false)
 
 
