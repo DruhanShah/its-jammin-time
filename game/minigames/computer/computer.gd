@@ -10,6 +10,7 @@ signal minigame_completed(id: StringName)
 signal minigame_failed(id: StringName)
 signal buffer_changed
 signal score_changed(score: int)
+signal bank_changed(balance: int)
 
 const SCENE := "res://minigames/computer/computer.tscn"
 const FALLBACK_RETURN_SCENE := "res://world/office/office.tscn"
@@ -55,6 +56,8 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_fit_screen)
 	_fit_screen()
 	$Screen/PowerButton.pressed.connect(exit)
+	$Screen/SleepButton.pressed.connect(start_minigame.bind(&"sleep"))
+	bank_changed.connect(func(_b: int) -> void: _refresh_status())
 	_refresh_editor()
 
 
@@ -114,6 +117,9 @@ func stop_all() -> void:
 		minigame.cleanup()
 		minigame.queue_free()
 
+## Naps at the desk: the screen dims and the bank balance drains until Wake Up (see sleep.gd).
+func sleep() -> void:
+	start_minigame(&"sleep")
 
 func exit() -> void:
 	stop_all()
@@ -153,4 +159,15 @@ func _refresh_editor() -> void:
 
 func _refresh_status() -> void:
 	var words := buffer.replace("\n", " ").replace("\t", " ").split(" ", false).size()
-	status_bar.text = "-- INSERT --    %d words    Score: %d" % [words, GameState.score]
+	status_bar.text = "-- INSERT --    %d words    Score: %d    Bank: %s" % [words, GameState.score, bank_text()]
+
+
+## "$1,000" / "-$25". Shared by the status bar and the sleep screen.
+static func bank_text() -> String:
+	var b := GameState.bank_balance
+	var digits := str(absi(b))
+	var out := ""
+	while digits.length() > 3:
+		out = "," + digits.right(3) + out
+		digits = digits.left(-3)
+	return "%s$%s%s" % ["-" if b < 0 else "", digits, out]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cgi4jtyag3s4j"]
+
+[ext_resource type="Script" uid="uid://dswa7om73gxnd" path="res://minigames/computer/minigames/sleep/sleep.gd" id="1_gomem"]
+[ext_resource type="Resource" uid="uid://dimxkfahx3y0o" path="res://minigames/computer/minigames/sleep/sleep_default.tres" id="2_yva8d"]
+
+[node name="Sleep" type="Control" unique_id=252823039]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gomem")
+config = ExtResource("2_yva8d")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=20882850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.23529412)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=954948667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="Center" unique_id=560832269]
+layout_mode = 2
+
+[node name="Balance" type="Label" parent="Center/Box" unique_id=1505524168]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74548644, 0.7069871, 0.43315163, 1)
+
+[node name="Wake" type="Button" parent="Center/Box" unique_id=1175205714]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Wake Up"

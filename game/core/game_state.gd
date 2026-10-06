@@ -47,6 +47,8 @@ var computer_queue: Array[StringName] = []
 var computer_exit_when_done := true
 ## How often each computer minigame was beaten, by id (counts queued and free-use runs).
 var minigames_completed: Dictionary[StringName, int] = {}
+## Money in the bank. Sleeping at the computer drains it (it's allowed to go negative).
+var bank_balance := 1000
 
 
 func unlock(id: StringName) -> void:

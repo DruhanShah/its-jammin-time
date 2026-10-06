@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/ad_popup/ad_popup.tscn" id="2_ad"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/corporate_speak/corporate_speak.tscn" id="3_cs"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/bot_check/bot_check.tscn" id="4_bc"]
+[ext_resource type="PackedScene" uid="uid://cgi4jtyag3s4j" path="res://minigames/computer/minigames/sleep/sleep.tscn" id="5_1npgu"]
 
 [resource]
 script = ExtResource("1_reg")
@@ -12,5 +13,6 @@ entries = Dictionary[StringName, PackedScene]({
 &"ad_popup": ExtResource("2_ad"),
 &"bot_check": ExtResource("4_bc"),
 &"corporate_speak": ExtResource("3_cs"),
-&"password_scream": ExtResource("1_fr80p")
+&"password_scream": ExtResource("1_fr80p"),
+&"sleep": ExtResource("5_1npgu")
 })

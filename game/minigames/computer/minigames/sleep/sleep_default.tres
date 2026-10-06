@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SleepConfig" format=3 uid="uid://dimxkfahx3y0o"]
+
+[ext_resource type="Script" uid="uid://uqhghqdaoqtn" path="res://minigames/computer/minigames/sleep/sleep_config.gd" id="1_u5lgc"]
+
+[resource]
+script = ExtResource("1_u5lgc")
+metadata/_custom_type_script = "uid://uqhghqdaoqtn"
