@@ -26,6 +26,7 @@ Audio="*res://core/audio/audio.tscn"
 Narrator="*res://core/narrator/narrator.tscn"
 GameState="*res://core/game_state.gd"
 Transition="*res://core/transition/transition.tscn"
+Story="*res://core/story.gd"
 
 [display]
 
@@ -80,6 +81,11 @@ debug_toggle_power={
 debug_next_light_look={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194337,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+debug_next_story_step={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194338,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

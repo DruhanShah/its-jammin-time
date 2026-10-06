@@ -37,7 +37,7 @@ Each room is a `Node3D` under `Rooms`, placed at the room's floor centre. Its ch
 | `Rooms/Start` | Player's own office. Only door: east, into A2 | (−6, 0) | −12…0 | −8…8 | −6…−1, −4…3 |
 | `Rooms/A1` | Office room (north of A2) | (6, −16) | 0…12 | −24…−8 | 0…5, −12…−5 |
 | `Rooms/B1` | Office room | (18, −16) | 12…24 | −24…−8 | 6…11, −12…−5 |
-| `Rooms/C1` | **Server / generator room** ("Gen" on the sketch): the switchboard goes here | (30, −16) | 24…36 | −24…−8 | 12…17, −12…−5 |
+| `Rooms/C1` | **Server / generator room** ("Gen" on the sketch): `Furniture/PowerSwitch` on the east wall. From the second blackout on, the story swaps the `Rooms/C1` and `Rooms/A3` nodes' positions at load (`world/office/story_stage.gd`), so the server room stands at A3's spot | (30, −16) | 24…36 | −24…−8 | 12…17, −12…−5 |
 | `Rooms/A2` | Room with two desks, entered from Start | (6, 0) | 0…12 | −8…8 | 0…5, −4…3 |
 | `Rooms/B2` | Office room (straight ahead from the Start door) | (18, 0) | 12…24 | −8…8 | 6…11, −4…3 |
 | `Rooms/C2` | Office room | (30, 0) | 24…36 | −8…8 | 12…17, −4…3 |

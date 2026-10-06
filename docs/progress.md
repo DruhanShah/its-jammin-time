@@ -62,9 +62,9 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 ## Current: teammate code + story flow
 - [x] Integrate teammate's `computer-minigames` branch (computer screen, ad popup, corporate speak, captcha) on branch `integrate/computer-minigames` (not in master yet): office computer opens the computer screen, Power returns to the desk, story API `Computer.open()`/`queue()` + `GameState.computer_minigame_finished`/`computer_queue_finished` [review: `minigames/computer/event_manager.gd`, `computer.gd` `open()`/`queue()`/`exit()`, `core/game_state.gd`; X at the desk, play memo → ad → bot check, press Power]
 - [x] Comic font family: research licenses, add usable fonts to the game + credits (Comic Sans MS itself not usable: Microsoft licence) [review: `core/ui/theme.tres` (project theme, `gui/theme/custom`), `assets/fonts/CREDITS.md`, `CREDITS.md`; check the HUD prompt, a subtitle, the computer screen, signs in B2/C1 and EXIT signs (F5)]
-- [ ] Story flow: start at the computer minigame → lights out → server room switch → back → minigame 2 → lights out, server room swapped with A3 → switch there → minigame 3 → lights out → switch again
-- [ ] Switch = highlighted interactable that opens a placeholder switch minigame (real switch minigames later)
-- [ ] Off-path narrator: cues when the player wanders away from the current objective for a while
+- [x] Story flow: start at the computer minigame → lights out → server room switch → back → minigame 2 → lights out, server room swapped with A3 → switch there → minigame 3 → lights out → switch again [review: `core/story.gd` (steps, `FIRST/SECOND/THIRD_VISIT` minigame lists), `world/office/story_stage.gd` (`_swap_rooms`), `docs/map/screenshots/story/`; play from the start, F7 skips a step (debug builds)]
+- [x] Switch = highlighted interactable that opens a placeholder switch minigame (real switch minigames later) [review: `world/office/props/power_switch.tscn`, `minigames/switch/switch_minigame.tscn`; press X on it with the lights on (locked line) and off]
+- [x] Off-path narrator: cues when the player wanders away from the current objective for a while [review: heuristic in `story_stage.gd` header, `off_path_time` 25 s / `off_path_cooldown` 30 s on the `StoryStage` node; lines `narration/off_path_1..4.tres`]
 
 ## Computer screen (teammate, `computer-minigames` branch)
 - [x] Computer scene (`minigames/computer/computer.tscn`): vim-ish editor (insert mode only), Power button exits back to the office [review: `computer.gd` `start_minigame()`/`exit()`]
@@ -78,6 +78,23 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - [ ] Vim modes (normal/insert, Esc)
 - [ ] Minigames: floating letters, password scream
 
+## Computer redesign
+- [x] Brainstorm (awaiting approval): make computer minigames comic-ier and more fun; fake desktop instead of terminal (`docs/computer_redesign.md`)
+- [ ] First visit: password via fake mic (live waveform, fails 5×, then text box) → font picker (must be Comic) → typing triggers ads → all closed → lights out
+
+## Switchboard gauntlet (twist minigames)
+- [x] Asset search: 3D models — picks in scratchpad `assets3d/` (Poly Pizza CC0/CC-BY; no free non-AI gargoyle → recoloured Quaternius demons on pedestals)
+- [x] Asset search: sounds — 71 picks in scratchpad `audio2/out/` (Freesound CC0, Kenney CC0, 400 Sounds Pack); quiz loop mood needs a listen
+- [x] Twist input detector: B-H-Y-T-F-V circle around G (direction + amount), reusable
+- [ ] Switchboard framework: obstacle then restore minigame per blackout, wired into the story flow
+- [ ] Obstacle: screwdriver panel
+- [ ] Obstacle: gargoyle riddle → Millionaire quiz (dialogue, lighting change, sfx, 3 in a row, random-number timer)
+- [ ] Obstacle: kaleidoscope + "TWIST ME" painting → password for the switchboard keypad
+- [ ] Restore: wires (connect straight, not by colour) + narrator mockery
+- [ ] Restore: pipe valve
+- [ ] Restore: candle wick
+- [ ] After the third blackout: controls shift to ESDF + narration
+
 - [ ] Before first export: change placeholder bundle id `com.infinium.gamejam` in `export_presets.cfg`
 
 ## Conventions
@@ -85,6 +102,10 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done (awaiting review notes in 
 - Interactive props are wrapper scenes in `world/office/props/` (Node3D root + model + Interactable/script), made when the mechanic is built
 
 ## Suggestions awaiting approval
+- Story: per-objective off-path lines ("the desk is the other way") and a short hint line when the off-path count runs out
+- Story: a power-down clunk + fluorescent tick sound on the blackout / switch
+- Story: `NarratorTrigger` option to not interrupt a line (the desk trigger's `desk_intro` can cut a story line short)
+- Story: tiny map/compass on the HUD while the lights are out
 - Computer: keep the typed document (`buffer`) in `GameState` so it survives leaving the computer
 - Computer: root as a full-rect Control instead of Node2D + `_fit_screen()`
 - Computer: narrator lines per minigame (bot button, 3rd ad, captcha retries)

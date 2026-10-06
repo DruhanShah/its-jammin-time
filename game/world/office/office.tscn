@@ -72,6 +72,8 @@
 [ext_resource type="PackedScene" path="res://world/office/props/sets/server_rack.tscn" id="p2_server_rack"]
 [ext_resource type="PackedScene" path="res://world/office/props/sets/server_rack_legacy.tscn" id="p2_server_rack_legacy"]
 [ext_resource type="PackedScene" uid="uid://twj3f5rxbol2" path="res://assets/vnb_office/models/Small_Fan.fbx" id="p2_Small_Fan"]
+[ext_resource type="PackedScene" path="res://world/office/props/power_switch.tscn" id="st_power_switch"]
+[ext_resource type="Script" path="res://world/office/story_stage.gd" id="st_story_stage"]
 
 [sub_resource type="Environment" id="Environment_hchcx"]
 background_mode = 1
@@ -702,6 +704,9 @@ font_size = 30
 outline_size = 8
 
 [node name="SwitchboardSpot" type="Marker3D" parent="Rooms/C1/Furniture" unique_id=695140583]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
+
+[node name="PowerSwitch" parent="Rooms/C1/Furniture" unique_id=1588203117 instance=ExtResource("st_power_switch")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.85, 0, 1)
 
 [node name="PCStack1" parent="Rooms/C1/Furniture" unique_id=1775349468 instance=ExtResource("p2_pc_shelf_stack")]
@@ -1799,6 +1804,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 8)
 
 [node name="Lighting" type="Node" parent="." unique_id=664409914]
 script = ExtResource("72_wqicl")
+
+[node name="StoryStage" type="Node" parent="." unique_id=1309915522]
+script = ExtResource("st_story_stage")
 
 [editable path="Rooms/A1/Furniture/Pinwheel/Desk3"]
 [editable path="Rooms/B1/Lights/CeilingLight1"]

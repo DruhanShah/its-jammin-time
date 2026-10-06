@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NarratorCue" format=3]
+
+[ext_resource type="Script" path="res://core/narrator/narrator_cue.gd" id="1_cue"]
+
+[resource]
+script = ExtResource("1_cue")
+subtitle = "Lights out. Again. Good news: the server room hasn't moved this time. I checked. Bad news: you still have to walk there."
+once = true

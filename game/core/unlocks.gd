@@ -7,9 +7,11 @@ const GENIE_LAMP := &"genie_lamp"
 const SWITCHBOARD := &"switchboard"
 const BINOCULARS := &"binoculars"
 const GLASSES := &"glasses"
+## The desk computer: usable while the power is on and no switch needs flipping (set by `Story`).
+const COMPUTER := &"computer"
 
 ## Comma-separated, for the Inspector dropdown and the typo check.
-const ALL := GENIE_LAMP + "," + SWITCHBOARD + "," + BINOCULARS + "," + GLASSES
+const ALL := GENIE_LAMP + "," + SWITCHBOARD + "," + BINOCULARS + "," + GLASSES + "," + COMPUTER
 
 
 static func has(id: StringName) -> bool:

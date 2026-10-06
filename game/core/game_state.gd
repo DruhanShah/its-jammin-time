@@ -20,6 +20,9 @@ var chair_push_time := 0.0
 ## Unlocked ids, global across scenes. Ids are snake_case names of the thing, e.g. &"genie_lamp".
 var unlocked: Dictionary[StringName, bool] = {}
 
+## Where the story is (`Story.Step`). Change it through `Story`, which reacts to it.
+var story_step := 0
+
 ## False while the lights are out: the office runs on emergency lighting (`world/office/lighting.gd`).
 var power_on := true
 
