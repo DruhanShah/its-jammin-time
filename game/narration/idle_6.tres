@@ -7,4 +7,3 @@
 script = ExtResource("1_cue")
 stream = ExtResource("2_voice")
 subtitle = "Did you know that the spinal cord has the same consistency as a ripe banana?"
-once = true

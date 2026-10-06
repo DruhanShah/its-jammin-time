@@ -7,4 +7,3 @@
 script = ExtResource("1_cue")
 stream = ExtResource("2_voice")
 subtitle = "Did you know that sharks have been around for longer than trees? Just passing time."
-once = true

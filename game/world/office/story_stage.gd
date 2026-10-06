@@ -19,13 +19,15 @@ extends Node
 ## Ending: blur strength outside the Start office (1 inside).
 @export_range(0.0, 1.0) var outside_blur_strength := 0.4
 ## Seconds of narrator silence before the next idle fun fact plays.
-@export var idle_silence := 7.0
+@export var idle_silence := 12.0
 
 const CHECK_INTERVAL := 0.5
 ## First-entry lines by room *content* (the room node, wherever it stands: C1 moves to A3's spot).
 const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &"C2": &"room_upside_down", &"B2": &"room_employee_month", &"B3": &"room_family_chairs"}
-## Played in order when the narrator has been silent for a while; `idle_out` ends the facts.
-const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6", &"idle_out"]
+## Played in order, cycling, when the narrator has been silent for a while.
+const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6"]
+## Follows the first repeated fact ("Oh, I already said that…"), once.
+const IDLE_REPEAT_CUE := &"idle_out"
 ## Most idle lines played per story step (i.e. per lights-out).
 const IDLE_PER_STEP := 2
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)
@@ -153,8 +155,8 @@ func _check_room_lines() -> void:
 			return
 
 
-## Idle facts: after `idle_silence` s with no narration, play the next fun fact (in order, at most
-## IDLE_PER_STEP per story step, i.e. per lights-out; `idle_out` closes the list).
+## Idle facts: after `idle_silence` s with no narration, play the next fun fact (in order, cycling,
+## at most IDLE_PER_STEP per story step, i.e. per lights-out). The first repeat is followed by `idle_out`.
 func _check_idle(delta: float) -> void:
 	if GameState.idle_step != Story.step:
 		GameState.idle_step = Story.step
@@ -163,15 +165,22 @@ func _check_idle(delta: float) -> void:
 		_silence = 0.0
 		return
 	_silence += delta
-	if GameState.idle_lines_played >= IDLE_CUES.size() or GameState.idle_lines_this_step >= IDLE_PER_STEP \
+	if GameState.idle_lines_this_step >= IDLE_PER_STEP \
 			or _player.get(&"movement_locked") or _player.get(&"frozen") \
 			or get_tree().get_first_node_in_group(&"scope_view"):
 		return
 	if _silence >= idle_silence:
-		Narrator.play(IDLE_CUES[GameState.idle_lines_played])
+		Narrator.play(IDLE_CUES[GameState.idle_lines_played % IDLE_CUES.size()])
+		if GameState.idle_lines_played == IDLE_CUES.size():
+			Narrator.line_finished.connect(_on_repeat_fact_finished, CONNECT_ONE_SHOT)
 		GameState.idle_lines_played += 1
 		GameState.idle_lines_this_step += 1
 		_silence = 0.0
+
+
+
+func _on_repeat_fact_finished(_cue: StringName) -> void:
+	Narrator.play(IDLE_REPEAT_CUE)
 
 
 ## Power came back while the player was in the office (an in-world restore game): set the ending up now.

@@ -7,4 +7,3 @@
 script = ExtResource("1_cue")
 stream = ExtResource("2_voice")
 subtitle = "Did you know that life is meaningless without balance and pursuit of the Tao?"
-once = true

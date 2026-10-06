@@ -7,4 +7,3 @@
 script = ExtResource("1_cue")
 stream = ExtResource("2_voice")
 subtitle = "Did you know that if you dissect a frog on a Sunday, it's still dead on Monday?"
-once = true
