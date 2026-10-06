@@ -113,6 +113,11 @@ func played_cues() -> Array[StringName]:
 	return ids
 
 
+## True once `cue_id` has played this game (any cue, `once` or not).
+func has_played(cue_id: StringName) -> bool:
+	return _played.has(cue_id)
+
+
 func set_played_cues(ids: Array) -> void:
 	_played.clear()
 	for id in ids:

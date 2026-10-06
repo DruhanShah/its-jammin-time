@@ -1,7 +1,8 @@
 extends Control
 ## Switch game "kaleidoscope", second half (see kaleidoscope.gd): the switchboard's security keypad,
 ## opened by the power switch. Type the password the TWIST ME painting showed through the scope, by
-## clicking the keys or typing. Wrong guesses get buzzed and mocked; the right one opens the panel and
+## clicking the keys or typing. Wrong guesses get buzzed and mocked (one line per attempt at most, and
+## only into silence: see `_mock`); the right one opens the panel and
 ## moves straight on to the restore game. Esc or the window's X leaves (the password is kept).
 
 const ID := Kaleidoscope.ID
@@ -9,6 +10,13 @@ const MAX_LENGTH := 9
 const ROWS: Array[String] = ["ABCDEFG", "HIJKLMN", "OPQRSTU", "VWXYZ"]
 const BACKSPACE := "⌫"
 const ENTER := "ENTER"
+## Generic mockery for a wrong guess, picked at random (never the same twice in a row).
+const WRONG_CUES: Array[StringName] = [&"keypad_wrong_1", &"keypad_no_password"]
+## Special cases (`once` cues: after their first time a generic line plays instead).
+const TWIST_ME_CUE := &"keypad_twist_me"
+const OLD_PASSWORD_CUE := &"keypad_old_password"
+## Seconds after a mocking line before a wrong guess gets another one.
+const MOCK_COOLDOWN := 3.0
 const FONT := preload("res://assets/fonts/ComicRelief-Bold.ttf")
 const LCD_GREEN := Color("#7dff7d")
 const LCD_RED := Color("#ff5a3c")
@@ -31,7 +39,8 @@ var _typed := ""
 var _blink := 0.0
 var _locked := false ## Showing a verdict (no typing).
 var _done := false
-var _wrong := 0
+static var _last_wrong_cue := &"" ## Kept across visits, so reopening the keypad doesn't repeat it either.
+var _mock_msec := -1
 var _buttons: Dictionary[String, Button] = {}
 
 @onready var _window: AppWindow = %Window
@@ -166,14 +175,13 @@ func _submit(text: String) -> void:
 	if text == GameState.scope_password:
 		_accept()
 		return
-	_wrong += 1
 	_locked = true
 	_window.shake(14.0)
 	Audio.play_sfx(wrong_sound, -6.0)
 	_set_status("ACCESS DENIED", LCD_RED)
 	_lcd.add_theme_color_override(&"font_color", LCD_RED)
 	ComicBurst.spawn(_burst, _lcd_panel.get_global_rect().get_center(), "BZZT!", Color("#ff7a6b"))
-	Narrator.play(_wrong_cue(text))
+	_mock(text)
 	await get_tree().create_timer(0.9).timeout
 	_typed = ""
 	_locked = false
@@ -181,14 +189,25 @@ func _submit(text: String) -> void:
 	_set_status("ENTER PASSWORD", Color.WHITE)
 
 
+## At most one narrator line per wrong guess, and only into silence (never cutting a line off or
+## restarting itself), at least MOCK_COOLDOWN s after the last one, so fast guesses don't loop it.
+func _mock(text: String) -> void:
+	if Narrator.is_speaking():
+		return
+	if _mock_msec >= 0 and Time.get_ticks_msec() - _mock_msec < MOCK_COOLDOWN * 1000.0:
+		return
+	_mock_msec = Time.get_ticks_msec()
+	Narrator.play(_wrong_cue(text))
+
+
 func _wrong_cue(text: String) -> StringName:
-	if text == "TWISTME":
-		return &"keypad_twist_me"
-	if GameState.password and text == GameState.password.to_upper():
-		return &"keypad_old_password"
-	if not GameState.scope_solved and _wrong == 1:
-		return &"keypad_no_password"
-	return &"keypad_wrong_1"
+	if text == "TWISTME" and not Narrator.has_played(TWIST_ME_CUE):
+		return TWIST_ME_CUE
+	if GameState.password and text == GameState.password.to_upper() and not Narrator.has_played(OLD_PASSWORD_CUE):
+		return OLD_PASSWORD_CUE
+	var options := WRONG_CUES.filter(func(cue: StringName) -> bool: return cue != _last_wrong_cue)
+	_last_wrong_cue = options.pick_random()
+	return _last_wrong_cue
 
 
 func _accept() -> void:

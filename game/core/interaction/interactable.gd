@@ -12,7 +12,12 @@ const HIGHLIGHT: Material = preload("res://core/interaction/highlight.tres")
 
 ## Local on/off switch: when false the player ignores it (no prompt, no crosshair change).
 ## Resets when the scene reloads; for story progress use `unlock_id` instead.
-@export var enabled := true
+## A disabled one also leaves the interactable layer, so the ray sees through it to whatever is behind
+## (e.g. the stepped-aside gargoyles' talk zones no longer hide the TWIST ME painting).
+@export var enabled := true:
+	set(value):
+		enabled = value
+		collision_layer = LAYER if value else 0
 ## Locked until `GameState.unlock(unlock_id)` was called (from any scene). Empty = never locked.
 ## Pick from the ids in `core/unlocks.gd` (add new ones there).
 @export_custom(PROPERTY_HINT_ENUM_SUGGESTION, Unlocks.ALL) var unlock_id: StringName
@@ -34,7 +39,7 @@ var _locked_cue_msec := -1
 
 
 func _ready() -> void:
-	collision_layer = LAYER
+	collision_layer = LAYER if enabled else 0
 	collision_mask = 0
 	monitoring = false
 	if unlock_id and not Unlocks.has(unlock_id):

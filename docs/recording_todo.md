@@ -8,11 +8,9 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 
 | Cue | Line |
 |---|---|
-| `ads_close_hint` | I think you should be closing those ads to continue your work. |
 | `ads_eco` | Don't. Don't press the— |
 | `ads_first` | Oh no. Advertising. In a workplace. Who could have foreseen this. |
 | `candle_match_fizzle` | Pfft. Matches, like interns, need three tries. |
-| `computer_no_power` | You can't use the computer without the power. |
 | `controls_shift_w` | W? We don't do W any more. Keep up. |
 | `ending_glasses_nudge_1` | The glasses. On the desk. They go on your face. That's the whole puzzle. |
 | `keypad_no_password` | You don't know the password. The painting does. Paintings know things. |
@@ -22,7 +20,6 @@ Needs a re-take: `keypad_right` (`lights_out_3_4.ogg`) is only 2.5 s for an 85-c
 | `lights_out_3` | Four thousand Reply Alls at once. The mail server melted, and it took the building's power with it. The switch is where it was last time: A3. |
 | `memo_cc40` | Forty people CC'd. Forty faces. Choose your words. |
 | `memo_reply_all` | Oh. Oh no. That was Reply All. Everyone saw that. |
-| `settings_nope` | You don't get to choose how you play this game! :D |
 | `scope_almost` | Ooh, almost. It's on the tip of the painting's tongue. [Unintelligible] |
 | `scope_pickup` | Binoculars! Now you can see the... no. That's a kaleidoscope. |
 | `valve_closing` | Other way. You're un-fixing it. Bold strategy. |

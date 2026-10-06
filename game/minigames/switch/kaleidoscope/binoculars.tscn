@@ -15,7 +15,7 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.059, 0)
 
 [node name="Interactable" type="Area3D" parent="."]
 script = ExtResource("3_int")
-verb = "pick up the binoculars"
+verb = "pick up the kaleidoscope"
 
 [node name="Shape" type="CollisionShape3D" parent="Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
