@@ -25,6 +25,16 @@ const CHAIR_PUSH_MEMORY := 2.0
 ## so backing into a chair still moves it without the arms reaching out in front.
 const PUSH_ANIM_MIN_DOT := 0.5
 
+## While true (e.g. in the gargoyle quiz) the player ignores movement, mouse look and interaction, the
+## HUD is hidden and gravity still applies. Whoever freezes the player handles Esc and the mouse itself.
+var frozen := false:
+	set(value):
+		frozen = value
+		if is_node_ready():
+			hud.visible = not value
+			if value and is_instance_valid(_target):
+				_target.set_highlighted(false)
+				_target = null
 ## True while something else owns the controls (e.g. the kaleidoscope's scope view, whose twist ring
 ## shares F with ESDF movement): no looking, walking, interacting or prompt.
 var movement_locked := false
@@ -59,6 +69,9 @@ func _exit_tree() -> void:
 
 
 func _process(delta: float) -> void:
+	if frozen:
+		idle_time = 0.0 # Something else (e.g. the quiz) has the player: not idle.
+		return
 	idle_time += delta
 	var target := _interactable() if not movement_locked else null
 	if target != _target:
@@ -77,7 +90,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if movement_locked:
+	if frozen or movement_locked:
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		# Body turns left/right, head tilts up/down.
@@ -104,7 +117,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	var input := Vector2.ZERO
-	if not movement_locked:
+	if not (frozen or movement_locked):
 		input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input.x, 0, input.y)).normalized()
 	velocity.x = direction.x * speed

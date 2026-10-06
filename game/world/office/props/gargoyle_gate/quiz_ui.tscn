@@ -1,0 +1,143 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/office/props/gargoyle_gate/quiz_ui.gd" id="1_ui"]
+
+[node name="QuizUI" type="CanvasLayer"]
+layer = 5
+visible = false
+script = ExtResource("1_ui")
+
+[node name="Root" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Root"]
+offset_left = 22.0
+offset_top = 14.0
+offset_right = 520.0
+offset_bottom = 60.0
+text = "WHO WANTS TO TURN ON THE LIGHTS?"
+
+[node name="Lifelines" type="HBoxContainer" parent="Root"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -372.0
+offset_top = 12.0
+offset_right = -20.0
+offset_bottom = 66.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="Phone" type="Button" parent="Root/Lifelines"]
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "PHONE A FRIEND"
+
+[node name="Prize" type="Label" parent="Root"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -372.0
+offset_top = 76.0
+offset_right = -20.0
+offset_bottom = 112.0
+grow_horizontal = 0
+text = "PRIZE: ACCESS TO THE SWITCHBOARD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Strip" type="VBoxContainer" parent="Root"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -232.0
+offset_right = -30.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Question" type="Label" parent="Root/Strip"]
+custom_minimum_size = Vector2(0, 62)
+text = "Question?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Answers" type="GridContainer" parent="Root/Strip"]
+theme_override_constants/h_separation = 22
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="A" type="Button" parent="Root/Strip/Answers"]
+custom_minimum_size = Vector2(0, 46)
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "A:"
+alignment = 0
+clip_text = true
+
+[node name="B" type="Button" parent="Root/Strip/Answers"]
+custom_minimum_size = Vector2(0, 46)
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "B:"
+alignment = 0
+clip_text = true
+
+[node name="C" type="Button" parent="Root/Strip/Answers"]
+custom_minimum_size = Vector2(0, 46)
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "C:"
+alignment = 0
+clip_text = true
+
+[node name="D" type="Button" parent="Root/Strip/Answers"]
+custom_minimum_size = Vector2(0, 46)
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "D:"
+alignment = 0
+clip_text = true
+
+[node name="Bottom" type="HBoxContainer" parent="Root/Strip"]
+
+[node name="WalkAway" type="Button" parent="Root/Strip/Bottom"]
+custom_minimum_size = Vector2(170, 38)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "WALK AWAY"
+
+[node name="Spacer" type="Control" parent="Root/Strip/Bottom"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Final" type="Button" parent="Root/Strip/Bottom"]
+custom_minimum_size = Vector2(230, 38)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "FINAL ANSWER"
+
+[node name="Dial" type="Control" parent="Root"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 110.0
+grow_horizontal = 2
+mouse_filter = 2
