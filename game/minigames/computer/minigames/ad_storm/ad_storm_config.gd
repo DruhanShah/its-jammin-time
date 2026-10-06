@@ -55,8 +55,8 @@ extends MinigameConfig
 @export var hint_cue := &"ads_close_hint"
 @export var hint_after_keys := 10
 @export var hint_after_idle := 6.0
-## Seconds after the first hint before it may play a second (and last) time.
-@export var hint_repeat_after := 45.0
+## Minimum seconds between hints; it keeps repeating while the player still isn't closing ads.
+@export var hint_repeat_after := 12.0
 
 @export_group("Sounds")
 @export var type_sfx: AudioStream

@@ -4,7 +4,7 @@ extends Minigame
 ## wave 1 = 3 plain ads one at a time; wave 2 = runner, nested, fake X and countdown, at most
 ## `max_ads` on screen at once (the rest wait for a free slot); then the ECO MODE ad. Ads never exceed
 ## `max_ads` (the comic ad's max_concurrent caps decoy and nested spawns too). Typing on (or idling)
-## while ads are open plays the "close those ads" hint (at most twice). Accepting it ("TURN OFF LIGHTS", or its tiny X) dims the screen twice and completes:
+## while ads are open plays the "close those ads" hint (repeating while they still ignore the ads). Accepting it ("TURN OFF LIGHTS", or its tiny X) dims the screen twice and completes:
 ## in the story the EventManager → Story → Computer.blackout() turns the lights out. This never calls
 ## blackout() itself, so free use doesn't cut the power. The root ignores the mouse: ads are siblings.
 
@@ -110,9 +110,9 @@ func _update_hint(delta: float) -> void:
 	_hint_idle += delta
 	if _hint_keys < cfg.hint_after_keys and _hint_idle < cfg.hint_after_idle:
 		return
-	if _hints_played >= 2 or Narrator.is_speaking():
+	if Narrator.is_speaking():
 		return
-	if _hints_played == 1 and Time.get_ticks_msec() - _hint_msec < cfg.hint_repeat_after * 1000.0:
+	if _hints_played > 0 and Time.get_ticks_msec() - _hint_msec < cfg.hint_repeat_after * 1000.0:
 		return
 	_hints_played += 1
 	_hint_msec = Time.get_ticks_msec()
