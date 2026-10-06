@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "The fuse is a candle. Don't ask. Twist some thread into a wick."
+subtitle = "The twine is too thin to carry wax. You'll have to twist it into something thicker."
 once = true

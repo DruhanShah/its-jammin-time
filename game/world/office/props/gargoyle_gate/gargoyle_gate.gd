@@ -23,6 +23,8 @@ const DIAL_POOL: Array[String] = ["30", "7", "29", "-4", "3.14", "812", "0", "âˆ
 const READ_CHARS_PER_SECOND := 15.0
 const MIN_LINE_TIME := 1.6
 const WORD_BLIP_TIME := 0.17
+## Narrator subtitle top edge (from the screen bottom) while the quiz strip is up.
+const SUBTITLE_LIFTED_TOP := -360.0
 
 const SLAM := preload("res://assets/audio/sfx/freesound/quiz_lights_slam_grubzyy.wav")
 const INTRO_HIT := preload("res://assets/audio/sfx/freesound/quiz_intro_hit_horns_devern.wav")
@@ -59,6 +61,7 @@ var _player ## The Player (untyped: player.gd has no class_name); `frozen`, `hea
 var _lighting ## The office's Lighting node (lighting.gd), or null outside the office.
 var _blips: AudioStreamRandomizer
 var _home := {} ## Gargoyle -> its guarding transform.
+var _subtitle_offsets: Array[float] = [] ## The subtitles' own [offset_top, offset_bottom] while lifted.
 
 @onready var _gar: Gargoyle = $Gar
 @onready var _goyle: Gargoyle = $Goyle
@@ -105,6 +108,7 @@ func _exit_tree() -> void:
 	if state in [State.BANTER, State.QUIZ_ASK, State.QUIZ_LOCKED, State.QUIZ_REVEAL]:
 		ComicCursor.reset()
 		_restore_music()
+		_lift_subtitles(false)
 
 
 func _process(delta: float) -> void:
@@ -222,6 +226,7 @@ func _slam(run: int) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	ComicCursor.apply()
 	_ui.slide_in()
+	_lift_subtitles(true)
 	await get_tree().create_timer(0.4).timeout
 
 
@@ -390,6 +395,7 @@ func _step_aside(time: float) -> void:
 
 ## Leaves the show look: lights back (fading over `fade`), rig, music, loops, timer, mouse.
 func _end_show(fade := 0.4) -> void:
+	_lift_subtitles(false)
 	if _lighting:
 		_lighting.clear_override(fade)
 	_set_rig(false)
@@ -399,6 +405,20 @@ func _end_show(fade := 0.4) -> void:
 	_dial_timer.stop()
 	_ui.accepting = false
 	ComicCursor.reset()
+
+
+## Moves the narrator's subtitles above the quiz strip while it's up (they'd cover the answers),
+## and back to their place after.
+func _lift_subtitles(on: bool) -> void:
+	var label: Label = Narrator.subtitle_label
+	if on and _subtitle_offsets.is_empty():
+		_subtitle_offsets = [label.offset_top, label.offset_bottom]
+		label.offset_top = SUBTITLE_LIFTED_TOP
+		label.offset_bottom = SUBTITLE_LIFTED_TOP + (_subtitle_offsets[1] - _subtitle_offsets[0])
+	elif not on and _subtitle_offsets:
+		label.offset_top = _subtitle_offsets[0]
+		label.offset_bottom = _subtitle_offsets[1]
+		_subtitle_offsets.clear()
 
 
 func _set_rig(on: bool) -> void:

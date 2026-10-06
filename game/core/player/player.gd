@@ -16,6 +16,9 @@ extends CharacterBody3D
 const CHAIR_JABS := {15.0: &"chair_push_1", 45.0: &"chair_push_2"}
 ## Narrator cue when a chair we pushed rolls into a different room than it started in.
 const CHAIR_NEW_ROOM_JAB := &"chair_new_room"
+## Narrator cue on this many-th left-click on something that isn't interactable ("no grabbing").
+const NO_GRAB_TOUCHES := 2
+const NO_GRAB_CUE := &"no_grabbing"
 ## Seconds after our last push that a rolling chair still counts as pushed by us.
 const CHAIR_PUSH_MEMORY := 2.0
 ## The arms only play the push animation for bodies within this angle (60°) of where we look,
@@ -35,6 +38,8 @@ var frozen := false:
 ## True while something else owns the controls (e.g. the kaleidoscope's scope view, whose twist ring
 ## shares F with ESDF movement): no looking, walking, interacting or prompt.
 var movement_locked := false
+## Seconds without any player input (keys, mouse buttons, looking around), for the idle lines.
+var idle_time := 0.0
 
 var _bob_time := 0.0
 var _step := 0
@@ -63,9 +68,11 @@ func _exit_tree() -> void:
 	GameState.player_poses[owner.scene_file_path] = [global_transform, head.rotation.x]
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if frozen:
+		idle_time = 0.0 # Something else (e.g. the quiz) has the player: not idle.
 		return
+	idle_time += delta
 	var target := _interactable() if not movement_locked else null
 	if target != _target:
 		if is_instance_valid(_target):
@@ -74,6 +81,12 @@ func _process(_delta: float) -> void:
 			target.set_highlighted(true)
 		_target = target
 	hud.show_prompt(target.verb if target else "")
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton \
+			or (event is InputEventMouseMotion and event.relative.length() > 2.0):
+		idle_time = 0.0
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -201,5 +214,9 @@ func _touch() -> void:
 	if ray.is_colliding():
 		hands.touch(ray.get_collision_point())
 		Audio.play_sfx(touch_sound, touch_volume_db)
+		if not ray.get_collider() is Interactable:
+			GameState.stray_touches += 1
+			if GameState.stray_touches >= NO_GRAB_TOUCHES and not Narrator.is_speaking():
+				Narrator.play(NO_GRAB_CUE) # `once` in the cue.
 	else:
 		hands.touch(ray.to_global(ray.target_position))

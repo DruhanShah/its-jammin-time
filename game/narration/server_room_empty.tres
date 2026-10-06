@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Ah. The server room is... not here. Someone has misplaced an entire server room. I'd try somewhere near where you started. Down and to the right, as they say."
+subtitle = "You misplaced an ENTIRE SERVER ROOM? How does that even happen? I know I'm omniscient and all, but I'm still impressed."
 once = true

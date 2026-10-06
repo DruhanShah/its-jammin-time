@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Ah, yes. The chair. Pushed it from one end of the room to the other. Truly, you are on a roll. Unfortunately, it's the only thing going anywhere."
+subtitle = "Just so you know, this isn't the game we have for you. Please play the game."
 once = true

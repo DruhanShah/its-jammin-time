@@ -18,16 +18,13 @@ extends MinigameConfig
 ]
 ## The (always failing) verdict after each attempt.
 @export var fail_lines: Array[String] = [
-	"Did you say: \"pastry bird\"?",
-	"Audio received. Audio not processed. (Budget cuts.)",
+	"We couldn't hear you.",
+	"Still nothing.",
 ]
 ## Narrator cue after each verdict (empty = none).
-@export var fail_cues: Array[StringName] = [&"mic_pastry_bird", &"mic_budget_cuts"]
-## Verdict of the first attempt when nothing was heard.
-@export var silent_line := "We couldn't hear you."
+## (The 2nd attempt says nothing: `type_cue` follows right after it.)
+@export var fail_cues: Array[StringName] = [&"mic_too_quiet", &""]
 @export var intro_cue := &"password_intro"
-## Played (once) on the first attempt with nothing heard.
-@export var silent_cue := &"mic_silent"
 @export var close_refused_cue := &"mic_close_refused"
 @export var accepted_cue := &"mic_accepted"
 ## When the text box appears.
@@ -35,8 +32,8 @@ extends MinigameConfig
 @export var accepted_line := "Password accepted. It was 'password'. Everyone could hear it, by the way."
 
 @export_group("Attempt gags (1-based attempt numbers)")
-## This verdict waits for a [No] button (not when it says nothing was heard).
-@export var no_button_attempt := 1
+## This verdict waits for a [No] button (0 = never; the verdicts say nothing was heard).
+@export var no_button_attempt := 0
 ## From this verdict on the microphone droops.
 @export var droop_attempt := 2
 

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "You've finally come to. Don't worry, you didn't miss anything. There's just warm, comforting darkness. You find this exciting somehow, like watching paint dry or watching grass grow. Riveting stuff! Alas, Life has more to it than this. You must wake"
+subtitle = "You've finally come to. Don't worry, you didn't miss anything. There's just warm, comforting darkness. You find this exciting somehow, like watching paint dry or watching grass grow. Riveting stuff! Alas, life has more to it than this. You must wake."
 once = true

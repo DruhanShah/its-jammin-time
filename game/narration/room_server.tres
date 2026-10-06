@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Matching colours again. It's a fuse box, not a sock drawer."
+subtitle = "Here's the server room, with a bunch of servers. They're really just PCs cooled by regular fans. I mean the company's going under, they can't really afford servers."
+once = true

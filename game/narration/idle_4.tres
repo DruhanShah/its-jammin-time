@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Straight. Across. Like a ruler. You've seen a ruler."
+subtitle = "Did you know that if you dissect a frog on a Sunday, it's still dead on Monday?"
+once = true

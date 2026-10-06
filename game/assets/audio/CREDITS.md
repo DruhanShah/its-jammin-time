@@ -116,4 +116,3 @@ Credit line (optional under CC0):
 Generated procedurally by a small Python script (sine tones and filtered noise), made for this project. No third-party or AI-generated audio. Replace them with real recordings when ready.
 
 - `music/placeholder_loop.wav`: 8 s quiet sine-chord loop (C, Am, F, G).
-- `narrator/placeholder_desk_intro.wav`: ~3 s of speech-like beeps for the example narrator cue.

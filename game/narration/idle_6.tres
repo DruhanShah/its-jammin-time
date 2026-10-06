@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "They bought the microphone. They did not buy the part that listens."
+subtitle = "Did you know that the spinal cord has the same consistency as a ripe banana?"
+once = true

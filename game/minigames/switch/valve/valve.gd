@@ -188,7 +188,6 @@ func _finish() -> void:
 	_wheel.position = _wheel_home
 	_surge.play()
 	create_tween().tween_property(_surge, "volume_db", -40.0, 0.6).set_delay(2.5)
-	Narrator.play(&"valve_done")
 	var t := create_tween()
 	t.tween_property(_bulb_mat, "emission_energy_multiplier", 10.0, 0.4)
 	t.parallel().tween_property(_bulb_light, "light_energy", 2.0, 0.4)

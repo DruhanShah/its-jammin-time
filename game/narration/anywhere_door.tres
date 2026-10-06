@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "I'm going to start billing you per spark."
+subtitle = "Oh yeah there's just doors here. The devs tried rigging up a Doraemon-style anywhere door, but ran out of Claude credits."
+once = true

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Your boss emailed. Reply in corporate speak: a language with no native speakers."
+subtitle = "Management has asked us to up our corpospeak rates. You've been given the grunt work. I'll expect this on my metaphorical desk by EOD."
 once = true

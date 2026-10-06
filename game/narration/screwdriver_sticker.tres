@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "That last one was a sticker. Of a screw. Facilities ran out of screws in 2009 and has been printing them ever since."
+subtitle = "That fourth screw was a sticker. We couldn't afford too many screws, so ever since the Great Screw Incident of '96, we've been using stickers."
 once = true

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "Power restored. The server room seems happy in its new spot. Don't get attached; nothing in this office stays put. Back to work."
+subtitle = "It's nice and bright again! Time to get back to the headache-inducing computer :D"
 once = true
