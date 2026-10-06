@@ -25,7 +25,7 @@ var _settings_x := 0.0
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	ComicCursor.apply()
-	Audio.play_music(Audio.MENU_MUSIC)
+	Audio.crossfade_to(Audio.MENU_MUSIC, 0.5, 0.5) # Also when quitting to the menu from the game.
 	tree_exiting.connect(ComicCursor.reset)
 	exit_button.visible = not OS.has_feature("web")
 	new_game_button.pressed.connect(_start.bind(new_game_button, false))
