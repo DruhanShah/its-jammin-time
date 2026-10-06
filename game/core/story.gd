@@ -126,7 +126,7 @@ func _go_to(new_step: Step) -> void:
 	_off_path_count = 0
 	_arrival_cue = ARRIVAL_CUES.get(new_step, &"")
 	if new_step in MINIGAMES:
-		Computer.queue(MINIGAMES[new_step])
+		Computer.queue(MINIGAMES[new_step], false) # The visit ends with Computer.blackout(), not an exit.
 	_sync_unlocks()
 	step_changed.emit(new_step)
 	switch_game_changed.emit(switch_game())
@@ -144,16 +144,22 @@ func _sync_unlocks() -> void:
 		GameState.unlock(Unlocks.SWITCHBOARD)
 
 
+## A beaten visit ends with the computer itself cutting the power (the office loads already dark).
 func _on_computer_queue_finished() -> void:
 	if step in MINIGAMES:
 		_go_to(step + 1 as Step)
+		var computer := get_tree().current_scene as Computer
+		if computer:
+			computer.blackout()
 
 
 func _on_power_changed(on: bool) -> void:
 	if on and is_switch_step():
 		_go_to(step + 1 as Step)
-	else:
-		_sync_unlocks()
+		return
+	if not on and is_switch_step():
+		_arrival_cue = BLACKOUT_CUES[step] # The office plays it (now, or on its next load).
+	_sync_unlocks()
 
 
 func _on_scene_changed() -> void:

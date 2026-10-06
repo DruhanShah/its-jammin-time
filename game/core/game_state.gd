@@ -45,6 +45,8 @@ var score := 0
 var computer_queue: Array[StringName] = []
 ## When true, the computer goes back to the office by itself once `computer_queue` is done.
 var computer_exit_when_done := true
+## The password typed at the computer's login (visit 1), so later gags can quote it back. Empty until then.
+var password := ""
 ## How often each computer minigame was beaten, by id (counts queued and free-use runs).
 var minigames_completed: Dictionary[StringName, int] = {}
 

@@ -44,6 +44,15 @@ Credit lines (optional under CC0):
 
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 
+## Computer UI sounds
+
+- 400 Sounds Pack (Chequered Ink, licence above), unaltered, in `sfx/400_sounds_pack/`: `pop_2.wav` (pack folder `UI/`): an `AppWindow` popping open; `whoosh_1.wav` (pack folder `Other/`): an `AppWindow` closing ("POOF!"); `power_down.wav` (pack folder `Retro/`): the CRT-off at the end of `Computer.blackout()`.
+- `sfx/freesound/spark_crackle_nachtmahr.wav`: "Electricity Sound" by NachtmahrTV, https://freesound.org/people/NachtmahrTV/sounds/556717/, CC0 1.0. **Modified:** cut 0.10–1.15 s from the Freesound HQ preview, short fades, normalised to −2 dB peak. Used for the screen flicker in `Computer.blackout()`.
+
+Credit line (optional under CC0):
+
+> Electricity crackle by NachtmahrTV (Freesound), CC0
+
 ## Placeholders (ours)
 
 Generated procedurally by a small Python script (sine tones and filtered noise), made for this project. No third-party or AI-generated audio. Replace them with real recordings when ready.

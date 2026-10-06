@@ -14,6 +14,13 @@ signal score_changed(score: int)
 const SCENE := "res://minigames/computer/computer.tscn"
 const FALLBACK_RETURN_SCENE := "res://world/office/office.tscn"
 const CURSOR := "▌"
+const FLICKER_SOUND := preload("res://assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav")
+const CRT_OFF_SOUND := preload("res://assets/audio/sfx/400_sounds_pack/power_down.wav")
+## Screen brightness steps before a blackout: [brightness, seconds held], like a dying fluorescent tube.
+const BLACKOUT_FLICKER: Array[Vector2] = [
+	Vector2(0.35, 0.06), Vector2(1.0, 0.1), Vector2(0.2, 0.05), Vector2(1.0, 0.3), Vector2(0.5, 0.05),
+	Vector2(0.9, 0.08), Vector2(0.15, 0.07), Vector2(0.8, 0.12), Vector2(0.1, 0.05), Vector2(1.0, 0.14),
+]
 
 @export var registry: MinigameRegistry
 
@@ -29,6 +36,8 @@ var buffer := "":
 @onready var editor: RichTextLabel = $Screen/Editor
 @onready var status_bar: Label = $Screen/StatusBar
 @onready var minigame_layer: Control = $Screen/MinigameLayer
+
+var _blacking_out := false
 
 
 ## Switches to the computer (with a fade), remembering where to come back to (defaults to the
@@ -52,6 +61,8 @@ static func queue(minigames: Array[StringName], exit_when_done := true) -> void:
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	ComicCursor.apply()
+	tree_exiting.connect(ComicCursor.reset)
 	get_viewport().size_changed.connect(_fit_screen)
 	_fit_screen()
 	$Screen/PowerButton.pressed.connect(exit)
@@ -120,6 +131,41 @@ func exit() -> void:
 	var target := GameState.computer_return_scene if GameState.computer_return_scene else FALLBACK_RETURN_SCENE
 	GameState.computer_return_scene = ""
 	Transition.change_scene(target)
+
+
+## Ends a visit with a power cut caused by the computer itself: the screen flickers, switches off like
+## an old CRT (squashes to a white line, then a dot), the power goes out (`GameState.set_power(false)`)
+## and the computer returns to the office, already dark. Story calls it when a visit's minigame queue is
+## beaten; a minigame may also call it directly (e.g. the Eco Mode ad). Calling it again does nothing.
+func blackout() -> void:
+	if _blacking_out:
+		return
+	_blacking_out = true
+	set_process_unhandled_key_input(false)
+	$Screen/PowerButton.disabled = true
+	var backdrop := ColorRect.new()
+	backdrop.color = Color.BLACK
+	backdrop.size = get_viewport_rect().size
+	add_child(backdrop)
+	move_child(backdrop, 0)
+	var flash := ColorRect.new() # Also swallows clicks while the screen dies.
+	flash.color = Color(1, 1, 1, 0)
+	screen.add_child(flash)
+	flash.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	screen.pivot_offset = screen.size / 2.0
+	Audio.play_sfx(FLICKER_SOUND, -6.0)
+	var tween := create_tween()
+	for step in BLACKOUT_FLICKER:
+		tween.tween_property(screen, "modulate", Color(step.x, step.x, step.x), 0.02)
+		tween.tween_interval(step.y)
+	tween.tween_callback(Audio.play_sfx.bind(CRT_OFF_SOUND))
+	tween.tween_property(flash, "color:a", 0.9, 0.06)
+	tween.tween_property(screen, "scale:y", 0.005, 0.16).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(screen, "scale:x", 0.003, 0.14).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(screen, "modulate:a", 0.0, 0.25)
+	tween.tween_callback(GameState.set_power.bind(false))
+	tween.tween_interval(0.8)
+	tween.tween_callback(exit)
 
 
 ## Plain insert mode for now; vim modes come later. Esc is deliberately not an exit.

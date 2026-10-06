@@ -1,8 +1,9 @@
 extends Node
 ## The office's side of `Story` (core/story.gd). On every load it rebuilds the office for the
 ## current step: begins at the computer on a fresh start, swaps the server room (C1) with A3 from
-## the second blackout on, plays the step's arrival line and, in a switch step, puts the lights out
-## a moment after you're back. While you play it tracks the objective (the desk computer, or the
+## the second blackout on and plays the step's arrival line (after a blackout from the computer that's
+## the lights_out line, since the power is already off); in a switch step that still has the power on
+## (e.g. after F7) it puts the lights out a moment after you're back. While you play it tracks the objective (the desk computer, or the
 ## power switch while the lights are out) and the narrator nags when you stop getting closer.
 ##
 ## Off-path heuristic: rooms and doors form a graph (room cells as built, linked by the `Doors`
@@ -138,11 +139,15 @@ func _swap_rooms() -> void:
 		(other.get_node(path) as Node3D).position.x = A3_CLEAR_X
 
 
+## Fallback for a switch step that starts with the lights still on (e.g. F7): the usual blackout comes
+## from the computer (`Computer.blackout()`), and the office then just loads dark and plays the line.
 func _blackout() -> void:
 	if not Story.is_switch_step() or not GameState.power_on:
 		return
-	GameState.set_power(false)
-	Narrator.play(Story.BLACKOUT_CUES[Story.step])
+	GameState.set_power(false) # Story queues the step's lights_out line as the arrival cue.
+	var cue := Story.take_arrival_cue()
+	if cue:
+		Narrator.play(cue)
 
 
 ## Walking into the server room's old spot after it moved.

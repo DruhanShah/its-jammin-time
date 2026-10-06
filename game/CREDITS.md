@@ -17,6 +17,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "Screwdriver 1" (2 clicks cut from it) | 16GPanskaToman_Kristian | https://freesound.org/people/16GPanskaToman_Kristian/sounds/496286/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_click_*.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Bolts into Iron Pipe Flange" (cut) | zembacraftworks | https://freesound.org/people/zembacraftworks/sounds/428340/ | CC0 1.0 | `assets/audio/sfx/freesound/screw_drop_bolt_zemba.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Vent cover removal (cut) | ME_Studios_Official | https://freesound.org/people/ME_Studios_Official/sounds/649765/ | CC0 1.0 | `assets/audio/sfx/freesound/panel_clatter_vent_me_studios.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Electricity Sound" (cut) | NachtmahrTV | https://freesound.org/people/NachtmahrTV/sounds/556717/ | CC0 1.0 | `assets/audio/sfx/freesound/spark_crackle_nachtmahr.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -25,6 +27,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 
 - Placeholder music and narrator audio (`assets/audio/music/`, `assets/audio/narrator/`): generated procedurally, see [audio CREDITS](assets/audio/CREDITS.md).
 - Ceiling grid texture (`world/office/textures/ceiling_grid.png`): 128x128 generated grid.
+- Cartoon glove mouse cursor (`core/ui/comic/cursor/glove.svg`, `glove_tap.svg`): hand-written SVG drawn for this project.
+- Halftone (Ben-Day dots) shader (`core/ui/comic/halftone.gdshader`): written for this project.
 - All scripts, scenes, materials and narration cues outside `addons/`.
 
 ## Credits screen text (suggested)
@@ -39,4 +43,5 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > First-person arms: PSX First Person Arms by Drillimpact, https://drillimpact.itch.io/, CC0
 > Screwdriver model by CreativeTrio (Poly Pizza), CC0
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
+> Electricity crackle by NachtmahrTV (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/
