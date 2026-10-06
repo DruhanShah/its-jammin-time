@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AntivirusDownloadConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/antivirus_download/antivirus_download_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://minigames/computer/minigames/antivirus_download/crank_ratchet.tres" id="2_ratchet"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/foley_creak_1.wav" id="3_creak"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/slide_and_click.wav" id="4_engage"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/wood_small_hollow.wav" id="5_clack"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/synth_process_complete.wav" id="6_done"]
+
+[resource]
+script = ExtResource("1_cfg")
+ratchet_sfx = ExtResource("2_ratchet")
+creak_sfx = ExtResource("3_creak")
+engage_sfx = ExtResource("4_engage")
+clack_sfx = ExtResource("5_clack")
+done_sfx = ExtResource("6_done")

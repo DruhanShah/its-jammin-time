@@ -17,7 +17,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | Almendra (Regular, unmodified; "Papyrus" option) | Copyright (c) 2011-2012, Ana Sanfelippo (anasanfe@gmail.com), Reserved Font Name 'Almendra' | https://github.com/google/fonts/tree/main/ofl/almendra | SIL Open Font License 1.1 (`OFL-almendra.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
 | Anton (Regular, subset to Latin; "Impact" option) | Copyright 2020 The Anton Project Authors | https://github.com/googlefonts/AntonFont.git | SIL Open Font License 1.1 (`OFL-anton.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
 | Jamdings (glyphs from Noto Sans Symbols and Noto Sans Symbols 2, scaled and mapped to letters by the team; "Wingdings" option) | glyphs Copyright 2022 The Noto Project Authors | https://github.com/notofonts/symbols | SIL Open Font License 1.1 (`OFL-Jamdings-NotoSymbols.txt`) | `assets/fonts/` ([CREDITS](assets/fonts/CREDITS.md)) | Shipped |
-| 400 Sounds Pack (26 files, 4 of them cut from `keyboard_typing.wav`) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | Free for any use incl. commercial, credit optional; may not sell/redistribute the unaltered assets as your own assets (verbatim text in [CREDITS](assets/audio/CREDITS.md)) | `assets/audio/sfx/400_sounds_pack/` | Shipped |
+| 400 Sounds Pack (28 files, 4 of them cut from `keyboard_typing.wav`) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | Free for any use incl. commercial, credit optional; may not sell/redistribute the unaltered assets as your own assets (verbatim text in [CREDITS](assets/audio/CREDITS.md)) | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | "rolling_office_chair.WAV" (trimmed into a 3 s loop) | alpanaytekin | https://freesound.org/people/alpanaytekin/sounds/213086/ | CC0 1.0 (public domain) | `assets/audio/sfx/chair_roll_loop.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | PSX First Person Arms (Free) v1.1.0 | Drillimpact, https://drillimpact.itch.io/ | https://drillimpact.itch.io/psx-first-person-arms-free | CC0 (public domain) | `assets/models/arms/` ([CREDITS](assets/models/arms/CREDITS.md)) | Shipped |
 | "Screwdriver" 3D model | CreativeTrio | https://poly.pizza/m/qBFMjkrKzH | CC0 1.0 (public domain) | `assets/models/screwdriver/` ([CREDITS](assets/models/screwdriver/CREDITS.md)) | Shipped |
@@ -33,6 +33,7 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Socket Wrench" (3 ratchet bursts cut from it) | xxqmanxx | https://freesound.org/people/xxqmanxx/sounds/147018/ | CC0 1.0 | `assets/audio/sfx/freesound/crank_ratchet_*.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | Godot AI 4.3.0 (MCP editor bridge) | Godot AI contributors | https://github.com/hi-godot/godot-ai | MIT (`addons/godot_ai/LICENSE`) | `addons/godot_ai/` | Editor-only (its export plugin strips the `_mcp_game_helper` autoload) |
 | Godot Asset Placer 1.6.0 | Roman Levinzon (levinzonr) | https://github.com/levinzonr/godot-asset-placer | MIT (`addons/asset_placer/LICENSE`) | `addons/asset_placer/` | Editor-only |
 | Snappy / godot-snappy 0.1.0 (main @ 4fdaaa3) | Jakob Gillich (jgillich) | https://github.com/jgillich/godot-snappy | MIT (`addons/snappy/LICENSE`) | `addons/snappy/` | Editor-only |
@@ -63,4 +64,5 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
+> Crank ratchet ("Socket Wrench") by xxqmanxx (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/

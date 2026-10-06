@@ -14,6 +14,7 @@
   - `subtle_knock.wav` (pack folder `Other/`): office chair bumping into something (`world/office/props/office_chair.tscn`). Imported as mono.
   - `foley_creak_1.wav` (pack folder `Footsteps/`): occasional office chair caster creak while rolling (pitched up in the scene). Imported as mono.
   - Visit 1 font step + ad storm (`minigames/computer/minigames/font_picker/`, `ad_storm/`): `select_1.wav`, `pop_1.wav`, `pop_3.wav`, `pop_4.wav`, `toggle_off.wav` (pack folder `UI/`): font list hover, ad pop-up (random pick, `ad_spawn_sfx.tres`), ECO MODE accepted; `wobble.wav`, `punch.wav`, `jump_short.wav` (pack folder `Retro/`): nested ad opening, ad closed ("POW!"), the runner ad's X hopping away; `coins_gather_medium.wav` (pack folder `Items/`): Comic font accepted ("KA-CHING!"); `elastic_twang.wav`, `record_scratch.wav` (pack folder `Other/`): decoy click ("BOING!"), the countdown ad lying; `brass_level_start.wav` (pack folder `Musical Effects/`): the ECO MODE ad sliding in.
+  - Antivirus download (visit 2, `minigames/computer/minigames/antivirus_download/`): `slide_and_click.wav` (pack folder `Other/`): the dial turning into a crank; `synth_process_complete.wav` (pack folder `UI/`): the download reaching 100 %.
   - **Modified:** `keyboard_key_1.wav` … `keyboard_key_4.wav`: four single keystrokes cut (85 ms each, 5 ms fades, normalised to −4.4 dB peak) from the pack's `Other/keyboard_typing.wav` at 0.454, 0.984, 1.964 and 2.114 s; the ad storm's scripted typing (`ad_storm/typing_sfx.tres`, random pick + pitch).
 
 Credit line for the game's credits screen (optional per the license):
@@ -45,11 +46,13 @@ All CC0 1.0 (public domain), https://creativecommons.org/publicdomain/zero/1.0/.
 | `spark_zap_grinnell.wav` | "Electric zap.wav", https://freesound.org/people/michael_grinnell/sounds/512471/ | michael_grinnell | 0–0.22 s | big zap: a wire plugged into its matching colour (wires game) |
 | `spark_klein.wav` | "Spark", https://freesound.org/people/elliott.klein/sounds/189630/ | elliott.klein | 0–0.17 s | small zap: crossed wires (wires game) |
 | `breaker_clunk_on_kyles.wav` | "switch big breaker metal click on, off.flac", https://freesound.org/people/kyles/sounds/451933/ | kyles | 0.10–1.40 s, mono | the wires game's lever pulled |
+| `crank_ratchet_1_xxqmanxx.wav`, `crank_ratchet_2_xxqmanxx.wav`, `crank_ratchet_3_xxqmanxx.wav` | "Socket Wrench", https://freesound.org/people/xxqmanxx/sounds/147018/ | xxqmanxx | one ratchet burst each (about 1.17–1.40 s, 2.27–2.46 s and 2.73–2.97 s of the original), mono, 4 ms / 30 ms fades, not normalised | one per key step while cranking the antivirus download (`antivirus_download/crank_ratchet.tres`, random pick + pitch) |
 | `power_on_neon_hum_kinoton.wav` | "Neon Lamp, Switch On, Hum", https://freesound.org/people/Kinoton/sounds/351430/ | Kinoton | 0.2–6.0 s (fades out) | lights coming back on after the wires game |
 
 Credit lines (optional under CC0):
 
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
+> Crank ratchet by xxqmanxx (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
 
 ## Kenney Interface Sounds 1.0 (`sfx/kenney/`)

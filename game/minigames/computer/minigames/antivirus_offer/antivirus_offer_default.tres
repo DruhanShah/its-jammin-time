@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AntivirusOfferConfig" format=3]
+
+[ext_resource type="Script" path="res://minigames/computer/minigames/antivirus_offer/antivirus_offer_config.gd" id="1_cfg"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav" id="2_refuse"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/400_sounds_pack/punch.wav" id="3_download"]
+
+[resource]
+script = ExtResource("1_cfg")
+refuse_sfx = ExtResource("2_refuse")
+refuse_db = -10.0
+download_sfx = ExtResource("3_download")

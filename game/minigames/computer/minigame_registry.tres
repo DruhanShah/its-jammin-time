@@ -8,12 +8,16 @@
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/font_picker/font_picker.tscn" id="5_fp"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/ad_storm/ad_storm.tscn" id="6_as"]
 [ext_resource type="PackedScene" path="res://minigames/computer/minigames/ad_storm/comic_ad.tscn" id="7_ca"]
+[ext_resource type="PackedScene" path="res://minigames/computer/minigames/antivirus_offer/antivirus_offer.tscn" id="8_avo"]
+[ext_resource type="PackedScene" path="res://minigames/computer/minigames/antivirus_download/antivirus_download.tscn" id="9_avd"]
 
 [resource]
 script = ExtResource("1_reg")
 entries = Dictionary[StringName, PackedScene]({
 &"ad_popup": ExtResource("2_ad"),
 &"ad_storm": ExtResource("6_as"),
+&"antivirus_download": ExtResource("9_avd"),
+&"antivirus_offer": ExtResource("8_avo"),
 &"bot_check": ExtResource("4_bc"),
 &"comic_ad": ExtResource("7_ca"),
 &"corporate_speak": ExtResource("3_cs"),

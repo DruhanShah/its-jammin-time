@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_cue")
-subtitle = "So now we know who's the person downloading viruses on company PCs. Finding the switchboard again shouldn't be too hard this time right??"
+subtitle = "'Remind me NOW.' That's not how reminders work. It's how ZappWare works."
 once = true
