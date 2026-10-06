@@ -30,14 +30,16 @@ extends Node
 ## Minimum seconds between two off-path lines.
 @export var off_path_cooldown := 30.0
 ## Seconds without any input before the first idle line, then between the next ones.
-@export var idle_first := 6.0
-@export var idle_next := 6.0
+@export var idle_first := 7.0
+@export var idle_next := 7.0
 
 const CHECK_INTERVAL := 0.5
 ## First-entry lines by room *content* (the room node, wherever it stands: C1 moves to A3's spot).
 const ROOM_LINES: Dictionary[StringName, StringName] = {&"C1": &"room_server", &"C2": &"room_upside_down", &"B2": &"room_employee_month", &"B3": &"room_family_chairs"}
 ## Played in order while the player stands idle (they don't restart after input); `idle_out` ends the facts.
 const IDLE_CUES: Array[StringName] = [&"idle_1", &"idle_2", &"idle_3", &"idle_4", &"idle_5", &"idle_6", &"idle_out"]
+## Most idle lines played per story step (i.e. per lights-out).
+const IDLE_PER_STEP := 2
 ## Seconds idle after which the off-path clock stops (standing still is idle, not lost).
 const IDLE_NOT_LOST := 5.0
 const ROOM_HALF_SIZE := Vector2(6.0, 8.0)
@@ -226,7 +228,10 @@ func _check_idle(delta: float) -> void:
 	if idle < _last_idle or _idle_due <= 0.0:
 		_idle_due = idle_first # Input since the last check: a new idle spell.
 	_last_idle = idle
-	if GameState.idle_lines_played >= IDLE_CUES.size() or _player.get(&"movement_locked") \
+	if GameState.idle_step != Story.step:
+		GameState.idle_step = Story.step
+		GameState.idle_lines_this_step = 0
+	if GameState.idle_lines_played >= IDLE_CUES.size() or GameState.idle_lines_this_step >= IDLE_PER_STEP or _player.get(&"movement_locked") \
 			or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED or get_tree().get_first_node_in_group(&"scope_view"):
 		return
 	if Narrator.is_speaking():
@@ -235,6 +240,7 @@ func _check_idle(delta: float) -> void:
 	if idle >= _idle_due:
 		Narrator.play(IDLE_CUES[GameState.idle_lines_played])
 		GameState.idle_lines_played += 1
+		GameState.idle_lines_this_step += 1
 		_idle_due = idle + idle_next
 
 

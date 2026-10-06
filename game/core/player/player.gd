@@ -13,7 +13,7 @@ extends CharacterBody3D
 @export var push_force := 300.0
 
 ## Narrator cues played once the player has pushed chairs for this many seconds in total.
-const CHAIR_JABS := {15.0: &"chair_push_1", 45.0: &"chair_push_2"}
+const CHAIR_JABS := {5.0: &"chair_push_1", 45.0: &"chair_push_2"}
 ## Narrator cue when a chair we pushed rolls into a different room than it started in.
 const CHAIR_NEW_ROOM_JAB := &"chair_new_room"
 ## Narrator cue on this many-th left-click on something that isn't interactable ("no grabbing").

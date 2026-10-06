@@ -22,6 +22,9 @@ var chair_push_time := 0.0
 var stray_touches := 0
 ## Idle facts already played (StoryStage.IDLE_CUES), so the next idle spell continues with the next one.
 var idle_lines_played := 0
+## Story step the idle-line count below belongs to, and idle lines played in it (max 2 per lights-out).
+var idle_step := -1
+var idle_lines_this_step := 0
 
 ## Unlocked ids, global across scenes. Ids are snake_case names of the thing, e.g. &"genie_lamp".
 var unlocked: Dictionary[StringName, bool] = {}
