@@ -30,6 +30,12 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 | "Spark" (cut) | elliott.klein | https://freesound.org/people/elliott.klein/sounds/189630/ | CC0 1.0 | `assets/audio/sfx/freesound/spark_klein.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "switch big breaker metal click on, off.flac" (cut) | kyles | https://freesound.org/people/kyles/sounds/451933/ | CC0 1.0 | `assets/audio/sfx/freesound/breaker_clunk_on_kyles.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Neon Lamp, Switch On, Hum" (cut) | Kinoton | https://freesound.org/people/Kinoton/sounds/351430/ | CC0 1.0 | `assets/audio/sfx/freesound/power_on_neon_hum_kinoton.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Steampunk pipes" 3D model | Phiam Ash | https://poly.pizza/m/aBug7Q_ZiS_ | CC-BY 3.0 (attribution required) | `assets/models/pipes/` ([CREDITS](assets/models/pipes/CREDITS.md)) | Shipped |
+| "squeak_01.wav" (3 squeaks cut from it) | joedeshon | https://freesound.org/people/joedeshon/sounds/339184/ | CC0 1.0 | `assets/audio/sfx/freesound/valve_squeak_*_joedeshon.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Foley_Mechanism_Wheel_Moderate_Rusty_Loop_Mono.wav" (cut, looped) | Nox_Sound | https://freesound.org/people/Nox_Sound/sounds/559470/ | CC0 1.0 | `assets/audio/sfx/freesound/valve_turn_rusty_loop_noxsound.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Hitting a Pipe with a Hammer" (cut) | brittmosel | https://freesound.org/people/brittmosel/sounds/530216/ | CC0 1.0 | `assets/audio/sfx/freesound/pipe_clunk_brittmosel.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "Pressure Meter Pipe Noises 1.aif" (cut, looped) | RutgerMuller | https://freesound.org/people/RutgerMuller/sounds/104087/ | CC0 1.0 | `assets/audio/sfx/freesound/pipe_flow_loop_rutgermuller.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
+| "high-voltage.wav" (cut) | fkurz | https://freesound.org/people/fkurz/sounds/136614/ | CC0 1.0 | `assets/audio/sfx/freesound/electric_surge_fkurz.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | 400 Sounds Pack, computer UI sounds (`pop_2`, `whoosh_1`, `power_down`; same pack and licence as above) | Chequered Ink, https://ci.itch.io/ | https://ci.itch.io/400-sounds-pack | as above | `assets/audio/sfx/400_sounds_pack/` | Shipped |
 | Kenney Interface Sounds 1.0 (`tick_001.ogg`) | Kenney, https://www.kenney.nl/ | https://kenney.nl/assets/interface-sounds | CC0 1.0 | `assets/audio/sfx/kenney/` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
 | "Wrong Buzzer" (cut) | KevinVG207 | https://freesound.org/people/KevinVG207/sounds/331912/ | CC0 1.0 | `assets/audio/sfx/freesound/quiz_wrong_buzzer_kevinvg207.wav` ([CREDITS](assets/audio/CREDITS.md)) | Shipped |
@@ -61,6 +67,8 @@ Every external resource in this project. "Shipped" = ends up in the exported gam
 > Screwdriver sounds by 16GPanskaToman_Kristian, bolt drop by zembacraftworks, panel clatter by ME_Studios_Official (Freesound), CC0
 > Electricity crackle by NachtmahrTV (Freesound), CC0
 > Wire plug by preyk, zaps by michael_grinnell and elliott.klein, breaker by kyles, neon hum by Kinoton (Freesound), CC0
+> Steampunk pipes model by Phiam Ash (Poly Pizza), CC-BY 3.0
+> Valve squeaks by joedeshon, rusty wheel by Nox_Sound, pipe clunk by brittmosel, pipe noises by RutgerMuller, high voltage by fkurz (Freesound), CC0
 > Interface sounds by Kenney (www.kenney.nl), CC0
 > "Wrong Buzzer" by KevinVG207 (Freesound), CC0
 > Made with Godot Engine, https://godotengine.org/license/
