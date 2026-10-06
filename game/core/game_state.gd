@@ -88,3 +88,19 @@ func set_power(on: bool) -> void:
 	if on != power_on:
 		power_on = on
 		power_changed.emit(on)
+
+
+## Symbols the bundled fonts lack (● ✓ ♥ ⌫ ∞ → ▌) fall back to DejaVu Sans. Desktop falls back to
+## system fonts anyway, but the web build has none, so without this they draw as boxes. Loaded
+## FontFiles are cached and shared, so setting it once covers every scene. Jamdings is left alone.
+const SYMBOL_FALLBACK := preload("res://assets/fonts/DejaVuSans-Bold.ttf")
+const FONT_DIR := "res://assets/fonts/"
+var _fonts: Array[Font] = [] ## Keeps the fonts (and so their fallback) in the resource cache.
+
+
+func _ready() -> void:
+	for file in ResourceLoader.list_directory(FONT_DIR):
+		if file.ends_with(".ttf") and not file.begins_with("DejaVu") and not file.begins_with("Jamdings"):
+			var font: Font = load(FONT_DIR + file)
+			font.fallbacks = [SYMBOL_FALLBACK]
+			_fonts.append(font)

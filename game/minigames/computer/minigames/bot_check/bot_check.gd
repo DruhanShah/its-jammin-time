@@ -62,7 +62,7 @@ func _on_captcha_pressed() -> void:
 func _on_verified() -> void:
 	_verifying = false
 	if _tries >= _tries_needed:
-		captcha_box.text = "✓"
+		captcha_box.text = "X" # No "✓" in the bundled fonts (no system fallback on web).
 		captcha_status.text = "Verified human. Probably."
 		if computer:
 			computer.add_score((config as BotCheckConfig).pass_points)

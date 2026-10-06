@@ -76,3 +76,9 @@ Times New Roman, Arial, Helvetica, Calibri, Papyrus, Impact, Wingdings and Comic
 - **License:** SIL Open Font License 1.1, full text in `OFL-Jamdings-NotoSymbols.txt`.
 - **Modifications:** glyphs scaled and mapped to letters by the team.
 - **Files used:** `Jamdings-Regular.ttf` (the "Wingdings" option).
+
+## DejaVu Sans
+
+- **Copyright:** Bitstream Vera Fonts Copyright (c) 2003 by Bitstream, Inc.; DejaVu changes are in the public domain (https://dejavu-fonts.github.io/).
+- **License:** Bitstream Vera / DejaVu font licence (free to bundle), full text in `LICENSE-DejaVu.txt`.
+- **Files used:** `DejaVuSans-Bold.ttf`, unmodified: fallback for symbols the other fonts lack (● ✓ ♥ ⌫ ∞ → ▌), set in `core/game_state.gd`. The web build has no system fonts to fall back on.

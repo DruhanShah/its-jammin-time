@@ -170,7 +170,7 @@ theme_override_colors/font_color = Color(0.45, 0.45, 0.45, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
 flat = true
-text = "✕"
+text = "X"
 
 [node name="Countdown" type="Label" parent="."]
 unique_name_in_owner = true
