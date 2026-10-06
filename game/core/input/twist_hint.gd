@@ -23,6 +23,8 @@ extends Control
 ## Seconds per key in the demo.
 @export var demo_step := 0.22
 @export var intro_cue := &"twist_tutorial"
+## Show the written feedback under the keys ("Keep going!"); off for text-free games.
+@export var feedback := true
 @export var radius := 62.0
 @export var key_color := Color(0.22, 0.22, 0.26, 0.9)
 @export var lit_color := Color(1.0, 0.62, 0.15)
@@ -50,6 +52,7 @@ func _ready() -> void:
 	if twist:
 		twist.twisted.connect(_on_twisted)
 		twist.broken.connect(_on_broken)
+	_feedback.visible = feedback
 	_say("Roll the keys in a circle, following the arrow", Color.WHITE)
 	if intro_cue:
 		Narrator.play(intro_cue)
@@ -109,6 +112,12 @@ func _on_twisted(delta: float) -> void:
 func _on_broken() -> void:
 	if _last_direction == arrow_direction and not _compact and _good < mastery_degrees:
 		_say("Don't stop: keep the keys rolling round.", WARN)
+
+
+## Back to full size with the demo, as if just shown (e.g. after a game flips `arrow_direction`).
+func restart() -> void:
+	_idle = 0.0
+	_set_compact(false)
 
 
 ## Shrunk + faded toward the bottom-right corner (true) or full size (false).
